@@ -9,5 +9,9 @@
     "version": "2.1.0",
     "url": "https://eimrek.github.io/qdk-chemistry/stable/",
     "preferred": true
+  },
+  {
+    "version": "1.1.0",
+    "url": "https://eimrek.github.io/qdk-chemistry/1.1.0/"
   }
 ]

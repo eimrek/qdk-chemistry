@@ -1,518 +1,135 @@
 
+
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Features, methods and dependencies &mdash; qdk-chemistry 2.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ac0f520b" />
 
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Features, methods and dependencies &#8212; QDK/Chemistry 2.1.0</title>
   
-  
-  
-  <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
-  </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3da93932" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
-
-    <script src="../_static/documentation_options.js?v=20623aea"></script>
-    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
-    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
-    <script src="../_static/tabs.js?v=3ee01567"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'user/features';</script>
-    <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
-        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://eimrek.github.io/qdk-chemistry/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.1.0';
-        DOCUMENTATION_OPTIONS.show_version_warning_banner =
-            true;
-        </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <link rel="canonical" href="https://eimrek.github.io/qdk-chemistry/stable/user/features.html" />
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=20623aea"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/tabs.js?v=3ee01567"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="In-depth user guide" href="comprehensive/index.html" />
-    <link rel="prev" title="Quickstart" href="quickstart.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-  </head>
-  <body data-default-mode="">
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+    <link rel="prev" title="Quickstart" href="quickstart.html" /> 
+</head>
 
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-  
-  
-  
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
 
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            qdk-chemistry
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-<div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-    
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-  
-    <p class="title logo__title">QDK/Chemistry</p>
-  
-</a></div>
-    
-      <div class="navbar-item">
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
-    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
-  </button>
-  <ul class="dropdown-menu dropdown-menu-end">
-    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
-    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
-    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
-  </ul>
-</div></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/microsoft/qdk-chemistry" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
-</div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
-    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
-  </button>
-  <ul class="dropdown-menu dropdown-menu-end">
-    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
-    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
-    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
-  </ul>
-</div></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/microsoft/qdk-chemistry" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
-        </li>
-</ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Documentation">
-  <p class="bd-links__title" role="heading" aria-level="1">Documentation</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
-<ul class="current nav bd-sidenav">
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Features, methods and dependencies</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="comprehensive/index.html">In-depth user guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="comprehensive/design/index.html">High-level design</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="comprehensive/data/index.html">Data classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/data/serialization.html">Serialization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/data/ansatz.html">Ansatz</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/data/basis_set.html">BasisSet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/data/hamiltonian.html">Hamiltonian</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/data/orbitals.html">Orbitals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/data/lattice_graph.html">LatticeGraph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/data/majorana_mapping.html">MajoranaMapping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/data/pauli_operator.html">Pauli Operators</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/data/structure.html">Structure</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/data/symmetries.html">Symmetries</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/data/wavefunction.html">Wavefunction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/data/qpe_result.html">QpeResult</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/data/circuit.html">Circuit</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Features, methods and dependencies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#supported-methods">Supported Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#quantum-algorithms">Quantum Algorithms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#phase-estimation">Phase Estimation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#state-preparation">State Preparation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hamiltonian-encoding">Hamiltonian Encoding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#observable-sampling-and-energy-estimation">Observable Sampling and Energy Estimation</a></li>
 </ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="comprehensive/algorithms/index.html">Algorithm classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/factory_pattern.html">Factory pattern</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/settings.html">Settings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/active_space.html">Active space selection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/effective_hamiltonian_constructor.html">Effective Hamiltonian construction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/expectation_estimator.html">Energy estimation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/hamiltonian_constructor.html">Hamiltonian construction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/localizer.html">Orbital localization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/mc_calculator.html">Multi-configuration calculations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/mcscf.html">Multi-Configuration Self-Consistent Field</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/pmc.html">Projected Multi-Configuration calculations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/qubit_mapper.html">Qubit mapping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/scf_solver.html">Self-consistent field (SCF) solver</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/stability_checker.html">Stability analysis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/state_preparation.html">State preparation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/hadamard_test.html">Hadamard test</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/phase_estimation.html">Phase estimation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/qpe_circuit_builder.html">Phase estimation circuit builder</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/amplitude_amplification.html">Amplitude amplification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/evolution_circuit_builder.html">Evolution circuit builder</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/hamiltonian_unitary_builder.html">Hamiltonian Unitary Builder</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/circuit_mapper.html">Controlled circuit mapper</a></li>
-<li class="toctree-l3"><a class="reference internal" href="comprehensive/algorithms/circuit_executor.html">Circuit execution</a></li>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#model-hamiltonians">Model Hamiltonians</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classical-quantum-chemistry-methods">Classical Quantum Chemistry Methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#self-consistent-field-scf">Self-Consistent Field (SCF)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#orbital-localization">Orbital Localization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#active-space-selection">Active Space Selection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multi-configuration-methods">Multi-Configuration Methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nuclear-derivatives-and-geometry-optimization">Nuclear Derivatives and Geometry Optimization</a></li>
 </ul>
-</details></li>
-<li class="toctree-l2"><a class="reference internal" href="comprehensive/basis_functionals.html">Available functionals and basis sets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="comprehensive/model_hamiltonians.html">Model Hamiltonians</a></li>
-<li class="toctree-l2"><a class="reference internal" href="comprehensive/plugins.html">Plugins</a></li>
+</li>
 </ul>
-</details></li>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#community-open-source-software-dependencies">Community Open Source Software Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basis-sets-and-effective-core-potentials">Basis Sets and Effective Core Potentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#integral-evaluation">Integral Evaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exchange-correlation-functionals">Exchange-Correlation Functionals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-configuration-solvers">Multi-Configuration Solvers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#plugins">Plugins</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#visual-studio-code-integration">Visual Studio Code Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#type-aware-autocompletion-for-factory-methods">Type-Aware Autocompletion for Factory Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dev-container-support">Dev Container Support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#see-also">See Also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="comprehensive/index.html">In-depth user guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="migrating-data-files.html">Migrating data files between serialization versions</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/ground_state_molecular_energies_with_qpe/index.html">Ground-state molecular energies with quantum phase estimation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/ground_state_molecular_energies_with_qpe/00_before_you_begin.html">Before you begin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/ground_state_molecular_energies_with_qpe/lab_notebook.html">Set up your lab notebook</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/ground_state_molecular_energies_with_qpe/01_energy_and_accuracy.html">Energy and accuracy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/ground_state_molecular_energies_with_qpe/02_describing_the_molecule.html">Describing the molecule</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/ground_state_molecular_energies_with_qpe/03_choosing_the_active_space.html">Choosing the active space</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/ground_state_molecular_energies_with_qpe/04_putting_the_problem_on_qubits.html">Mapping the problem to qubits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/ground_state_molecular_energies_with_qpe/05_preparing_the_trial_state.html">Preparing the trial state</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/ground_state_molecular_energies_with_qpe/06_iterative_phase_estimation.html">Iterative quantum phase estimation</a></li>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/python_api.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/cpp_api.html">C++ API</a></li>
 </ul>
-</details></li>
-</ul>
-</details></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../api/python_api.html">Python API</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.html">qdk_chemistry.data package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.enums.html">qdk_chemistry.data.enums package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.time_dependent_qubit_hamiltonian.html">qdk_chemistry.data.time_dependent_qubit_hamiltonian package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.unitary_representation.html">qdk_chemistry.data.unitary_representation package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data._hashing.html">qdk_chemistry.data._hashing module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data._spin_channels.html">qdk_chemistry.data._spin_channels module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.base.html">qdk_chemistry.data.base module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.circuit.html">qdk_chemistry.data.circuit module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.circuit_executor_data.html">qdk_chemistry.data.circuit_executor_data module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.encoding_validation.html">qdk_chemistry.data.encoding_validation module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.estimator_data.html">qdk_chemistry.data.estimator_data module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.noise_models.html">qdk_chemistry.data.noise_models module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.qpe_result.html">qdk_chemistry.data.qpe_result module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.qubit_operator.html">qdk_chemistry.data.qubit_operator module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.symmetries.html">qdk_chemistry.data.symmetries module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.symmetry.html">qdk_chemistry.data.symmetry module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.term_partition.html">qdk_chemistry.data.term_partition module</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.html">qdk_chemistry.algorithms package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.circuit_executor.html">qdk_chemistry.algorithms.circuit_executor package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.circuit_mapper.html">qdk_chemistry.algorithms.circuit_mapper package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.controlled_circuit_mapper.html">qdk_chemistry.algorithms.controlled_circuit_mapper package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.expectation_estimator.html">qdk_chemistry.algorithms.expectation_estimator package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.hadamard_test.html">qdk_chemistry.algorithms.hadamard_test package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.hamiltonian_unitary_builder.html">qdk_chemistry.algorithms.hamiltonian_unitary_builder package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.phase_estimation.html">qdk_chemistry.algorithms.phase_estimation package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.propagator.html">qdk_chemistry.algorithms.propagator package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.qubit_mapper.html">qdk_chemistry.algorithms.qubit_mapper package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.state_preparation.html">qdk_chemistry.algorithms.state_preparation package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.term_grouper.html">qdk_chemistry.algorithms.term_grouper package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.time_evolution.html">qdk_chemistry.algorithms.time_evolution package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.active_space_selector.html">qdk_chemistry.algorithms.active_space_selector module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.amplitude_amplification.html">qdk_chemistry.algorithms.amplitude_amplification module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.base.html">qdk_chemistry.algorithms.base module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.dynamical_correlation_calculator.html">qdk_chemistry.algorithms.dynamical_correlation_calculator module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.effective_hamiltonian_constructor.html">qdk_chemistry.algorithms.effective_hamiltonian_constructor module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.geometry_optimization.html">qdk_chemistry.algorithms.geometry_optimization module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.hamiltonian_constructor.html">qdk_chemistry.algorithms.hamiltonian_constructor module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.hashing.html">qdk_chemistry.algorithms.hashing module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.multi_configuration_calculator.html">qdk_chemistry.algorithms.multi_configuration_calculator module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.multi_configuration_scf.html">qdk_chemistry.algorithms.multi_configuration_scf module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.nuclear_derivative.html">qdk_chemistry.algorithms.nuclear_derivative module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.orbital_localizer.html">qdk_chemistry.algorithms.orbital_localizer module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.projected_multi_configuration_calculator.html">qdk_chemistry.algorithms.projected_multi_configuration_calculator module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.qubit_hamiltonian_solver.html">qdk_chemistry.algorithms.qubit_hamiltonian_solver module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.registry.html">qdk_chemistry.algorithms.registry module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.scf_solver.html">qdk_chemistry.algorithms.scf_solver module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.stability_checker.html">qdk_chemistry.algorithms.stability_checker module</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.plugins.html">qdk_chemistry.plugins package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.plugins.geometric.html">qdk_chemistry.plugins.geometric package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.plugins.networkx.html">qdk_chemistry.plugins.networkx package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.plugins.openfermion.html">qdk_chemistry.plugins.openfermion package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.plugins.pyscf.html">qdk_chemistry.plugins.pyscf package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.plugins.qiskit.html">qdk_chemistry.plugins.qiskit package</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.html">qdk_chemistry.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.qsharp.html">qdk_chemistry.utils.qsharp package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.cubegen.html">qdk_chemistry.utils.cubegen module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.enum.html">qdk_chemistry.utils.enum module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.model_hamiltonians.html">qdk_chemistry.utils.model_hamiltonians module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.pauli_commutation.html">qdk_chemistry.utils.pauli_commutation module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.pauli_matrix.html">qdk_chemistry.utils.pauli_matrix module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.telemetry.html">qdk_chemistry.utils.telemetry module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.telemetry_events.html">qdk_chemistry.utils.telemetry_events module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.wavefunction.html">qdk_chemistry.utils.wavefunction module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.zassenhaus_generation.html">qdk_chemistry.utils.zassenhaus_generation module</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.constants.html">qdk_chemistry.constants module</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../api/cpp_api.html">C++ API</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../api/breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1data.html">Namespace qdk::chemistry::data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1algorithms.html">Namespace qdk::chemistry::algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1utils.html">Namespace qdk::chemistry::utils</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1constants.html">Namespace qdk::chemistry::constants</a></li>
-</ul>
-</details></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Supporting Information</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../release-notes/index.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../release-notes/v2.1.0.html">What’s New in Version 2.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../release-notes/v2.0.0.html">What’s New in Version 2.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../release-notes/v1.1.0.html">What’s New in Version 1.1</a></li>
-</ul>
-</details></li>
+<p class="caption" role="heading"><span class="caption-text">Supporting Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes/index.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Acronym definitions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
-</div>
-</nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
-  </div>
 
-
+        </div>
       </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
-<div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
+    </nav>
 
-<nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Features, methods and dependencies</span></li>
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">qdk-chemistry</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Features, methods and dependencies</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/user/features.rst.txt" rel="nofollow"> View page source</a>
+      </li>
   </ul>
-</nav>
+  <hr/>
 </div>
-      
-    </div>
-  
-  
-</div>
-</div>
-              
-              
-              
-                
-<div id="searchbox"></div>
-                <article class="bd-article">
-                  
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="features-methods-and-dependencies">
-<h1>Features, methods and dependencies<a class="headerlink" href="#features-methods-and-dependencies" title="Link to this heading">#</a></h1>
+<h1>Features, methods and dependencies<a class="headerlink" href="#features-methods-and-dependencies" title="Link to this heading"></a></h1>
 <p>This document provides an overview of QDK/Chemistry’s features, supported methods, and software dependencies.
 QDK/Chemistry spans the full quantum applications pipeline — from classical electronic structure through quantum circuit synthesis and execution — providing researchers with the tools to construct end-to-end quantum–classical workflows for molecular simulation.</p>
 <nav class="contents local" id="on-this-page">
@@ -544,17 +161,17 @@ QDK/Chemistry spans the full quantum applications pipeline — from classical el
 </ul>
 </nav>
 <section id="supported-methods">
-<h2><a class="toc-backref" href="#id33" role="doc-backlink">Supported Methods</a><a class="headerlink" href="#supported-methods" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id33" role="doc-backlink">Supported Methods</a><a class="headerlink" href="#supported-methods" title="Link to this heading"></a></h2>
 <section id="quantum-algorithms">
-<h3><a class="toc-backref" href="#id34" role="doc-backlink">Quantum Algorithms</a><a class="headerlink" href="#quantum-algorithms" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id34" role="doc-backlink">Quantum Algorithms</a><a class="headerlink" href="#quantum-algorithms" title="Link to this heading"></a></h3>
 <p>QDK/Chemistry provides quantum algorithms for chemistry, designed to work together as composable stages in a quantum applications workflow.
 Each algorithm is available through the <a class="reference internal" href="comprehensive/algorithms/factory_pattern.html"><span class="doc">factory/registry pattern</span></a>, enabling seamless selection between multiple implementations.</p>
 <section id="phase-estimation">
-<h4>Phase Estimation<a class="headerlink" href="#phase-estimation" title="Link to this heading">#</a></h4>
+<h4>Phase Estimation<a class="headerlink" href="#phase-estimation" title="Link to this heading"></a></h4>
 <p>Phase estimation algorithms extract energy eigenvalues from a quantum state by measuring the phase accumulated under Hamiltonian time evolution.
 QDK/Chemistry provides several phase estimation approaches, including:</p>
 <dl class="simple">
-<dt>Iterative Quantum Phase Estimation (<a class="reference internal" href="../glossary.html#term-IQPE"><span class="xref std std-term">IQPE</span></a>)</dt><dd><p>Kitaev’s algorithm using a single ancilla qubit with sequential LSB-to-MSB bit extraction and adaptive feedback phase correction.
+<dt>Iterative Quantum Phase Estimation (<a class="reference internal" href="../glossary.html#term-IQPE"><span class="xref std std-term">IQPE</span></a>)</dt><dd><p>Kitaev’s algorithm using a single ancilla qubit with sequential MSB-to-LSB bit extraction and adaptive feedback phase correction.
 Particularly suited to near-term hardware due to its low ancilla requirements and configurable shots-per-bit precision.</p>
 </dd>
 <dt>Standard QFT-based Quantum Phase Estimation (<a class="reference internal" href="../glossary.html#term-QPE"><span class="xref std std-term">QPE</span></a>)</dt><dd><p>Parallel phase-register measurement via quantum Fourier transform, providing all precision bits simultaneously.</p>
@@ -564,7 +181,7 @@ Particularly suited to near-term hardware due to its low ancilla requirements an
 <p>See <a class="reference internal" href="comprehensive/algorithms/phase_estimation.html"><span class="doc">Phase estimation</span></a> for detailed documentation on available implementations and usage, and <a class="reference internal" href="comprehensive/algorithms/hamiltonian_unitary_builder.html"><span class="doc">Hamiltonian Unitary Builder</span></a> for the Hamiltonian simulation methods that underpin phase estimation.</p>
 </section>
 <section id="state-preparation">
-<h4>State Preparation<a class="headerlink" href="#state-preparation" title="Link to this heading">#</a></h4>
+<h4>State Preparation<a class="headerlink" href="#state-preparation" title="Link to this heading"></a></h4>
 <p>Core to quantum algorithms for chemistry is the ability to efficiently prepare quantum states that approximate the ground or excited states of molecular systems. In QDK/Chemistry, this process is generally viewed as a mapping between a classical representation of the molecular wavefunction (e.g., a Slater determinant or a linear combination thereof, represented by the <cite>Wavefunction</cite> class) and a circuit that prepares the corresponding quantum state on a quantum computer given a particular qubit encoding (e.g. binary, gray code, etc). QDK/Chemistry provides several state preparation techniques to facilitate this mapping, including:</p>
 <dl class="simple">
 <dt>Dense Isometry State Preparation</dt><dd><p>Implementations of general-purpose state preparation algorithms that can prepare arbitrary quantum states, represented in the occupation number formalism, given their amplitudes.</p>
@@ -574,42 +191,42 @@ Particularly suited to near-term hardware due to its low ancilla requirements an
 </dl>
 <p>See <a class="reference internal" href="comprehensive/algorithms/state_preparation.html"><span class="doc">State preparation</span></a> for further details about available state preparation methods and implementations.</p>
 <section id="implementation-highlights">
-<h5>Implementation Highlights<a class="headerlink" href="#implementation-highlights" title="Link to this heading">#</a></h5>
+<h5>Implementation Highlights<a class="headerlink" href="#implementation-highlights" title="Link to this heading"></a></h5>
 <dl class="simple">
 <dt>GF2+X Sparse Isometry State Preparation</dt><dd><p>QDK/Chemistry implements an optimized state preparation algorithm for wavefunctions with sparse amplitude structure.
-The GF2+X method, a modification of the original sparse isometry work in <span class="bibtex-citation" id="id1">[<a class="reference internal" href="../references.html#id13" title="Emanuel Malvetti, Raban Iten, and Roger Colbeck. Quantum circuits for sparse isometries. Quantum, 5:412, 2021. URL: http://arxiv.org/abs/2006.00016, doi:10.22331/q-2021-06-21-412.">MIC21</a>]</span>, applies GF(2) Gaussian elimination to the binary matrix representation of the quantum state to determine a reduced space representation of the sparse state.
-This reduced state is then densely encoded via regular isometry <span class="bibtex-citation" id="id2">[<a class="reference internal" href="../references.html#id22" title="Raban Iten, Roger Colbeck, Ivan Kukuljan, Jonathan Home, and Matthias Christandl. Quantum circuits for isometries. Physical Review A, 93:032318, 2016. doi:10.1103/PhysRevA.93.032318.">ICK+16</a>]</span> on a smaller number of qubits, and finally scattered to the full qubit space using X and <a class="reference internal" href="../glossary.html#term-CNOT"><span class="xref std std-term">CNOT</span></a> gates.
+The GF2+X method, a modification of the original sparse isometry work in <span class="bibtex-citation" id="id1">[<a class="reference internal" href="../references.html#id10" title="Emanuel Malvetti, Raban Iten, and Roger Colbeck. Quantum circuits for sparse isometries. Quantum, 5:412, 2021. URL: http://arxiv.org/abs/2006.00016, doi:10.22331/q-2021-06-21-412.">MIC21</a>]</span>, applies GF(2) Gaussian elimination to the binary matrix representation of the quantum state to determine a reduced space representation of the sparse state.
+This reduced state is then densely encoded via regular isometry <span class="bibtex-citation" id="id2">[<a class="reference internal" href="../references.html#id19" title="Raban Iten, Roger Colbeck, Ivan Kukuljan, Jonathan Home, and Matthias Christandl. Quantum circuits for isometries. Physical Review A, 93:032318, 2016. doi:10.1103/PhysRevA.93.032318.">ICK+16</a>]</span> on a smaller number of qubits, and finally scattered to the full qubit space using X and <a class="reference internal" href="../glossary.html#term-CNOT"><span class="xref std std-term">CNOT</span></a> gates.
 By focusing only on non-zero amplitudes, this approach substantially reduces circuit depth and gate count compared to dense isometry methods, making it especially suitable for selected <a class="reference internal" href="../glossary.html#term-CI"><span class="xref std std-term">CI</span></a> and other sparse wavefunctions.</p>
 </dd>
 </dl>
 </section>
 </section>
 <section id="hamiltonian-encoding">
-<h4>Hamiltonian Encoding<a class="headerlink" href="#hamiltonian-encoding" title="Link to this heading">#</a></h4>
+<h4>Hamiltonian Encoding<a class="headerlink" href="#hamiltonian-encoding" title="Link to this heading"></a></h4>
 <p>Classical quantum chemistry methods are generally expressed in the language of second quantization, using fermionic creation and annihilation operators to describe interactions between electron configurations. However, quantum computers operate on qubits, necessitating a transformation from fermionic operators to qubit operators. QDK/Chemistry implements several standard mapping techniques, including:</p>
 <dl class="simple">
-<dt>Jordan-Wigner Transformation <span class="bibtex-citation" id="id3">[<a class="reference internal" href="../references.html#id16" title="P. Jordan and E. Wigner. Über das Paulische Äquivalenzverbot. Zeitschrift für Physik, 47:631-651, 1928. doi:10.1007/BF01331938.">JW28</a>]</span></dt><dd><p>A straightforward mapping that encodes fermionic operators directly onto qubits, preserving the algebraic structure of the operators.</p>
+<dt>Jordan-Wigner Transformation <span class="bibtex-citation" id="id3">[<a class="reference internal" href="../references.html#id13" title="P. Jordan and E. Wigner. Über das Paulische Äquivalenzverbot. Zeitschrift für Physik, 47:631-651, 1928. doi:10.1007/BF01331938.">JW28</a>]</span></dt><dd><p>A straightforward mapping that encodes fermionic operators directly onto qubits, preserving the algebraic structure of the operators.</p>
 </dd>
-<dt>Bravyi-Kitaev Transformation <span class="bibtex-citation" id="id4">[<a class="reference internal" href="../references.html#id17" title="Jacob T. Seeley, Martin J. Richard, and Peter J. Love. The Bravyi-Kitaev transformation for quantum computation of electronic structure. The Journal of Chemical Physics, 137(22):224109, 2012. doi:10.1063/1.4768229.">SRL12</a>]</span></dt><dd><p>A more efficient mapping that reduces the number of qubits required for certain operations by balancing locality and parity information.</p>
+<dt>Bravyi-Kitaev Transformation <span class="bibtex-citation" id="id4">[<a class="reference internal" href="../references.html#id14" title="Jacob T. Seeley, Martin J. Richard, and Peter J. Love. The Bravyi-Kitaev transformation for quantum computation of electronic structure. The Journal of Chemical Physics, 137(22):224109, 2012. doi:10.1063/1.4768229.">SRL12</a>]</span></dt><dd><p>A more efficient mapping that reduces the number of qubits required for certain operations by balancing locality and parity information.</p>
 </dd>
-<dt>Parity Transformation <span class="bibtex-citation" id="id5">[<a class="reference internal" href="../references.html#id17" title="Jacob T. Seeley, Martin J. Richard, and Peter J. Love. The Bravyi-Kitaev transformation for quantum computation of electronic structure. The Journal of Chemical Physics, 137(22):224109, 2012. doi:10.1063/1.4768229.">SRL12</a>]</span></dt><dd><p>An alternative mapping that encodes fermionic operators based on the parity of occupation numbers, offering advantages in specific contexts.</p>
+<dt>Parity Transformation <span class="bibtex-citation" id="id5">[<a class="reference internal" href="../references.html#id14" title="Jacob T. Seeley, Martin J. Richard, and Peter J. Love. The Bravyi-Kitaev transformation for quantum computation of electronic structure. The Journal of Chemical Physics, 137(22):224109, 2012. doi:10.1063/1.4768229.">SRL12</a>]</span></dt><dd><p>An alternative mapping that encodes fermionic operators based on the parity of occupation numbers, offering advantages in specific contexts.</p>
 </dd>
 </dl>
 <p>QDK/Chemistry provides both a native qubit mapper implementation and integration with external libraries through plugins.
 See <a class="reference internal" href="comprehensive/algorithms/qubit_mapper.html"><span class="doc">Qubit mapping</span></a> for available implementations and usage details.
 QDK/Chemistry also provides <a class="reference internal" href="comprehensive/data/pauli_operator.html"><span class="doc">Pauli operator arithmetic</span></a> for building and manipulating qubit operators using natural mathematical notation.</p>
 <section id="qubit-mapper-highlights">
-<span id="id6"></span><h5>Implementation Highlights<a class="headerlink" href="#qubit-mapper-highlights" title="Link to this heading">#</a></h5>
+<span id="id6"></span><h5>Implementation Highlights<a class="headerlink" href="#qubit-mapper-highlights" title="Link to this heading"></a></h5>
 <dl class="simple">
 <dt>Native QDK Qubit Mapper</dt><dd><p>QDK/Chemistry includes a high-performance native implementation of fermion-to-qubit mappings built on the <a class="reference internal" href="comprehensive/data/pauli_operator.html"><span class="doc">PauliOperator</span></a> expression layer.
-This implementation supports both Jordan-Wigner and Bravyi-Kitaev encodings <span class="bibtex-citation" id="id7">[<a class="reference internal" href="../references.html#id17" title="Jacob T. Seeley, Martin J. Richard, and Peter J. Love. The Bravyi-Kitaev transformation for quantum computation of electronic structure. The Journal of Chemical Physics, 137(22):224109, 2012. doi:10.1063/1.4768229.">SRL12</a>]</span>, using the Seeley-Richard-Love algorithm for the Bravyi-Kitaev mapping, with configurable coefficient thresholds for controlling numerical precision.
+This implementation supports both Jordan-Wigner and Bravyi-Kitaev encodings <span class="bibtex-citation" id="id7">[<a class="reference internal" href="../references.html#id14" title="Jacob T. Seeley, Martin J. Richard, and Peter J. Love. The Bravyi-Kitaev transformation for quantum computation of electronic structure. The Journal of Chemical Physics, 137(22):224109, 2012. doi:10.1063/1.4768229.">SRL12</a>]</span>, using the Seeley-Richard-Love algorithm for the Bravyi-Kitaev mapping, with configurable coefficient thresholds for controlling numerical precision.
 The native mapper applies thresholds after the complete transformation, ensuring mathematically consistent results across different molecular systems.</p>
 </dd>
 </dl>
 </section>
 </section>
 <section id="observable-sampling-and-energy-estimation">
-<h4>Observable Sampling and Energy Estimation<a class="headerlink" href="#observable-sampling-and-energy-estimation" title="Link to this heading">#</a></h4>
+<h4>Observable Sampling and Energy Estimation<a class="headerlink" href="#observable-sampling-and-energy-estimation" title="Link to this heading"></a></h4>
 <p>After preparing a quantum state representing the molecular system, a common next step is to compute physical observables, such as the ground state energy.
 One canonical choice for this task is to estimate the expectation value through statistical sampling of measurements performed on the quantum state relative to the operator of interest.
 This generally involves the following steps:</p>
@@ -630,7 +247,7 @@ The measurement results are processed classically to estimate the expectation va
 </section>
 </section>
 <section id="model-hamiltonians">
-<h3><a class="toc-backref" href="#id35" role="doc-backlink">Model Hamiltonians</a><a class="headerlink" href="#model-hamiltonians" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id35" role="doc-backlink">Model Hamiltonians</a><a class="headerlink" href="#model-hamiltonians" title="Link to this heading"></a></h3>
 <p>For systems where the essential physics can be captured by a lattice model, QDK/Chemistry provides native construction of model Hamiltonians without requiring molecular structures, basis sets, or external electronic-structure codes.
 The resulting Hamiltonians integrate directly with the quantum and classical algorithms described on this page.</p>
 <dl class="simple">
@@ -644,10 +261,10 @@ Parameters accept either scalars (uniform) or per-site/per-bond arrays for inhom
 <p>See <a class="reference internal" href="comprehensive/model_hamiltonians.html"><span class="doc">Model Hamiltonians</span></a> for detailed documentation and usage examples.</p>
 </section>
 <section id="classical-quantum-chemistry-methods">
-<h3><a class="toc-backref" href="#id36" role="doc-backlink">Classical Quantum Chemistry Methods</a><a class="headerlink" href="#classical-quantum-chemistry-methods" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id36" role="doc-backlink">Classical Quantum Chemistry Methods</a><a class="headerlink" href="#classical-quantum-chemistry-methods" title="Link to this heading"></a></h3>
 <p>The classical electronic structure methods in QDK/Chemistry produce the molecular orbitals, reference wavefunctions, and compact Hamiltonians that serve as essential inputs to the quantum algorithms above.</p>
 <section id="self-consistent-field-scf">
-<h4>Self-Consistent Field (SCF)<a class="headerlink" href="#self-consistent-field-scf" title="Link to this heading">#</a></h4>
+<h4>Self-Consistent Field (SCF)<a class="headerlink" href="#self-consistent-field-scf" title="Link to this heading"></a></h4>
 <p>QDK/Chemistry provides access to a variety of robust, high-performance implementations of mean-field electronic structure methods that produce optimized molecular orbitals and reference energies. In particular, the following <a class="reference internal" href="../glossary.html#term-SCF"><span class="xref std std-term">SCF</span></a> types are supported:</p>
 <dl class="simple">
 <dt>Hartree-Fock (<a class="reference internal" href="../glossary.html#term-HF"><span class="xref std std-term">HF</span></a>)</dt><dd><p>Restricted (<a class="reference internal" href="../glossary.html#term-RHF"><span class="xref std std-term">RHF</span></a>), Unrestricted (<a class="reference internal" href="../glossary.html#term-UHF"><span class="xref std std-term">UHF</span></a>), Restricted Open-Shell (<a class="reference internal" href="../glossary.html#term-ROHF"><span class="xref std std-term">ROHF</span></a>)</p>
@@ -657,36 +274,36 @@ Parameters accept either scalars (uniform) or per-site/per-bond arrays for inhom
 </dl>
 <p>See <a class="reference internal" href="comprehensive/algorithms/scf_solver.html"><span class="doc">Self-consistent field (SCF) solver</span></a> for further details about available <a class="reference internal" href="../glossary.html#term-SCF"><span class="xref std std-term">SCF</span></a> methods and implementations.</p>
 <section id="id8">
-<h5>Implementation Highlights<a class="headerlink" href="#id8" title="Link to this heading">#</a></h5>
+<h5>Implementation Highlights<a class="headerlink" href="#id8" title="Link to this heading"></a></h5>
 <dl class="simple">
-<dt>Geometric Direct Minimization (<a class="reference internal" href="../glossary.html#term-GDM"><span class="xref std std-term">GDM</span></a>)</dt><dd><p>The <a class="reference internal" href="comprehensive/algorithms/scf_solver.html#qdk-scf-native"><span class="std std-ref">QDK SCF Solver</span></a> implements the <a class="reference internal" href="../glossary.html#term-GDM"><span class="xref std std-term">GDM</span></a> algorithm <span class="bibtex-citation" id="id9">[<a class="reference internal" href="../references.html#id42" title="Troy Van Voorhis and Martin Head-Gordon. A geometric approach to direct minimization. Molecular Physics, 100(11):1713–1721, 2002. URL: https://doi.org/10.1080/00268970110103642, doi:10.1080/00268970110103642.">VanVoorhisHG02</a>]</span> for robust and efficient convergence of challenging <a class="reference internal" href="../glossary.html#term-SCF"><span class="xref std std-term">SCF</span></a> systems.
+<dt>Geometric Direct Minimization (<a class="reference internal" href="../glossary.html#term-GDM"><span class="xref std std-term">GDM</span></a>)</dt><dd><p>The <a class="reference internal" href="comprehensive/algorithms/scf_solver.html#qdk-scf-native"><span class="std std-ref">QDK SCF Solver</span></a> implements the <a class="reference internal" href="../glossary.html#term-GDM"><span class="xref std std-term">GDM</span></a> algorithm <span class="bibtex-citation" id="id9">[<a class="reference internal" href="../references.html#id39" title="Troy Van Voorhis and Martin Head-Gordon. A geometric approach to direct minimization. Molecular Physics, 100(11):1713–1721, 2002. URL: https://doi.org/10.1080/00268970110103642, doi:10.1080/00268970110103642.">VanVoorhisHG02</a>]</span> for robust and efficient convergence of challenging <a class="reference internal" href="../glossary.html#term-SCF"><span class="xref std std-term">SCF</span></a> systems.
 This method is particularly helpful for open-shell and small gap systems, which are of high interest in quantum computing applications, yet challenging for many <a class="reference internal" href="../glossary.html#term-SCF"><span class="xref std std-term">SCF</span></a> solvers.
 See the <a class="reference internal" href="comprehensive/algorithms/scf_solver.html#scf-convergence-algorithms"><span class="std std-ref">SCF Convergence Algorithms</span></a> section for further details.</p>
 </dd>
 <dt>Stability Analysis and Reoptimization</dt><dd><p>Challenging <a class="reference internal" href="../glossary.html#term-SCF"><span class="xref std std-term">SCF</span></a> problems often converge to local minima that do not represent the true mean-field ground state, which in turn can lead to incorrect and unintuitive results in post-<a class="reference internal" href="../glossary.html#term-SCF"><span class="xref std std-term">SCF</span></a> calculations.
-QDK/Chemistry includes automated <a class="reference internal" href="comprehensive/algorithms/stability_checker.html"><span class="doc">Stability analysis</span></a> <span class="bibtex-citation" id="id10">[<a class="reference internal" href="../references.html#id43" title="H. B. Schlegel and J. J. W. McDouall. Do you have SCF stability and convergence problems?, pages 167–185. Springer Netherlands, Dordrecht, 1991. URL: https://doi.org/10.1007/978-94-011-3262-6_2, doi:10.1007/978-94-011-3262-6_2.">SM91</a>]</span> tools to identify, perturb and reoptimize unstable solutions, helping users obtain physically meaningful reference states for subsequent calculations.</p>
+QDK/Chemistry includes automated <a class="reference internal" href="comprehensive/algorithms/stability_checker.html"><span class="doc">Stability analysis</span></a> <span class="bibtex-citation" id="id10">[<a class="reference internal" href="../references.html#id40" title="H. B. Schlegel and J. J. W. McDouall. Do you have SCF stability and convergence problems?, pages 167–185. Springer Netherlands, Dordrecht, 1991. URL: https://doi.org/10.1007/978-94-011-3262-6_2, doi:10.1007/978-94-011-3262-6_2.">SM91</a>]</span> tools to identify, perturb and reoptimize unstable solutions, helping users obtain physically meaningful reference states for subsequent calculations.</p>
 </dd>
 </dl>
 </section>
 </section>
 <section id="orbital-localization">
-<h4>Orbital Localization<a class="headerlink" href="#orbital-localization" title="Link to this heading">#</a></h4>
+<h4>Orbital Localization<a class="headerlink" href="#orbital-localization" title="Link to this heading"></a></h4>
 <p>The canonical orbitals produced by <a class="reference internal" href="../glossary.html#term-SCF"><span class="xref std std-term">SCF</span></a> calculations are typically delocalized over the entire molecule, which can complicate chemical interpretation and slow the convergence of post-<a class="reference internal" href="../glossary.html#term-SCF"><span class="xref std std-term">SCF</span></a> correlation methods. QDK/Chemistry provides several classes of orbital transformation techniques to yield specialized representations which accelerate the convergence of correlation methods and enhance chemical insight:</p>
 <dl class="simple">
-<dt>Optimization-Based Methods</dt><dd><p>The vast majority of orbital localization methods fall into this category, where a cost function is iteratively minimized to yield localized orbitals <span class="bibtex-citation" id="id11">[<a class="reference internal" href="../references.html#id48" title="Susi Lehtola and Hannes Jónsson. Unitary optimization of localized molecular orbitals. Journal of Chemical Theory and Computation, 9(12):5365-5372, 2013. URL: https://doi.org/10.1021/ct400793q, doi:10.1021/ct400793q.">LJ13</a>]</span>.
-QDK/Chemistry supports, either through our <a class="reference internal" href="comprehensive/algorithms/localizer.html#localizer-qdk-pipek-mezey"><span class="std std-ref">native implementations</span></a> or via <a class="reference internal" href="comprehensive/algorithms/localizer.html#localizer-pyscf-multi"><span class="std std-ref">integration with external libraries</span></a>, several popular choices of cost functions, including: <strong>Pipek-Mezey</strong> <span class="bibtex-citation" id="id12">[<a class="reference internal" href="../references.html#id45" title="János Pipek and Paul G. Mezey. A fast intrinsic localization procedure applicable for ab initio and semiempirical linear combination of atomic orbital wave functions. The Journal of Chemical Physics, 90(9):4916-4926, 05 1989. URL: https://doi.org/10.1063/1.456588, doi:10.1063/1.456588.">PM89</a>]</span>, <strong>Foster-Boys</strong> <span class="bibtex-citation" id="id13">[<a class="reference internal" href="../references.html#id47" title="J. M. Foster and S. F. Boys. Canonical configurational interaction procedure. Rev. Mod. Phys., 32:300–302, Apr 1960. URL: https://link.aps.org/doi/10.1103/RevModPhys.32.300, doi:10.1103/RevModPhys.32.300.">FB60</a>]</span>, and <strong>Edmiston-Ruedenberg</strong> <span class="bibtex-citation" id="id14">[<a class="reference internal" href="../references.html#id46" title="Clyde Edmiston and Klaus Ruedenberg. Localized atomic and molecular orbitals. Rev. Mod. Phys., 35:457–464, Jul 1963. URL: https://link.aps.org/doi/10.1103/RevModPhys.35.457, doi:10.1103/RevModPhys.35.457.">ER63</a>]</span>.</p>
+<dt>Optimization-Based Methods</dt><dd><p>The vast majority of orbital localization methods fall into this category, where a cost function is iteratively minimized to yield localized orbitals <span class="bibtex-citation" id="id11">[<a class="reference internal" href="../references.html#id45" title="Susi Lehtola and Hannes Jónsson. Unitary optimization of localized molecular orbitals. Journal of Chemical Theory and Computation, 9(12):5365-5372, 2013. URL: https://doi.org/10.1021/ct400793q, doi:10.1021/ct400793q.">LJ13</a>]</span>.
+QDK/Chemistry supports, either through our <a class="reference internal" href="comprehensive/algorithms/localizer.html#localizer-qdk-pipek-mezey"><span class="std std-ref">native implementations</span></a> or via <a class="reference internal" href="comprehensive/algorithms/localizer.html#localizer-pyscf-multi"><span class="std std-ref">integration with external libraries</span></a>, several popular choices of cost functions, including: <strong>Pipek-Mezey</strong> <span class="bibtex-citation" id="id12">[<a class="reference internal" href="../references.html#id42" title="János Pipek and Paul G. Mezey. A fast intrinsic localization procedure applicable for ab initio and semiempirical linear combination of atomic orbital wave functions. The Journal of Chemical Physics, 90(9):4916-4926, 05 1989. URL: https://doi.org/10.1063/1.456588, doi:10.1063/1.456588.">PM89</a>]</span>, <strong>Foster-Boys</strong> <span class="bibtex-citation" id="id13">[<a class="reference internal" href="../references.html#id44" title="J. M. Foster and S. F. Boys. Canonical configurational interaction procedure. Rev. Mod. Phys., 32:300–302, Apr 1960. URL: https://link.aps.org/doi/10.1103/RevModPhys.32.300, doi:10.1103/RevModPhys.32.300.">FB60</a>]</span>, and <strong>Edmiston-Ruedenberg</strong> <span class="bibtex-citation" id="id14">[<a class="reference internal" href="../references.html#id43" title="Clyde Edmiston and Klaus Ruedenberg. Localized atomic and molecular orbitals. Rev. Mod. Phys., 35:457–464, Jul 1963. URL: https://link.aps.org/doi/10.1103/RevModPhys.35.457, doi:10.1103/RevModPhys.35.457.">ER63</a>]</span>.</p>
 </dd>
 <dt>Analytical Methods</dt><dd><p>These methods transform orbitals in a single step through analytical techniques rather than iterative optimization.
-Prominent examples include <strong>natural orbitals</strong> <span class="bibtex-citation" id="id15">[<a class="reference internal" href="../references.html#id44" title="Per-Olov Löwdin and Harrison Shull. Natural orbitals in the quantum theory of two-electron systems. Physical Review, 101:1730–1739, Mar 1956. URL: https://link.aps.org/doi/10.1103/PhysRev.101.1730, doi:10.1103/PhysRev.101.1730.">LowdinS56</a>]</span>, which diagonalize the one-particle reduced density matrix, and <strong>Cholesky localization</strong> <span class="bibtex-citation" id="id16">[<a class="reference internal" href="../references.html#id60" title="Francesco Aquilante, Thomas Bondo Pedersen, Alfredo Sánchez de Merás, and Henrik Koch. Fast noniterative orbital localization for large molecules. The Journal of Chemical Physics, 125(17):174101, 11 2006. URL: https://doi.org/10.1063/1.2360264, doi:10.1063/1.2360264.">ABPSdMK06</a>]</span>, which uses Cholesky decomposition of the one particle density matrix for efficient approximate localization.
+Prominent examples include <strong>natural orbitals</strong> <span class="bibtex-citation" id="id15">[<a class="reference internal" href="../references.html#id41" title="Per-Olov Löwdin and Harrison Shull. Natural orbitals in the quantum theory of two-electron systems. Physical Review, 101:1730–1739, Mar 1956. URL: https://link.aps.org/doi/10.1103/PhysRev.101.1730, doi:10.1103/PhysRev.101.1730.">LowdinS56</a>]</span>, which diagonalize the one-particle reduced density matrix, and <strong>Cholesky localization</strong> <span class="bibtex-citation" id="id16">[<a class="reference internal" href="../references.html#id57" title="Francesco Aquilante, Thomas Bondo Pedersen, Alfredo Sánchez de Merás, and Henrik Koch. Fast noniterative orbital localization for large molecules. The Journal of Chemical Physics, 125(17):174101, 11 2006. URL: https://doi.org/10.1063/1.2360264, doi:10.1063/1.2360264.">ABPSdMK06</a>]</span>, which uses Cholesky decomposition of the one particle density matrix for efficient approximate localization.
 The localization of the “hard-virtual” orbitals in the <a class="reference internal" href="comprehensive/algorithms/localizer.html#vvhv-algorithm"><span class="std std-ref">VVHV localization</span></a> also falls into this category.</p>
 </dd>
 </dl>
 <p>See <a class="reference internal" href="comprehensive/algorithms/localizer.html"><span class="doc">Orbital localization</span></a> for further details about available orbital localization methods and implementations.</p>
 <section id="id17">
-<h5>Implementation Highlights<a class="headerlink" href="#id17" title="Link to this heading">#</a></h5>
+<h5>Implementation Highlights<a class="headerlink" href="#id17" title="Link to this heading"></a></h5>
 <dl class="simple">
 <dt>Valence Virtual–Hard Virtual (<a class="reference internal" href="../glossary.html#term-VVHV"><span class="xref std std-term">VVHV</span></a>) Orbital Localization</dt><dd><p>Localization of molecular orbitals expressed in a near-complete <a class="reference internal" href="comprehensive/data/basis_set.html"><span class="doc">BasisSet</span></a> is numerically ill-posed and challenging for most iterative methods.
-QDK/Chemistry includes an implementation of the <a class="reference internal" href="../glossary.html#term-VVHV"><span class="xref std std-term">VVHV</span></a> separation <span class="bibtex-citation" id="id18">[<a class="reference internal" href="../references.html#id49" title="Joseph E. Subotnik, Anthony D. Dutoi, and Martin Head-Gordon. Fast localized orthonormal virtual orbitals which depend smoothly on nuclear coordinates. The Journal of Chemical Physics, 123(11):114108, 09 2005. URL: https://doi.org/10.1063/1.2033687, doi:10.1063/1.2033687.">SDHG05</a>]</span>, which partitions the virtual orbital space into valence-virtual and hard-virtual subspaces for more numerically stable treatments.
+QDK/Chemistry includes an implementation of the <a class="reference internal" href="../glossary.html#term-VVHV"><span class="xref std std-term">VVHV</span></a> separation <span class="bibtex-citation" id="id18">[<a class="reference internal" href="../references.html#id46" title="Joseph E. Subotnik, Anthony D. Dutoi, and Martin Head-Gordon. Fast localized orthonormal virtual orbitals which depend smoothly on nuclear coordinates. The Journal of Chemical Physics, 123(11):114108, 09 2005. URL: https://doi.org/10.1063/1.2033687, doi:10.1063/1.2033687.">SDHG05</a>]</span>, which partitions the virtual orbital space into valence-virtual and hard-virtual subspaces for more numerically stable treatments.
 This produces orbitals that vary smoothly with molecular geometry, which is particularly useful for selecting consistent active spaces along reaction pathways.
 See the <a class="reference internal" href="comprehensive/algorithms/localizer.html#vvhv-algorithm"><span class="std std-ref">VVHV Algorithm</span></a> section for further details.</p>
 </dd>
@@ -694,18 +311,18 @@ See the <a class="reference internal" href="comprehensive/algorithms/localizer.h
 </section>
 </section>
 <section id="active-space-selection">
-<h4>Active Space Selection<a class="headerlink" href="#active-space-selection" title="Link to this heading">#</a></h4>
+<h4>Active Space Selection<a class="headerlink" href="#active-space-selection" title="Link to this heading"></a></h4>
 <p>Accurate treatment of strongly correlated systems requires identifying which molecular orbitals exhibit significant entanglement character. QDK/Chemistry provides a range of automated and manual approaches to select chemically relevant orbitals for <a class="reference internal" href="comprehensive/algorithms/mc_calculator.html"><span class="doc">multi-configurational calculations</span></a>.</p>
 <p>The challenge lies in balancing accuracy and computational cost: an ideal active space should include all orbitals with significant entanglement character while remaining as compact as possible. QDK/Chemistry supports several strategies for making this selection:</p>
 <p class="rubric">Automated Approaches</p>
 <dl class="simple">
 <dt>Entropy-Based Methods</dt><dd><p>Using concepts from quantum information theory, these methods identify strongly correlated orbitals based on their entanglement with the rest of the system.
-QDK/Chemistry includes a native implementation of the autoCAS algorithm <span class="bibtex-citation" id="id19">[<a class="reference internal" href="../references.html#id35" title="Christopher J. Stein and Markus Reiher. autoCAS: a program for fully automated multiconfigurational calculations. Journal of Computational Chemistry, 40(25):2216-2226, 2019. URL: https://arxiv.org/abs/1904.00097, doi:10.1002/jcc.25869.">SR19</a>]</span>, which leverages single-orbital entropies computed from reduced density matrices to systematically select active spaces (see below for details).</p>
+QDK/Chemistry includes a native implementation of the autoCAS algorithm <span class="bibtex-citation" id="id19">[<a class="reference internal" href="../references.html#id32" title="Christopher J. Stein and Markus Reiher. autoCAS: a program for fully automated multiconfigurational calculations. Journal of Computational Chemistry, 40(25):2216-2226, 2019. URL: https://arxiv.org/abs/1904.00097, doi:10.1002/jcc.25869.">SR19</a>]</span>, which leverages single-orbital entropies computed from reduced density matrices to systematically select active spaces (see below for details).</p>
 </dd>
 <dt>Occupation-based Methods</dt><dd><p>Automatic selection based on natural orbital occupation numbers obtained from correlated many-body methods.
 Orbitals with fractional occupations indicate entanglement and are included in the active space.</p>
 </dd>
-<dt><a class="reference internal" href="../glossary.html#term-AVAS"><span class="xref std std-term">AVAS</span></a> (Automated Valence Active Space) <span class="bibtex-citation" id="id20">[<a class="reference internal" href="../references.html#id8" title="Elvira R. Sayfutyarova, Qiming Sun, Garnet Kin-Lic Chan, and Gerald Knizia. Automated construction of molecular active spaces from atomic valence orbitals. Journal of Chemical Theory and Computation, 13(9):4063-4078, 2017. URL: https://arxiv.org/abs/1701.07862, doi:10.1021/acs.jctc.7b00128.">SSCK17</a>]</span></dt><dd><p>Projects molecular orbitals onto a target atomic orbital basis (e.g., metal 3d orbitals) to systematically identify valence active spaces.
+<dt><a class="reference internal" href="../glossary.html#term-AVAS"><span class="xref std std-term">AVAS</span></a> (Automated Valence Active Space) <span class="bibtex-citation" id="id20">[<a class="reference internal" href="../references.html#id5" title="Elvira R. Sayfutyarova, Qiming Sun, Garnet Kin-Lic Chan, and Gerald Knizia. Automated construction of molecular active spaces from atomic valence orbitals. Journal of Chemical Theory and Computation, 13(9):4063-4078, 2017. URL: https://arxiv.org/abs/1701.07862, doi:10.1021/acs.jctc.7b00128.">SSCK17</a>]</span></dt><dd><p>Projects molecular orbitals onto a target atomic orbital basis (e.g., metal 3d orbitals) to systematically identify valence active spaces.
 This functionality is available through the <a class="reference internal" href="comprehensive/algorithms/active_space.html#pyscf-avas-plugin"><span class="std std-ref">PySCF Plugin</span></a>.</p>
 </dd>
 </dl>
@@ -716,9 +333,9 @@ This functionality is available through the <a class="reference internal" href="
 </dl>
 <p>See <a class="reference internal" href="comprehensive/algorithms/active_space.html"><span class="doc">Active space selection</span></a> for further details about available methods and implementations.</p>
 <section id="active-space-highlights">
-<span id="id21"></span><h5>Implementation Highlights<a class="headerlink" href="#active-space-highlights" title="Link to this heading">#</a></h5>
+<span id="id21"></span><h5>Implementation Highlights<a class="headerlink" href="#active-space-highlights" title="Link to this heading"></a></h5>
 <dl class="simple">
-<dt>autoCAS</dt><dd><p>QDK/Chemistry includes a native implementation of the autoCAS algorithm <span class="bibtex-citation" id="id22">[<a class="reference internal" href="../references.html#id35" title="Christopher J. Stein and Markus Reiher. autoCAS: a program for fully automated multiconfigurational calculations. Journal of Computational Chemistry, 40(25):2216-2226, 2019. URL: https://arxiv.org/abs/1904.00097, doi:10.1002/jcc.25869.">SR19</a>]</span>, which leverages quantum information concepts to identify strongly correlated orbitals.
+<dt>autoCAS</dt><dd><p>QDK/Chemistry includes a native implementation of the autoCAS algorithm <span class="bibtex-citation" id="id22">[<a class="reference internal" href="../references.html#id32" title="Christopher J. Stein and Markus Reiher. autoCAS: a program for fully automated multiconfigurational calculations. Journal of Computational Chemistry, 40(25):2216-2226, 2019. URL: https://arxiv.org/abs/1904.00097, doi:10.1002/jcc.25869.">SR19</a>]</span>, which leverages quantum information concepts to identify strongly correlated orbitals.
 The method computes single-orbital entropies—measures of how entangled each orbital is with the rest of the system—from the one- and two-electron reduced density matrices of a multi-configurational wavefunction.
 Orbitals with high entropy are strongly entangled and should be treated explicitly within the active space. QDK/Chemistry’s implementation includes both standard autoCAS and an enhanced variant (autoCAS-EOS) for improved robustness.
 See the <a class="reference internal" href="comprehensive/algorithms/active_space.html#autocas-algorithm-details"><span class="std std-ref">autoCAS Algorithm</span></a> documentation for further details.</p>
@@ -727,7 +344,7 @@ See the <a class="reference internal" href="comprehensive/algorithms/active_spac
 </section>
 </section>
 <section id="multi-configuration-methods">
-<h4>Multi-Configuration Methods<a class="headerlink" href="#multi-configuration-methods" title="Link to this heading">#</a></h4>
+<h4>Multi-Configuration Methods<a class="headerlink" href="#multi-configuration-methods" title="Link to this heading"></a></h4>
 <p>Multi-configuration (<a class="reference internal" href="../glossary.html#term-MC"><span class="xref std std-term">MC</span></a>) methods represent the electronic wavefunction as a linear combination of many Slater determinants, enabling accurate description of static correlation effects.
 QDK/Chemistry provides access to a hierarchy of <a class="reference internal" href="../glossary.html#term-MC"><span class="xref std std-term">MC</span></a> methods:</p>
 <p class="rubric">Configuration Interaction</p>
@@ -744,9 +361,9 @@ QDK/Chemistry provides access to a hierarchy of <a class="reference internal" hr
 </dl>
 <p>See <a class="reference internal" href="comprehensive/algorithms/mc_calculator.html"><span class="doc">Multi-configuration calculations</span></a> and <a class="reference internal" href="comprehensive/algorithms/mcscf.html"><span class="doc">Multi-Configuration Self-Consistent Field</span></a> for further details.</p>
 <section id="mc-highlights">
-<span id="id23"></span><h5>Implementation Highlights<a class="headerlink" href="#mc-highlights" title="Link to this heading">#</a></h5>
+<span id="id23"></span><h5>Implementation Highlights<a class="headerlink" href="#mc-highlights" title="Link to this heading"></a></h5>
 <dl class="simple">
-<dt>Adaptive Sampling Configuration Interaction (<a class="reference internal" href="../glossary.html#term-ASCI"><span class="xref std std-term">ASCI</span></a>)</dt><dd><p>QDK/Chemistry integrates <a class="reference internal" href="../glossary.html#term-MACIS"><span class="xref std std-term">MACIS</span></a> (Many-body Adaptive Configuration Interaction Solver) <span class="bibtex-citation" id="id24">[<a class="reference internal" href="../references.html#id12" title="David B. Williams-Young, Norm M. Tubman, Carlos Mejuto-Zaera, and Wibe A. de Jong. A parallel, distributed memory implementation of the adaptive sampling configuration interaction method. The Journal of Chemical Physics, 158:214109, 2023. URL: https://arxiv.org/abs/2303.05688, doi:10.1063/5.0148650.">WYTMZdJ23</a>]</span>, a high-performance, parallel implementation of the Adaptive Sampling Configuration Interaction (<a class="reference internal" href="../glossary.html#term-ASCI"><span class="xref std std-term">ASCI</span></a>) algorithm <span class="bibtex-citation" id="id25">[<a class="reference internal" href="../references.html#id52" title="Norm M. Tubman, C. Daniel Freeman, Daniel S. Levine, Diptarka Hait, Martin Head-Gordon, and K. Birgitta Whaley. Modern approaches to exact diagonalization and selected configuration interaction with the adaptive sampling CI method. Journal of Chemical Theory and Computation, 16(4):2139-2159, 2020. URL: https://doi.org/10.1021/acs.jctc.8b00536, doi:10.1021/acs.jctc.8b00536.">TFL+20</a>, <a class="reference internal" href="../references.html#id51" title="Norm M. Tubman, Joonho Lee, Tyler Y. Takeshita, Martin Head-Gordon, and K. Birgitta Whaley. A deterministic alternative to the full configuration interaction quantum Monte Carlo method. The Journal of Chemical Physics, 145(4):044112, 07 2016. URL: https://doi.org/10.1063/1.4955109, doi:10.1063/1.4955109.">TLT+16</a>]</span>.
+<dt>Adaptive Sampling Configuration Interaction (<a class="reference internal" href="../glossary.html#term-ASCI"><span class="xref std std-term">ASCI</span></a>)</dt><dd><p>QDK/Chemistry integrates <a class="reference internal" href="../glossary.html#term-MACIS"><span class="xref std std-term">MACIS</span></a> (Many-body Adaptive Configuration Interaction Solver) <span class="bibtex-citation" id="id24">[<a class="reference internal" href="../references.html#id9" title="David B. Williams-Young, Norm M. Tubman, Carlos Mejuto-Zaera, and Wibe A. de Jong. A parallel, distributed memory implementation of the adaptive sampling configuration interaction method. The Journal of Chemical Physics, 158:214109, 2023. URL: https://arxiv.org/abs/2303.05688, doi:10.1063/5.0148650.">WYTMZdJ23</a>]</span>, a high-performance, parallel implementation of the Adaptive Sampling Configuration Interaction (<a class="reference internal" href="../glossary.html#term-ASCI"><span class="xref std std-term">ASCI</span></a>) algorithm <span class="bibtex-citation" id="id25">[<a class="reference internal" href="../references.html#id49" title="Norm M. Tubman, C. Daniel Freeman, Daniel S. Levine, Diptarka Hait, Martin Head-Gordon, and K. Birgitta Whaley. Modern approaches to exact diagonalization and selected configuration interaction with the adaptive sampling CI method. Journal of Chemical Theory and Computation, 16(4):2139-2159, 2020. URL: https://doi.org/10.1021/acs.jctc.8b00536, doi:10.1021/acs.jctc.8b00536.">TFL+20</a>, <a class="reference internal" href="../references.html#id48" title="Norm M. Tubman, Joonho Lee, Tyler Y. Takeshita, Martin Head-Gordon, and K. Birgitta Whaley. A deterministic alternative to the full configuration interaction quantum Monte Carlo method. The Journal of Chemical Physics, 145(4):044112, 07 2016. URL: https://doi.org/10.1063/1.4955109, doi:10.1063/1.4955109.">TLT+16</a>]</span>.
 <a class="reference internal" href="../glossary.html#term-ASCI"><span class="xref std std-term">ASCI</span></a> iteratively grows the determinant space by identifying configurations with the largest contributions to the wavefunction, achieving near-<a class="reference internal" href="../glossary.html#term-CASCI"><span class="xref std std-term">CASCI</span></a> accuracy at a fraction of the cost.
 This enables treatment of active spaces that would be intractable for conventional <a class="reference internal" href="../glossary.html#term-CASCI"><span class="xref std std-term">CASCI</span></a>. See the <a class="reference internal" href="comprehensive/algorithms/mc_calculator.html#asci-algorithm"><span class="std std-ref">ASCI Algorithm</span></a> section for details.</p>
 </dd>
@@ -754,7 +371,7 @@ This enables treatment of active spaces that would be intractable for convention
 </section>
 </section>
 <section id="nuclear-derivatives-and-geometry-optimization">
-<h4>Nuclear Derivatives and Geometry Optimization<a class="headerlink" href="#nuclear-derivatives-and-geometry-optimization" title="Link to this heading">#</a></h4>
+<h4>Nuclear Derivatives and Geometry Optimization<a class="headerlink" href="#nuclear-derivatives-and-geometry-optimization" title="Link to this heading"></a></h4>
 <p>Nuclear derivative calculators evaluate the energy, its gradient with respect to nuclear coordinates, and optionally the nuclear Hessian, for any electronic structure method exposed through the algorithm registry.</p>
 <p>Geometry optimizers build on these derivatives to relax a molecular structure to a stationary point, returning the converged energy, the optimized structure, and optionally a Hessian and the converged wavefunction.
 Both minimizations and transition-state searches are supported, and the derivative engine is selected through settings, so the same optimizer drives any registered nuclear derivative calculator.</p>
@@ -762,49 +379,49 @@ Both minimizations and transition-state searches are supported, and the derivati
 </section>
 </section>
 <section id="community-open-source-software-dependencies">
-<h2><a class="toc-backref" href="#id37" role="doc-backlink">Community Open Source Software Dependencies</a><a class="headerlink" href="#community-open-source-software-dependencies" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id37" role="doc-backlink">Community Open Source Software Dependencies</a><a class="headerlink" href="#community-open-source-software-dependencies" title="Link to this heading"></a></h2>
 <p>QDK/Chemistry builds upon a foundation of well-established open source libraries developed by the quantum chemistry community. For a complete list of software dependencies, see the <a class="reference external" href="https://github.com/microsoft/qdk-chemistry/blob/main/INSTALL.md">Installation Guide</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you use QDK/Chemistry in published work, please cite the underlying libraries as described below to acknowledge the community’s contributions.</p>
 </div>
 <section id="basis-sets-and-effective-core-potentials">
-<h3><a class="toc-backref" href="#id38" role="doc-backlink">Basis Sets and Effective Core Potentials</a><a class="headerlink" href="#basis-sets-and-effective-core-potentials" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id38" role="doc-backlink">Basis Sets and Effective Core Potentials</a><a class="headerlink" href="#basis-sets-and-effective-core-potentials" title="Link to this heading"></a></h3>
 <dl class="simple">
-<dt>Basis Set Exchange (<a class="reference internal" href="../glossary.html#term-BSE"><span class="xref std std-term">BSE</span></a>) <span class="bibtex-citation" id="id26">[<a class="reference internal" href="../references.html#id55" title="David Feller. The role of databases in support of computational chemistry calculations. Journal of Computational Chemistry, 17(13):1571-1586, 1996. URL: https://onlinelibrary.wiley.com/doi/abs/10.1002/%28SICI%291096-987X%28199610%2917%3A13%3C1571%3A%3AAID-JCC9%3E3.0.CO%3B2-P, doi:10.1002/(SICI)1096-987X(199610)17:13&lt;1571::AID-JCC9&gt;3.0.CO;2-P.">Fel96</a>, <a class="reference internal" href="../references.html#id54" title="Benjamin P. Pritchard, Doaa Altarawy, Brett Didier, Tara D. Gibson, and Theresa L. Windus. New Basis Set Exchange: an open, up-to-date resource for the molecular sciences community. Journal of Chemical Information and Modeling, 59(11):4814-4820, 2019. URL: https://doi.org/10.1021/acs.jcim.9b00725, doi:10.1021/acs.jcim.9b00725.">PAD+19</a>, <a class="reference internal" href="../references.html#id56" title="Karen L. Schuchardt, Brett T. Didier, Todd Elsethagen, Lisong Sun, Vidhya Gurumoorthi, Jared Chase, Jun Li, and Theresa L. Windus. Basis Set Exchange: a community database for computational sciences. Journal of Chemical Information and Modeling, 47(3):1045-1052, 2007. URL: https://doi.org/10.1021/ci600510j, doi:10.1021/ci600510j.">SDE+07</a>]</span></dt><dd><p>A comprehensive repository of standardized basis sets for quantum chemistry calculations.
+<dt>Basis Set Exchange (<a class="reference internal" href="../glossary.html#term-BSE"><span class="xref std std-term">BSE</span></a>) <span class="bibtex-citation" id="id26">[<a class="reference internal" href="../references.html#id52" title="David Feller. The role of databases in support of computational chemistry calculations. Journal of Computational Chemistry, 17(13):1571-1586, 1996. URL: https://onlinelibrary.wiley.com/doi/abs/10.1002/%28SICI%291096-987X%28199610%2917%3A13%3C1571%3A%3AAID-JCC9%3E3.0.CO%3B2-P, doi:10.1002/(SICI)1096-987X(199610)17:13&lt;1571::AID-JCC9&gt;3.0.CO;2-P.">Fel96</a>, <a class="reference internal" href="../references.html#id51" title="Benjamin P. Pritchard, Doaa Altarawy, Brett Didier, Tara D. Gibson, and Theresa L. Windus. New Basis Set Exchange: an open, up-to-date resource for the molecular sciences community. Journal of Chemical Information and Modeling, 59(11):4814-4820, 2019. URL: https://doi.org/10.1021/acs.jcim.9b00725, doi:10.1021/acs.jcim.9b00725.">PAD+19</a>, <a class="reference internal" href="../references.html#id53" title="Karen L. Schuchardt, Brett T. Didier, Todd Elsethagen, Lisong Sun, Vidhya Gurumoorthi, Jared Chase, Jun Li, and Theresa L. Windus. Basis Set Exchange: a community database for computational sciences. Journal of Chemical Information and Modeling, 47(3):1045-1052, 2007. URL: https://doi.org/10.1021/ci600510j, doi:10.1021/ci600510j.">SDE+07</a>]</span></dt><dd><p>A comprehensive repository of standardized basis sets for quantum chemistry calculations.
 All of the basis sets and effective core potentials distributed with QDK/Chemistry are sourced from the <a class="reference internal" href="../glossary.html#term-BSE"><span class="xref std std-term">BSE</span></a>.
 If you publish results obtained with default basis sets provided with QDK/Chemistry, in addition to the reference for the basis set itself, please cite the <a class="reference internal" href="../glossary.html#term-BSE"><span class="xref std std-term">BSE</span></a>.
 For guidance on citing specific basis sets and effective core potentials, see the <a class="reference external" href="https://www.basissetexchange.org/">Basis Set Exchange Website</a>.</p>
 </dd>
-<dt>Libecpint <span class="bibtex-citation" id="id27">[<a class="reference internal" href="../references.html#id57" title="Robert A. Shaw and J. Grant Hill. Prescreening and efficiency in the evaluation of integrals over ab initio effective core potentials. The Journal of Chemical Physics, 147(7):074108, aug 2017. URL: http://aip.scitation.org/doi/10.1063/1.4986887, doi:10.1063/1.4986887.">SH17</a>, <a class="reference internal" href="../references.html#id58" title="Robert A. Shaw and J. Grant Hill. libecpint: a C++ library for the efficient evaluation of integrals over effective core potentials. Journal of Open Source Software, 6(60):3039, 2021. URL: https://doi.org/10.21105/joss.03039, doi:10.21105/joss.03039.">SH21</a>]</span></dt><dd><p>Provides efficient evaluation of effective core potential (<a class="reference internal" href="../glossary.html#term-ECP"><span class="xref std std-term">ECP</span></a>) integrals over Gaussian-type orbitals. QDK/Chemistry’s native <a class="reference internal" href="../glossary.html#term-SCF"><span class="xref std std-term">SCF</span></a> solver relies on Libecpint for <a class="reference internal" href="../glossary.html#term-ECP"><span class="xref std std-term">ECP</span></a> integral computation. If you publish results obtained with any of the native quantum chemistry modules within QDK/Chemistry that utilize ECPs, please cite Libecpint. The <a class="reference external" href="https://github.com/robashaw/libecpint">Libecpint repository</a> includes additional guidance on citing Libecpint.</p>
+<dt>Libecpint <span class="bibtex-citation" id="id27">[<a class="reference internal" href="../references.html#id54" title="Robert A. Shaw and J. Grant Hill. Prescreening and efficiency in the evaluation of integrals over ab initio effective core potentials. The Journal of Chemical Physics, 147(7):074108, aug 2017. URL: http://aip.scitation.org/doi/10.1063/1.4986887, doi:10.1063/1.4986887.">SH17</a>, <a class="reference internal" href="../references.html#id55" title="Robert A. Shaw and J. Grant Hill. libecpint: a C++ library for the efficient evaluation of integrals over effective core potentials. Journal of Open Source Software, 6(60):3039, 2021. URL: https://doi.org/10.21105/joss.03039, doi:10.21105/joss.03039.">SH21</a>]</span></dt><dd><p>Provides efficient evaluation of effective core potential (<a class="reference internal" href="../glossary.html#term-ECP"><span class="xref std std-term">ECP</span></a>) integrals over Gaussian-type orbitals. QDK/Chemistry’s native <a class="reference internal" href="../glossary.html#term-SCF"><span class="xref std std-term">SCF</span></a> solver relies on Libecpint for <a class="reference internal" href="../glossary.html#term-ECP"><span class="xref std std-term">ECP</span></a> integral computation. If you publish results obtained with any of the native quantum chemistry modules within QDK/Chemistry that utilize ECPs, please cite Libecpint. The <a class="reference external" href="https://github.com/robashaw/libecpint">Libecpint repository</a> includes additional guidance on citing Libecpint.</p>
 </dd>
 </dl>
 </section>
 <section id="integral-evaluation">
-<h3><a class="toc-backref" href="#id39" role="doc-backlink">Integral Evaluation</a><a class="headerlink" href="#integral-evaluation" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id39" role="doc-backlink">Integral Evaluation</a><a class="headerlink" href="#integral-evaluation" title="Link to this heading"></a></h3>
 <dl class="simple">
-<dt>Libint <span class="bibtex-citation" id="id28">[<a class="reference internal" href="../references.html#id53" title="E. F. Valeev. Libint: a library for the evaluation of molecular integrals of many-body operators over Gaussian functions. http://libint.valeyev.net/, 2024. version 2.9.0.">Val24</a>]</span></dt><dd><p>Provides efficient evaluation of molecular integrals over Gaussian-type orbitals, including one- and two-electron repulsion integrals essential for all electronic structure methods. QDK/Chemistry’s native <a class="reference internal" href="../glossary.html#term-SCF"><span class="xref std std-term">SCF</span></a> solver, orbital localization, and post-<a class="reference internal" href="../glossary.html#term-SCF"><span class="xref std std-term">SCF</span></a> modules rely on Libint for integral computation. If you publish results obtained with any of the native quantum chemistry modules within QDK/Chemistry, please cite Libint. The <a class="reference external" href="https://github.com/evaleev/libint">Libint repository</a> includes additional guidance on citing Libint.</p>
+<dt>Libint <span class="bibtex-citation" id="id28">[<a class="reference internal" href="../references.html#id50" title="E. F. Valeev. Libint: a library for the evaluation of molecular integrals of many-body operators over Gaussian functions. http://libint.valeyev.net/, 2024. version 2.9.0.">Val24</a>]</span></dt><dd><p>Provides efficient evaluation of molecular integrals over Gaussian-type orbitals, including one- and two-electron repulsion integrals essential for all electronic structure methods. QDK/Chemistry’s native <a class="reference internal" href="../glossary.html#term-SCF"><span class="xref std std-term">SCF</span></a> solver, orbital localization, and post-<a class="reference internal" href="../glossary.html#term-SCF"><span class="xref std std-term">SCF</span></a> modules rely on Libint for integral computation. If you publish results obtained with any of the native quantum chemistry modules within QDK/Chemistry, please cite Libint. The <a class="reference external" href="https://github.com/evaleev/libint">Libint repository</a> includes additional guidance on citing Libint.</p>
 </dd>
-<dt>GauXC <span class="bibtex-citation" id="id29">[<a class="reference internal" href="../references.html#id29" title="Mikael Kovtun, Eleftherios Lambros, Aodong Liu, Diandong Tang, David B. Williams–Young, and Xiaosong Li. Accelerating relativistic exact-two-component density functional theory calculations with graphical processing units. Journal of Chemical Theory and Computation, 20(18):7694–7699, 2024. doi:10.1021/acs.jctc.4c00843.">KLL+24</a>, <a class="reference internal" href="../references.html#id15" title="Alessio Petrone, David B. Williams–Young, Shichao Sun, Torin F. Stetina, and Xiaosong Li. An efficient implementation of two-component relativistic density functional theory with torque-free auxiliary variables. The European Physical Journal B, 91(169):169, 2018. doi:10.1140/epjb/e2018-90170-1.">PWYS+18</a>, <a class="reference internal" href="../references.html#id30" title="David B. Williams–Young, Andrey Asadchev, Doru Thom Popovici, David Clark, Jonathan Waldrop, Theresa L. Windus, Edward F. Valeev, and Wibe A. de Jong. Distributed memory, GPU accelerated Fock construction for hybrid, Gaussian basis density functional theory. The Journal of Chemical Physics, 158(23):234104, 2023. doi:10.1063/5.0151070.">WYAP+23</a>, <a class="reference internal" href="../references.html#id31" title="David B. Williams–Young, Abhishek Bagusetty, Wibe A. de Jong, Douglas Doerfler, Hubertus J. J. van Dam, Álvaro Vázquez-Mayagoitia, Theresa L. Windus, and Chao Yang. Achieving performance portability in Gaussian basis set density functional theory on accelerator-based architectures in NWChemEx. Parallel Computing, 108:102829, 2021. doi:10.1016/j.parco.2021.102829.">WYBdeJong+21</a>, <a class="reference internal" href="../references.html#id32" title="David B. Williams–Young, Wibe A. de Jong, Hubertus J. J. van Dam, and Chao Yang. On the efficient evaluation of the exchange correlation potential on graphics processing unit clusters. Frontiers in Chemistry, 8:581058, 2020. URL: https://arxiv.org/abs/2007.03143, doi:10.3389/fchem.2020.581058.">WYdeJongvanDamY20</a>]</span></dt><dd><p>Handles numerical integration on atom-centered grids, which is required for evaluating exchange-correlation contributions in density functional theory. GauXC supports both CPU and GPU acceleration, enabling scalable <a class="reference internal" href="../glossary.html#term-DFT"><span class="xref std std-term">DFT</span></a> calculations on modern hardware. If you publish <a class="reference internal" href="../glossary.html#term-DFT"><span class="xref std std-term">DFT</span></a> results obtained with QDK/Chemistry, please cite GauXC. See the <a class="reference external" href="https://github.com/wavefunction91/gauxc">GauXC repository</a> for guidance on citing GauXC.</p>
+<dt>GauXC <span class="bibtex-citation" id="id29">[<a class="reference internal" href="../references.html#id26" title="Mikael Kovtun, Eleftherios Lambros, Aodong Liu, Diandong Tang, David B. Williams–Young, and Xiaosong Li. Accelerating relativistic exact-two-component density functional theory calculations with graphical processing units. Journal of Chemical Theory and Computation, 20(18):7694–7699, 2024. doi:10.1021/acs.jctc.4c00843.">KLL+24</a>, <a class="reference internal" href="../references.html#id12" title="Alessio Petrone, David B. Williams–Young, Shichao Sun, Torin F. Stetina, and Xiaosong Li. An efficient implementation of two-component relativistic density functional theory with torque-free auxiliary variables. The European Physical Journal B, 91(169):169, 2018. doi:10.1140/epjb/e2018-90170-1.">PWYS+18</a>, <a class="reference internal" href="../references.html#id27" title="David B. Williams–Young, Andrey Asadchev, Doru Thom Popovici, David Clark, Jonathan Waldrop, Theresa L. Windus, Edward F. Valeev, and Wibe A. de Jong. Distributed memory, GPU accelerated Fock construction for hybrid, Gaussian basis density functional theory. The Journal of Chemical Physics, 158(23):234104, 2023. doi:10.1063/5.0151070.">WYAP+23</a>, <a class="reference internal" href="../references.html#id28" title="David B. Williams–Young, Abhishek Bagusetty, Wibe A. de Jong, Douglas Doerfler, Hubertus J. J. van Dam, Álvaro Vázquez-Mayagoitia, Theresa L. Windus, and Chao Yang. Achieving performance portability in Gaussian basis set density functional theory on accelerator-based architectures in NWChemEx. Parallel Computing, 108:102829, 2021. doi:10.1016/j.parco.2021.102829.">WYBdeJong+21</a>, <a class="reference internal" href="../references.html#id29" title="David B. Williams–Young, Wibe A. de Jong, Hubertus J. J. van Dam, and Chao Yang. On the efficient evaluation of the exchange correlation potential on graphics processing unit clusters. Frontiers in Chemistry, 8:581058, 2020. URL: https://arxiv.org/abs/2007.03143, doi:10.3389/fchem.2020.581058.">WYdeJongvanDamY20</a>]</span></dt><dd><p>Handles numerical integration on atom-centered grids, which is required for evaluating exchange-correlation contributions in density functional theory. GauXC supports both CPU and GPU acceleration, enabling scalable <a class="reference internal" href="../glossary.html#term-DFT"><span class="xref std std-term">DFT</span></a> calculations on modern hardware. If you publish <a class="reference internal" href="../glossary.html#term-DFT"><span class="xref std std-term">DFT</span></a> results obtained with QDK/Chemistry, please cite GauXC. See the <a class="reference external" href="https://github.com/wavefunction91/gauxc">GauXC repository</a> for guidance on citing GauXC.</p>
 </dd>
 </dl>
 </section>
 <section id="exchange-correlation-functionals">
-<h3><a class="toc-backref" href="#id40" role="doc-backlink">Exchange-Correlation Functionals</a><a class="headerlink" href="#exchange-correlation-functionals" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id40" role="doc-backlink">Exchange-Correlation Functionals</a><a class="headerlink" href="#exchange-correlation-functionals" title="Link to this heading"></a></h3>
 <dl class="simple">
-<dt>Libxc <span class="bibtex-citation" id="id30">[<a class="reference internal" href="../references.html#id48" title="Susi Lehtola and Hannes Jónsson. Unitary optimization of localized molecular orbitals. Journal of Chemical Theory and Computation, 9(12):5365-5372, 2013. URL: https://doi.org/10.1021/ct400793q, doi:10.1021/ct400793q.">LJ13</a>]</span></dt><dd><p>A comprehensive library providing implementations of over 600 exchange-correlation functionals spanning <a class="reference internal" href="../glossary.html#term-LDA"><span class="xref std std-term">LDA</span></a>, <a class="reference internal" href="../glossary.html#term-GGA"><span class="xref std std-term">GGA</span></a>, meta-<a class="reference internal" href="../glossary.html#term-GGA"><span class="xref std std-term">GGA</span></a>, and hybrid rungs of Jacob’s ladder. GauXC depends on Libxc for functional evaluation. If you publish <a class="reference internal" href="../glossary.html#term-DFT"><span class="xref std std-term">DFT</span></a> results obtained with QDK/Chemistry, in addition to the reference for the functional used, please cite Libxc. For guidance on citing specific functionals, see the <a class="reference external" href="https://tddft.org/programs/libxc/">Libxc Website</a>.</p>
+<dt>Libxc <span class="bibtex-citation" id="id30">[<a class="reference internal" href="../references.html#id45" title="Susi Lehtola and Hannes Jónsson. Unitary optimization of localized molecular orbitals. Journal of Chemical Theory and Computation, 9(12):5365-5372, 2013. URL: https://doi.org/10.1021/ct400793q, doi:10.1021/ct400793q.">LJ13</a>]</span></dt><dd><p>A comprehensive library providing implementations of over 600 exchange-correlation functionals spanning <a class="reference internal" href="../glossary.html#term-LDA"><span class="xref std std-term">LDA</span></a>, <a class="reference internal" href="../glossary.html#term-GGA"><span class="xref std std-term">GGA</span></a>, meta-<a class="reference internal" href="../glossary.html#term-GGA"><span class="xref std std-term">GGA</span></a>, and hybrid rungs of Jacob’s ladder. GauXC depends on Libxc for functional evaluation. If you publish <a class="reference internal" href="../glossary.html#term-DFT"><span class="xref std std-term">DFT</span></a> results obtained with QDK/Chemistry, in addition to the reference for the functional used, please cite Libxc. For guidance on citing specific functionals, see the <a class="reference external" href="https://tddft.org/programs/libxc/">Libxc Website</a>.</p>
 </dd>
 </dl>
 </section>
 <section id="multi-configuration-solvers">
-<h3><a class="toc-backref" href="#id41" role="doc-backlink">Multi-Configuration Solvers</a><a class="headerlink" href="#multi-configuration-solvers" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id41" role="doc-backlink">Multi-Configuration Solvers</a><a class="headerlink" href="#multi-configuration-solvers" title="Link to this heading"></a></h3>
 <dl class="simple">
-<dt>MACIS <span class="bibtex-citation" id="id31">[<a class="reference internal" href="../references.html#id12" title="David B. Williams-Young, Norm M. Tubman, Carlos Mejuto-Zaera, and Wibe A. de Jong. A parallel, distributed memory implementation of the adaptive sampling configuration interaction method. The Journal of Chemical Physics, 158:214109, 2023. URL: https://arxiv.org/abs/2303.05688, doi:10.1063/5.0148650.">WYTMZdJ23</a>]</span></dt><dd><p>The Many-body Adaptive Configuration Interaction Solver powers QDK/Chemistry’s selected CI capabilities. <a class="reference internal" href="../glossary.html#term-MACIS"><span class="xref std std-term">MACIS</span></a> implements the <a class="reference internal" href="../glossary.html#term-ASCI"><span class="xref std std-term">ASCI</span></a> algorithm with distributed-memory parallelism, enabling treatment of active spaces far beyond the reach of conventional exact diagonalization.</p>
+<dt>MACIS <span class="bibtex-citation" id="id31">[<a class="reference internal" href="../references.html#id9" title="David B. Williams-Young, Norm M. Tubman, Carlos Mejuto-Zaera, and Wibe A. de Jong. A parallel, distributed memory implementation of the adaptive sampling configuration interaction method. The Journal of Chemical Physics, 158:214109, 2023. URL: https://arxiv.org/abs/2303.05688, doi:10.1063/5.0148650.">WYTMZdJ23</a>]</span></dt><dd><p>The Many-body Adaptive Configuration Interaction Solver powers QDK/Chemistry’s selected CI capabilities. <a class="reference internal" href="../glossary.html#term-MACIS"><span class="xref std std-term">MACIS</span></a> implements the <a class="reference internal" href="../glossary.html#term-ASCI"><span class="xref std std-term">ASCI</span></a> algorithm with distributed-memory parallelism, enabling treatment of active spaces far beyond the reach of conventional exact diagonalization.</p>
 </dd>
 </dl>
 </section>
 <section id="plugins">
-<h3><a class="toc-backref" href="#id42" role="doc-backlink">Plugins</a><a class="headerlink" href="#plugins" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id42" role="doc-backlink">Plugins</a><a class="headerlink" href="#plugins" title="Link to this heading"></a></h3>
 <p>QDK/Chemistry is distributed with the following officially supported plugins that extend its capabilities by integrating with external quantum chemistry and quantum algorithms frameworks. If implementations of QDK/Chemistry interfaces using these plugins are used in your published work, please cite both QDK/Chemistry and the underlying package as described in the respective plugin documentation.</p>
 <dl class="simple">
 <dt>PySCF Plugin</dt><dd><p>Integrates QDK/Chemistry with the PySCF quantum chemistry package, providing access to its extensive suite of electronic structure methods and tools.
@@ -820,10 +437,10 @@ See the <a class="reference external" href="https://github.com/leeping/geomeTRIC
 </section>
 </section>
 <section id="visual-studio-code-integration">
-<h2><a class="toc-backref" href="#id43" role="doc-backlink">Visual Studio Code Integration</a><a class="headerlink" href="#visual-studio-code-integration" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id43" role="doc-backlink">Visual Studio Code Integration</a><a class="headerlink" href="#visual-studio-code-integration" title="Link to this heading"></a></h2>
 <p>QDK/Chemistry provides integration with Visual Studio Code to enhance the development experience when using the Python API.</p>
 <section id="type-aware-autocompletion-for-factory-methods">
-<h3><a class="toc-backref" href="#id44" role="doc-backlink">Type-Aware Autocompletion for Factory Methods</a><a class="headerlink" href="#type-aware-autocompletion-for-factory-methods" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id44" role="doc-backlink">Type-Aware Autocompletion for Factory Methods</a><a class="headerlink" href="#type-aware-autocompletion-for-factory-methods" title="Link to this heading"></a></h3>
 <p>QDK/Chemistry dynamically generates type stubs that enable intelligent autocompletion in VS Code (via Pylance) for the <a class="reference internal" href="comprehensive/algorithms/factory_pattern.html"><span class="doc">factory pattern</span></a> used throughout the library.
 When calling <code class="docutils literal notranslate"><span class="pre">registry.create()</span></code>, the editor provides:</p>
 <ul class="simple">
@@ -841,14 +458,14 @@ Custom plugins registered at runtime will not have autocompletion support for th
 </div>
 </section>
 <section id="dev-container-support">
-<h3><a class="toc-backref" href="#id45" role="doc-backlink">Dev Container Support</a><a class="headerlink" href="#dev-container-support" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id45" role="doc-backlink">Dev Container Support</a><a class="headerlink" href="#dev-container-support" title="Link to this heading"></a></h3>
 <p>For developers who want to modify or extend QDK/Chemistry and compile from source, the repository includes a pre-configured Dev Container.
 This provides a complete build environment with all system dependencies installed, once the container is built.
 See the <a class="reference external" href="https://github.com/microsoft/qdk-chemistry/blob/main/INSTALL.md">Installation Guide</a> for details.</p>
 </section>
 </section>
 <section id="see-also">
-<h2><a class="toc-backref" href="#id46" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id46" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="quickstart.html"><span class="doc">Quickstart</span></a> - Get started with QDK/Chemistry</p></li>
 <li><p><a class="reference internal" href="comprehensive/index.html"><span class="doc">In-depth user guide</span></a> - Comprehensive documentation</p></li>
@@ -857,170 +474,34 @@ See the <a class="reference external" href="https://github.com/microsoft/qdk-che
 </section>
 
 
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
-<div class="prev-next-area">
-    <a class="left-prev"
-       href="quickstart.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Quickstart</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="comprehensive/index.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">In-depth user guide</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
-</div>
-                </footer>
-              
-            </div>
-            
-            
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-methods">Supported Methods</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-algorithms">Quantum Algorithms</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-estimation">Phase Estimation</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#state-preparation">State Preparation</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-highlights">Implementation Highlights</a></li>
-</ul>
-</li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hamiltonian-encoding">Hamiltonian Encoding</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qubit-mapper-highlights">Implementation Highlights</a></li>
-</ul>
-</li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#observable-sampling-and-energy-estimation">Observable Sampling and Energy Estimation</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-hamiltonians">Model Hamiltonians</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-quantum-chemistry-methods">Classical Quantum Chemistry Methods</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#self-consistent-field-scf">Self-Consistent Field (SCF)</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Implementation Highlights</a></li>
-</ul>
-</li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbital-localization">Orbital Localization</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">Implementation Highlights</a></li>
-</ul>
-</li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#active-space-selection">Active Space Selection</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#active-space-highlights">Implementation Highlights</a></li>
-</ul>
-</li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-configuration-methods">Multi-Configuration Methods</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-highlights">Implementation Highlights</a></li>
-</ul>
-</li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nuclear-derivatives-and-geometry-optimization">Nuclear Derivatives and Geometry Optimization</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#community-open-source-software-dependencies">Community Open Source Software Dependencies</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-sets-and-effective-core-potentials">Basis Sets and Effective Core Potentials</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integral-evaluation">Integral Evaluation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exchange-correlation-functionals">Exchange-Correlation Functionals</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-configuration-solvers">Multi-Configuration Solvers</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plugins">Plugins</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-studio-code-integration">Visual Studio Code Integration</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#type-aware-autocompletion-for-factory-methods">Type-Aware Autocompletion for Factory Methods</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dev-container-support">Dev Container Support</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-also">See Also</a></li>
-</ul>
-  </nav></div>
-
-  <div class="sidebar-secondary-item">
-
-  <div class="tocsection sourcelink">
-    <a href="../_sources/user/features.rst.txt">
-      <i class="fa-solid fa-file-lines"></i> Show Source
-    </a>
-  </div>
-</div>
-
-</div></div>
-              
-            
+           </div>
           </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="quickstart.html" class="btn btn-neutral float-left" title="Quickstart" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="comprehensive/index.html" class="btn btn-neutral float-right" title="In-depth user guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Microsoft Corporation. All rights reserved. Licensed under the MIT License.</p>
   </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
 
-  <footer class="bd-footer">
-<div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
-  <p class="copyright">
-    
-      © Copyright Microsoft Corporation. All rights reserved. Licensed under the MIT License.
-      <br/>
-    
-  </p>
-</div>
-      
-        <div class="footer-item">
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-  <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
-    <br/>
-  </p>
-</div>
-      
-    </div>
-  
-  
-  
-    <div class="footer-items__end">
-      
-        <div class="footer-item">
-<p class="theme-version">
-  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
-</p></div>
-      
-    </div>
-  
-</div>
-
-  </footer>
-  </body>
+</body>
 </html>

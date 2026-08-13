@@ -1,0 +1,262 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qdk_chemistry.plugins.pyscf.scf_solver module &mdash; qdk-chemistry 1.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ac0f520b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=fc837d61"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/tabs.js?v=3ee01567"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="qdk_chemistry.plugins.pyscf.stability module" href="qdk_chemistry.plugins.pyscf.stability.html" />
+    <link rel="prev" title="qdk_chemistry.plugins.pyscf.mcscf module" href="qdk_chemistry.plugins.pyscf.mcscf.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            qdk-chemistry
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/features.html">Features, methods and dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/comprehensive/index.html">In-depth user guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../python_api.html">Python API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#data-classes">Data Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#algorithms">Algorithms</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../python_api.html#plugins">Plugins</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="qdk_chemistry.plugins.html">qdk_chemistry.plugins package</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.html#purpose-and-benefits">Purpose and Benefits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.html#available-plugins">Available Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.html#using-plugins">Using Plugins</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="qdk_chemistry.plugins.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#constants">Constants</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp_api.html">C++ API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Supporting Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Acronym definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">qdk-chemistry</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../python_api.html">Python API</a></li>
+          <li class="breadcrumb-item"><a href="qdk_chemistry.plugins.html">qdk_chemistry.plugins package</a></li>
+          <li class="breadcrumb-item"><a href="qdk_chemistry.plugins.pyscf.html">qdk_chemistry.plugins.pyscf package</a></li>
+      <li class="breadcrumb-item active">qdk_chemistry.plugins.pyscf.scf_solver module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/api/api_autogen/qdk_chemistry.plugins.pyscf.scf_solver.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-qdk_chemistry.plugins.pyscf.scf_solver">
+<span id="qdk-chemistry-plugins-pyscf-scf-solver-module"></span><h1>qdk_chemistry.plugins.pyscf.scf_solver module<a class="headerlink" href="#module-qdk_chemistry.plugins.pyscf.scf_solver" title="Link to this heading"></a></h1>
+<p>PySCF-based Self-Consistent Field (SCF) solver implementation for qdk_chemistry.</p>
+<p>This module provides integration between QDK/Chemistry and PySCF for performing
+Self-Consistent Field calculations supporting both Hartree-Fock (HF) and
+Density Functional Theory (DFT) methods. It implements solvers that can be
+used within the QDK/Chemistry framework for electronic structure calculations.</p>
+<p>The module contains:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#qdk_chemistry.plugins.pyscf.scf_solver.PyscfScfSettings" title="qdk_chemistry.plugins.pyscf.scf_solver.PyscfScfSettings"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyscfScfSettings</span></code></a>: Configuration class for SCF calculation parameters</p></li>
+<li><p><a class="reference internal" href="#qdk_chemistry.plugins.pyscf.scf_solver.PyscfScfSolver" title="qdk_chemistry.plugins.pyscf.scf_solver.PyscfScfSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyscfScfSolver</span></code></a>: Main solver class that performs HF and DFT calculations</p></li>
+<li><p>Registration utilities to integrate the solver with QDK/Chemistry’s plugin system</p></li>
+</ul>
+<p>The solver handles automatic conversion between QDK/Chemistry molecular structures and PySCF
+format, performs the SCF calculation using the specified method (HF or DFT functional),
+and returns results (energy and orbitals) in QDK/Chemistry-compatible format. It supports
+various basis sets and exchange-correlation functionals through the settings interface.</p>
+<p>Upon import, this module automatically registers the PySCF solver with QDK/Chemistry’s
+SCF solver registry under the name “pyscf”.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.plugins.pyscf.scf_solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">PyscfScfSolver</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span> <span class="o">=</span> <span class="n">PyscfScfSolver</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span><span class="o">.</span><span class="n">settings</span><span class="p">()[</span><span class="s2">&quot;method&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;b3lyp&quot;</span>  <span class="c1"># Use B3LYP DFT</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">energy</span><span class="p">,</span> <span class="n">orbitals</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">molecule</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;sto-3g&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This module requires both QDK/Chemistry and PySCF to be installed. The solver supports both
+restricted and unrestricted variants for both HF and DFT calculations.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.scf_solver.PyscfScfSettings">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">qdk_chemistry.plugins.pyscf.scf_solver.</span></span><span class="sig-name descname"><span class="pre">PyscfScfSettings</span></span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/pyscf/scf_solver.html#PyscfScfSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.scf_solver.PyscfScfSettings" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="qdk_chemistry.data.html#qdk_chemistry.data.ElectronicStructureSettings" title="qdk_chemistry.data.ElectronicStructureSettings"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElectronicStructureSettings</span></code></a></p>
+<p>Settings configuration for the PySCF SCF solver.</p>
+<p>This class manages the configuration parameters for the PySCF Self-Consistent
+Field (SCF) solver, inheriting common electronic structure defaults from
+ElectronicStructureSettings and adding PySCF-specific customizations.</p>
+<p>Inherits from ElectronicStructureSettings:
+- method (str, default=”hf”): The electronic structure method (Hartree-Fock).
+- basis_set (str, default=”def2-svp”): The basis set used for quantum chemistry calculations.
+Common options include “def2-svp”, “def2-tzvp”, “cc-pvdz”, etc.
+- convergence_threshold (float, default=1e-7): Convergence tolerance for orbital gradient norm.
+- max_iterations (int, default=50): Maximum number of iterations.
+- scf_type (str, default=”auto”): Type of SCF calculation. Can be:
+“auto”: Automatically detect based on spin (RHF for singlet, UHF for open-shell)
+“restricted”: Force restricted calculation (RHF/ROHF for HF, RKS/ROKS for DFT)
+“unrestricted”: Force unrestricted calculation (UHF for HF, UKS for DFT)</p>
+<p>PySCF specific setting:
+- xc_grid: Integer DFT integration grid density level passed to PySCF (0=coarse, 9=very fine).</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">settings</span> <span class="o">=</span> <span class="n">PyscfScfSettings</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_iterations&quot;</span><span class="p">)</span>
+<span class="go">50</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">settings</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;max_iterations&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_iterations&quot;</span><span class="p">)</span>
+<span class="go">100</span>
+</pre></div>
+</div>
+<p class="rubric">Notes</p>
+<p>The PySCF SCF solver is used for performing self-consistent field calculations in quantum chemistry, which
+are fundamental for determining electronic structure and molecular properties.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.scf_solver.PyscfScfSettings.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/pyscf/scf_solver.html#PyscfScfSettings.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.scf_solver.PyscfScfSettings.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the settings with default values from ElectronicStructureSettings plus PySCF-specific defaults.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.scf_solver.PyscfScfSolver">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">qdk_chemistry.plugins.pyscf.scf_solver.</span></span><span class="sig-name descname"><span class="pre">PyscfScfSolver</span></span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/pyscf/scf_solver.html#PyscfScfSolver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.scf_solver.PyscfScfSolver" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="qdk_chemistry.algorithms.html#qdk_chemistry.algorithms.ScfSolver" title="qdk_chemistry.algorithms.ScfSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">ScfSolver</span></code></a></p>
+<p>PySCF-based Self-Consistent Field (SCF) solver for quantum chemistry calculations.</p>
+<p>This class provides an interface between QDK/Chemistry and PySCF for performing both Hartree-Fock (HF) and Density
+Functional Theory (DFT) calculations on molecular systems. It handles the conversion between QDK/Chemistry
+structuresand PySCF molecular representations, performs the SCF calculation, and returns the results in
+QDK/Chemistry-compatible format.</p>
+<p>The solver supports:</p>
+<ul class="simple">
+<li><p>Hartree-Fock (HF): method=”hf” uses RHF/UHF/ROHF</p></li>
+<li><p>DFT methods: any other method string is treated as an XC functional (e.g., “b3lyp”, “pbe”, “m06”)</p></li>
+</ul>
+<p>The solver automatically selects restricted/unrestricted variants based on spin
+and the scf setting, returning electronic energy (excluding nuclear
+repulsion) along with molecular orbitals information.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span> <span class="o">=</span> <span class="n">PyscfScfSolver</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span><span class="o">.</span><span class="n">settings</span><span class="p">()[</span><span class="s2">&quot;method&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;b3lyp&quot;</span>  <span class="c1"># Use B3LYP DFT</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">energy</span><span class="p">,</span> <span class="n">orbitals</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">molecule_structure</span><span class="p">,</span> <span class="n">charge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">spin_multiplicity</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;6-31G*&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Electronic energy: </span><span class="si">{</span><span class="n">energy</span><span class="si">}</span><span class="s2"> Hartree&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>ScfSolver : Base class for SCF solvers
+PyscfScfSettings : Settings configuration for PySCF calculations</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.scf_solver.PyscfScfSolver.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/pyscf/scf_solver.html#PyscfScfSolver.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.scf_solver.PyscfScfSolver.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the PySCF SCF solver with default settings.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.scf_solver.PyscfScfSolver.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/pyscf/scf_solver.html#PyscfScfSolver.name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.scf_solver.PyscfScfSolver.name" title="Link to this definition"></a></dt>
+<dd><p>Return the name of the SCF solver.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="qdk_chemistry.plugins.pyscf.mcscf.html" class="btn btn-neutral float-left" title="qdk_chemistry.plugins.pyscf.mcscf module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="qdk_chemistry.plugins.pyscf.stability.html" class="btn btn-neutral float-right" title="qdk_chemistry.plugins.pyscf.stability module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Microsoft Corporation. All rights reserved. Licensed under the MIT License.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

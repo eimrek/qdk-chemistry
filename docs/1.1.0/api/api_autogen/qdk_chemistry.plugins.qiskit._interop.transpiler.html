@@ -1,0 +1,359 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qdk_chemistry.plugins.qiskit._interop.transpiler module &mdash; qdk-chemistry 1.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ac0f520b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=fc837d61"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/tabs.js?v=3ee01567"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="qdk_chemistry.plugins.qiskit.circuit_executor module" href="qdk_chemistry.plugins.qiskit.circuit_executor.html" />
+    <link rel="prev" title="qdk_chemistry.plugins.qiskit._interop.qir module" href="qdk_chemistry.plugins.qiskit._interop.qir.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            qdk-chemistry
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/features.html">Features, methods and dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/comprehensive/index.html">In-depth user guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../python_api.html">Python API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#data-classes">Data Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#algorithms">Algorithms</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../python_api.html#plugins">Plugins</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="qdk_chemistry.plugins.html">qdk_chemistry.plugins package</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.html#purpose-and-benefits">Purpose and Benefits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.html#available-plugins">Available Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.html#using-plugins">Using Plugins</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="qdk_chemistry.plugins.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#constants">Constants</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp_api.html">C++ API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Supporting Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Acronym definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">qdk-chemistry</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../python_api.html">Python API</a></li>
+          <li class="breadcrumb-item"><a href="qdk_chemistry.plugins.html">qdk_chemistry.plugins package</a></li>
+          <li class="breadcrumb-item"><a href="qdk_chemistry.plugins.qiskit.html">qdk_chemistry.plugins.qiskit package</a></li>
+          <li class="breadcrumb-item"><a href="qdk_chemistry.plugins.qiskit._interop.html">qdk_chemistry.plugins.qiskit._interop package</a></li>
+      <li class="breadcrumb-item active">qdk_chemistry.plugins.qiskit._interop.transpiler module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/api/api_autogen/qdk_chemistry.plugins.qiskit._interop.transpiler.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-qdk_chemistry.plugins.qiskit._interop.transpiler">
+<span id="qdk-chemistry-plugins-qiskit-interop-transpiler-module"></span><h1>qdk_chemistry.plugins.qiskit._interop.transpiler module<a class="headerlink" href="#module-qdk_chemistry.plugins.qiskit._interop.transpiler" title="Link to this heading"></a></h1>
+<p>Utilities for transpiling qiskit quantum circuits.</p>
+<p>This module provides various custom transformation passes for optimizing circuits, including merging Z-basis
+rotations, substituting Clifford Rz gates, and removing Z-basis operations on qubits in the <span class="math notranslate nohighlight">\(\lvert 0 \rangle\)</span>
+state. It also includes functions to create custom pass managers based on preset configurations and custom passes.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.qiskit._interop.transpiler.MergeZBasisRotations">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">qdk_chemistry.plugins.qiskit._interop.transpiler.</span></span><span class="sig-name descname"><span class="pre">MergeZBasisRotations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/qiskit/_interop/transpiler.html#MergeZBasisRotations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.qiskit._interop.transpiler.MergeZBasisRotations" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://quantum.cloud.ibm.com/docs/api/qiskit/qiskit.transpiler.TransformationPass" title="(in Qiskit v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TransformationPass</span></code></a></p>
+<p>Transformation pass to merge consecutive Z-basis rotations into a single Rz gate and remove identity gates.</p>
+<p>This pass identifies sequences of single-qubit gates in the Z-basis,
+specifically Rz(θ), Z, S, and Sdg, and combines them into a single Rz(θ_new)
+operation whenever possible. These gates all correspond to rotations around the
+Z-axis of the Bloch sphere and can be represented in a unified form.</p>
+<p>Gates:</p>
+<ul class="simple">
+<li><p>Rz(θ): Arbitrary rotation by angle θ.</p></li>
+<li><p>Z: Equivalent to Rz(π).</p></li>
+<li><p>S: Equivalent to Rz(π/2).</p></li>
+<li><p>Sdg: Equivalent to Rz(-π/2).</p></li>
+<li><p>Id: Equivalent to Rz(0) (no effect, removed).</p></li>
+</ul>
+<p>Behavior:</p>
+<ul class="simple">
+<li><p>Does not merge across non-Z-basis gates (e.g., X, H, CX).</p></li>
+<li><p>Removes Id gates entirely since they have no effect.</p></li>
+<li><p>Respects circuit boundaries and barriers.</p></li>
+</ul>
+<p class="rubric">Example</p>
+<dl class="simple">
+<dt>Input sequence:</dt><dd><p><span class="math notranslate nohighlight">\(S \rightarrow R_z(π/3) \rightarrow S^\dagger \rightarrow Z\)</span></p>
+</dd>
+<dt>Output:</dt><dd><p><span class="math notranslate nohighlight">\(R_z(π/2 + π/3 - π/2 + π) = R_z(π + π/3)\)</span></p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Useful for simplifying circuits before basis gate decomposition.</p></li>
+<li><p>Reduces gate count and improves optimization opportunities downstream.</p></li>
+</ul>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.qiskit._interop.transpiler.MergeZBasisRotations.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/qiskit/_interop/transpiler.html#MergeZBasisRotations.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.qiskit._interop.transpiler.MergeZBasisRotations.__init__" title="Link to this definition"></a></dt>
+<dd><p>Use Optimize1qGatesDecomposition to handle gate optimization to merge Z basis rotations.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.qiskit._interop.transpiler.MergeZBasisRotations.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/qiskit/_interop/transpiler.html#MergeZBasisRotations.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.qiskit._interop.transpiler.MergeZBasisRotations.run" title="Link to this definition"></a></dt>
+<dd><p>Run the pass on the given <code class="docutils literal notranslate"><span class="pre">DAGCircuit</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://quantum.cloud.ibm.com/docs/api/qiskit/qiskit.dagcircuit.DAGCircuit" title="(in Qiskit v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DAGCircuit</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>dag</strong> (<a class="reference external" href="https://quantum.cloud.ibm.com/docs/api/qiskit/qiskit.dagcircuit.DAGCircuit" title="(in Qiskit v2.5)"><em>qiskit.dagcircuit.DAGCircuit</em></a>) – The input <code class="docutils literal notranslate"><span class="pre">DAGCircuit</span></code> to transform.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The transformed <code class="docutils literal notranslate"><span class="pre">DAGCircuit</span></code> with merged Z-basis rotations.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.qiskit._interop.transpiler.RemoveZBasisOnZeroState">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">qdk_chemistry.plugins.qiskit._interop.transpiler.</span></span><span class="sig-name descname"><span class="pre">RemoveZBasisOnZeroState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/qiskit/_interop/transpiler.html#RemoveZBasisOnZeroState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.qiskit._interop.transpiler.RemoveZBasisOnZeroState" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://quantum.cloud.ibm.com/docs/api/qiskit/qiskit.transpiler.TransformationPass" title="(in Qiskit v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TransformationPass</span></code></a></p>
+<p>Transformation pass to remove Z-basis operations on qubits that are in the <span class="math notranslate nohighlight">\(\lvert 0 \rangle\)</span> state.</p>
+<p>This optimization eliminates gates that apply only a global phase to the qubit,
+which has no effect on observable outcomes (measurement probabilities) or
+downstream quantum operations. Specifically, diagonal gates in the computational
+basis (e.g., Rz(θ), Z, S, Sdg) act trivially on the <span class="math notranslate nohighlight">\(\lvert 0 \rangle\)</span> state:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(R_z(θ) \lvert 0 \rangle = e^{-iθ/2} \lvert 0 \rangle\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Z \lvert 0 \rangle = +1 \lvert 0 \rangle\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(S \lvert 0 \rangle = +1 \lvert 0 \rangle\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(S^\dagger \lvert 0 \rangle = +1 \lvert 0 \rangle\)</span></p></li>
+</ul>
+<p>These gates only introduce a global phase factor, which is physically unobservable.</p>
+<p>This transformation must not be applied to qubits in superposition or entangled
+states, since Z-basis rotations there modify relative phases between basis states.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.qiskit._interop.transpiler.RemoveZBasisOnZeroState.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/qiskit/_interop/transpiler.html#RemoveZBasisOnZeroState.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.qiskit._interop.transpiler.RemoveZBasisOnZeroState.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the <code class="docutils literal notranslate"><span class="pre">RemoveZBasisOnZeroState</span></code> transformation pass.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.qiskit._interop.transpiler.RemoveZBasisOnZeroState.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/qiskit/_interop/transpiler.html#RemoveZBasisOnZeroState.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.qiskit._interop.transpiler.RemoveZBasisOnZeroState.run" title="Link to this definition"></a></dt>
+<dd><p>Run the pass on the given <code class="docutils literal notranslate"><span class="pre">DAGCircuit</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://quantum.cloud.ibm.com/docs/api/qiskit/qiskit.dagcircuit.DAGCircuit" title="(in Qiskit v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DAGCircuit</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>dag</strong> (<a class="reference external" href="https://quantum.cloud.ibm.com/docs/api/qiskit/qiskit.dagcircuit.DAGCircuit" title="(in Qiskit v2.5)"><em>qiskit.dagcircuit.DAGCircuit</em></a>) – The input <code class="docutils literal notranslate"><span class="pre">DAGCircuit</span></code> to transform.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The transformed <code class="docutils literal notranslate"><span class="pre">DAGCircuit</span></code> with Z-basis gates removed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.qiskit._interop.transpiler.SubstituteCliffordRz">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">qdk_chemistry.plugins.qiskit._interop.transpiler.</span></span><span class="sig-name descname"><span class="pre">SubstituteCliffordRz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">equivalent_gate_set</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.220446049250313e-16</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/qiskit/_interop/transpiler.html#SubstituteCliffordRz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.qiskit._interop.transpiler.SubstituteCliffordRz" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://quantum.cloud.ibm.com/docs/api/qiskit/qiskit.transpiler.TransformationPass" title="(in Qiskit v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TransformationPass</span></code></a></p>
+<p>Transformation pass to substitute Rz(θ) gates with equivalent Clifford gates for special angles.</p>
+<p>This pass replaces Rz(θ) gates with one of the following Clifford gates:</p>
+<ul class="simple">
+<li><p>Identity (Id)</p></li>
+<li><p>Phase gate (S)</p></li>
+<li><p>Inverse Phase gate (Sdg)</p></li>
+<li><p>Pauli-Z (Z)</p></li>
+</ul>
+<p>Substitution rules:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Rz angle (θ)</p></th>
+<th class="head"><p>Equivalent Clifford gate</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Id</p></td>
+</tr>
+<tr class="row-odd"><td><p>π/2</p></td>
+<td><p>S</p></td>
+</tr>
+<tr class="row-even"><td><p>π</p></td>
+<td><p>Z</p></td>
+</tr>
+<tr class="row-odd"><td><p>-π/2 or 3π/2</p></td>
+<td><p>Sdg</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Only substitutes gates whose angle is non-parameterized and matches
+one of the above special Clifford phases within the specified tolerance.</p></li>
+<li><p>Leaves parameterized Rz gates untouched to preserve symbolic expressions.</p></li>
+<li><p>Ignores gates not in the user-specified <code class="docutils literal notranslate"><span class="pre">equivalent_gate_set</span></code></p></li>
+</ul>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>equivalent_gate_set</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>] </em><em>| </em><em>None</em>)</p></li>
+<li><p><strong>tolerance</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.qiskit._interop.transpiler.SubstituteCliffordRz.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">equivalent_gate_set</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">float(np.finfo(np.float64).eps)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/qiskit/_interop/transpiler.html#SubstituteCliffordRz.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.qiskit._interop.transpiler.SubstituteCliffordRz.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the SubstituteCliffordRz transformation pass.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>equivalent_gate_set</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>] </em><em>| </em><em>None</em>) – List of gates to substitute rz with special
+angles. Default is None, which means [‘id’, ‘s’, ‘sdg’, ‘z’].</p></li>
+<li><p><strong>tolerance</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Angle comparison tolerance. Default is np.finfo(np.float64).eps.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.qiskit._interop.transpiler.SubstituteCliffordRz.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/qiskit/_interop/transpiler.html#SubstituteCliffordRz.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.qiskit._interop.transpiler.SubstituteCliffordRz.run" title="Link to this definition"></a></dt>
+<dd><p>Run the pass on the given <code class="docutils literal notranslate"><span class="pre">DAGCircuit</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://quantum.cloud.ibm.com/docs/api/qiskit/qiskit.dagcircuit.DAGCircuit" title="(in Qiskit v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DAGCircuit</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>dag</strong> (<a class="reference external" href="https://quantum.cloud.ibm.com/docs/api/qiskit/qiskit.dagcircuit.DAGCircuit" title="(in Qiskit v2.5)"><em>qiskit.dagcircuit.DAGCircuit</em></a>) – The input <code class="docutils literal notranslate"><span class="pre">DAGCircuit</span></code> to transform.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The transformed <code class="docutils literal notranslate"><span class="pre">DAGCircuit</span></code> with Rz substitutions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.qiskit._interop.transpiler.SubstituteCliffordRz.settings">
+<span class="sig-name descname"><span class="pre">settings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/qiskit/_interop/transpiler.html#SubstituteCliffordRz.settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.qiskit._interop.transpiler.SubstituteCliffordRz.settings" title="Link to this definition"></a></dt>
+<dd><p>Get the settings for SubstituteCliffordRz.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="qdk_chemistry.data.html#qdk_chemistry.data.Settings" title="qdk_chemistry.data.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The settings object associated with SubstituteCliffordRz.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="qdk_chemistry.plugins.qiskit._interop.qir.html" class="btn btn-neutral float-left" title="qdk_chemistry.plugins.qiskit._interop.qir module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="qdk_chemistry.plugins.qiskit.circuit_executor.html" class="btn btn-neutral float-right" title="qdk_chemistry.plugins.qiskit.circuit_executor module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Microsoft Corporation. All rights reserved. Licensed under the MIT License.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

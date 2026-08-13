@@ -2,11 +2,63 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Page not found</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page not found &#8212; QDK/Chemistry</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --fg: #222832;
+        --muted: #48566b;
+        --bg: #ffffff;
+        --surface: #f3f4f5;
+        --border: #d1d5da;
+        --link: #0a7d91;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --fg: #ced6dd;
+          --muted: #9ca4af;
+          --bg: #14181e;
+          --surface: #222832;
+          --border: #48566b;
+          --link: #3fb1c5;
+        }
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        line-height: 1.6;
+      }
+      main {
+        max-width: 34rem;
+        padding: 2.5rem;
+        margin: 1rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 0.5rem;
+      }
+      h1 { margin: 0 0 0.25rem; font-size: 1.5rem; }
+      p { color: var(--muted); }
+      code {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 0.25rem;
+        padding: 0.1rem 0.3rem;
+        font-size: 0.9em;
+      }
+      ul { padding-left: 1.1rem; }
+      a { color: var(--link); }
+    </style>
     <script>
       (function () {
         var basePath = "/qdk-chemistry/";
-        var known = ["2.1.0", "latest", "stable"];
+        var known = ["2.1.0", "1.1.0", "latest", "stable"];
         var path = window.location.pathname;
         if (path.indexOf(basePath) !== 0) {
           return;
@@ -24,7 +76,17 @@
     </script>
   </head>
   <body>
-    <h1>Page not found</h1>
-    <p>Try the <a href="/qdk-chemistry/stable/">stable documentation</a>.</p>
+    <main>
+      <h1>Page not found</h1>
+      <p>This page does not exist in the version of the documentation you requested.</p>
+      <p>The documentation is published per version:</p>
+      <ul>
+        <li><a href="/qdk-chemistry/stable/">stable</a> &mdash; the latest release</li>
+        <li><a href="/qdk-chemistry/latest/">latest</a> &mdash; the development version</li>
+      </ul>
+      <p>If you followed a link to an older release, the page may have been
+      renamed or removed since. Try searching from
+      <a href="/qdk-chemistry/stable/search.html">the current documentation</a>.</p>
+    </main>
   </body>
 </html>

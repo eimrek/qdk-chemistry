@@ -1,3 +1,41 @@
+/* Wider than the theme defaults (60em article, 88rem page), closer to the
+   previous theme, so wide tables and code blocks need less scrolling.
+   These must stay separate rules to stay more specific than the theme's. */
+.bd-main .bd-content .bd-article-container {
+    max-width: 80em;
+}
+
+.bd-page-width {
+    max-width: 100rem;
+}
+
+/* The sidebar otherwise grows to fit long API entries, squeezing the article. */
+.bd-sidebar-primary {
+    max-width: 18rem;
+}
+
+/* Reveal section permalinks on hover, as the previous theme did, instead of
+   showing them next to every heading. */
+.bd-article-container h1 > a.headerlink,
+.bd-article-container h2 > a.headerlink,
+.bd-article-container h3 > a.headerlink,
+.bd-article-container h4 > a.headerlink,
+.bd-article-container h5 > a.headerlink,
+.bd-article-container h6 > a.headerlink {
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out;
+}
+
+.bd-article-container h1:hover > a.headerlink,
+.bd-article-container h2:hover > a.headerlink,
+.bd-article-container h3:hover > a.headerlink,
+.bd-article-container h4:hover > a.headerlink,
+.bd-article-container h5:hover > a.headerlink,
+.bd-article-container h6:hover > a.headerlink,
+.bd-article-container a.headerlink:focus-visible {
+    opacity: 1;
+}
+
 /* Italicize the definition term to increase contrast in text formatting */
 dl dt {
     font-weight: normal;
@@ -11,10 +49,10 @@ p.rubric {
     font-weight: bold;
     padding-left: 10px;
     /* Space text away from border */
-    border-left: 4px solid #2980b9;
-    /* Thick blue line on the left */
-    background-color: #f8f9fa;
-    /* Very light grey background */
+    border-left: 4px solid var(--pst-color-primary);
+    /* Thick accent line on the left */
+    background-color: var(--pst-color-surface);
+    color: var(--pst-color-text-base);
     display: inline-block;
     /* Hug the text length */
     width: 100%;
@@ -24,16 +62,18 @@ p.rubric {
 /* Style for bibtex citations transformed from Doxygen :cite: markers */
 a.bibtex.internal {
     text-decoration: none;
-    color: #2980b9;
+    color: var(--pst-color-link);
 }
 
 a.bibtex.internal:hover {
     text-decoration: underline;
 }
 
-/* Distinguish tutorial chapter orientation from notes, assignments, and hints. */
+/* Distinguish tutorial chapter orientation from notes, assignments, and hints.
+   Bodies use theme surfaces so they stay legible in dark mode; the accent
+   colour survives in the left border and the title bar. */
 .admonition.chapter-focus {
-    background-color: #f7f2fa;
+    background-color: var(--pst-color-surface);
     border-left: 4px solid #6d3f8c;
 }
 
@@ -42,9 +82,9 @@ a.bibtex.internal:hover {
     color: #ffffff;
 }
 
-/* Required cumulative course work: blue title with a pale blue body. */
+/* Required cumulative course work. */
 .admonition.lab-notebook-assignment {
-    background-color: #eef7fb;
+    background-color: var(--pst-color-surface);
     border-left: 4px solid #005a8d;
 }
 
@@ -53,9 +93,9 @@ a.bibtex.internal:hover {
     color: #ffffff;
 }
 
-/* Collapsible course questions: orange title with a pale amber body. */
+/* Collapsible course questions. */
 details.admonition.quiz-question {
-    background-color: #fff8e6;
+    background-color: var(--pst-color-surface);
     border-left: 4px solid #8c4a00;
 }
 

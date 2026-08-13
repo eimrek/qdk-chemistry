@@ -1,0 +1,370 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qdk_chemistry.plugins.pyscf.coupled_cluster module &mdash; qdk-chemistry 1.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ac0f520b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=fc837d61"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/tabs.js?v=3ee01567"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="qdk_chemistry.plugins.pyscf.localization module" href="qdk_chemistry.plugins.pyscf.localization.html" />
+    <link rel="prev" title="qdk_chemistry.plugins.pyscf.conversion module" href="qdk_chemistry.plugins.pyscf.conversion.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            qdk-chemistry
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/features.html">Features, methods and dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/comprehensive/index.html">In-depth user guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../python_api.html">Python API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#data-classes">Data Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#algorithms">Algorithms</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../python_api.html#plugins">Plugins</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="qdk_chemistry.plugins.html">qdk_chemistry.plugins package</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.html#purpose-and-benefits">Purpose and Benefits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.html#available-plugins">Available Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.html#using-plugins">Using Plugins</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="qdk_chemistry.plugins.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#constants">Constants</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp_api.html">C++ API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Supporting Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Acronym definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">qdk-chemistry</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../python_api.html">Python API</a></li>
+          <li class="breadcrumb-item"><a href="qdk_chemistry.plugins.html">qdk_chemistry.plugins package</a></li>
+          <li class="breadcrumb-item"><a href="qdk_chemistry.plugins.pyscf.html">qdk_chemistry.plugins.pyscf package</a></li>
+      <li class="breadcrumb-item active">qdk_chemistry.plugins.pyscf.coupled_cluster module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/api/api_autogen/qdk_chemistry.plugins.pyscf.coupled_cluster.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-qdk_chemistry.plugins.pyscf.coupled_cluster">
+<span id="qdk-chemistry-plugins-pyscf-coupled-cluster-module"></span><h1>qdk_chemistry.plugins.pyscf.coupled_cluster module<a class="headerlink" href="#module-qdk_chemistry.plugins.pyscf.coupled_cluster" title="Link to this heading"></a></h1>
+<p>PySCF-based Coupled Cluster calculator implementation for qdk_chemistry.</p>
+<p>This module provides integration between QDK/Chemistry and PySCF for performing
+Coupled Cluster (CC) calculations. It implements a CCSD (Coupled Cluster Singles and Doubles)
+calculator that can be used within the QDK/Chemistry framework.</p>
+<p>The module contains:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings" title="qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyscfCoupledClusterSettings</span></code></a>: Configuration class for CC calculation parameters</p></li>
+<li><p><a class="reference internal" href="#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterCalculator" title="qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterCalculator"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyscfCoupledClusterCalculator</span></code></a>: Main calculator class that performs CC calculations</p></li>
+<li><p>Registration utilities to integrate the calculator with QDK/Chemistry’s plugin system</p></li>
+</ul>
+<p>The calculator handles automatic conversion between QDK/Chemistry Hamiltonian objects and PySCF
+format, performs the CC calculation, and returns results (energy and wavefunction)
+in QDK/Chemistry-compatible format.</p>
+<p>Upon import, this module automatically registers the PySCF CC calculator with QDK/Chemistry’s
+CC calculator registry under the name “pyscf_coupled_cluster”.</p>
+<p class="rubric">Examples</p>
+<p>Basic usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.plugins.pyscf.coupled_cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">PyscfCoupledClusterCalculator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cc_calculator</span> <span class="o">=</span> <span class="n">PyscfCoupledClusterCalculator</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">energy</span><span class="p">,</span> <span class="n">wavefunction</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">cc_calculator</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">ansatz</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Computing the bra wavefunction (lambda/gamma amplitudes):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cc_calculator</span> <span class="o">=</span> <span class="n">PyscfCoupledClusterCalculator</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cc_calculator</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;compute_bra&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cc_calculator</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;store_amplitudes&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">energy</span><span class="p">,</span> <span class="n">ket_wavefunction</span><span class="p">,</span> <span class="n">bra_wavefunction</span> <span class="o">=</span> <span class="n">cc_calculator</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">ansatz</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This module requires both QDK/Chemistry and PySCF to be installed.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterCalculator">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">qdk_chemistry.plugins.pyscf.coupled_cluster.</span></span><span class="sig-name descname"><span class="pre">PyscfCoupledClusterCalculator</span></span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/pyscf/coupled_cluster.html#PyscfCoupledClusterCalculator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterCalculator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="qdk_chemistry.algorithms.html#qdk_chemistry.algorithms.DynamicalCorrelationCalculator" title="qdk_chemistry.algorithms.DynamicalCorrelationCalculator"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicalCorrelationCalculator</span></code></a></p>
+<p>PySCF-based Coupled Cluster calculator for quantum chemistry calculations.</p>
+<p>This class provides an interface between QDK/Chemistry and PySCF for performing
+Coupled Cluster calculations on molecular systems. It handles the conversion
+between QDK/Chemistry Hamiltonian objects and PySCF representations, performs the
+CC calculation, and returns the results in QDK/Chemistry-compatible format.</p>
+<p>The calculator uses CCSD (Coupled Cluster Singles and Doubles) method.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterCalculator.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/pyscf/coupled_cluster.html#PyscfCoupledClusterCalculator.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterCalculator.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the calculator with default settings.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterCalculator.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/pyscf/coupled_cluster.html#PyscfCoupledClusterCalculator.name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterCalculator.name" title="Link to this definition"></a></dt>
+<dd><p>Return the name of this coupled cluster implementation.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">qdk_chemistry.plugins.pyscf.coupled_cluster.</span></span><span class="sig-name descname"><span class="pre">PyscfCoupledClusterSettings</span></span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/pyscf/coupled_cluster.html#PyscfCoupledClusterSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="qdk_chemistry.data.html#qdk_chemistry.data.Settings" title="qdk_chemistry.data.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a></p>
+<p>Settings configuration for the PySCF Coupled Cluster calculator.</p>
+<p>This class manages the configuration parameters for the PySCF Coupled Cluster
+calculator, providing default settings and allowing customization of
+quantum chemistry calculations.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.verbose">
+<span class="sig-name descname"><span class="pre">verbose</span></span><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.verbose" title="Link to this definition"></a></dt>
+<dd><p>Print level. Default value equals to <code class="docutils literal notranslate"><span class="pre">Mole.verbose</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.max_memory">
+<span class="sig-name descname"><span class="pre">max_memory</span></span><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.max_memory" title="Link to this definition"></a></dt>
+<dd><p>Allowed memory in MB. Default value equals to <code class="docutils literal notranslate"><span class="pre">Mole.max_memory</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.conv_tol">
+<span class="sig-name descname"><span class="pre">conv_tol</span></span><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.conv_tol" title="Link to this definition"></a></dt>
+<dd><p>Convergence threshold. Default is 1e-7.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.conv_tol_norm">
+<span class="sig-name descname"><span class="pre">conv_tol_norm</span></span><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.conv_tol_norm" title="Link to this definition"></a></dt>
+<dd><p>Convergence threshold for norm(t1,t2). Default is 1e-5.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.max_cycle">
+<span class="sig-name descname"><span class="pre">max_cycle</span></span><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.max_cycle" title="Link to this definition"></a></dt>
+<dd><p>Max number of iterations. Default is 50.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.diis_space">
+<span class="sig-name descname"><span class="pre">diis_space</span></span><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.diis_space" title="Link to this definition"></a></dt>
+<dd><p>DIIS space size. Default is 6.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.diis_start_cycle">
+<span class="sig-name descname"><span class="pre">diis_start_cycle</span></span><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.diis_start_cycle" title="Link to this definition"></a></dt>
+<dd><p>The step to start DIIS. Default is 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.direct">
+<span class="sig-name descname"><span class="pre">direct</span></span><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.direct" title="Link to this definition"></a></dt>
+<dd><p>AO-direct CCSD. Default is False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.async_io">
+<span class="sig-name descname"><span class="pre">async_io</span></span><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.async_io" title="Link to this definition"></a></dt>
+<dd><p>Allow for asynchronous function execution. Default is True.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.incore_complete">
+<span class="sig-name descname"><span class="pre">incore_complete</span></span><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.incore_complete" title="Link to this definition"></a></dt>
+<dd><p>Avoid all I/O. Default is True.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.frozen">
+<span class="sig-name descname"><span class="pre">frozen</span></span><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.frozen" title="Link to this definition"></a></dt>
+<dd><p>If integer is given, the inner-most orbitals are frozen from CC amplitudes.
+Given the orbital indices (0-based) in a list, both occupied and virtual orbitals can be frozen in the
+CC calculation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.store_amplitudes">
+<span class="sig-name descname"><span class="pre">store_amplitudes</span></span><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.store_amplitudes" title="Link to this definition"></a></dt>
+<dd><p>Whether to store amplitudes in the CC container. Default is False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.compute_bra">
+<span class="sig-name descname"><span class="pre">compute_bra</span></span><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.compute_bra" title="Link to this definition"></a></dt>
+<dd><p>Whether to compute the bra wavefunction (lambda/gamma amplitudes).
+Default is False. When True, a second wavefunction with the lambda amplitudes is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">settings</span> <span class="o">=</span> <span class="n">PyscfCoupledClusterSettings</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">settings</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;max_cycle&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/pyscf/coupled_cluster.html#PyscfCoupledClusterSettings.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the settings with default values.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="qdk_chemistry.plugins.pyscf.conversion.html" class="btn btn-neutral float-left" title="qdk_chemistry.plugins.pyscf.conversion module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="qdk_chemistry.plugins.pyscf.localization.html" class="btn btn-neutral float-right" title="qdk_chemistry.plugins.pyscf.localization module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Microsoft Corporation. All rights reserved. Licensed under the MIT License.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

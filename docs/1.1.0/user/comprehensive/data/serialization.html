@@ -1,0 +1,398 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serialization &mdash; qdk-chemistry 1.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=ac0f520b" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=fc837d61"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/tabs.js?v=3ee01567"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Ansatz" href="ansatz.html" />
+    <link rel="prev" title="Data classes" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            qdk-chemistry
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features, methods and dependencies</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">In-depth user guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../design/index.html">High-level design</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Data classes</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Serialization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#supported-formats">Supported formats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common-serialization-interface">Common serialization interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#file-extensions">File extensions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ansatz.html">Ansatz</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basis_set.html">BasisSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hamiltonian.html">Hamiltonian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="orbitals.html">Orbitals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lattice_graph.html">LatticeGraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pauli_operator.html">Pauli Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="structure.html">Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="symmetries.html">Symmetries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wavefunction.html">Wavefunction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qpe_result.html">QpeResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="circuit.html">Circuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#quick-reference">Quick reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/index.html">Algorithm classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basis_functionals.html">Available functionals and basis sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../model_hamiltonians.html">Model Hamiltonians</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins.html">Plugins</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/python_api.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/cpp_api.html">C++ API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Supporting Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Acronym definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">qdk-chemistry</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">In-depth user guide</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Data classes</a></li>
+      <li class="breadcrumb-item active">Serialization</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/user/comprehensive/data/serialization.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="serialization">
+<h1>Serialization<a class="headerlink" href="#serialization" title="Link to this heading"></a></h1>
+<p>QDK/Chemistry provides serialization capabilities for all its data classes, allowing to save and load computational results in various formats.
+This document explains the serialization mechanisms and formats supported by QDK/Chemistry.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>Serialization is the process of converting complex data structures into a format that can be stored or transmitted.
+In QDK/Chemistry, this is crucial for:</p>
+<ul class="simple">
+<li><p>Saving intermediate results of calculations</p></li>
+<li><p>Sharing data between different programs or languages</p></li>
+<li><p>Preserving computational results for future analysis</p></li>
+<li><p>Implementing checkpoint and restart capabilities</p></li>
+</ul>
+</section>
+<section id="supported-formats">
+<h2>Supported formats<a class="headerlink" href="#supported-formats" title="Link to this heading"></a></h2>
+<p>QDK/Chemistry supports multiple serialization formats:</p>
+<dl class="simple">
+<dt>JSON</dt><dd><p>Human-readable text format, suitable for small to medium data</p>
+</dd>
+<dt>HDF5</dt><dd><p>Hierarchical binary format, suitable for large data sets</p>
+</dd>
+<dt>XYZ</dt><dd><p>Standard format for molecular geometries (for <code class="docutils literal notranslate"><span class="pre">Structure</span></code> only)</p>
+</dd>
+<dt><a class="reference internal" href="../../../glossary.html#term-FCIDUMP"><span class="xref std std-term">FCIDUMP</span></a></dt><dd><p>Format for Hamiltonian integrals (for <code class="docutils literal notranslate"><span class="pre">Hamiltonian</span></code> only)</p>
+</dd>
+</dl>
+</section>
+<section id="common-serialization-interface">
+<h2>Common serialization interface<a class="headerlink" href="#common-serialization-interface" title="Link to this heading"></a></h2>
+<p>All QDK/Chemistry data classes implement a consistent serialization interface as described below.</p>
+<section id="json-serialization">
+<h3>JSON serialization<a class="headerlink" href="#json-serialization" title="Link to this heading"></a></h3>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio" /><label class="tab-label" for="tab-set--0-input--1">C++ API</label><div class="tab-content docutils container">
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;filesystem&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;qdk/chemistry.hpp&gt;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">qdk</span><span class="o">::</span><span class="nn">chemistry</span><span class="o">::</span><span class="nn">data</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Load structure from XYZ file (the file uses Angstrom, converted to Bohr</span>
+<span class="w">  </span><span class="c1">// internally)</span>
+<span class="w">  </span><span class="n">Structure</span><span class="w"> </span><span class="n">structure_from_file</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">Structure</span><span class="o">::</span><span class="n">from_xyz_file</span><span class="p">(</span><span class="s">&quot;../data/h2.structure.xyz&quot;</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// For demonstration: create a structure with custom masses and charges</span>
+<span class="w">  </span><span class="c1">// (requires explicit coordinates, here in Bohr)</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="o">&gt;</span><span class="w"> </span><span class="n">coords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{{</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.4</span><span class="p">}};</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">symbols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;H&quot;</span><span class="p">};</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">custom_masses</span><span class="p">{</span><span class="mf">1.001</span><span class="p">,</span><span class="w"> </span><span class="mf">0.999</span><span class="p">};</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">custom_charges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mf">0.9</span><span class="p">,</span><span class="w"> </span><span class="mf">1.1</span><span class="p">};</span>
+<span class="w">  </span><span class="n">Structure</span><span class="w"> </span><span class="n">structure</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span><span class="w"> </span><span class="n">symbols</span><span class="p">,</span><span class="w"> </span><span class="n">custom_masses</span><span class="p">,</span><span class="w"> </span><span class="n">custom_charges</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Serialize to JSON object</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">structure_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">structure</span><span class="p">.</span><span class="n">to_json</span><span class="p">();</span>
+
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="s">&quot;h2_example.structure.json&quot;</span><span class="p">;</span><span class="w">  </span><span class="c1">// Extension depends on object type</span>
+
+<span class="w">  </span><span class="c1">// Deserialize from JSON object</span>
+<span class="w">  </span><span class="c1">// &quot;Structure&quot; is the data type to de-serialize into (will throw, if it</span>
+<span class="w">  </span><span class="c1">// doesn&#39;t match)</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">structure_from_json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Structure</span><span class="o">::</span><span class="n">from_json</span><span class="p">(</span><span class="n">structure_data</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Write to json file</span>
+<span class="w">  </span><span class="n">structure</span><span class="p">.</span><span class="n">to_json_file</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Read from json file</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">structure_from_json_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Structure</span><span class="o">::</span><span class="n">from_json_file</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">filesystem</span><span class="o">::</span><span class="n">remove</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio" /><label class="tab-label" for="tab-set--0-input--2">Python API</label><div class="tab-content docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.data</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Structure</span><span class="p">,</span>
+    <span class="n">Hamiltonian</span><span class="p">,</span>
+    <span class="n">CanonicalFourCenterHamiltonianContainer</span><span class="p">,</span>
+    <span class="n">ModelOrbitals</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Load structure from XYZ file (the file uses Angstrom, which is converted to Bohr internally)</span>
+<span class="n">structure</span> <span class="o">=</span> <span class="n">Structure</span><span class="o">.</span><span class="n">from_xyz_file</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;../data/h2.structure.xyz&quot;</span><span class="p">)</span>
+
+<span class="c1"># For demonstration: create a structure with custom masses and charges</span>
+<span class="c1"># (requires explicit coordinates, here in Bohr)</span>
+<span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">]])</span>  <span class="c1"># Bohr</span>
+<span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">]</span>
+<span class="n">custom_masses</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.001</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">]</span>
+<span class="n">custom_charges</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">]</span>
+<span class="n">structure_custom</span> <span class="o">=</span> <span class="n">Structure</span><span class="p">(</span>
+    <span class="n">coords</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="n">symbols</span><span class="p">,</span> <span class="n">masses</span><span class="o">=</span><span class="n">custom_masses</span><span class="p">,</span> <span class="n">nuclear_charges</span><span class="o">=</span><span class="n">custom_charges</span>
+<span class="p">)</span>
+
+<span class="c1"># Serialize to JSON object</span>
+<span class="n">structure_data</span> <span class="o">=</span> <span class="n">structure_custom</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span>
+
+<span class="c1"># Deserialize from JSON object</span>
+<span class="c1"># &quot;Structure&quot; is the data type to de-serialize into (will throw, if it doesn&#39;t match)</span>
+<span class="n">structure_from_json</span> <span class="o">=</span> <span class="n">Structure</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">structure_data</span><span class="p">)</span>
+
+<span class="c1"># Write to json file</span>
+<span class="n">tmpfile</span> <span class="o">=</span> <span class="s2">&quot;example.structure.json&quot;</span>
+<span class="n">structure</span><span class="o">.</span><span class="n">to_json_file</span><span class="p">(</span><span class="n">tmpfile</span><span class="p">)</span>
+
+<span class="c1"># Read from json file</span>
+<span class="n">structure_from_json_file</span> <span class="o">=</span> <span class="n">Structure</span><span class="o">.</span><span class="n">from_json_file</span><span class="p">(</span><span class="n">tmpfile</span><span class="p">)</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">tmpfile</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="hdf5-serialization">
+<h3>HDF5 serialization<a class="headerlink" href="#hdf5-serialization" title="Link to this heading"></a></h3>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--1-input--1" name="tab-set--1" type="radio" /><label class="tab-label" for="tab-set--1-input--1">C++ API</label><div class="tab-content docutils container">
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="c1">// Hamiltonian data class example</span>
+<span class="w">  </span><span class="c1">// Create dummy data for Hamiltonian class</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="w"> </span><span class="n">one_body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="o">::</span><span class="n">Identity</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="w"> </span><span class="n">two_body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">::</span><span class="n">Ones</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">orbitals</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">ModelOrbitals</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span><span class="w">  </span><span class="c1">// 2 orbitals, restricted</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">core_energy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5</span><span class="p">;</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="w"> </span><span class="n">inactive_fock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="o">::</span><span class="n">Zero</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">Hamiltonian</span><span class="w"> </span><span class="nf">h2_example</span><span class="p">(</span><span class="n">one_body</span><span class="p">,</span><span class="w"> </span><span class="n">two_body</span><span class="p">,</span><span class="w"> </span><span class="n">orbitals</span><span class="p">,</span><span class="w"> </span><span class="n">core_energy</span><span class="p">,</span>
+<span class="w">                         </span><span class="n">inactive_fock</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">h2_example</span><span class="p">.</span><span class="n">to_hdf5_file</span><span class="p">(</span>
+<span class="w">      </span><span class="s">&quot;h2_example.hamiltonian.h5&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// Extension depends on object type</span>
+
+<span class="w">  </span><span class="c1">// Deserialize from HDF5 file</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">h2_example_from_hdf5_file</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">Hamiltonian</span><span class="o">::</span><span class="n">from_hdf5_file</span><span class="p">(</span><span class="s">&quot;h2_example.hamiltonian.h5&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<input class="tab-input" id="tab-set--1-input--2" name="tab-set--1" type="radio" /><label class="tab-label" for="tab-set--1-input--2">Python API</label><div class="tab-content docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hamiltonian data class example</span>
+<span class="c1"># Create dummy data for Hamiltonian class</span>
+<span class="n">one_body</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">two_body</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">16</span><span class="p">,))</span>
+<span class="n">orbitals</span> <span class="o">=</span> <span class="n">ModelOrbitals</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># 2 orbitals, restricted</span>
+<span class="n">core_energy</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">inactive_fock</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="n">h2_example</span> <span class="o">=</span> <span class="n">Hamiltonian</span><span class="p">(</span>
+    <span class="n">CanonicalFourCenterHamiltonianContainer</span><span class="p">(</span>
+        <span class="n">one_body</span><span class="p">,</span> <span class="n">two_body</span><span class="p">,</span> <span class="n">orbitals</span><span class="p">,</span> <span class="n">core_energy</span><span class="p">,</span> <span class="n">inactive_fock</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">h2_example</span><span class="o">.</span><span class="n">to_hdf5_file</span><span class="p">(</span><span class="s2">&quot;h2_example.hamiltonian.h5&quot;</span><span class="p">)</span>
+
+<span class="c1"># Deserialize from HDF5 file</span>
+<span class="n">h2_example_from_hdf5_file</span> <span class="o">=</span> <span class="n">Hamiltonian</span><span class="o">.</span><span class="n">from_hdf5_file</span><span class="p">(</span><span class="s2">&quot;h2_example.hamiltonian.h5&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;h2_example.hamiltonian.h5&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="file-extensions">
+<h2>File extensions<a class="headerlink" href="#file-extensions" title="Link to this heading"></a></h2>
+<p>QDK/Chemistry enforces specific file extensions to ensure clarity about the content type:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Data class</p></th>
+<th class="head"><p>JSON extension</p></th>
+<th class="head"><p>HDF5 extension</p></th>
+<th class="head"><p>Other formats</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="structure.html"><span class="doc">Structure</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.structure.json</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.structure.h5</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.structure.xyz</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="basis_set.html"><span class="doc">BasisSet</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.basis_set.json</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.basis_set.h5</span></code></p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="orbitals.html"><span class="doc">Orbitals</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.orbitals.json</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.orbitals.h5</span></code></p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="hamiltonian.html"><span class="doc">Hamiltonian</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.hamiltonian.json</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.hamiltonian.h5</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">hamiltonian.fcidump</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="wavefunction.html"><span class="doc">Wavefunction</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.wavefunction.json</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.wavefunction.h5</span></code></p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The same patterns are observed for other data classes in QDK/Chemistry.</p>
+</section>
+<section id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The above examples can be downloaded as complete <a class="reference external" href="../../../_static/examples/cpp/serialization.cpp">C++</a> and <a class="reference external" href="../../../_static/examples/python/serialization.py">Python</a> scripts.</p></li>
+<li><p><a class="reference internal" href="structure.html"><span class="doc">Structure</span></a>: Molecular geometry and atomic information</p></li>
+<li><p><a class="reference internal" href="basis_set.html"><span class="doc">BasisSet</span></a>: Basis set definitions</p></li>
+<li><p><a class="reference internal" href="orbitals.html"><span class="doc">Orbitals</span></a>: Molecular orbital coefficients and properties</p></li>
+<li><p><a class="reference internal" href="hamiltonian.html"><span class="doc">Hamiltonian</span></a>: Electronic Hamiltonian operator</p></li>
+<li><p><a class="reference internal" href="wavefunction.html"><span class="doc">Wavefunction</span></a>: Wavefunction data</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Data classes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ansatz.html" class="btn btn-neutral float-right" title="Ansatz" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Microsoft Corporation. All rights reserved. Licensed under the MIT License.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,262 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qdk_chemistry.plugins.pyscf.active_space_avas module &mdash; qdk-chemistry 1.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ac0f520b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=fc837d61"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/tabs.js?v=3ee01567"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="qdk_chemistry.plugins.pyscf.conversion module" href="qdk_chemistry.plugins.pyscf.conversion.html" />
+    <link rel="prev" title="qdk_chemistry.plugins.pyscf package" href="qdk_chemistry.plugins.pyscf.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            qdk-chemistry
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/features.html">Features, methods and dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/comprehensive/index.html">In-depth user guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../python_api.html">Python API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#data-classes">Data Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#algorithms">Algorithms</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../python_api.html#plugins">Plugins</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="qdk_chemistry.plugins.html">qdk_chemistry.plugins package</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.html#purpose-and-benefits">Purpose and Benefits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.html#available-plugins">Available Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.html#using-plugins">Using Plugins</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="qdk_chemistry.plugins.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_api.html#constants">Constants</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp_api.html">C++ API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Supporting Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Acronym definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">qdk-chemistry</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../python_api.html">Python API</a></li>
+          <li class="breadcrumb-item"><a href="qdk_chemistry.plugins.html">qdk_chemistry.plugins package</a></li>
+          <li class="breadcrumb-item"><a href="qdk_chemistry.plugins.pyscf.html">qdk_chemistry.plugins.pyscf package</a></li>
+      <li class="breadcrumb-item active">qdk_chemistry.plugins.pyscf.active_space_avas module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/api/api_autogen/qdk_chemistry.plugins.pyscf.active_space_avas.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-qdk_chemistry.plugins.pyscf.active_space_avas">
+<span id="qdk-chemistry-plugins-pyscf-active-space-avas-module"></span><h1>qdk_chemistry.plugins.pyscf.active_space_avas module<a class="headerlink" href="#module-qdk_chemistry.plugins.pyscf.active_space_avas" title="Link to this heading"></a></h1>
+<p>PySCF AVAS active space selector implementation for qdk_chemistry.</p>
+<p>This module provides an interface to the PySCF Automated Valence Active Space (AVAS)
+method for selecting active spaces in quantum chemistry calculations. The AVAS method
+automatically constructs molecular active spaces from atomic valence orbitals.</p>
+<p>The module contains:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVASSettings" title="qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVASSettings"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyscfAVASSettings</span></code></a>: Configuration class for AVAS parameters</p></li>
+<li><p><a class="reference internal" href="#qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVAS" title="qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVAS"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyscfAVAS</span></code></a>: Main active space selector implementing the AVAS algorithm</p></li>
+<li><p>Registration functions to integrate with the QDK/Chemistry framework</p></li>
+</ul>
+<p class="rubric">References</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.plugins.pyscf.active_space</span><span class="w"> </span><span class="kn">import</span> <span class="n">PyscfAVAS</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avas_selector</span> <span class="o">=</span> <span class="n">PyscfAVAS</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avas_selector</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;ao_labels&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Fe 3d&quot;</span><span class="p">,</span> <span class="s2">&quot;Fe 4d&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">active_orbitals</span> <span class="o">=</span> <span class="n">avas_selector</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">molecular_orbitals</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVAS">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">qdk_chemistry.plugins.pyscf.active_space_avas.</span></span><span class="sig-name descname"><span class="pre">PyscfAVAS</span></span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/pyscf/active_space_avas.html#PyscfAVAS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVAS" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="qdk_chemistry.algorithms.html#qdk_chemistry.algorithms.ActiveSpaceSelector" title="qdk_chemistry.algorithms.ActiveSpaceSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActiveSpaceSelector</span></code></a></p>
+<p>PySCF-based Active Space Selector for quantum chemistry calculations.</p>
+<p>This class exposes AVAS active space selection using the PySCF library.</p>
+<p>The details of the AVAS method can be found in the following publication:</p>
+<blockquote>
+<div><p>Sayfutyarova et al. (2017) doi:10.1021/acs.jctc.7b00128. <span class="bibtex-citation" id="id1">[<a class="reference internal" href="../../references.html#id5" title="Elvira R. Sayfutyarova, Qiming Sun, Garnet Kin-Lic Chan, and Gerald Knizia. Automated construction of molecular active spaces from atomic valence orbitals. Journal of Chemical Theory and Computation, 13(9):4063-4078, 2017. URL: https://arxiv.org/abs/1701.07862, doi:10.1021/acs.jctc.7b00128.">SSCK17</a>]</span></p>
+</div></blockquote>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">avas</span> <span class="o">=</span> <span class="n">PyscfAVAS</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avas</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;ao_labels&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Fe 3d&quot;</span><span class="p">,</span> <span class="s2">&quot;Fe 4d&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">active_orbitals</span> <span class="o">=</span> <span class="n">avas</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">wavefunction</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Notes</p>
+<p>The selection criteria can be customized through the settings object.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVAS.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/pyscf/active_space_avas.html#PyscfAVAS.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVAS.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the PySCF AVAS with default settings.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVAS.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/pyscf/active_space_avas.html#PyscfAVAS.name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVAS.name" title="Link to this definition"></a></dt>
+<dd><p>Return the name of the active space selector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVASSettings">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">qdk_chemistry.plugins.pyscf.active_space_avas.</span></span><span class="sig-name descname"><span class="pre">PyscfAVASSettings</span></span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/pyscf/active_space_avas.html#PyscfAVASSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVASSettings" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="qdk_chemistry.data.html#qdk_chemistry.data.Settings" title="qdk_chemistry.data.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a></p>
+<p>Settings for the PySCF AVAS Active Space Selector.</p>
+<p>This class manages the configuration parameters for the PySCF AVAS, providing a convenient
+interface for setting and getting options.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVASSettings.ao_labels">
+<span class="sig-name descname"><span class="pre">ao_labels</span></span><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVASSettings.ao_labels" title="Link to this definition"></a></dt>
+<dd><p>The atomic orbital labels to be included in the active space (default = None).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVASSettings.canonicalize">
+<span class="sig-name descname"><span class="pre">canonicalize</span></span><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVASSettings.canonicalize" title="Link to this definition"></a></dt>
+<dd><p>Whether to canonicalize the active space orbitals after selection (default = False).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVASSettings.openshell_option">
+<span class="sig-name descname"><span class="pre">openshell_option</span></span><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVASSettings.openshell_option" title="Link to this definition"></a></dt>
+<dd><p>How to handle singly-occupied orbitals in the active space (default = 2).
+The singly-occupied orbitals are projected as part of alpha orbitals if <code class="docutils literal notranslate"><span class="pre">openshell_option=2</span></code>, or
+completely kept in active space if <code class="docutils literal notranslate"><span class="pre">openshell_option=3</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">settings</span> <span class="o">=</span> <span class="n">PyscfAVASSettings</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ao_labels&quot;</span><span class="p">)</span>
+<span class="go">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">settings</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;ao_labels&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;1s&quot;</span><span class="p">,</span> <span class="s2">&quot;2s&quot;</span><span class="p">,</span> <span class="s2">&quot;2p&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ao_labels&quot;</span><span class="p">)</span>
+<span class="go">[&#39;1s&#39;, &#39;2s&#39;, &#39;2p&#39;]</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVASSettings.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qdk_chemistry/plugins/pyscf/active_space_avas.html#PyscfAVASSettings.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVASSettings.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the settings with default values.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="qdk_chemistry.plugins.pyscf.html" class="btn btn-neutral float-left" title="qdk_chemistry.plugins.pyscf package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="qdk_chemistry.plugins.pyscf.conversion.html" class="btn btn-neutral float-right" title="qdk_chemistry.plugins.pyscf.conversion module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Microsoft Corporation. All rights reserved. Licensed under the MIT License.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
