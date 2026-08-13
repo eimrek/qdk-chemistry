@@ -570,6 +570,16 @@ jobs:
           exit $MAKE_EXIT_CODE
         fi
 
+    # Consumed by the Docs workflow to publish `latest`; only the Linux build is
+    # published, so that the output does not depend on which runner produced it.
+    - name: Upload documentation artifact
+      if: matrix.python-version == '3.13' && matrix.os-name == 'Linux'
+      uses: actions/upload-artifact@v4
+      with:
+        name: docs-html
+        path: docs/build/html
+        retention-days: 7
+
   coverage-windows:
     name: ${{ matrix.compiler }} - Build & test (Windows)
     runs-on: [self-hosted, 1ES.Pool=1es-gh-Dads_v5-pool-wus2, 1ES.ImageOverride=windows-2025-1espt, 'JobId=qdk_chemistry-win-${{ strategy.job-index }}-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}']
