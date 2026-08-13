@@ -1,18 +1,14 @@
 /* The theme sizes the brand area as a fixed grid column, so the version
-   switcher overflows it and collides with the search box while the right of the
-   header stays empty. Size that area to its content, keep the trailing items
-   right-aligned, and let the switcher wrap under the brand when space runs out. */
+   switcher overflows it and collides with the search box. Size both header
+   areas to their content, and let the switcher wrap under the brand only when
+   space really runs out. */
 .bd-header .navbar-header-items__start {
     width: auto;
     max-width: none;
     flex: 0 1 auto;
     align-items: center;
     flex-wrap: wrap;
-    row-gap: 0.25rem;
-}
-
-.bd-header .navbar-header-items__end {
-    margin-left: auto;
+    row-gap: 0;
 }
 
 /* Without this the sibling column keeps reserving 75% of the header, which
@@ -32,6 +28,20 @@
 
 .bd-header button.btn.version-switcher__button {
     margin-bottom: 0;
+}
+
+/* Keep the brand and switcher on one line for as long as possible on phones,
+   and remove the dead space above the switcher once it does wrap. */
+@media (max-width: 959.98px) {
+    .bd-header .navbar-brand {
+        padding-top: 0.15rem;
+        padding-bottom: 0.15rem;
+    }
+
+    .bd-header button.btn.version-switcher__button {
+        font-size: 0.8rem;
+        padding: 2px 6px;
+    }
 }
 
 .bd-header .navbar-header-items__start > .navbar-item {
