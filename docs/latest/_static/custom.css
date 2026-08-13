@@ -1,21 +1,16 @@
-/* The theme sizes the brand area as a fixed grid column, so the version
-   switcher overflows it and collides with the search box. Size both header
-   areas to their content, and let the switcher wrap under the brand only when
-   space really runs out. */
+/* The brand area is a fixed 25% grid column, so the version switcher overflows
+   it and collides with the search box on mid-width screens. Letting it grow to
+   its content only when it has to keeps the theme's original alignment. */
+@media (min-width: 960px) {
+    .bd-header .navbar-header-items__start {
+        min-width: max-content;
+    }
+}
+
 .bd-header .navbar-header-items__start {
-    width: auto;
-    max-width: none;
-    flex: 0 1 auto;
     align-items: center;
     flex-wrap: wrap;
     row-gap: 0;
-}
-
-/* Without this the sibling column keeps reserving 75% of the header, which
-   pushes the switcher onto a second line long before it needs to wrap. */
-.bd-header .navbar-header-items {
-    width: auto;
-    max-width: none;
 }
 
 /* The switcher button otherwise sits above the brand on narrow screens: the
@@ -31,16 +26,27 @@
 }
 
 /* Keep the brand and switcher on one line for as long as possible on phones,
-   and remove the dead space above the switcher once it does wrap. */
+   and close the gap left by the 4rem header row once the switcher does wrap. */
 @media (max-width: 959.98px) {
+    html {
+        --pst-header-height: 2.75rem;
+    }
+
     .bd-header .navbar-brand {
-        padding-top: 0.15rem;
-        padding-bottom: 0.15rem;
+        padding-top: 0;
+        padding-bottom: 0;
     }
 
     .bd-header button.btn.version-switcher__button {
         font-size: 0.8rem;
         padding: 2px 6px;
+    }
+
+    /* Below the grid breakpoint the brand area is content-sized, so without
+       this it pushes the toggles off-screen instead of wrapping. */
+    .bd-header .navbar-header-items__start {
+        flex: 1 1 auto;
+        min-width: 0;
     }
 }
 
