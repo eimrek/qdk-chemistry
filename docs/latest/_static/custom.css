@@ -14,26 +14,25 @@
     max-width: 18rem;
 }
 
-/* Reveal section permalinks on hover, as the previous theme did, instead of
-   showing them next to every heading. */
-.bd-article-container h1 > a.headerlink,
-.bd-article-container h2 > a.headerlink,
-.bd-article-container h3 > a.headerlink,
-.bd-article-container h4 > a.headerlink,
-.bd-article-container h5 > a.headerlink,
-.bd-article-container h6 > a.headerlink {
-    opacity: 0;
-    transition: opacity 0.15s ease-in-out;
+/* Pages with a local `contents` directive get docutils back-references that wrap
+   the whole heading in a link back to the contents list. Keep the behaviour, but
+   render it as heading text rather than something inviting a click. */
+.bd-article-container a.toc-backref {
+    color: inherit;
+    text-decoration: none;
 }
 
-.bd-article-container h1:hover > a.headerlink,
-.bd-article-container h2:hover > a.headerlink,
-.bd-article-container h3:hover > a.headerlink,
-.bd-article-container h4:hover > a.headerlink,
-.bd-article-container h5:hover > a.headerlink,
-.bd-article-container h6:hover > a.headerlink,
-.bd-article-container a.headerlink:focus-visible {
-    opacity: 1;
+/* Section headings get no permalink anchor; the ones on API objects are kept,
+   so a specific class or function can still be linked to. */
+.bd-article-container :is(h1, h2, h3, h4, h5, h6) > a.headerlink {
+    display: none;
+}
+
+/* The theme resets width on .docutils.container, which cancels the full-row
+   width sphinx-inline-tabs relies on; without this the panel sits beside the
+   tab labels instead of below them. */
+.tab-set > .tab-content.docutils.container {
+    width: 100%;
 }
 
 /* Italicize the definition term to increase contrast in text formatting */
