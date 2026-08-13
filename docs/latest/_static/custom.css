@@ -1,3 +1,44 @@
+/* The theme sizes the brand area as a fixed grid column, so the version
+   switcher overflows it and collides with the search box while the right of the
+   header stays empty. Size that area to its content, keep the trailing items
+   right-aligned, and let the switcher wrap under the brand when space runs out. */
+.bd-header .navbar-header-items__start {
+    width: auto;
+    max-width: none;
+    flex: 0 1 auto;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 0.25rem;
+}
+
+.bd-header .navbar-header-items__end {
+    margin-left: auto;
+}
+
+/* Without this the sibling column keeps reserving 75% of the header, which
+   pushes the switcher onto a second line long before it needs to wrap. */
+.bd-header .navbar-header-items {
+    width: auto;
+    max-width: none;
+}
+
+/* The switcher button otherwise sits above the brand on narrow screens: the
+   theme gives it a bottom margin below 960px, where it expects the switcher to
+   be stacked rather than sitting next to the logo. */
+.bd-header .version-switcher__container {
+    display: flex;
+    align-items: center;
+}
+
+.bd-header button.btn.version-switcher__button {
+    margin-bottom: 0;
+}
+
+.bd-header .navbar-header-items__start > .navbar-item {
+    display: flex;
+    align-items: center;
+}
+
 /* Wider than the theme defaults (60em article, 88rem page), closer to the
    previous theme, so wide tables and code blocks need less scrolling.
    These must stay separate rules to stay more specific than the theme's. */
