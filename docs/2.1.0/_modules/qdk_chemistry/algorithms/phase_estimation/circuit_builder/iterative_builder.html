@@ -1,0 +1,820 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>qdk_chemistry.algorithms.phase_estimation.circuit_builder.iterative_builder &#8212; QDK/Chemistry 2.1.0</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/custom.css?v=3da93932" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../../../../../_static/documentation_options.js?v=20623aea"></script>
+    <script src="../../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../../_static/tabs.js?v=3ee01567"></script>
+    <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/qdk_chemistry/algorithms/phase_estimation/circuit_builder/iterative_builder';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://eimrek.github.io/qdk-chemistry/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.1.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            true;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="canonical" href="https://eimrek.github.io/qdk-chemistry/stable/_modules/qdk_chemistry/algorithms/phase_estimation/circuit_builder/iterative_builder.html" />
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../../../_static/searchtools.js"></script>
+    <script src="../../../../../_static/language_data.js"></script>
+    <script src="../../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">QDK/Chemistry</p>
+  
+</a></div>
+    
+      <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/microsoft/qdk-chemistry" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/microsoft/qdk-chemistry" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Documentation">
+  <p class="bd-links__title" role="heading" aria-level="1">Documentation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../user/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../user/features.html">Features, methods and dependencies</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../../user/comprehensive/index.html">In-depth user guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../user/comprehensive/design/index.html">High-level design</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../../user/comprehensive/data/index.html">Data classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/data/serialization.html">Serialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/data/ansatz.html">Ansatz</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/data/basis_set.html">BasisSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/data/hamiltonian.html">Hamiltonian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/data/orbitals.html">Orbitals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/data/lattice_graph.html">LatticeGraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/data/majorana_mapping.html">MajoranaMapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/data/pauli_operator.html">Pauli Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/data/structure.html">Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/data/symmetries.html">Symmetries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/data/wavefunction.html">Wavefunction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/data/qpe_result.html">QpeResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/data/circuit.html">Circuit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/index.html">Algorithm classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/factory_pattern.html">Factory pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/settings.html">Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/active_space.html">Active space selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/effective_hamiltonian_constructor.html">Effective Hamiltonian construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/expectation_estimator.html">Energy estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/hamiltonian_constructor.html">Hamiltonian construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/localizer.html">Orbital localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/mc_calculator.html">Multi-configuration calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/mcscf.html">Multi-Configuration Self-Consistent Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/pmc.html">Projected Multi-Configuration calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/qubit_mapper.html">Qubit mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/scf_solver.html">Self-consistent field (SCF) solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/stability_checker.html">Stability analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/state_preparation.html">State preparation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/hadamard_test.html">Hadamard test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/phase_estimation.html">Phase estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/qpe_circuit_builder.html">Phase estimation circuit builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/amplitude_amplification.html">Amplitude amplification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/evolution_circuit_builder.html">Evolution circuit builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/hamiltonian_unitary_builder.html">Hamiltonian Unitary Builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/circuit_mapper.html">Controlled circuit mapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../user/comprehensive/algorithms/circuit_executor.html">Circuit execution</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../user/comprehensive/basis_functionals.html">Available functionals and basis sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../user/comprehensive/model_hamiltonians.html">Model Hamiltonians</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../user/comprehensive/plugins.html">Plugins</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../user/migrating-data-files.html">Migrating data files between serialization versions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../../tutorials/index.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../../tutorials/ground_state_molecular_energies_with_qpe/index.html">Ground-state molecular energies with quantum phase estimation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../tutorials/ground_state_molecular_energies_with_qpe/00_before_you_begin.html">Before you begin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../tutorials/ground_state_molecular_energies_with_qpe/lab_notebook.html">Set up your lab notebook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../tutorials/ground_state_molecular_energies_with_qpe/01_energy_and_accuracy.html">Energy and accuracy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../tutorials/ground_state_molecular_energies_with_qpe/02_describing_the_molecule.html">Describing the molecule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../tutorials/ground_state_molecular_energies_with_qpe/03_choosing_the_active_space.html">Choosing the active space</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../tutorials/ground_state_molecular_energies_with_qpe/04_putting_the_problem_on_qubits.html">Mapping the problem to qubits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../tutorials/ground_state_molecular_energies_with_qpe/05_preparing_the_trial_state.html">Preparing the trial state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../tutorials/ground_state_molecular_energies_with_qpe/06_iterative_phase_estimation.html">Iterative quantum phase estimation</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../../api/python_api.html">Python API</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.data.html">qdk_chemistry.data package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.data.enums.html">qdk_chemistry.data.enums package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.data.time_dependent_qubit_hamiltonian.html">qdk_chemistry.data.time_dependent_qubit_hamiltonian package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.data.unitary_representation.html">qdk_chemistry.data.unitary_representation package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.data._hashing.html">qdk_chemistry.data._hashing module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.data._spin_channels.html">qdk_chemistry.data._spin_channels module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.data.base.html">qdk_chemistry.data.base module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.data.circuit.html">qdk_chemistry.data.circuit module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.data.circuit_executor_data.html">qdk_chemistry.data.circuit_executor_data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.data.encoding_validation.html">qdk_chemistry.data.encoding_validation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.data.estimator_data.html">qdk_chemistry.data.estimator_data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.data.noise_models.html">qdk_chemistry.data.noise_models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.data.qpe_result.html">qdk_chemistry.data.qpe_result module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.data.qubit_operator.html">qdk_chemistry.data.qubit_operator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.data.symmetries.html">qdk_chemistry.data.symmetries module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.data.symmetry.html">qdk_chemistry.data.symmetry module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.data.term_partition.html">qdk_chemistry.data.term_partition module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.html">qdk_chemistry.algorithms package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.circuit_executor.html">qdk_chemistry.algorithms.circuit_executor package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.circuit_mapper.html">qdk_chemistry.algorithms.circuit_mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.controlled_circuit_mapper.html">qdk_chemistry.algorithms.controlled_circuit_mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.expectation_estimator.html">qdk_chemistry.algorithms.expectation_estimator package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.hadamard_test.html">qdk_chemistry.algorithms.hadamard_test package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.hamiltonian_unitary_builder.html">qdk_chemistry.algorithms.hamiltonian_unitary_builder package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.phase_estimation.html">qdk_chemistry.algorithms.phase_estimation package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.propagator.html">qdk_chemistry.algorithms.propagator package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.qubit_mapper.html">qdk_chemistry.algorithms.qubit_mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.state_preparation.html">qdk_chemistry.algorithms.state_preparation package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.term_grouper.html">qdk_chemistry.algorithms.term_grouper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.time_evolution.html">qdk_chemistry.algorithms.time_evolution package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.active_space_selector.html">qdk_chemistry.algorithms.active_space_selector module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.amplitude_amplification.html">qdk_chemistry.algorithms.amplitude_amplification module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.base.html">qdk_chemistry.algorithms.base module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.dynamical_correlation_calculator.html">qdk_chemistry.algorithms.dynamical_correlation_calculator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.effective_hamiltonian_constructor.html">qdk_chemistry.algorithms.effective_hamiltonian_constructor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.geometry_optimization.html">qdk_chemistry.algorithms.geometry_optimization module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.hamiltonian_constructor.html">qdk_chemistry.algorithms.hamiltonian_constructor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.hashing.html">qdk_chemistry.algorithms.hashing module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.multi_configuration_calculator.html">qdk_chemistry.algorithms.multi_configuration_calculator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.multi_configuration_scf.html">qdk_chemistry.algorithms.multi_configuration_scf module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.nuclear_derivative.html">qdk_chemistry.algorithms.nuclear_derivative module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.orbital_localizer.html">qdk_chemistry.algorithms.orbital_localizer module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.projected_multi_configuration_calculator.html">qdk_chemistry.algorithms.projected_multi_configuration_calculator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.qubit_hamiltonian_solver.html">qdk_chemistry.algorithms.qubit_hamiltonian_solver module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.registry.html">qdk_chemistry.algorithms.registry module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.scf_solver.html">qdk_chemistry.algorithms.scf_solver module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.stability_checker.html">qdk_chemistry.algorithms.stability_checker module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.plugins.html">qdk_chemistry.plugins package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.plugins.geometric.html">qdk_chemistry.plugins.geometric package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.plugins.networkx.html">qdk_chemistry.plugins.networkx package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.plugins.openfermion.html">qdk_chemistry.plugins.openfermion package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.plugins.pyscf.html">qdk_chemistry.plugins.pyscf package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.plugins.qiskit.html">qdk_chemistry.plugins.qiskit package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.utils.html">qdk_chemistry.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.utils.qsharp.html">qdk_chemistry.utils.qsharp package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.utils.cubegen.html">qdk_chemistry.utils.cubegen module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.utils.enum.html">qdk_chemistry.utils.enum module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.utils.model_hamiltonians.html">qdk_chemistry.utils.model_hamiltonians module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.utils.pauli_commutation.html">qdk_chemistry.utils.pauli_commutation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.utils.pauli_matrix.html">qdk_chemistry.utils.pauli_matrix module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.utils.telemetry.html">qdk_chemistry.utils.telemetry module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.utils.telemetry_events.html">qdk_chemistry.utils.telemetry_events module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.utils.wavefunction.html">qdk_chemistry.utils.wavefunction module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.utils.zassenhaus_generation.html">qdk_chemistry.utils.zassenhaus_generation module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../api/api_autogen/qdk_chemistry.constants.html">qdk_chemistry.constants module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../../api/cpp_api.html">C++ API</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../api/breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1data.html">Namespace qdk::chemistry::data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../api/breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1algorithms.html">Namespace qdk::chemistry::algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../api/breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1utils.html">Namespace qdk::chemistry::utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../api/breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1constants.html">Namespace qdk::chemistry::constants</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Supporting Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../../release-notes/index.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../release-notes/v2.1.0.html">What’s New in Version 2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../release-notes/v2.0.0.html">What’s New in Version 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../release-notes/v1.1.0.html">What’s New in Version 1.1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../glossary.html">Acronym definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../references.html">References</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">qdk_chemistry.algorithms.phase_estimation.circuit_builder.iterative_builder</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for qdk_chemistry.algorithms.phase_estimation.circuit_builder.iterative_builder</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Iterative phase estimation circuit builder.</span>
+
+<span class="sd">This module implements the circuit-building component of the Kitaev-style iterative</span>
+<span class="sd">quantum phase estimation (IQPE) algorithm. It constructs the iteration circuits</span>
+<span class="sd">without executing them, enabling standalone resource estimation and circuit preview.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># --------------------------------------------------------------------------------------------</span>
+<span class="c1"># Copyright (c) Microsoft Corporation. All rights reserved.</span>
+<span class="c1"># Licensed under the MIT License. See LICENSE.txt in the project root for license information.</span>
+<span class="c1"># --------------------------------------------------------------------------------------------</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">AlgorithmRef</span><span class="p">,</span> <span class="n">Circuit</span><span class="p">,</span> <span class="n">QubitOperator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.data.circuit</span><span class="w"> </span><span class="kn">import</span> <span class="n">QsharpFactoryData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">Logger</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.utils.qsharp</span><span class="w"> </span><span class="kn">import</span> <span class="n">QSHARP_UTILS</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">IterativeQpeCircuitBuilder</span><span class="p">,</span> <span class="n">QpeCircuitBuilderSettings</span>
+
+<span class="n">__all__</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;QdkIterativeQpeCircuitBuilder&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;QdkIterativeQpeCircuitBuilderSettings&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_validate_iteration_inputs&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="QdkIterativeQpeCircuitBuilderSettings">
+<a class="viewcode-back" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.phase_estimation.circuit_builder.iterative_builder.html#qdk_chemistry.algorithms.phase_estimation.circuit_builder.iterative_builder.QdkIterativeQpeCircuitBuilderSettings">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">QdkIterativeQpeCircuitBuilderSettings</span><span class="p">(</span><span class="n">QpeCircuitBuilderSettings</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Settings for the Iterative Phase Estimation Builder.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="QdkIterativeQpeCircuitBuilderSettings.__init__">
+<a class="viewcode-back" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.phase_estimation.circuit_builder.iterative_builder.html#qdk_chemistry.algorithms.phase_estimation.circuit_builder.iterative_builder.QdkIterativeQpeCircuitBuilderSettings.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the settings for the Iterative Phase Estimation Builder.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_default</span><span class="p">(</span><span class="s2">&quot;phase_correction&quot;</span><span class="p">,</span> <span class="s2">&quot;double&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;The accumulated phase feedback from prior iterations.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_default</span><span class="p">(</span>
+            <span class="s2">&quot;num_iteration&quot;</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;The specific iteration to build. Default to -1 to build all iterations.&quot;</span>
+        <span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="QdkIterativeQpeCircuitBuilder">
+<a class="viewcode-back" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.phase_estimation.circuit_builder.iterative_builder.html#qdk_chemistry.algorithms.phase_estimation.circuit_builder.iterative_builder.QdkIterativeQpeCircuitBuilder">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">QdkIterativeQpeCircuitBuilder</span><span class="p">(</span><span class="n">IterativeQpeCircuitBuilder</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Iterative Phase Estimation circuit builder.</span>
+
+<span class="sd">    Constructs the quantum circuits for each IQPE iteration without executing them.</span>
+<span class="sd">    Can be used standalone for resource estimation or composed inside IterativePhaseEstimation.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="QdkIterativeQpeCircuitBuilder.__init__">
+<a class="viewcode-back" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.phase_estimation.circuit_builder.iterative_builder.html#qdk_chemistry.algorithms.phase_estimation.circuit_builder.iterative_builder.QdkIterativeQpeCircuitBuilder.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">num_bits</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">phase_correction</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">num_iteration</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">unitary_builder</span><span class="p">:</span> <span class="n">AlgorithmRef</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">controlled_circuit_mapper</span><span class="p">:</span> <span class="n">AlgorithmRef</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the IterativeQpeCircuitBuilder.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            num_bits: The number of phase bits to estimate. Default to -1; user needs to set a valid value.</span>
+<span class="sd">            phase_correction: The accumulated phase feedback from prior iterations. Default to 0.0.</span>
+<span class="sd">            num_iteration: The specific iteration to build. Default to -1 (build all iterations).</span>
+<span class="sd">            unitary_builder: Optional algorithm reference for the unitary builder.</span>
+<span class="sd">            controlled_circuit_mapper: Optional algorithm reference for the controlled circuit mapper.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Logger</span><span class="o">.</span><span class="n">trace_entering</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">num_bits</span><span class="o">=</span><span class="n">num_bits</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span> <span class="o">=</span> <span class="n">QdkIterativeQpeCircuitBuilderSettings</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;num_bits&quot;</span><span class="p">,</span> <span class="n">num_bits</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;phase_correction&quot;</span><span class="p">,</span> <span class="n">phase_correction</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;num_iteration&quot;</span><span class="p">,</span> <span class="n">num_iteration</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">unitary_builder</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;unitary_builder&quot;</span><span class="p">,</span> <span class="n">unitary_builder</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">controlled_circuit_mapper</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;controlled_circuit_mapper&quot;</span><span class="p">,</span> <span class="n">controlled_circuit_mapper</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_run_impl</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">state_preparation</span><span class="p">:</span> <span class="n">Circuit</span><span class="p">,</span>
+        <span class="n">qubit_hamiltonian</span><span class="p">:</span> <span class="n">QubitOperator</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Circuit</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build IQPE iteration circuits.</span>
+
+<span class="sd">        Uses settings ``phase_correction`` (default 0.0) and ``num_iteration``</span>
+<span class="sd">        (default -1). When ``num_iteration`` is negative, all iteration circuits</span>
+<span class="sd">        are returned. When positive, only the circuit for that single iteration</span>
+<span class="sd">        (0-based) is returned.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            state_preparation: The circuit that prepares the initial state.</span>
+<span class="sd">            qubit_hamiltonian: The qubit Hamiltonian for which to build circuits.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list of quantum circuits, one per phase bit iteration (or a single-element</span>
+<span class="sd">            list when ``num_iteration`` is set to a specific iteration index).</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If ``num_iteration`` &gt;= ``num_bits``.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">num_bits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;num_bits&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">num_bits</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;num_bits must be a positive integer. Got </span><span class="si">{</span><span class="n">num_bits</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="n">phase_correction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;phase_correction&quot;</span><span class="p">)</span>
+        <span class="n">num_iteration</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;num_iteration&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">num_iteration</span> <span class="o">&gt;=</span> <span class="n">num_bits</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;num_iteration (</span><span class="si">{</span><span class="n">num_iteration</span><span class="si">}</span><span class="s2">) must be less than num_bits (</span><span class="si">{</span><span class="n">num_bits</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">)</span>
+
+        <span class="n">iterations</span> <span class="o">=</span> <span class="p">[</span><span class="n">num_iteration</span><span class="p">]</span> <span class="k">if</span> <span class="n">num_iteration</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_bits</span><span class="p">)</span>
+        <span class="n">circuits</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Circuit</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="n">iterations</span><span class="p">:</span>
+            <span class="n">circuit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_iteration_circuit</span><span class="p">(</span>
+                <span class="n">state_preparation</span><span class="o">=</span><span class="n">state_preparation</span><span class="p">,</span>
+                <span class="n">qubit_hamiltonian</span><span class="o">=</span><span class="n">qubit_hamiltonian</span><span class="p">,</span>
+                <span class="n">iteration</span><span class="o">=</span><span class="n">iteration</span><span class="p">,</span>
+                <span class="n">total_iterations</span><span class="o">=</span><span class="n">num_bits</span><span class="p">,</span>
+                <span class="n">phase_correction</span><span class="o">=</span><span class="n">phase_correction</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">circuits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
+
+        <span class="n">Logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Built </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">circuits</span><span class="p">)</span><span class="si">}</span><span class="s2"> iteration circuit(s) with phase_correction=</span><span class="si">{</span><span class="n">phase_correction</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">circuits</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_iteration_circuit</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">state_preparation</span><span class="p">:</span> <span class="n">Circuit</span><span class="p">,</span>
+        <span class="n">qubit_hamiltonian</span><span class="p">:</span> <span class="n">QubitOperator</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">iteration</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">total_iterations</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">phase_correction</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Circuit</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct a single IQPE iteration circuit.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            state_preparation: Trial-state preparation circuit that prepares the initial state on the system qubits.</span>
+<span class="sd">            qubit_hamiltonian: The qubit Hamiltonian for which to estimate the phase.</span>
+<span class="sd">            iteration: Current iteration index (0-based), where 0 corresponds to the most-significant bit.</span>
+<span class="sd">            total_iterations: Total number of phase bits to measure across all iterations.</span>
+<span class="sd">            phase_correction: Feedback phase angle to apply before controlled unitary, defaults to 0.0.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A quantum circuit implementing one IQPE iteration.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_validate_iteration_inputs</span><span class="p">(</span><span class="n">iteration</span><span class="p">,</span> <span class="n">total_iterations</span><span class="p">)</span>
+        <span class="n">num_system_qubits</span> <span class="o">=</span> <span class="n">qubit_hamiltonian</span><span class="o">.</span><span class="n">num_qubits</span>
+        <span class="n">power</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">total_iterations</span> <span class="o">-</span> <span class="n">iteration</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">ctrl_unitary_circuit</span><span class="p">,</span> <span class="n">num_ancilla_qubits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_controlled_circuit</span><span class="p">(</span><span class="n">qubit_hamiltonian</span><span class="p">,</span> <span class="n">power</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">state_preparation</span><span class="o">.</span><span class="n">_qsharp_op</span> <span class="ow">and</span> <span class="n">ctrl_unitary_circuit</span><span class="o">.</span><span class="n">_qsharp_op</span><span class="p">:</span>  <span class="c1"># noqa: SLF001</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_circuit_from_qsharp_op</span><span class="p">(</span>
+                <span class="n">state_preparation</span><span class="p">,</span> <span class="n">ctrl_unitary_circuit</span><span class="p">,</span> <span class="n">phase_correction</span><span class="p">,</span> <span class="n">num_system_qubits</span><span class="p">,</span> <span class="n">num_ancilla_qubits</span>
+            <span class="p">)</span>
+
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+            <span class="s2">&quot;Failed to create iteration circuit: Q# operations are not available. &quot;</span>
+            <span class="s2">&quot;For Qiskit support, use QiskitIterativeQpeCircuitBuilder from the qiskit plugin.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_circuit_from_qsharp_op</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">state_preparation</span><span class="p">:</span> <span class="n">Circuit</span><span class="p">,</span>
+        <span class="n">controlled_unitary_circuit</span><span class="p">:</span> <span class="n">Circuit</span><span class="p">,</span>
+        <span class="n">phase_correction</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">num_system_qubits</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">num_ancilla_qubits</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Circuit</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a Circuit object from a Q# operation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            state_preparation: Circuit object containing a Q# operation for state preparation.</span>
+<span class="sd">            controlled_unitary_circuit: Circuit object containing a Q# operation for the controlled unitary.</span>
+<span class="sd">            phase_correction: Feedback phase angle to apply before controlled unitary.</span>
+<span class="sd">            num_system_qubits: Number of system qubits.</span>
+<span class="sd">            num_ancilla_qubits: Number of ancilla qubits within the unitary (0 for Trotter).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A Circuit object representing the IQPE iteration.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">state_prep_op</span> <span class="o">=</span> <span class="n">state_preparation</span><span class="o">.</span><span class="n">_qsharp_op</span>  <span class="c1"># noqa: SLF001</span>
+        <span class="n">ctrl_unitary_op</span> <span class="o">=</span> <span class="n">controlled_unitary_circuit</span><span class="o">.</span><span class="n">_qsharp_op</span>  <span class="c1"># noqa: SLF001</span>
+        <span class="n">iterative_parameters</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;statePrep&quot;</span><span class="p">:</span> <span class="n">state_prep_op</span><span class="p">,</span>
+            <span class="s2">&quot;repControlledUnitary&quot;</span><span class="p">:</span> <span class="n">ctrl_unitary_op</span><span class="p">,</span>
+            <span class="s2">&quot;accumulatePhase&quot;</span><span class="p">:</span> <span class="n">phase_correction</span><span class="p">,</span>
+            <span class="s2">&quot;phaseQubit&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;systems&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_system_qubits</span><span class="p">)],</span>
+            <span class="s2">&quot;numAncillaQubits&quot;</span><span class="p">:</span> <span class="n">num_ancilla_qubits</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">Circuit</span><span class="p">(</span>
+            <span class="n">qsharp_factory</span><span class="o">=</span><span class="n">QsharpFactoryData</span><span class="p">(</span>
+                <span class="n">program</span><span class="o">=</span><span class="n">QSHARP_UTILS</span><span class="o">.</span><span class="n">IterativePhaseEstimation</span><span class="o">.</span><span class="n">MakeIQPECircuit</span><span class="p">,</span>
+                <span class="n">parameter</span><span class="o">=</span><span class="n">iterative_parameters</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="QdkIterativeQpeCircuitBuilder.name">
+<a class="viewcode-back" href="../../../../../api/api_autogen/qdk_chemistry.algorithms.phase_estimation.circuit_builder.iterative_builder.html#qdk_chemistry.algorithms.phase_estimation.circuit_builder.iterative_builder.QdkIterativeQpeCircuitBuilder.name">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the name of the builder algorithm.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;qdk_iterative&quot;</span></div>
+</div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_iteration_inputs</span><span class="p">(</span><span class="n">iteration</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">total_iterations</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate iteration parameters for IQPE circuit construction.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        iteration: The current iteration index (0-based).</span>
+<span class="sd">        total_iterations: The total number of iterations.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">total_iterations</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;total_iterations must be a positive integer.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">iteration</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">iteration</span> <span class="o">&gt;=</span> <span class="n">total_iterations</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;iteration index </span><span class="si">{</span><span class="n">iteration</span><span class="si">}</span><span class="s2"> is outside the valid range [0, </span><span class="si">{</span><span class="n">total_iterations</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">].&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright Microsoft Corporation. All rights reserved. Licensed under the MIT License.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

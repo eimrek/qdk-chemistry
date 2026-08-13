@@ -1,0 +1,78 @@
+/* Italicize the definition term to increase contrast in text formatting */
+dl dt {
+    font-weight: normal;
+    /* Remove the default bold */
+    font-style: italic;
+    /* Add italics */
+}
+
+/* Make the rubric directive more visually distinct */
+p.rubric {
+    font-weight: bold;
+    padding-left: 10px;
+    /* Space text away from border */
+    border-left: 4px solid #2980b9;
+    /* Thick blue line on the left */
+    background-color: #f8f9fa;
+    /* Very light grey background */
+    display: inline-block;
+    /* Hug the text length */
+    width: 100%;
+    /* Or span full width */
+}
+
+/* Style for bibtex citations transformed from Doxygen :cite: markers */
+a.bibtex.internal {
+    text-decoration: none;
+    color: #2980b9;
+}
+
+a.bibtex.internal:hover {
+    text-decoration: underline;
+}
+
+/* Distinguish tutorial chapter orientation from notes, assignments, and hints. */
+.admonition.chapter-focus {
+    background-color: #f7f2fa;
+    border-left: 4px solid #6d3f8c;
+}
+
+.admonition.chapter-focus > .admonition-title {
+    background-color: #6d3f8c;
+    color: #ffffff;
+}
+
+/* Required cumulative course work: blue title with a pale blue body. */
+.admonition.lab-notebook-assignment {
+    background-color: #eef7fb;
+    border-left: 4px solid #005a8d;
+}
+
+.admonition.lab-notebook-assignment > .admonition-title {
+    background-color: #005a8d;
+    color: #ffffff;
+}
+
+/* Collapsible course questions: orange title with a pale amber body. */
+details.admonition.quiz-question {
+    background-color: #fff8e6;
+    border-left: 4px solid #8c4a00;
+}
+
+details.admonition.quiz-question > .admonition-title {
+    background-color: #8c4a00;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+details.admonition.quiz-question > .admonition-title::after {
+    content: "Show answer";
+    float: right;
+    font-size: 0.85em;
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+details.admonition.quiz-question[open] > .admonition-title::after {
+    content: "Hide answer";
+}

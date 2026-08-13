@@ -1,0 +1,167 @@
+"""Minimal end-to-end example."""
+
+# --------------------------------------------------------------------------------------------
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License. See LICENSE.txt in the project root for license information.
+# --------------------------------------------------------------------------------------------
+
+################################################################################
+# docs:xyz ../data/para_benzyne.structure.xyz
+# start-cell-structure
+
+import numpy as np
+from qdk_chemistry.algorithms import create
+from qdk_chemistry.data import AlgorithmRef, Structure
+from qdk_chemistry.data.symmetry import SymmetryLabel, axes
+
+# Load para-benzyne structure from inline XYZ file
+structure = Structure.from_xyz("""\
+10
+para-Benzyne
+C    0.000000    1.396000    0.000000
+C    1.209077    0.698000    0.000000
+C    1.209077   -0.698000    0.000000
+C    0.000000   -1.396000    0.000000
+C   -1.209077   -0.698000    0.000000
+C   -1.209077    0.698000    0.000000
+H    2.151000    1.242000    0.000000
+H    2.151000   -1.242000    0.000000
+H   -2.151000   -1.242000    0.000000
+H   -2.151000    1.242000    0.000000
+""")
+
+print(f"Created structure with {structure.get_num_atoms()} atoms")
+print(f"Elements: {structure.get_elements()}")
+# end-cell-structure
+################################################################################
+
+################################################################################
+# start-cell-scf
+# Perform an SCF calculation, returning the energy and wavefunction
+scf_solver = create("scf_solver")
+E_hf, wfn_hf = scf_solver.run(
+    structure, charge=0, spin_multiplicity=1, basis_or_guess="cc-pvdz"
+)
+print(f"SCF energy is {E_hf:.3f} Hartree")
+
+# Display a summary of the molecular orbitals obtained from the SCF calculation
+print("SCF Orbitals:\n", wfn_hf.get_orbitals().get_summary())
+# end-cell-scf
+################################################################################
+
+################################################################################
+# start-cell-active-space
+# Select active space (6 electrons in 6 orbitals for para-benzyne)
+#   to choose most chemically relevant orbitals
+active_space_selector = create(
+    "active_space_selector",
+    algorithm_name="qdk_valence",
+    num_active_electrons=6,
+    num_active_orbitals=6,
+)
+active_wfn = active_space_selector.run(wfn_hf)
+active_orbitals = active_wfn.get_orbitals()
+
+# Print a summary of the active space orbitals
+print("Active Space Orbitals:\n", active_orbitals.get_summary())
+# end-cell-active-space
+################################################################################
+
+################################################################################
+# start-cell-hamiltonian-constructor
+# Construct Hamiltonian in the active space and print its summary
+hamiltonian_constructor = create("hamiltonian_constructor")
+hamiltonian = hamiltonian_constructor.run(active_orbitals)
+print("Active Space Hamiltonian:\n", hamiltonian.get_summary())
+# end-cell-hamiltonian-constructor
+################################################################################
+
+################################################################################
+# start-cell-mc-compute
+# Perform CASCI calculation to get the wavefunction and exact energy for the active space
+mc = create("multi_configuration_calculator")
+E_cas, wfn_cas = mc.run(
+    hamiltonian, n_active_alpha_electrons=3, n_active_beta_electrons=3
+)
+print(
+    f"CASCI energy is {E_cas:.3f} Hartree, and the electron correlation energy is {E_cas - E_hf:.3f} Hartree"
+)
+# end-cell-mc-compute
+################################################################################
+
+################################################################################
+# start-cell-wfn-select-configs
+# Get top 2 determinants from the CASCI wavefunction to form a sparse wavefunction
+top_configurations = wfn_cas.get_top_determinants(max_determinants=2)
+
+# Compute the reference energy of the sparse wavefunction
+pmc_calculator = create("projected_multi_configuration_calculator")
+E_sparse, wfn_sparse = pmc_calculator.run(hamiltonian, list(top_configurations.keys()))
+
+print(f"Reference energy for top 2 determinants is {E_sparse:.6f} Hartree")
+# end-cell-wfn-select-configs
+################################################################################
+
+################################################################################
+# start-state-prep-circuit
+
+# Generate state preparation circuit for the sparse state via sparse isometry (GF2 + X)
+state_prep = create("state_prep", "sparse_isometry_gf2x")
+sparse_isometry_circuit = state_prep.run(wfn_sparse)
+
+# end-state-prep-circuit
+################################################################################
+
+################################################################################
+# start-cell-qubit-hamiltonian
+# Prepare qubit Hamiltonian
+from qdk_chemistry.data import MajoranaMapping
+
+active_alpha = active_orbitals.active_indices().indices(SymmetryLabel([axes.alpha()]))
+active_beta = active_orbitals.active_indices().indices(SymmetryLabel([axes.beta()]))
+n_active_spin_orbitals = len(active_alpha) + len(active_beta)
+qubit_mapper = create("qubit_mapper", algorithm_name="qdk")
+qubit_hamiltonian = qubit_mapper.run(
+    hamiltonian, MajoranaMapping.jordan_wigner(num_modes=n_active_spin_orbitals)
+)
+
+# Print the number of Pauli strings in the full Hamiltonian
+print(
+    f"Number of Pauli strings in the Hamiltonian: {len(qubit_hamiltonian.pauli_strings)}"
+)
+# end-cell-qubit-hamiltonian
+################################################################################
+
+################################################################################
+# start-cell-energy-estimation
+# Estimate energy using the optimized circuit and the qubit Hamiltonian
+estimator = create("expectation_estimator", algorithm_name="qdk")
+estimator.settings().set(
+    "circuit_executor",
+    AlgorithmRef("circuit_executor", "qdk_full_state_simulator"),
+)
+term_grouper = create("term_grouper", "qubit_wise_commuting")
+grouped_hamiltonian = term_grouper.run(qubit_hamiltonian=qubit_hamiltonian)
+
+energy_results, simulation_data = estimator.run(
+    circuit=sparse_isometry_circuit,
+    qubit_hamiltonian=grouped_hamiltonian,
+    total_shots=500000,
+)
+
+for i, results in enumerate(simulation_data.bitstring_counts):
+    print(
+        f"Measurement Results for Hamiltonian Group {i + 1}: {simulation_data.hamiltonians[i].pauli_strings}"
+    )
+
+# Print statistics for the measured energy
+energy_mean = energy_results.energy_expectation_value + hamiltonian.get_core_energy()
+energy_stddev = np.sqrt(energy_results.energy_variance)
+print(
+    f"Estimated energy from quantum circuit: {energy_mean:.3f} ± {energy_stddev:.3f} Hartree"
+)
+
+# Print comparison with reference energy
+print(f"Difference from reference energy: {energy_mean - E_sparse} Hartree")
+# end-cell-energy-estimation
+################################################################################

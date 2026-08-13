@@ -1,0 +1,13 @@
+[
+  {
+    "name": "latest (main)",
+    "version": "latest",
+    "url": "https://eimrek.github.io/qdk-chemistry/latest/"
+  },
+  {
+    "name": "2.1.0 (stable)",
+    "version": "2.1.0",
+    "url": "https://eimrek.github.io/qdk-chemistry/stable/",
+    "preferred": true
+  }
+]

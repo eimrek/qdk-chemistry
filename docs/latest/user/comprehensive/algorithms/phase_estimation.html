@@ -1,0 +1,1070 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Phase estimation &#8212; QDK/Chemistry latest</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=3da93932" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../../../_static/documentation_options.js?v=c6e86fd7"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/tabs.js?v=3ee01567"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user/comprehensive/algorithms/phase_estimation';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://eimrek.github.io/qdk-chemistry/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'latest';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            true;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="canonical" href="https://eimrek.github.io/qdk-chemistry/latest/user/comprehensive/algorithms/phase_estimation.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Phase estimation circuit builder" href="qpe_circuit_builder.html" />
+    <link rel="prev" title="Hadamard test" href="hadamard_test.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">QDK/Chemistry</p>
+  
+</a></div>
+    
+      <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/microsoft/qdk-chemistry" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/microsoft/qdk-chemistry" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Documentation">
+  <p class="bd-links__title" role="heading" aria-level="1">Documentation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features, methods and dependencies</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">In-depth user guide</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../design/index.html">High-level design</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../data/index.html">Data classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../data/serialization.html">Serialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/ansatz.html">Ansatz</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/basis_set.html">BasisSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/hamiltonian.html">Hamiltonian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/orbitals.html">Orbitals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/lattice_graph.html">LatticeGraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/majorana_mapping.html">MajoranaMapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/pauli_operator.html">Pauli Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/structure.html">Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/symmetries.html">Symmetries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/wavefunction.html">Wavefunction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/qpe_result.html">QpeResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/circuit.html">Circuit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">Algorithm classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="factory_pattern.html">Factory pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="active_space.html">Active space selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="effective_hamiltonian_constructor.html">Effective Hamiltonian construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expectation_estimator.html">Energy estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hamiltonian_constructor.html">Hamiltonian construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="localizer.html">Orbital localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mc_calculator.html">Multi-configuration calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcscf.html">Multi-Configuration Self-Consistent Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmc.html">Projected Multi-Configuration calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qubit_mapper.html">Qubit mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scf_solver.html">Self-consistent field (SCF) solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stability_checker.html">Stability analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="state_preparation.html">State preparation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hadamard_test.html">Hadamard test</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Phase estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qpe_circuit_builder.html">Phase estimation circuit builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="amplitude_amplification.html">Amplitude amplification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="evolution_circuit_builder.html">Evolution circuit builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hamiltonian_unitary_builder.html">Hamiltonian Unitary Builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_mapper.html">Controlled circuit mapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="circuit_executor.html">Circuit execution</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../basis_functionals.html">Available functionals and basis sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../model_hamiltonians.html">Model Hamiltonians</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins.html">Plugins</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migrating-data-files.html">Migrating data files between serialization versions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tutorials/ground_state_molecular_energies_with_qpe/index.html">Ground-state molecular energies with quantum phase estimation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/ground_state_molecular_energies_with_qpe/00_before_you_begin.html">Before you begin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/ground_state_molecular_energies_with_qpe/lab_notebook.html">Set up your lab notebook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/ground_state_molecular_energies_with_qpe/01_energy_and_accuracy.html">Energy and accuracy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/ground_state_molecular_energies_with_qpe/02_describing_the_molecule.html">Describing the molecule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/ground_state_molecular_energies_with_qpe/03_choosing_the_active_space.html">Choosing the active space</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/ground_state_molecular_energies_with_qpe/04_putting_the_problem_on_qubits.html">Mapping the problem to qubits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/ground_state_molecular_energies_with_qpe/05_preparing_the_trial_state.html">Preparing the trial state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/ground_state_molecular_energies_with_qpe/06_iterative_phase_estimation.html">Iterative quantum phase estimation</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api/python_api.html">Python API</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html">qdk_chemistry.data package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.enums.html">qdk_chemistry.data.enums package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.time_dependent_qubit_hamiltonian.html">qdk_chemistry.data.time_dependent_qubit_hamiltonian package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.unitary_representation.html">qdk_chemistry.data.unitary_representation package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data._hashing.html">qdk_chemistry.data._hashing module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data._spin_channels.html">qdk_chemistry.data._spin_channels module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.base.html">qdk_chemistry.data.base module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.circuit.html">qdk_chemistry.data.circuit module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.circuit_executor_data.html">qdk_chemistry.data.circuit_executor_data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.encoding_validation.html">qdk_chemistry.data.encoding_validation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.estimator_data.html">qdk_chemistry.data.estimator_data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.noise_models.html">qdk_chemistry.data.noise_models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.qpe_result.html">qdk_chemistry.data.qpe_result module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.qubit_operator.html">qdk_chemistry.data.qubit_operator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.symmetries.html">qdk_chemistry.data.symmetries module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.symmetry.html">qdk_chemistry.data.symmetry module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.term_partition.html">qdk_chemistry.data.term_partition module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.html">qdk_chemistry.algorithms package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.circuit_executor.html">qdk_chemistry.algorithms.circuit_executor package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.circuit_mapper.html">qdk_chemistry.algorithms.circuit_mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.controlled_circuit_mapper.html">qdk_chemistry.algorithms.controlled_circuit_mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.expectation_estimator.html">qdk_chemistry.algorithms.expectation_estimator package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.hadamard_test.html">qdk_chemistry.algorithms.hadamard_test package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.hamiltonian_unitary_builder.html">qdk_chemistry.algorithms.hamiltonian_unitary_builder package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.phase_estimation.html">qdk_chemistry.algorithms.phase_estimation package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.propagator.html">qdk_chemistry.algorithms.propagator package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.qubit_mapper.html">qdk_chemistry.algorithms.qubit_mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.state_preparation.html">qdk_chemistry.algorithms.state_preparation package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.term_grouper.html">qdk_chemistry.algorithms.term_grouper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.time_evolution.html">qdk_chemistry.algorithms.time_evolution package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.active_space_selector.html">qdk_chemistry.algorithms.active_space_selector module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.amplitude_amplification.html">qdk_chemistry.algorithms.amplitude_amplification module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.base.html">qdk_chemistry.algorithms.base module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.dynamical_correlation_calculator.html">qdk_chemistry.algorithms.dynamical_correlation_calculator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.effective_hamiltonian_constructor.html">qdk_chemistry.algorithms.effective_hamiltonian_constructor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.geometry_optimization.html">qdk_chemistry.algorithms.geometry_optimization module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.hamiltonian_constructor.html">qdk_chemistry.algorithms.hamiltonian_constructor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.hashing.html">qdk_chemistry.algorithms.hashing module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.multi_configuration_calculator.html">qdk_chemistry.algorithms.multi_configuration_calculator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.multi_configuration_scf.html">qdk_chemistry.algorithms.multi_configuration_scf module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.nuclear_derivative.html">qdk_chemistry.algorithms.nuclear_derivative module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.orbital_localizer.html">qdk_chemistry.algorithms.orbital_localizer module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.projected_multi_configuration_calculator.html">qdk_chemistry.algorithms.projected_multi_configuration_calculator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.qubit_hamiltonian_solver.html">qdk_chemistry.algorithms.qubit_hamiltonian_solver module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.registry.html">qdk_chemistry.algorithms.registry module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.scf_solver.html">qdk_chemistry.algorithms.scf_solver module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.stability_checker.html">qdk_chemistry.algorithms.stability_checker module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.plugins.html">qdk_chemistry.plugins package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.plugins.geometric.html">qdk_chemistry.plugins.geometric package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.plugins.networkx.html">qdk_chemistry.plugins.networkx package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.plugins.openfermion.html">qdk_chemistry.plugins.openfermion package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.plugins.pyscf.html">qdk_chemistry.plugins.pyscf package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.plugins.qiskit.html">qdk_chemistry.plugins.qiskit package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.utils.html">qdk_chemistry.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.utils.qsharp.html">qdk_chemistry.utils.qsharp package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.utils.cubegen.html">qdk_chemistry.utils.cubegen module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.utils.enum.html">qdk_chemistry.utils.enum module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.utils.model_hamiltonians.html">qdk_chemistry.utils.model_hamiltonians module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.utils.pauli_commutation.html">qdk_chemistry.utils.pauli_commutation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.utils.pauli_matrix.html">qdk_chemistry.utils.pauli_matrix module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.utils.telemetry.html">qdk_chemistry.utils.telemetry module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.utils.telemetry_events.html">qdk_chemistry.utils.telemetry_events module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.utils.wavefunction.html">qdk_chemistry.utils.wavefunction module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.utils.zassenhaus_generation.html">qdk_chemistry.utils.zassenhaus_generation module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.constants.html">qdk_chemistry.constants module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api/cpp_api.html">C++ API</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1data.html">Namespace qdk::chemistry::data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1algorithms.html">Namespace qdk::chemistry::algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1utils.html">Namespace qdk::chemistry::utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1constants.html">Namespace qdk::chemistry::constants</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Supporting Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../release-notes/index.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../release-notes/v2.1.0.html">What’s New in Version 2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../release-notes/v2.0.0.html">What’s New in Version 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../release-notes/v1.1.0.html">What’s New in Version 1.1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Acronym definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">In-depth user guide</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Algorithm classes</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Phase estimation</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="phase-estimation">
+<h1>Phase estimation<a class="headerlink" href="#phase-estimation" title="Link to this heading">#</a></h1>
+<p>The <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.html#qdk_chemistry.algorithms.PhaseEstimation" title="qdk_chemistry.algorithms.PhaseEstimation"><code class="xref py py-class docutils literal notranslate"><span class="pre">PhaseEstimation</span></code></a> algorithm in QDK/Chemistry extracts eigenvalues from a quantum state by measuring the phase accumulated under repeated application of a unitary operator.
+Following QDK/Chemistry’s <a class="reference internal" href="../design/index.html"><span class="doc">algorithm design principles</span></a>, it takes a state-preparation <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.Circuit" title="qdk_chemistry.data.Circuit"><code class="xref py py-class docutils literal notranslate"><span class="pre">Circuit</span></code></a> (from <a class="reference internal" href="state_preparation.html"><span class="doc">StatePreparation</span></a>), a <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.QubitOperator" title="qdk_chemistry.data.QubitOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">QubitOperator</span></code></a> (from <a class="reference internal" href="qubit_mapper.html"><span class="doc">QubitMapper</span></a> or a <a class="reference internal" href="../model_hamiltonians.html"><span class="doc">model Hamiltonian</span></a>), a <a class="reference internal" href="qpe_circuit_builder.html"><span class="doc">QpeCircuitBuilder</span></a> (which encapsulates the unitary builder and controlled circuit mapper), and a <a class="reference internal" href="circuit_executor.html"><span class="doc">CircuitExecutor</span></a> as input and returns a <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.QpeResult" title="qdk_chemistry.data.QpeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">QpeResult</span></code></a> containing the measured phase, reconstructed energy, and alias-resolution metadata.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Quantum Phase Estimation (<a class="reference internal" href="../../../glossary.html#term-QPE"><span class="xref std std-term">QPE</span></a>) is one of the foundational quantum algorithms for chemistry.
+Given a unitary <span class="math notranslate nohighlight">\(U\)</span> and an initial state <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> that has significant overlap with an eigenstate of <span class="math notranslate nohighlight">\(U\)</span>, <a class="reference internal" href="../../../glossary.html#term-QPE"><span class="xref std std-term">QPE</span></a> measures the eigenphase <span class="math notranslate nohighlight">\(\varphi\)</span> such that <span class="math notranslate nohighlight">\(U|\psi\rangle = e^{2\pi i \varphi}|\psi\rangle\)</span>.</p>
+<p>QDK/Chemistry supports two types of unitaries for QPE:</p>
+<ul class="simple">
+<li><p><strong>Time evolution</strong> — <span class="math notranslate nohighlight">\(U = e^{-iHt}\)</span> constructed via <a class="reference internal" href="hamiltonian_unitary_builder.html#trotter-builder"><span class="std std-ref">Trotter-Suzuki decomposition</span></a>. Energy is recovered as <span class="math notranslate nohighlight">\(E = -\theta / t\)</span> where <span class="math notranslate nohighlight">\(\theta = 2\pi\varphi\)</span> is mapped to <span class="math notranslate nohighlight">\((-\pi, \pi]\)</span>.</p></li>
+<li><p><strong>Qubitization</strong> — The walk operator <span class="math notranslate nohighlight">\(W\)</span> constructed via <a class="reference internal" href="hamiltonian_unitary_builder.html#lcu-builder"><span class="std std-ref">LCU block encoding</span></a>. Energy is recovered as <span class="math notranslate nohighlight">\(E = \lambda \cos(\theta)\)</span> where <span class="math notranslate nohighlight">\(\lambda\)</span> is the L1 norm of the Hamiltonian.</p></li>
+</ul>
+<p>The QPE algorithm itself is agnostic to how the unitary is constructed — the choice of unitary builder determines the phase-to-energy mapping used in post-processing.</p>
+<p>QDK/Chemistry provides two <a class="reference internal" href="../../../glossary.html#term-QPE"><span class="xref std std-term">QPE</span></a> approaches, each suited to different hardware constraints:</p>
+<dl class="simple">
+<dt>Iterative Quantum Phase Estimation (<a class="reference internal" href="../../../glossary.html#term-IQPE"><span class="xref std std-term">IQPE</span></a>)</dt><dd><p>Kitaev’s single-ancilla algorithm <span class="bibtex-citation" id="id1">[<a class="reference internal" href="../../../references.html#id23" title="A. Y. Kitaev. Quantum measurements and the Abelian stabilizer problem. arXiv, 1995. URL: https://arxiv.org/abs/quant-ph/9511026.">Kit95</a>]</span> that extracts phase bits one at a time, from least significant to most significant, using adaptive feedback corrections between iterations.
+This approach minimizes ancilla requirements and is particularly suited to near-term hardware.</p>
+</dd>
+<dt>Standard QFT-based Quantum Phase Estimation</dt><dd><p>The textbook multi-ancilla approach <span class="bibtex-citation" id="id2">[<a class="reference internal" href="../../../references.html#id25" title="Michael A. Nielsen and Isaac L. Chuang. The quantum Fourier transform and its applications, chapter 5.2. Cambridge University Press, Cambridge, UK, 2010. doi:10.1017/CBO9780511976667.">NC10</a>]</span> that uses a register of <span class="math notranslate nohighlight">\(n\)</span> ancilla qubits and an inverse Quantum Fourier Transform to extract all phase bits simultaneously.
+This approach achieves all precision bits in a single circuit execution but requires more ancilla qubits and longer circuit depth.</p>
+</dd>
+</dl>
+<p>Both implementations share the same interface and produce <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.QpeResult" title="qdk_chemistry.data.QpeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">QpeResult</span></code></a> objects with automatic phase-wrapping, energy alias detection, and full <a class="reference internal" href="../data/serialization.html"><span class="doc">serialization</span></a> support.
+See <a class="reference internal" href="../data/qpe_result.html"><span class="doc">QpeResult</span></a> for details on the result data class.</p>
+<section id="typical-workflow">
+<span id="qpe-workflow"></span><h3>Typical workflow<a class="headerlink" href="#typical-workflow" title="Link to this heading">#</a></h3>
+<p>A complete <a class="reference internal" href="../../../glossary.html#term-QPE"><span class="xref std std-term">QPE</span></a> workflow connects several stages of the QDK/Chemistry pipeline.
+The most common path starts from a molecular system:</p>
+<ol class="arabic simple">
+<li><p>Prepare a reference <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.Wavefunction" title="qdk_chemistry.data.Wavefunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Wavefunction</span></code></a> from a <a class="reference internal" href="mc_calculator.html"><span class="doc">multi-configuration calculation</span></a></p></li>
+<li><p>Generate a state-preparation <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.Circuit" title="qdk_chemistry.data.Circuit"><code class="xref py py-class docutils literal notranslate"><span class="pre">Circuit</span></code></a> using <a class="reference internal" href="state_preparation.html"><span class="doc">StatePreparation</span></a></p></li>
+<li><p>Map the molecular <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.Hamiltonian" title="qdk_chemistry.data.Hamiltonian"><code class="xref py py-class docutils literal notranslate"><span class="pre">Hamiltonian</span></code></a> to qubit operators using <a class="reference internal" href="qubit_mapper.html"><span class="doc">QubitMapper</span></a></p></li>
+<li><p>Choose a method for constructing the target unitary — either <a class="reference internal" href="hamiltonian_unitary_builder.html#trotter-builder"><span class="std std-ref">Trotter time-evolution</span></a> or <a class="reference internal" href="hamiltonian_unitary_builder.html#lcu-builder"><span class="std std-ref">LCU block encoding</span></a> (qubitization)</p></li>
+<li><p>Run phase estimation to obtain the energy eigenvalue</p></li>
+</ol>
+<p>Alternatively, phase estimation can be used with <a class="reference internal" href="../model_hamiltonians.html"><span class="doc">model Hamiltonians</span></a> (e.g., Hubbard, Heisenberg, or Ising spin models) or with a user-supplied <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.Circuit" title="qdk_chemistry.data.Circuit"><code class="xref py py-class docutils literal notranslate"><span class="pre">Circuit</span></code></a> and <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.QubitOperator" title="qdk_chemistry.data.QubitOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">QubitOperator</span></code></a> directly — the full molecular-structure pipeline is not required.</p>
+</section>
+</section>
+<section id="using-the-phaseestimation">
+<h2>Using the PhaseEstimation<a class="headerlink" href="#using-the-phaseestimation" title="Link to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This algorithm is currently available only in the Python API.</p>
+</div>
+<p>This section demonstrates how to create, configure, and run a phase estimation calculation.
+The <code class="docutils literal notranslate"><span class="pre">run</span></code> method returns a <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.QpeResult" title="qdk_chemistry.data.QpeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">QpeResult</span></code></a> containing the measured phase, energy, alias candidates, and measurement metadata.</p>
+<section id="input-requirements">
+<h3>Input requirements<a class="headerlink" href="#input-requirements" title="Link to this heading">#</a></h3>
+<p>The <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.html#qdk_chemistry.algorithms.PhaseEstimation" title="qdk_chemistry.algorithms.PhaseEstimation"><code class="xref py py-class docutils literal notranslate"><span class="pre">PhaseEstimation</span></code></a> requires the following inputs:</p>
+<dl class="simple">
+<dt>State preparation circuit</dt><dd><p>A <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.Circuit" title="qdk_chemistry.data.Circuit"><code class="xref py py-class docutils literal notranslate"><span class="pre">Circuit</span></code></a> that prepares the target quantum state on the system register.
+This is typically generated by the <a class="reference internal" href="state_preparation.html"><span class="doc">StatePreparation</span></a> algorithm from a <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.Wavefunction" title="qdk_chemistry.data.Wavefunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Wavefunction</span></code></a>, but can also be any user-constructed circuit (e.g., a custom initial state for a <a class="reference internal" href="../model_hamiltonians.html"><span class="doc">model Hamiltonian</span></a>).</p>
+</dd>
+<dt>QubitOperator</dt><dd><p>A <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.QubitOperator" title="qdk_chemistry.data.QubitOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">QubitOperator</span></code></a> containing the Pauli-string representation of the Hamiltonian.
+This can be obtained from the <a class="reference internal" href="qubit_mapper.html"><span class="doc">QubitMapper</span></a> algorithm, constructed from a <a class="reference internal" href="../model_hamiltonians.html"><span class="doc">model Hamiltonian</span></a>, or built directly by the user.</p>
+</dd>
+<dt>Settings</dt><dd><p>The <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.html#qdk_chemistry.algorithms.PhaseEstimation" title="qdk_chemistry.algorithms.PhaseEstimation"><code class="xref py py-class docutils literal notranslate"><span class="pre">PhaseEstimation</span></code></a> is configured via its settings object, which includes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">qpe_circuit_builder</span></code> — A <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.AlgorithmRef" title="qdk_chemistry.data.AlgorithmRef"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmRef</span></code></a> to a <a class="reference internal" href="qpe_circuit_builder.html"><span class="doc">QpeCircuitBuilder</span></a> that handles circuit composition.
+The circuit builder encapsulates a <a class="reference internal" href="hamiltonian_unitary_builder.html"><span class="doc">HamiltonianUnitaryBuilder</span></a> and a <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.html#qdk_chemistry.algorithms.ControlledCircuitMapper" title="qdk_chemistry.algorithms.ControlledCircuitMapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">ControlledCircuitMapper</span></code></a> as its own nested algorithms.
+See <a class="reference internal" href="qpe_circuit_builder.html"><span class="doc">Phase estimation circuit builder</span></a> for detailed configuration.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">circuit_executor</span></code> — A <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.AlgorithmRef" title="qdk_chemistry.data.AlgorithmRef"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmRef</span></code></a> to a backend that executes <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.Circuit" title="qdk_chemistry.data.Circuit"><code class="xref py py-class docutils literal notranslate"><span class="pre">Circuit</span></code></a> objects and returns measurement bitstrings as <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.CircuitExecutorData" title="qdk_chemistry.data.CircuitExecutorData"><code class="xref py py-class docutils literal notranslate"><span class="pre">CircuitExecutorData</span></code></a>.
+QDK/Chemistry ships native Q# simulators (sparse-state and full-state, with optional <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.QuantumErrorProfile" title="qdk_chemistry.data.QuantumErrorProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuantumErrorProfile</span></code></a> noise modelling) and integrates with Qiskit’s Aer simulator through the <a class="reference internal" href="../plugins.html"><span class="doc">plugin system</span></a>.
+See <a class="reference internal" href="circuit_executor.html"><span class="doc">Circuit execution</span></a> for details.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The state preparation circuit and qubit Hamiltonian must be compatible — they should use the same qubit encoding and be derived from the same underlying system.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">qpe_circuit_builder</span></code> is configured with nested algorithm references for the unitary builder and controlled circuit mapper, as shown in the configuration examples below.</p>
+</div>
+<p class="rubric">Creating a phase estimation algorithm</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio" /><label class="tab-label" for="tab-set--0-input--1">Python API</label><div class="tab-content docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.algorithms</span><span class="w"> </span><span class="kn">import</span> <span class="n">create</span>
+
+<span class="c1"># Create the default (iterative) phase estimation algorithm</span>
+<span class="n">iqpe</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span><span class="s2">&quot;phase_estimation&quot;</span><span class="p">,</span> <span class="s2">&quot;qdk_iterative&quot;</span><span class="p">)</span>
+
+<span class="c1"># Or create the standard QFT-based variant</span>
+<span class="n">qpe</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span><span class="s2">&quot;phase_estimation&quot;</span><span class="p">,</span> <span class="s2">&quot;qdk_standard&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p class="rubric">Configuring settings</p>
+<p>Settings vary by implementation.
+See <a class="reference internal" href="#available-implementations">Available implementations</a> below for implementation-specific options.</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--1-input--1" name="tab-set--1" type="radio" /><label class="tab-label" for="tab-set--1-input--1">Python API (Iterative)</label><div class="tab-content docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure iterative phase estimation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">AlgorithmRef</span>
+
+<span class="c1"># Create iterative qpe circuit builder</span>
+<span class="n">iqpe_circuit_builder</span> <span class="o">=</span> <span class="n">AlgorithmRef</span><span class="p">(</span>
+    <span class="s2">&quot;qpe_circuit_builder&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;qdk_iterative&quot;</span><span class="p">,</span>
+    <span class="n">num_bits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">controlled_circuit_mapper</span><span class="o">=</span><span class="n">AlgorithmRef</span><span class="p">(</span>
+        <span class="s2">&quot;controlled_circuit_mapper&quot;</span><span class="p">,</span> <span class="s2">&quot;pauli_sequence&quot;</span>
+    <span class="p">),</span>
+    <span class="n">unitary_builder</span><span class="o">=</span><span class="n">AlgorithmRef</span><span class="p">(</span><span class="s2">&quot;hamiltonian_unitary_builder&quot;</span><span class="p">,</span> <span class="s2">&quot;trotter&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">iqpe</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span><span class="s2">&quot;phase_estimation&quot;</span><span class="p">,</span> <span class="s2">&quot;qdk_iterative&quot;</span><span class="p">,</span> <span class="n">shots_per_bit</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">iqpe</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;qpe_circuit_builder&quot;</span><span class="p">,</span> <span class="n">iqpe_circuit_builder</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input class="tab-input" id="tab-set--1-input--2" name="tab-set--1" type="radio" /><label class="tab-label" for="tab-set--1-input--2">Python API (Standard)</label><div class="tab-content docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure standard QFT-based phase estimation</span>
+<span class="n">qpe_circuit_builder</span> <span class="o">=</span> <span class="n">AlgorithmRef</span><span class="p">(</span>
+    <span class="s2">&quot;qpe_circuit_builder&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;qdk_standard&quot;</span><span class="p">,</span>
+    <span class="n">num_bits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">controlled_circuit_mapper</span><span class="o">=</span><span class="n">AlgorithmRef</span><span class="p">(</span>
+        <span class="s2">&quot;controlled_circuit_mapper&quot;</span><span class="p">,</span> <span class="s2">&quot;pauli_sequence&quot;</span>
+    <span class="p">),</span>
+    <span class="n">unitary_builder</span><span class="o">=</span><span class="n">AlgorithmRef</span><span class="p">(</span><span class="s2">&quot;hamiltonian_unitary_builder&quot;</span><span class="p">,</span> <span class="s2">&quot;trotter&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">qpe</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span><span class="s2">&quot;phase_estimation&quot;</span><span class="p">,</span> <span class="s2">&quot;qdk_standard&quot;</span><span class="p">)</span>
+<span class="n">qpe</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;shots&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">qpe</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;qpe_circuit_builder&quot;</span><span class="p">,</span> <span class="n">qpe_circuit_builder</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p class="rubric">Running the calculation</p>
+<p>Once configured, the <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.html#qdk_chemistry.algorithms.PhaseEstimation" title="qdk_chemistry.algorithms.PhaseEstimation"><code class="xref py py-class docutils literal notranslate"><span class="pre">PhaseEstimation</span></code></a> can be executed with all required dependencies:</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--2-input--1" name="tab-set--2" type="radio" /><label class="tab-label" for="tab-set--2-input--1">Python API</label><div class="tab-content docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.algorithms</span><span class="w"> </span><span class="kn">import</span> <span class="n">create</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">Structure</span>
+
+<span class="c1"># 1. Setup molecule</span>
+<span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">]])</span>
+<span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">]</span>
+<span class="n">structure</span> <span class="o">=</span> <span class="n">Structure</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="n">symbols</span><span class="p">)</span>
+
+<span class="c1"># 2. SCF</span>
+<span class="n">scf_solver</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span><span class="s2">&quot;scf_solver&quot;</span><span class="p">)</span>
+<span class="n">E_scf</span><span class="p">,</span> <span class="n">wfn_scf</span> <span class="o">=</span> <span class="n">scf_solver</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">structure</span><span class="p">,</span> <span class="n">charge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">spin_multiplicity</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">basis_or_guess</span><span class="o">=</span><span class="s2">&quot;sto-3g&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># 3. Hamiltonian construction</span>
+<span class="n">hamiltonian_constructor</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span><span class="s2">&quot;hamiltonian_constructor&quot;</span><span class="p">)</span>
+<span class="n">hamiltonian</span> <span class="o">=</span> <span class="n">hamiltonian_constructor</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">wfn_scf</span><span class="o">.</span><span class="n">get_orbitals</span><span class="p">())</span>
+
+<span class="c1"># 4. Multi-configuration calculation (reference state)</span>
+<span class="n">cas_solver</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span><span class="s2">&quot;multi_configuration_calculator&quot;</span><span class="p">)</span>
+<span class="n">E_cas</span><span class="p">,</span> <span class="n">wfn_cas</span> <span class="o">=</span> <span class="n">cas_solver</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">hamiltonian</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># 5. Qubit mapping</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">MajoranaMapping</span>
+
+<span class="n">n_spin_orbitals</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">hamiltonian</span><span class="o">.</span><span class="n">get_orbitals</span><span class="p">()</span><span class="o">.</span><span class="n">get_num_molecular_orbitals</span><span class="p">()</span>
+<span class="n">qubit_mapper</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span><span class="s2">&quot;qubit_mapper&quot;</span><span class="p">)</span>
+<span class="n">qubit_ham</span> <span class="o">=</span> <span class="n">qubit_mapper</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">hamiltonian</span><span class="p">,</span> <span class="n">MajoranaMapping</span><span class="o">.</span><span class="n">jordan_wigner</span><span class="p">(</span><span class="n">n_spin_orbitals</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># 6. State preparation</span>
+<span class="n">state_prep</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span><span class="s2">&quot;state_prep&quot;</span><span class="p">,</span> <span class="s2">&quot;sparse_isometry_gf2x&quot;</span><span class="p">)</span>
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">state_prep</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">wfn_cas</span><span class="p">)</span>
+
+<span class="c1"># 7. Create and run IQPE with nested algorithm settings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">AlgorithmRef</span>
+
+<span class="n">iqpe</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span><span class="s2">&quot;phase_estimation&quot;</span><span class="p">,</span> <span class="s2">&quot;qdk_iterative&quot;</span><span class="p">,</span> <span class="n">shots_per_bit</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># 8. Configure nested algorithms — the circuit builder holds num_bits, unitary_builder, and circuit_mapper</span>
+<span class="n">iqpe_circuit_builder</span> <span class="o">=</span> <span class="n">AlgorithmRef</span><span class="p">(</span>
+    <span class="s2">&quot;qpe_circuit_builder&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;qdk_iterative&quot;</span><span class="p">,</span>
+    <span class="n">num_bits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">controlled_circuit_mapper</span><span class="o">=</span><span class="n">AlgorithmRef</span><span class="p">(</span>
+        <span class="s2">&quot;controlled_circuit_mapper&quot;</span><span class="p">,</span> <span class="s2">&quot;pauli_sequence&quot;</span>
+    <span class="p">),</span>
+    <span class="n">unitary_builder</span><span class="o">=</span><span class="n">AlgorithmRef</span><span class="p">(</span>
+        <span class="s2">&quot;hamiltonian_unitary_builder&quot;</span><span class="p">,</span> <span class="s2">&quot;trotter&quot;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mf">0.1</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+<span class="n">iqpe</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="s2">&quot;qpe_circuit_builder&quot;</span><span class="p">,</span>
+    <span class="n">iqpe_circuit_builder</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">iqpe</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="s2">&quot;circuit_executor&quot;</span><span class="p">,</span>
+    <span class="n">AlgorithmRef</span><span class="p">(</span><span class="s2">&quot;circuit_executor&quot;</span><span class="p">,</span> <span class="s2">&quot;qdk_full_state_simulator&quot;</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">iqpe</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">state_preparation</span><span class="o">=</span><span class="n">circuit</span><span class="p">,</span>
+    <span class="n">qubit_hamiltonian</span><span class="o">=</span><span class="n">qubit_ham</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># 9. Inspect results</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get_summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="available-implementations">
+<h2>Available implementations<a class="headerlink" href="#available-implementations" title="Link to this heading">#</a></h2>
+<p>QDK/Chemistry’s <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.html#qdk_chemistry.algorithms.PhaseEstimation" title="qdk_chemistry.algorithms.PhaseEstimation"><code class="xref py py-class docutils literal notranslate"><span class="pre">PhaseEstimation</span></code></a> provides a unified interface for phase estimation methods.
+You can discover available implementations programmatically:</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--3-input--1" name="tab-set--3" type="radio" /><label class="tab-label" for="tab-set--3-input--1">Python API</label><div class="tab-content docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.algorithms</span><span class="w"> </span><span class="kn">import</span> <span class="n">registry</span>
+
+<span class="c1"># List all registered phase estimation implementations</span>
+<span class="n">implementations</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="n">available</span><span class="p">(</span><span class="s2">&quot;phase_estimation&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">implementations</span><span class="p">)</span>  <span class="c1"># e.g. [&#39;qdk_iterative&#39;, &#39;qdk_standard&#39;]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="iterative-phase-estimation-iqpe">
+<span id="iqpe-algorithm"></span><h3>Iterative phase estimation (IQPE)<a class="headerlink" href="#iterative-phase-estimation-iqpe" title="Link to this heading">#</a></h3>
+<p class="rubric">Factory name: <code class="docutils literal notranslate"><span class="pre">&quot;qdk_iterative&quot;</span></code></p>
+<p>Kitaev’s iterative algorithm <span class="bibtex-citation" id="id3">[<a class="reference internal" href="../../../references.html#id23" title="A. Y. Kitaev. Quantum measurements and the Abelian stabilizer problem. arXiv, 1995. URL: https://arxiv.org/abs/quant-ph/9511026.">Kit95</a>]</span> uses a single ancilla qubit to extract phase bits sequentially, from the least significant bit (LSB) to the most significant bit (MSB).
+At each iteration <span class="math notranslate nohighlight">\(k\)</span> (from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(n-1\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the total number of bits):</p>
+<ol class="arabic simple">
+<li><p>Prepare the ancilla in <span class="math notranslate nohighlight">\(|+\rangle\)</span></p></li>
+<li><p>Apply the controlled evolution <span class="math notranslate nohighlight">\(C\text{-}U^{2^{n-k-1}}\)</span> between the ancilla and the system register</p></li>
+<li><p>Apply a phase correction <span class="math notranslate nohighlight">\(R_z(-\Phi_k)\)</span> based on previously measured bits</p></li>
+<li><p>Measure the ancilla to determine bit <span class="math notranslate nohighlight">\(b_k\)</span></p></li>
+</ol>
+<p>The phase feedback is updated using Kitaev’s recursion, starting from <span class="math notranslate nohighlight">\(\Phi_0 = 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\Phi_{k+1} = \frac{\Phi_{k}}{2} + \frac{\pi \cdot b_k}{2}\]</div>
+<p>where <span class="math notranslate nohighlight">\(b_k\)</span> is the bit measured at iteration <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>Each bit is determined by a majority vote over multiple circuit executions (controlled by <code class="docutils literal notranslate"><span class="pre">shots_per_bit</span></code>).</p>
+<p class="rubric">Settings</p>
+<p>Direct settings on <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.phase_estimation.iterative_phase_estimation.html#qdk_chemistry.algorithms.phase_estimation.iterative_phase_estimation.IterativePhaseEstimation" title="qdk_chemistry.algorithms.phase_estimation.iterative_phase_estimation.IterativePhaseEstimation"><code class="xref py py-class docutils literal notranslate"><span class="pre">IterativePhaseEstimation</span></code></a>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 15.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Setting</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">shots_per_bit</span></code></p></td>
+<td><p>int</p></td>
+<td><p>Number of circuit executions per bit, used for majority-vote determination. Default is 3.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Nested algorithm configuration (via <code class="docutils literal notranslate"><span class="pre">qpe_circuit_builder</span></code>):</p>
+<p>See <a class="reference internal" href="qpe_circuit_builder.html"><span class="doc">Phase estimation circuit builder</span></a> for configuring:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">num_bits</span></code> — Number of phase bits to extract</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unitary_builder</span></code> → <code class="docutils literal notranslate"><span class="pre">time</span></code> — Time parameter <span class="math notranslate nohighlight">\(t\)</span> in <span class="math notranslate nohighlight">\(U = e^{-iHt}\)</span> (Trotter)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unitary_builder</span></code> → <code class="docutils literal notranslate"><span class="pre">quantum_walk</span></code> — Enable walk operator for qubitization (LCU)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">controlled_circuit_mapper</span></code> — Circuit synthesis strategy</p></li>
+</ul>
+</section>
+<section id="standard-qft-based-phase-estimation">
+<span id="standard-qpe-algorithm"></span><h3>Standard QFT-based phase estimation<a class="headerlink" href="#standard-qft-based-phase-estimation" title="Link to this heading">#</a></h3>
+<p class="rubric">Factory name: <code class="docutils literal notranslate"><span class="pre">&quot;qdk_standard&quot;</span></code></p>
+<p>The standard <a class="reference internal" href="../../../glossary.html#term-QPE"><span class="xref std std-term">QPE</span></a> algorithm <span class="bibtex-citation" id="id4">[<a class="reference internal" href="../../../references.html#id25" title="Michael A. Nielsen and Isaac L. Chuang. The quantum Fourier transform and its applications, chapter 5.2. Cambridge University Press, Cambridge, UK, 2010. doi:10.1017/CBO9780511976667.">NC10</a>]</span> uses a register of <span class="math notranslate nohighlight">\(n\)</span> ancilla qubits to extract all phase bits simultaneously.
+The circuit structure consists of:</p>
+<ol class="arabic simple">
+<li><p>Initialize <span class="math notranslate nohighlight">\(n\)</span> ancilla qubits in <span class="math notranslate nohighlight">\(|+\rangle\)</span></p></li>
+<li><p>For each ancilla qubit <span class="math notranslate nohighlight">\(j \in \{0, \ldots, n-1\}\)</span>, apply the controlled evolution <span class="math notranslate nohighlight">\(C\text{-}U^{2^j}\)</span></p></li>
+<li><p>Apply an inverse Quantum Fourier Transform (iQFT) to the ancilla register</p></li>
+<li><p>Measure all ancilla qubits</p></li>
+</ol>
+<p>The phase is extracted from the dominant bitstring in the measurement results.</p>
+<p class="rubric">Settings</p>
+<p>Direct settings on <a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.algorithms.phase_estimation.standard_phase_estimation.html#qdk_chemistry.algorithms.phase_estimation.standard_phase_estimation.StandardPhaseEstimation" title="qdk_chemistry.algorithms.phase_estimation.standard_phase_estimation.StandardPhaseEstimation"><code class="xref py py-class docutils literal notranslate"><span class="pre">StandardPhaseEstimation</span></code></a>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 15.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Setting</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">shots</span></code></p></td>
+<td><p>int</p></td>
+<td><p>Total measurement shots for the full circuit. Default is 3.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Nested algorithm configuration (via <code class="docutils literal notranslate"><span class="pre">qpe_circuit_builder</span></code>):</p>
+<p>See <a class="reference internal" href="qpe_circuit_builder.html"><span class="doc">Phase estimation circuit builder</span></a> for configuring:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">num_bits</span></code> — Number of ancilla qubits (phase register size)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unitary_builder</span></code> → <code class="docutils literal notranslate"><span class="pre">time</span></code> — Time parameter <span class="math notranslate nohighlight">\(t\)</span> in <span class="math notranslate nohighlight">\(U = e^{-iHt}\)</span> (Trotter)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unitary_builder</span></code> → <code class="docutils literal notranslate"><span class="pre">quantum_walk</span></code> — Enable walk operator for qubitization (LCU)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">qft_do_swaps</span></code> — Whether to include swap gates in the inverse QFT (Qiskit only)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">controlled_circuit_mapper</span></code> — Circuit synthesis strategy</p></li>
+</ul>
+</section>
+</section>
+<section id="phase-to-energy-extraction">
+<h2>Phase-to-energy extraction<a class="headerlink" href="#phase-to-energy-extraction" title="Link to this heading">#</a></h2>
+<p>The method for converting a measured phase <span class="math notranslate nohighlight">\(\varphi \in [0, 1)\)</span> to energy depends on the type of unitary used.</p>
+<section id="time-evolution-trotter">
+<h3>Time evolution (Trotter)<a class="headerlink" href="#time-evolution-trotter" title="Link to this heading">#</a></h3>
+<p>When QPE acts on <span class="math notranslate nohighlight">\(U = e^{-iHt}\)</span>, the phase angle <span class="math notranslate nohighlight">\(\theta = 2\pi\varphi\)</span> is mapped to <span class="math notranslate nohighlight">\((-\pi, \pi]\)</span> and energy is:</p>
+<div class="math notranslate nohighlight">
+\[E = \frac{\theta}{t}\]</div>
+<p>Aliasing can be resolved by enumerating candidates <span class="math notranslate nohighlight">\(E_{\mathrm{raw}} + k \cdot 2\pi/t\)</span> and selecting the one closest to a reference energy (e.g., <a class="reference internal" href="../../../glossary.html#term-CASCI"><span class="xref std std-term">CASCI</span></a>).</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--4-input--1" name="tab-set--4" type="radio" /><label class="tab-label" for="tab-set--4-input--1">Python API (Time evolution configuration)</label><div class="tab-content docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure iterative phase estimation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">AlgorithmRef</span>
+
+<span class="c1"># Create iterative qpe circuit builder</span>
+<span class="n">iqpe_circuit_builder</span> <span class="o">=</span> <span class="n">AlgorithmRef</span><span class="p">(</span>
+    <span class="s2">&quot;qpe_circuit_builder&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;qdk_iterative&quot;</span><span class="p">,</span>
+    <span class="n">num_bits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">controlled_circuit_mapper</span><span class="o">=</span><span class="n">AlgorithmRef</span><span class="p">(</span>
+        <span class="s2">&quot;controlled_circuit_mapper&quot;</span><span class="p">,</span> <span class="s2">&quot;pauli_sequence&quot;</span>
+    <span class="p">),</span>
+    <span class="n">unitary_builder</span><span class="o">=</span><span class="n">AlgorithmRef</span><span class="p">(</span><span class="s2">&quot;hamiltonian_unitary_builder&quot;</span><span class="p">,</span> <span class="s2">&quot;trotter&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">iqpe</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span><span class="s2">&quot;phase_estimation&quot;</span><span class="p">,</span> <span class="s2">&quot;qdk_iterative&quot;</span><span class="p">,</span> <span class="n">shots_per_bit</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">iqpe</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;qpe_circuit_builder&quot;</span><span class="p">,</span> <span class="n">iqpe_circuit_builder</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="qubitization-lcu-block-encoding">
+<h3>Qubitization (LCU block encoding)<a class="headerlink" href="#qubitization-lcu-block-encoding" title="Link to this heading">#</a></h3>
+<p>When QPE acts on the qubitization walk operator <span class="math notranslate nohighlight">\(W\)</span>, the eigenvalues are <span class="math notranslate nohighlight">\(e^{\pm i \arccos(E/\lambda)}\)</span> and energy is recovered as:</p>
+<div class="math notranslate nohighlight">
+\[E = \lambda \cos(\theta)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda = \sum_j |\alpha_j|\)</span> is the L1 norm of the Hamiltonian coefficients.</p>
+<p>To use qubitization QPE, the <a class="reference internal" href="hamiltonian_unitary_builder.html#lcu-builder"><span class="std std-ref">LCU builder</span></a> must be configured with <code class="docutils literal notranslate"><span class="pre">quantum_walk=True</span></code>.
+This wraps the raw block encoding in a quantum walk operator <span class="math notranslate nohighlight">\(W = (2|0\rangle\langle 0| - I) \cdot B[H]\)</span>, which is required for the <span class="math notranslate nohighlight">\(\arccos\)</span> eigenvalue-phase relationship.</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--5-input--1" name="tab-set--5" type="radio" /><label class="tab-label" for="tab-set--5-input--1">Python API (Qubitization configuration)</label><div class="tab-content docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure phase estimation with qubitization (LCU block encoding)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.algorithms</span><span class="w"> </span><span class="kn">import</span> <span class="n">create</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">AlgorithmRef</span>
+
+<span class="c1"># Use LCU builder with quantum_walk=True for qubitization</span>
+<span class="n">iqpe_qubitization</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span><span class="s2">&quot;phase_estimation&quot;</span><span class="p">,</span> <span class="s2">&quot;qdk_iterative&quot;</span><span class="p">,</span> <span class="n">shots_per_bit</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">iqpe_circuit_builder</span> <span class="o">=</span> <span class="n">AlgorithmRef</span><span class="p">(</span>
+    <span class="s2">&quot;qpe_circuit_builder&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;qdk_iterative&quot;</span><span class="p">,</span>
+    <span class="n">num_bits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">controlled_circuit_mapper</span><span class="o">=</span><span class="n">AlgorithmRef</span><span class="p">(</span>
+        <span class="s2">&quot;controlled_circuit_mapper&quot;</span><span class="p">,</span> <span class="s2">&quot;prepare_select_prepare&quot;</span>
+    <span class="p">),</span>
+    <span class="n">unitary_builder</span><span class="o">=</span><span class="n">AlgorithmRef</span><span class="p">(</span>
+        <span class="s2">&quot;hamiltonian_unitary_builder&quot;</span><span class="p">,</span> <span class="s2">&quot;lcu&quot;</span><span class="p">,</span> <span class="n">quantum_walk</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+<span class="n">iqpe_qubitization</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;qpe_circuit_builder&quot;</span><span class="p">,</span> <span class="n">iqpe_circuit_builder</span><span class="p">)</span>
+<span class="n">iqpe_qubitization</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="s2">&quot;circuit_executor&quot;</span><span class="p">,</span>
+    <span class="n">AlgorithmRef</span><span class="p">(</span><span class="s2">&quot;circuit_executor&quot;</span><span class="p">,</span> <span class="s2">&quot;qdk_sparse_state_simulator&quot;</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>See <a class="reference internal" href="../data/qpe_result.html"><span class="doc">QpeResult</span></a> for the full data class documentation.</p>
+</section>
+</section>
+<section id="related-classes">
+<h2>Related classes<a class="headerlink" href="#related-classes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.QpeResult" title="qdk_chemistry.data.QpeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">QpeResult</span></code></a>: Output data class containing phase, energy, and alias information</p></li>
+<li><p><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.QubitOperator" title="qdk_chemistry.data.QubitOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">QubitOperator</span></code></a>: Input qubit Hamiltonian</p></li>
+<li><p><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.Circuit" title="qdk_chemistry.data.Circuit"><code class="xref py py-class docutils literal notranslate"><span class="pre">Circuit</span></code></a>: State-preparation circuit from <a class="reference internal" href="state_preparation.html"><span class="doc">StatePreparation</span></a></p></li>
+<li><p><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.UnitaryRepresentation" title="qdk_chemistry.data.UnitaryRepresentation"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnitaryRepresentation</span></code></a>: Output of <a class="reference internal" href="hamiltonian_unitary_builder.html"><span class="doc">HamiltonianUnitaryBuilder</span></a></p></li>
+<li><p><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.CircuitExecutorData" title="qdk_chemistry.data.CircuitExecutorData"><code class="xref py py-class docutils literal notranslate"><span class="pre">CircuitExecutorData</span></code></a>: Measurement results from <a class="reference internal" href="circuit_executor.html"><span class="doc">CircuitExecutor</span></a></p></li>
+<li><p><a class="reference internal" href="../../../api/api_autogen/qdk_chemistry.data.html#qdk_chemistry.data.QuantumErrorProfile" title="qdk_chemistry.data.QuantumErrorProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuantumErrorProfile</span></code></a>: Noise model for noisy simulation</p></li>
+</ul>
+</section>
+<section id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The above examples can be downloaded as a complete <a class="reference external" href="../../../_static/examples/python/phase_estimation.py">Python</a> script.</p></li>
+<li><p><a class="reference internal" href="qpe_circuit_builder.html"><span class="doc">QpeCircuitBuilder</span></a>: Abstract base class for phase estimation circuit builders</p></li>
+<li><p><a class="reference internal" href="hamiltonian_unitary_builder.html"><span class="doc">HamiltonianUnitaryBuilder</span></a>: Hamiltonian simulation via Trotter-Suzuki decomposition or block-encoding methods</p></li>
+<li><p><a class="reference internal" href="circuit_executor.html"><span class="doc">CircuitExecutor</span></a>: Quantum circuit execution backends</p></li>
+<li><p><a class="reference internal" href="state_preparation.html"><span class="doc">StatePreparation</span></a>: Load wavefunctions onto qubits as quantum circuits</p></li>
+<li><p><a class="reference internal" href="qubit_mapper.html"><span class="doc">QubitMapper</span></a>: Map fermionic Hamiltonians to qubit operators</p></li>
+<li><p><a class="reference internal" href="../data/qpe_result.html"><span class="doc">QpeResult</span></a>: Phase estimation result data class</p></li>
+<li><p>See the <code class="docutils literal notranslate"><span class="pre">examples/qpe_stretched_n2.ipynb</span></code> notebook for a complete end-to-end <a class="reference internal" href="../../../glossary.html#term-QPE"><span class="xref std std-term">QPE</span></a> workflow</p></li>
+<li><p><a class="reference internal" href="settings.html"><span class="doc">Settings</span></a>: Configuration settings for algorithms</p></li>
+<li><p><a class="reference internal" href="factory_pattern.html"><span class="doc">Factory Pattern</span></a>: Understanding algorithm creation</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="hadamard_test.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Hadamard test</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="qpe_circuit_builder.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Phase estimation circuit builder</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-workflow">Typical workflow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-phaseestimation">Using the PhaseEstimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-requirements">Input requirements</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#available-implementations">Available implementations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-phase-estimation-iqpe">Iterative phase estimation (IQPE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-qft-based-phase-estimation">Standard QFT-based phase estimation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-to-energy-extraction">Phase-to-energy extraction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-evolution-trotter">Time evolution (Trotter)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qubitization-lcu-block-encoding">Qubitization (LCU block encoding)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-classes">Related classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../../_sources/user/comprehensive/algorithms/phase_estimation.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright Microsoft Corporation. All rights reserved. Licensed under the MIT License.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+qdk\_chemistry.algorithms.time\_evolution package
+=================================================
+
+.. automodule:: qdk_chemistry.algorithms.time_evolution
+   :members:
+   :private-members:
+   :show-inheritance:
+   :undoc-members:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   qdk_chemistry.algorithms.time_evolution.evolution_circuit_builder
+   qdk_chemistry.algorithms.time_evolution.hamiltonian_simulation

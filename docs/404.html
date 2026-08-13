@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Page not found</title>
+    <script>
+      (function () {
+        var basePath = "/qdk-chemistry/";
+        var known = ["2.1.0", "latest", "stable"];
+        var path = window.location.pathname;
+        if (path.indexOf(basePath) !== 0) {
+          return;
+        }
+        var rest = path.slice(basePath.length);
+        var first = rest.split("/")[0];
+        // Anything already inside a version directory is genuinely missing.
+        if (rest === "" || known.indexOf(first) !== -1) {
+          return;
+        }
+        window.location.replace(
+          basePath + "stable" + "/" + rest + window.location.hash
+        );
+      })();
+    </script>
+  </head>
+  <body>
+    <h1>Page not found</h1>
+    <p>Try the <a href="/qdk-chemistry/stable/">stable documentation</a>.</p>
+  </body>
+</html>
