@@ -92,6 +92,13 @@
     width: 100%;
 }
 
+/* The dark code palette italicises keyword tokens such as `import` and `in`.
+   Comments and docstrings stay italic, matching the light palette. */
+html[data-theme="dark"] .highlight .kn,
+html[data-theme="dark"] .highlight .ow {
+    font-style: normal;
+}
+
 /* Italicize the definition term to increase contrast in text formatting */
 dl dt {
     font-weight: normal;
