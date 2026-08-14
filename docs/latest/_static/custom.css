@@ -92,7 +92,21 @@
     width: 100%;
 }
 
-/* The dark code palette italicises keyword tokens such as `import` and `in`.
+/* Code sizing close to the previous theme, which used 12px at a 1.4 line
+   height; the theme's own 14px/1.25 makes code blocks dominate the page. */
+.bd-article-container div.highlight pre,
+.bd-article-container pre,
+.bd-article-container code.literal,
+.bd-article-container code.docutils {
+    font-size: 0.8125rem;
+}
+
+.bd-article-container div.highlight pre,
+.bd-article-container pre {
+    line-height: 1.5;
+}
+
+/* The dark palette italicises keyword tokens such as `import` and `in`.
    Comments and docstrings stay italic, matching the light palette. */
 html[data-theme="dark"] .highlight .kn,
 html[data-theme="dark"] .highlight .ow {
