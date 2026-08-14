@@ -181,6 +181,11 @@ html_theme_options = {
     "show_nav_level": 1,
     "navigation_depth": 3,
     "show_version_warning_banner": True,
+    # The theme defaults to a11y-high-contrast-*, which is louder than the
+    # previous theme. `default` is what it used, token for token; `material` is
+    # a muted dark counterpart without underlined imports or orange strings.
+    "pygments_light_style": "default",
+    "pygments_dark_style": "material",
     # switcher.json only exists on the published site, so it cannot be fetched at build time
     "check_switcher": False,
     "switcher": {

@@ -124,9 +124,17 @@ jobs:
           echo "base_url=https://${OWNER}.github.io/${NAME}/"
         } >> "$GITHUB_OUTPUT"
 
-    - name: Checkout gh-pages branch
+    - name: Check for a gh-pages branch
       id: gh_pages
-      continue-on-error: true
+      run: |
+        if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
+          echo "exists=true" >> "$GITHUB_OUTPUT"
+        else
+          echo "exists=false" >> "$GITHUB_OUTPUT"
+        fi
+
+    - name: Checkout gh-pages branch
+      if: steps.gh_pages.outputs.exists == 'true'
       uses: actions/checkout@v6
       with:
         ref: gh-pages
@@ -137,7 +145,7 @@ jobs:
       id: mode
       env:
         EVENT: ${{ github.event_name }}
-        GH_PAGES: ${{ steps.gh_pages.outcome }}
+        GH_PAGES: ${{ steps.gh_pages.outputs.exists }}
         RUN_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
         RUN_ID: ${{ github.event.workflow_run.id }}
         SHA: ${{ steps.resolve.outputs.sha }}
@@ -161,7 +169,7 @@ jobs:
             fi
             ;;
           release)
-            if [ "$GH_PAGES" = "success" ]; then
+            if [ "$GH_PAGES" = "true" ]; then
               if [ -f "gh-pages/$INFO" ] && [ "$(jq -r .commit "gh-pages/$INFO")" = "$SHA" ]; then
                 MODE=promote
               else
@@ -260,14 +268,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # The site assembly script must come from the current branch, not from the
+    # (possibly much older) revision whose documentation is being published.
     - name: Checkout repository
       uses: actions/checkout@v6
       with:
-        ref: ${{ needs.config.outputs.sha }}
+        ref: ${{ github.event.repository.default_branch }}
+
+    - name: Check for a gh-pages branch
+      id: gh_pages
+      run: |
+        if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
+          echo "exists=true" >> "$GITHUB_OUTPUT"
+        else
+          echo "exists=false" >> "$GITHUB_OUTPUT"
+        fi
 
     - name: Checkout gh-pages branch
-      id: gh_pages
-      continue-on-error: true
+      if: steps.gh_pages.outputs.exists == 'true'
       uses: actions/checkout@v6
       with:
         ref: gh-pages
@@ -277,13 +295,13 @@ jobs:
     # Bootstraps a repository that has no gh-pages branch yet. Uses checkout so
     # that the push credentials are set up the same way as above.
     - name: Checkout for a new gh-pages branch
-      if: steps.gh_pages.outcome != 'success'
+      if: steps.gh_pages.outputs.exists != 'true'
       uses: actions/checkout@v6
       with:
         path: gh-pages
 
     - name: Create gh-pages branch
-      if: steps.gh_pages.outcome != 'success'
+      if: steps.gh_pages.outputs.exists != 'true'
       working-directory: gh-pages
       run: |
         git checkout --orphan gh-pages
