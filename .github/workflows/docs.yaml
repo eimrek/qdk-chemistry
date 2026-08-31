@@ -1,8 +1,7 @@
 name: Docs
 
 on:
-  # `latest` follows main: republished from the documentation that Build and Test
-  # already produces, so no rebuild is needed here.
+  # Build and Test already builds develop from main, so reuse that trusted artifact.
   workflow_run:
     workflows: [Build and Test]
     types: [completed]
@@ -12,266 +11,190 @@ on:
   workflow_dispatch:
     inputs:
       ref:
-        description: Git ref to build the documentation sources from (defaults to the selected branch)
+        description: Git ref containing the documentation sources
         required: false
         type: string
       package_version:
-        description: Released qdk-chemistry version to build against (defaults to the VERSION file)
+        description: Final X.Y.Z qdk-chemistry version to install (defaults to VERSION)
         required: false
         type: string
-      target:
-        description: Site directory to publish into, e.g. latest or 2.1.0
+      stable:
+        description: Update stable if this version is newer
         required: false
-        default: latest
-        type: string
-      alias:
-        description: Additional site directory to copy the build into, e.g. stable
-        required: false
-        default: ''
-        type: string
+        default: false
+        type: boolean
       publish:
         description: Push the result to the gh-pages branch
         required: false
         default: false
         type: boolean
 
-# Serialize publishes; concurrent runs would race on the gh-pages branch.
+# Serialize gh-pages writes without canceling an active publication.
 concurrency:
-  group: ${{ github.workflow }}
+  group: docs-publish
+  cancel-in-progress: false
 
 permissions:
-  contents: write
   actions: read
+  contents: read
 
 jobs:
   config:
     name: Resolve configuration
+    # workflow_run has a write-capable downstream token. Only consume artifacts
+    # produced by a successful push to this repository's default branch.
+    if: >-
+      (github.event_name != 'release' || github.event.release.prerelease == false) &&
+      (github.event_name != 'workflow_run' ||
+       (github.event.workflow_run.event == 'push' &&
+        github.event.workflow_run.conclusion == 'success' &&
+        github.event.workflow_run.head_branch == github.event.repository.default_branch &&
+        github.event.workflow_run.head_repository.full_name == github.repository))
     runs-on: ubuntu-latest
     outputs:
+      base_url: ${{ steps.resolve.outputs.base_url }}
+      package_version: ${{ steps.resolve.outputs.package_version }}
+      publish: ${{ steps.resolve.outputs.publish }}
       ref: ${{ steps.resolve.outputs.ref }}
       sha: ${{ steps.resolve.outputs.sha }}
-      version: ${{ steps.resolve.outputs.version }}
-      target: ${{ steps.resolve.outputs.target }}
-      alias: ${{ steps.resolve.outputs.alias }}
-      publish: ${{ steps.resolve.outputs.publish }}
-      base_url: ${{ steps.resolve.outputs.base_url }}
+      source: ${{ steps.resolve.outputs.source }}
       source_run_id: ${{ steps.resolve.outputs.source_run_id }}
-      history_commit: ${{ steps.mode.outputs.history_commit }}
-      mode: ${{ steps.mode.outputs.mode }}
+      stable: ${{ steps.resolve.outputs.stable }}
+      target: ${{ steps.resolve.outputs.target }}
+      version: ${{ steps.resolve.outputs.version }}
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
-        ref: ${{ inputs.ref }}
+        ref: ${{ inputs.ref || github.event.release.tag_name || github.ref }}
 
     - name: Resolve inputs
       id: resolve
       env:
+        DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         EVENT: ${{ github.event_name }}
-        TAG_NAME: ${{ github.event.release.tag_name }}
-        PRERELEASE: ${{ github.event.release.prerelease }}
+        INPUT_PACKAGE_VERSION: ${{ inputs.package_version }}
+        INPUT_PUBLISH: ${{ inputs.publish }}
+        INPUT_REF: ${{ inputs.ref }}
+        INPUT_STABLE: ${{ inputs.stable }}
+        RELEASE_TAG: ${{ github.event.release.tag_name }}
         RUN_ID: ${{ github.event.workflow_run.id }}
         RUN_SHA: ${{ github.event.workflow_run.head_sha }}
-        INPUT_REF: ${{ inputs.ref }}
-        INPUT_VERSION: ${{ inputs.package_version }}
-        INPUT_TARGET: ${{ inputs.target }}
-        INPUT_ALIAS: ${{ inputs.alias }}
-        INPUT_PUBLISH: ${{ inputs.publish }}
       run: |
-        SOURCE_RUN_ID=""
-        case "$EVENT" in
-          release)
-            VERSION="${TAG_NAME#v}"
-            REF="$TAG_NAME"
-            SHA="$(git rev-parse HEAD)"
-            TARGET="$VERSION"
-            # A prerelease gets its own directory but must not move `stable`.
-            if [ "$PRERELEASE" = "true" ]; then ALIAS=""; else ALIAS="stable"; fi
-            PUBLISH=true
-            ;;
-          workflow_run)
-            VERSION="latest"
-            REF="main"
-            SHA="$RUN_SHA"
-            TARGET="latest"
-            ALIAS=""
-            PUBLISH=true
-            SOURCE_RUN_ID="$RUN_ID"
-            ;;
-          *)
-            VERSION="${INPUT_VERSION:-$(cat VERSION)}"
-            REF="${INPUT_REF:-$GITHUB_REF_NAME}"
-            SHA="$(git rev-parse HEAD)"
-            TARGET="${INPUT_TARGET:-latest}"
-            ALIAS="$INPUT_ALIAS"
-            PUBLISH="${INPUT_PUBLISH:-false}"
-            ;;
-        esac
-
-        # GitHub Pages serves lowercase owner URLs.
-        OWNER=$(echo "${GITHUB_REPOSITORY%%/*}" | tr '[:upper:]' '[:lower:]')
-        NAME="${GITHUB_REPOSITORY#*/}"
-
-        {
-          echo "ref=$REF"
-          echo "sha=$SHA"
-          echo "version=$VERSION"
-          echo "target=$TARGET"
-          echo "alias=$ALIAS"
-          echo "publish=$PUBLISH"
-          echo "source_run_id=$SOURCE_RUN_ID"
-          echo "base_url=https://${OWNER}.github.io/${NAME}/"
-        } >> "$GITHUB_OUTPUT"
-
-    - name: Check for a gh-pages branch
-      id: gh_pages
-      run: |
-        if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
-          echo "exists=true" >> "$GITHUB_OUTPUT"
+        if [[ "$EVENT" == "workflow_run" ]]; then
+          PACKAGE_VERSION=""
+          PUBLISH=true
+          REF="$DEFAULT_BRANCH"
+          SHA="$RUN_SHA"
+          SOURCE=artifact
+          SOURCE_RUN_ID="$RUN_ID"
+          STABLE=false
+          TARGET=develop
+          VERSION=develop
         else
-          echo "exists=false" >> "$GITHUB_OUTPUT"
+          if [[ "$EVENT" == "release" ]]; then
+            PACKAGE_VERSION="${RELEASE_TAG#v}"
+            PUBLISH=true
+            REF="$RELEASE_TAG"
+            STABLE=true
+          else
+            PACKAGE_VERSION="${INPUT_PACKAGE_VERSION:-$(cat VERSION)}"
+            PUBLISH="${INPUT_PUBLISH:-false}"
+            REF="${INPUT_REF:-$GITHUB_REF_NAME}"
+            STABLE="${INPUT_STABLE:-false}"
+          fi
+
+          if [[ ! "$PACKAGE_VERSION" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+            echo "::error::Invalid final release version '$PACKAGE_VERSION'; expected X.Y.Z."
+            exit 1
+          fi
+          TARGET="${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
+          VERSION="$TARGET"
+          SHA="$(git rev-parse HEAD)"
+          SOURCE=build
+          SOURCE_RUN_ID=""
         fi
 
-    - name: Checkout gh-pages branch
-      if: steps.gh_pages.outputs.exists == 'true'
-      uses: actions/checkout@v6
-      with:
-        ref: gh-pages
-        path: gh-pages
-        fetch-depth: 0
-
-    - name: Decide where the documentation comes from
-      id: mode
-      env:
-        EVENT: ${{ github.event_name }}
-        GH_PAGES: ${{ steps.gh_pages.outputs.exists }}
-        RUN_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
-        RUN_ID: ${{ github.event.workflow_run.id }}
-        SHA: ${{ steps.resolve.outputs.sha }}
-        GH_TOKEN: ${{ github.token }}
-      run: |
-        MODE=build
-        HISTORY_COMMIT=""
-        INFO=docs/latest/.build-info.json
-        case "$EVENT" in
-          workflow_run)
-            # Build and Test only uploads the documentation when its whole
-            # Linux job succeeded; without it there is nothing to publish.
-            if [ "$RUN_CONCLUSION" != "success" ]; then
-              MODE=skip
-            elif ! gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${RUN_ID}/artifacts" \
-                   --jq '.artifacts[].name' | grep -qx docs-html; then
-              echo "Run ${RUN_ID} produced no docs-html artifact."
-              MODE=skip
-            else
-              MODE=artifact
-            fi
-            ;;
-          release)
-            if [ "$GH_PAGES" = "true" ]; then
-              if [ -f "gh-pages/$INFO" ] && [ "$(jq -r .commit "gh-pages/$INFO")" = "$SHA" ]; then
-                MODE=promote
-              else
-                # `latest` has moved on, but the documentation built for the
-                # tagged commit is still in the branch history.
-                for commit in $(git -C gh-pages log --format=%H -n 200 -- "$INFO"); do
-                  built=$(git -C gh-pages show "$commit:$INFO" 2>/dev/null | jq -r .commit)
-                  if [ "$built" = "$SHA" ]; then
-                    MODE=history
-                    HISTORY_COMMIT="$commit"
-                    echo "Found documentation for $SHA in gh-pages commit $commit."
-                    break
-                  fi
-                done
-              fi
-            fi
-            ;;
-        esac
+        OWNER="$(echo "${GITHUB_REPOSITORY%%/*}" | tr '[:upper:]' '[:lower:]')"
+        NAME="$(echo "${GITHUB_REPOSITORY#*/}" | tr '[:upper:]' '[:lower:]')"
         {
-          echo "mode=$MODE"
-          echo "history_commit=$HISTORY_COMMIT"
+          echo "base_url=https://${OWNER}.github.io/${NAME}/"
+          echo "package_version=$PACKAGE_VERSION"
+          echo "publish=$PUBLISH"
+          echo "ref=$REF"
+          echo "sha=$SHA"
+          echo "source=$SOURCE"
+          echo "source_run_id=$SOURCE_RUN_ID"
+          echo "stable=$STABLE"
+          echo "target=$TARGET"
+          echo "version=$VERSION"
         } >> "$GITHUB_OUTPUT"
-        echo "Documentation source: $MODE"
 
   build:
-    name: Build documentation
+    name: Build release documentation
     needs: config
-    if: needs.config.outputs.mode == 'build'
+    if: needs.config.outputs.source == 'build'
     runs-on: ubuntu-latest
     timeout-minutes: 60
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v6
+    - name: Checkout documentation sources
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
         ref: ${{ needs.config.outputs.sha }}
 
     - name: Set up Python
-      uses: actions/setup-python@v6
+      uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
       with:
-        python-version: '3.13'
         cache: pip
+        python-version: '3.13'
 
     - name: Install system packages
       run: |
         sudo apt-get update
         sudo apt-get install -y doxygen graphviz
 
-    # Only released versions can be built here, since the compiled package comes
-    # from PyPI. Unreleased `main` is documented from the Build and Test artifact.
-    - name: Install qdk-chemistry
+    - name: Install released qdk-chemistry
       env:
-        VERSION: ${{ needs.config.outputs.version }}
+        PACKAGE_VERSION: ${{ needs.config.outputs.package_version }}
       run: |
         python -m pip install --upgrade pip
-        if ! python -m pip install "qdk-chemistry[all]==${VERSION}"; then
-          echo "::error::Could not install qdk-chemistry ${VERSION} from PyPI. Wheels are published by a separate, manually approved pipeline; re-run this workflow once they are available."
+        if ! python -m pip install "qdk-chemistry[all]==${PACKAGE_VERSION}"; then
+          echo "::error::Could not install qdk-chemistry ${PACKAGE_VERSION} from PyPI. The wheel pipeline is separately approved; rerun Docs after the wheel is published."
           exit 1
         fi
 
     - name: Build documentation
       working-directory: docs
       env:
+        QDK_CHEMISTRY_DOCS_BASE_URL: ${{ needs.config.outputs.base_url }}${{ needs.config.outputs.target }}/
         QDK_CHEMISTRY_DOCS_VERSION: ${{ needs.config.outputs.version }}
-        QDK_CHEMISTRY_DOCS_BASE_URL: ${{ needs.config.outputs.base_url }}${{ needs.config.outputs.alias || needs.config.outputs.target }}/
-      run: |
-        set +e
-        make clean all
-        MAKE_EXIT_CODE=$?
-        set -e
-
-        if [ $MAKE_EXIT_CODE -ne 0 ]; then
-          echo "=== Documentation build failed ==="
-          echo "=== Contents of all .txt output files ==="
-          for txtfile in *-output.txt *-warnings.txt; do
-            if [ -f "$txtfile" ]; then
-              echo ""
-              echo "==== File: $txtfile ===="
-              cat "$txtfile"
-            fi
-          done
-          exit $MAKE_EXIT_CODE
-        fi
+      run: make clean all
 
     - name: Upload documentation artifact
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
       with:
         name: docs-html
         path: docs/build/html
         retention-days: 7
 
   publish:
-    name: Publish to gh-pages
+    name: Publish documentation
     needs: [config, build]
-    if: ${{ !cancelled() && needs.build.result != 'failure' && needs.config.outputs.mode != 'skip' && needs.config.outputs.publish == 'true' }}
+    if: >-
+      !cancelled() &&
+      needs.config.outputs.publish == 'true' &&
+      needs.build.result != 'failure'
+    permissions:
+      actions: read
+      contents: write
     runs-on: ubuntu-latest
 
     steps:
-    # The site assembly script must come from the current branch, not from the
-    # (possibly much older) revision whose documentation is being published.
+    # Always use the current assembler, including when old release sources were built.
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
         ref: ${{ github.event.repository.default_branch }}
 
@@ -286,17 +209,15 @@ jobs:
 
     - name: Checkout gh-pages branch
       if: steps.gh_pages.outputs.exists == 'true'
-      uses: actions/checkout@v6
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
-        ref: gh-pages
-        path: gh-pages
         fetch-depth: 0
+        path: gh-pages
+        ref: gh-pages
 
-    # Bootstraps a repository that has no gh-pages branch yet. Uses checkout so
-    # that the push credentials are set up the same way as above.
     - name: Checkout for a new gh-pages branch
       if: steps.gh_pages.outputs.exists != 'true'
-      uses: actions/checkout@v6
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
         path: gh-pages
 
@@ -307,63 +228,52 @@ jobs:
         git checkout --orphan gh-pages
         git rm -rf --quiet .
 
-    - name: Download documentation from this run
-      if: needs.config.outputs.mode == 'build'
-      uses: actions/download-artifact@v6
+    - name: Download release documentation
+      if: needs.config.outputs.source == 'build'
+      uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
       with:
         name: docs-html
         path: docs-html
 
-    - name: Download documentation from the Build and Test run
-      if: needs.config.outputs.mode == 'artifact'
-      uses: actions/download-artifact@v6
+    - name: Download develop documentation
+      if: needs.config.outputs.source == 'artifact'
+      uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
       with:
+        github-token: ${{ github.token }}
         name: docs-html
         path: docs-html
         run-id: ${{ needs.config.outputs.source_run_id }}
-        github-token: ${{ github.token }}
 
-    - name: Recover documentation from gh-pages history
-      if: needs.config.outputs.mode == 'history'
+    - name: Update site
       env:
-        HISTORY_COMMIT: ${{ needs.config.outputs.history_commit }}
-      run: |
-        mkdir -p docs-html
-        git -C gh-pages archive "$HISTORY_COMMIT" docs/latest \
-          | tar -x -C docs-html --strip-components=2
-
-    - name: Update the site
-      env:
-        SITE: gh-pages/docs
-        MODE: ${{ needs.config.outputs.mode }}
         BASE_URL: ${{ needs.config.outputs.base_url }}
-        TARGET: ${{ needs.config.outputs.target }}
-        ALIAS: ${{ needs.config.outputs.alias }}
-        VERSION: ${{ needs.config.outputs.version }}
+        PACKAGE_VERSION: ${{ needs.config.outputs.package_version }}
         REF: ${{ needs.config.outputs.ref }}
         SHA: ${{ needs.config.outputs.sha }}
+        SITE: gh-pages/docs
+        STABLE: ${{ needs.config.outputs.stable }}
+        TARGET: ${{ needs.config.outputs.target }}
+        VERSION: ${{ needs.config.outputs.version }}
       run: |
         mkdir -p "$SITE"
-        if [ "$MODE" = "promote" ]; then
-          python3 .github/scripts/docs_site.py --site "$SITE" --base-url "$BASE_URL" \
-            promote --source latest --target "$TARGET" --version "$VERSION" \
-            --ref "$REF" --alias "$ALIAS" --expect-commit "$SHA"
-        else
-          python3 .github/scripts/docs_site.py --site "$SITE" --base-url "$BASE_URL" \
-            install --html docs-html --target "$TARGET" --version "$VERSION" \
-            --commit "$SHA" --ref "$REF" --alias "$ALIAS"
+        STABLE_ARG=()
+        if [[ "$STABLE" == "true" ]]; then
+          STABLE_ARG=(--stable)
         fi
+        python3 .github/scripts/docs_site.py --site "$SITE" --base-url "$BASE_URL" \
+          install --html docs-html --target "$TARGET" --version "$VERSION" \
+          --package-version "$PACKAGE_VERSION" --commit "$SHA" --ref "$REF" \
+          "${STABLE_ARG[@]}"
 
     - name: Commit and push
       working-directory: gh-pages
       env:
-        TARGET: ${{ needs.config.outputs.target }}
-        VERSION: ${{ needs.config.outputs.version }}
+        PACKAGE_VERSION: ${{ needs.config.outputs.package_version }}
         SHA: ${{ needs.config.outputs.sha }}
+        TARGET: ${{ needs.config.outputs.target }}
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        # Force-add: the branch inherits the repository .gitignore.
         git add --all --force docs
 
         if git diff --cached --quiet; then
@@ -371,14 +281,6 @@ jobs:
           exit 0
         fi
 
-        git commit -m "Update ${TARGET} docs to ${VERSION} (${SHA:0:8})"
-
-        # Another run may have pushed while this one was building.
-        for attempt in 1 2 3; do
-          if git push origin gh-pages; then
-            exit 0
-          fi
-          echo "Push attempt ${attempt} failed; rebasing onto the remote branch."
-          git pull --rebase origin gh-pages
-        done
-        exit 1
+        LABEL="${PACKAGE_VERSION:-develop}"
+        git commit -m "Update ${TARGET} docs to ${LABEL} (${SHA:0:8})"
+        git push origin gh-pages

@@ -1,25 +1,18 @@
-#!/usr/bin/env python3
 """Assemble the versioned documentation site published on the ``gh-pages`` branch.
 
 The site is a directory holding one subdirectory per documentation version,
-plus the ``latest`` (tip of ``main``) and ``stable`` (newest release) aliases::
+plus ``develop`` (tip of ``main``) and ``stable`` (newest release) aliases::
 
     <site>/
       index.html        redirect to stable/
       404.html          rewrites legacy flat paths into stable/
       switcher.json     version list consumed by the theme version switcher
       .nojekyll
-      latest/  stable/  2.1.0/  2.0.0/  ...
+    develop/  stable/  2.1/  2.0/  ...
 
 GitHub Pages does not follow symlinks, so ``stable`` is a full copy of the
-newest release build rather than a link.
-
-Subcommands:
-    install: place a freshly built HTML tree into the site
-    promote: copy an existing version directory to a new version and alias
-
-Both subcommands regenerate the site-level index, 404 handler and switcher
-manifest afterwards.
+newest release build rather than a link. Patch releases replace their matching
+minor-version directory.
 """
 
 # --------------------------------------------------------------------------------------------
@@ -34,18 +27,23 @@ import shutil
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import NoReturn
 from urllib.parse import urlsplit
 
 BUILD_INFO_NAME = ".build-info.json"
-LATEST_DIR = "latest"
+DEVELOP_DIR = "develop"
 STABLE_DIR = "stable"
+_BUILD_INFO_KEYS = {"version", "package_version", "commit", "ref", "built_at"}
+_LEGACY_BUILD_INFO_KEYS = _BUILD_INFO_KEYS - {"package_version"}
 
-# Directory names that are valid publication targets: a version, or an alias.
-_VERSION_RE = re.compile(r"^\d+\.\d+\.\d+[A-Za-z0-9.]*$")
+# Published release directories use only the major and minor components.
+_VERSION_RE = re.compile(r"^\d+\.\d+$")
+_RELEASE_RE = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")
 _TARGET_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
+_SITE_FILES = {".nojekyll", "index.html", "404.html", "switcher.json"}
 
 
-def _fail(message: str) -> None:
+def _fail(message: str) -> NoReturn:
     """Print an error and exit with a non-zero status.
 
     Args:
@@ -69,22 +67,35 @@ def _check_target_name(name: str) -> str:
     return name
 
 
-def _version_sort_key(version: str) -> tuple[int, int, int, int, str]:
+def _version_sort_key(version: str) -> tuple[int, int]:
     """Build a sort key ordering versions newest-first when reversed.
 
     Args:
-        version: A version string such as ``2.1.0`` or ``2.2.0rc1``.
+        version: A minor version string such as ``2.1``.
 
     Returns:
-        A tuple ordering by numeric components, with final releases ranked
-        above prereleases of the same number.
+        A tuple ordering by numeric components.
     """
-    match = re.match(r"^(\d+)\.(\d+)\.(\d+)(.*)$", version)
+    match = _VERSION_RE.fullmatch(version)
     if match is None:
-        return (0, 0, 0, 0, version)
-    major, minor, patch, suffix = match.groups()
-    # An empty suffix is a final release and sorts after any prerelease.
-    return (int(major), int(minor), int(patch), 0 if suffix else 1, suffix)
+        return (0, 0)
+    major, minor = version.split(".")
+    return (int(major), int(minor))
+
+
+def _release_sort_key(version: str) -> tuple[int, int, int]:
+    """Return the numeric ordering key for a final release version."""
+    match = _RELEASE_RE.fullmatch(version)
+    if match is None:
+        _fail(f"invalid final release version: {version!r}; expected X.Y.Z")
+    major, minor, patch = match.groups()
+    return (int(major), int(minor), int(patch))
+
+
+def _minor_version(version: str) -> str:
+    """Return the major.minor documentation target for a final release."""
+    major, minor, _ = _release_sort_key(version)
+    return f"{major}.{minor}"
 
 
 def _replace_tree(source: Path, destination: Path) -> None:
@@ -100,17 +111,25 @@ def _replace_tree(source: Path, destination: Path) -> None:
     shutil.copytree(source, destination)
 
 
-def _write_build_info(directory: Path, version: str, commit: str, ref: str) -> None:
+def _write_build_info(
+    directory: Path,
+    version: str,
+    package_version: str,
+    commit: str,
+    ref: str,
+) -> None:
     """Record what a published directory was built from.
 
     Args:
         directory: Published version directory.
         version: Version label of the build.
+        package_version: Exact package version used to build release docs.
         commit: Commit SHA the documentation sources came from.
         ref: Git ref the documentation sources came from.
     """
     info = {
         "version": version,
+        "package_version": package_version,
         "commit": commit,
         "ref": ref,
         "built_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -118,8 +137,31 @@ def _write_build_info(directory: Path, version: str, commit: str, ref: str) -> N
     (directory / BUILD_INFO_NAME).write_text(json.dumps(info, indent=2) + "\n")
 
 
+def _load_build_info(directory: Path) -> dict[str, str]:
+    """Load and type-check a published directory's build metadata.
+
+    Args:
+        directory: Published version directory.
+
+    Returns:
+        String-valued metadata, or an empty dict if it is missing.
+    """
+    info_file = directory / BUILD_INFO_NAME
+    if not info_file.exists():
+        return {}
+    try:
+        info = json.loads(info_file.read_text())
+    except json.JSONDecodeError as error:
+        _fail(f"invalid JSON in {info_file}: {error}")
+    if not isinstance(info, dict) or not all(
+        isinstance(key, str) and isinstance(value, str) for key, value in info.items()
+    ):
+        _fail(f"invalid build metadata in {info_file}")
+    return info
+
+
 def _read_build_info(directory: Path) -> dict[str, str]:
-    """Read the build metadata of a published directory.
+    """Read complete build metadata for a published directory.
 
     Args:
         directory: Published version directory.
@@ -127,10 +169,47 @@ def _read_build_info(directory: Path) -> dict[str, str]:
     Returns:
         The recorded metadata, or an empty dict if it is missing.
     """
-    info_file = directory / BUILD_INFO_NAME
-    if not info_file.exists():
+    info = _load_build_info(directory)
+    if not info:
         return {}
-    return json.loads(info_file.read_text())
+    missing_keys = _BUILD_INFO_KEYS - info.keys()
+    if missing_keys:
+        info_file = directory / BUILD_INFO_NAME
+        _fail(
+            f"build metadata in {info_file} is missing: {', '.join(sorted(missing_keys))}"
+        )
+    return info
+
+
+def _upgrade_legacy_build_info(directory: Path) -> dict[str, str]:
+    """Upgrade the previous four-field metadata schema in place.
+
+    Args:
+        directory: Published release directory.
+
+    Returns:
+        Complete metadata using a minor documentation version.
+    """
+    info = _load_build_info(directory)
+    if not info:
+        return {}
+    missing_keys = _BUILD_INFO_KEYS - info.keys()
+    if not missing_keys:
+        return info
+    if (
+        missing_keys != {"package_version"}
+        or not _LEGACY_BUILD_INFO_KEYS <= info.keys()
+    ):
+        info_file = directory / BUILD_INFO_NAME
+        _fail(
+            f"build metadata in {info_file} is missing: {', '.join(sorted(missing_keys))}"
+        )
+
+    package_version = info["version"]
+    info["package_version"] = package_version
+    info["version"] = _minor_version(package_version)
+    (directory / BUILD_INFO_NAME).write_text(json.dumps(info, indent=2) + "\n")
+    return info
 
 
 def _discover_versions(site: Path) -> list[str]:
@@ -145,7 +224,7 @@ def _discover_versions(site: Path) -> list[str]:
     versions = [
         entry.name
         for entry in site.iterdir()
-        if entry.is_dir() and _VERSION_RE.match(entry.name)
+        if entry.is_dir() and _VERSION_RE.fullmatch(entry.name)
     ]
     return sorted(versions, key=_version_sort_key, reverse=True)
 
@@ -154,7 +233,7 @@ def _switcher_entries(site: Path, base_url: str) -> list[dict[str, object]]:
     """Build the version switcher manifest.
 
     The stable release is listed once, pointing at the ``stable`` alias so that
-    the canonical URL is the one users share.
+    the switcher does not duplicate its minor-version entry.
 
     Args:
         site: Site root directory.
@@ -166,12 +245,12 @@ def _switcher_entries(site: Path, base_url: str) -> list[dict[str, object]]:
     entries: list[dict[str, object]] = []
     stable_version = _read_build_info(site / STABLE_DIR).get("version", "")
 
-    if (site / LATEST_DIR).is_dir():
+    if (site / DEVELOP_DIR).is_dir():
         entries.append(
             {
-                "name": "latest (main)",
-                "version": LATEST_DIR,
-                "url": f"{base_url}{LATEST_DIR}/",
+                "name": "develop (main)",
+                "version": DEVELOP_DIR,
+                "url": f"{base_url}{DEVELOP_DIR}/",
             }
         )
     if stable_version:
@@ -190,32 +269,33 @@ def _switcher_entries(site: Path, base_url: str) -> list[dict[str, object]]:
     return entries
 
 
-def _render_index(base_url: str) -> str:
-    """Render the site landing page redirecting to the stable documentation.
+def _render_index(base_url: str, target: str) -> str:
+    """Render the site landing page redirecting to a documentation target.
 
     Args:
         base_url: Absolute URL the site is served from, with a trailing slash.
+        target: Directory to redirect to.
 
     Returns:
         HTML source of the landing page.
     """
-    stable_url = f"{base_url}{STABLE_DIR}/"
+    target_url = f"{base_url}{target}/"
     return f"""<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <title>QDK/Chemistry documentation</title>
-    <meta http-equiv="refresh" content="0; url={STABLE_DIR}/">
-    <link rel="canonical" href="{stable_url}">
+    <meta http-equiv="refresh" content="0; url={target}/">
+    <link rel="canonical" href="{target_url}">
   </head>
   <body>
-    <p>Redirecting to the <a href="{STABLE_DIR}/">stable documentation</a>.</p>
+    <p>Redirecting to the <a href="{target}/">{target} documentation</a>.</p>
   </body>
 </html>
 """
 
 
-def _render_not_found(base_path: str, known: list[str]) -> str:
+def _render_not_found(base_path: str, known: list[str], fallback: str) -> str:
     """Render the 404 handler that rewrites legacy flat paths into ``stable``.
 
     Before the site was versioned, pages were served directly from the site
@@ -224,6 +304,7 @@ def _render_not_found(base_path: str, known: list[str]) -> str:
     Args:
         base_path: Path component the site is served from, e.g. ``/qdk-chemistry/``.
         known: Top-level directory names that must not be rewritten.
+        fallback: Directory that receives legacy flat paths.
 
     Returns:
         HTML source of the 404 page.
@@ -300,7 +381,8 @@ def _render_not_found(base_path: str, known: list[str]) -> str:
           return;
         }}
         window.location.replace(
-          basePath + {json.dumps(STABLE_DIR)} + "/" + rest + window.location.hash
+                    basePath + {json.dumps(fallback)} + "/" + rest +
+                    window.location.search + window.location.hash
         );
       }})();
     </script>
@@ -312,7 +394,7 @@ def _render_not_found(base_path: str, known: list[str]) -> str:
       <p>The documentation is published per version:</p>
       <ul>
         <li><a href="{base_path}{STABLE_DIR}/">{STABLE_DIR}</a> &mdash; the latest release</li>
-        <li><a href="{base_path}{LATEST_DIR}/">{LATEST_DIR}</a> &mdash; the development version</li>
+        <li><a href="{base_path}{DEVELOP_DIR}/">{DEVELOP_DIR}</a> &mdash; the development version</li>
       </ul>
       <p>If you followed a link to an older release, the page may have been
       renamed or removed since. Try searching from
@@ -323,6 +405,28 @@ def _render_not_found(base_path: str, known: list[str]) -> str:
 """
 
 
+def _migrate_legacy_root(site: Path) -> None:
+    """Remove the old flat Sphinx tree once stable documentation exists."""
+    keep = _SITE_FILES | {DEVELOP_DIR, STABLE_DIR} | set(_discover_versions(site))
+    for entry in site.iterdir():
+        if entry.name in keep:
+            continue
+        if entry.is_dir():
+            shutil.rmtree(entry)
+        else:
+            entry.unlink()
+
+
+def _migrate_legacy_metadata(site: Path) -> None:
+    """Upgrade stable metadata written by the previous preview workflow."""
+    if not site.is_dir():
+        return
+
+    stable = site / STABLE_DIR
+    if stable.is_dir():
+        _upgrade_legacy_build_info(stable)
+
+
 def refresh(site: Path, base_url: str) -> None:
     """Regenerate the site-level index, 404 handler and switcher manifest.
 
@@ -331,14 +435,23 @@ def refresh(site: Path, base_url: str) -> None:
         base_url: Absolute URL the site is served from, with a trailing slash.
     """
     base_path = urlsplit(base_url).path or "/"
+    site.mkdir(parents=True, exist_ok=True)
+    _migrate_legacy_metadata(site)
     known = _discover_versions(site)
-    for alias in (LATEST_DIR, STABLE_DIR):
+    for alias in (DEVELOP_DIR, STABLE_DIR):
         if (site / alias).is_dir():
             known.append(alias)
 
     (site / ".nojekyll").touch()
-    (site / "index.html").write_text(_render_index(base_url))
-    (site / "404.html").write_text(_render_not_found(base_path, known))
+    if (site / STABLE_DIR).is_dir():
+        _migrate_legacy_root(site)
+        fallback = STABLE_DIR
+        (site / "index.html").write_text(_render_index(base_url, fallback))
+        (site / "404.html").write_text(_render_not_found(base_path, known, fallback))
+    elif not (site / "index.html").exists() and (site / DEVELOP_DIR).is_dir():
+        fallback = DEVELOP_DIR
+        (site / "index.html").write_text(_render_index(base_url, fallback))
+        (site / "404.html").write_text(_render_not_found(base_path, known, fallback))
     (site / "switcher.json").write_text(
         json.dumps(_switcher_entries(site, base_url), indent=2) + "\n"
     )
@@ -356,51 +469,57 @@ def install(args: argparse.Namespace) -> None:
         _fail(f"{html} does not look like a built documentation tree")
 
     site = Path(args.site)
-    target = site / _check_target_name(args.target)
+    _migrate_legacy_metadata(site)
+    target_name = _check_target_name(args.target)
+    if target_name == DEVELOP_DIR:
+        if args.version != DEVELOP_DIR:
+            _fail("develop documentation must use version 'develop'")
+        if args.package_version:
+            _fail("develop documentation must not specify a package version")
+        if args.stable:
+            _fail("develop documentation cannot update stable")
+    else:
+        expected_target = _minor_version(args.package_version)
+        if target_name != expected_target or args.version != expected_target:
+            _fail(
+                f"release {args.package_version} must publish with version and target "
+                f"{expected_target!r}"
+            )
+        previous_version = _read_build_info(site / target_name).get(
+            "package_version", ""
+        )
+        if previous_version and _release_sort_key(
+            args.package_version
+        ) < _release_sort_key(previous_version):
+            _fail(
+                f"refusing to replace {target_name}/ built from newer release "
+                f"{previous_version} with {args.package_version}"
+            )
+
+    target = site / target_name
     _replace_tree(html, target)
-    _write_build_info(target, args.version, args.commit, args.ref)
+    _write_build_info(
+        target,
+        args.version,
+        args.package_version,
+        args.commit,
+        args.ref,
+    )
     print(f"installed {args.version} ({args.commit[:8]}) into {target.name}/")
 
-    if args.alias:
-        alias = site / _check_target_name(args.alias)
-        _replace_tree(target, alias)
-        print(f"aliased {target.name}/ as {alias.name}/")
-
-    refresh(site, args.base_url)
-
-
-def promote(args: argparse.Namespace) -> None:
-    """Copy an already published directory to a version directory and alias.
-
-    This is the release path: the documentation for the tagged commit has
-    normally already been built and published as ``latest``, so promoting it
-    avoids rebuilding. The recorded commit must match the release, otherwise
-    ``latest`` has drifted ahead of the tag and the caller must rebuild.
-
-    Args:
-        args: Parsed command line arguments.
-    """
-    site = Path(args.site)
-    source = site / _check_target_name(args.source)
-    if not source.is_dir():
-        _fail(f"{source} does not exist; nothing to promote")
-
-    info = _read_build_info(source)
-    if args.expect_commit and info.get("commit") != args.expect_commit:
-        _fail(
-            f"{args.source} was built from {info.get('commit', 'an unknown commit')!r}, "
-            f"expected {args.expect_commit!r}; rebuild instead of promoting"
-        )
-
-    target = site / _check_target_name(args.target)
-    _replace_tree(source, target)
-    _write_build_info(target, args.version, info.get("commit", ""), args.ref)
-    print(f"promoted {source.name}/ to {target.name}/")
-
-    if args.alias:
-        alias = site / _check_target_name(args.alias)
-        _replace_tree(target, alias)
-        print(f"aliased {target.name}/ as {alias.name}/")
+    if args.stable:
+        stable = site / STABLE_DIR
+        stable_package_version = _read_build_info(stable).get("package_version", "")
+        if stable_package_version and _release_sort_key(
+            args.package_version
+        ) < _release_sort_key(stable_package_version):
+            print(
+                f"kept stable/ at newer release {stable_package_version}; "
+                f"published maintenance release {args.package_version} only to {target.name}/"
+            )
+        else:
+            _replace_tree(target, stable)
+            print(f"updated stable/ to {args.package_version}")
 
     refresh(site, args.base_url)
 
@@ -414,9 +533,9 @@ def main() -> None:
         required=True,
         help="absolute URL the site is served from (trailing slash)",
     )
-    subparsers = parser.add_subparsers(required=True)
-
-    install_parser = subparsers.add_parser("install", help="publish a built HTML tree")
+    install_parser = parser.add_subparsers(required=True).add_parser(
+        "install", help="publish a built HTML tree"
+    )
     install_parser.add_argument("--html", required=True, help="built HTML directory")
     install_parser.add_argument(
         "--target", required=True, help="directory to publish into"
@@ -425,36 +544,20 @@ def main() -> None:
         "--version", required=True, help="version label of the build"
     )
     install_parser.add_argument(
+        "--package-version",
+        default="",
+        help="exact X.Y.Z package version used for release documentation",
+    )
+    install_parser.add_argument(
         "--commit", default="", help="commit the sources came from"
     )
     install_parser.add_argument(
         "--ref", default="", help="git ref the sources came from"
     )
     install_parser.add_argument(
-        "--alias", default="", help="additional directory to copy into"
+        "--stable", action="store_true", help="update stable if this is newest"
     )
     install_parser.set_defaults(func=install)
-
-    promote_parser = subparsers.add_parser("promote", help="copy an existing directory")
-    promote_parser.add_argument(
-        "--source", default=LATEST_DIR, help="directory to promote"
-    )
-    promote_parser.add_argument(
-        "--target", required=True, help="directory to publish into"
-    )
-    promote_parser.add_argument(
-        "--version", required=True, help="version label of the release"
-    )
-    promote_parser.add_argument("--ref", default="", help="git ref of the release")
-    promote_parser.add_argument(
-        "--alias", default="", help="additional directory to copy into"
-    )
-    promote_parser.add_argument(
-        "--expect-commit",
-        default="",
-        help="require the source to have been built from this commit",
-    )
-    promote_parser.set_defaults(func=promote)
 
     args = parser.parse_args()
     if not args.base_url.endswith("/"):

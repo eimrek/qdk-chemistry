@@ -15,11 +15,11 @@ QDK/Chemistry bridges classical computational chemistry with quantum computing b
 
 ## Documentation
 
-- **Website**: The full documentation is hosted [online](https://microsoft.github.io/qdk-chemistry/)
-- **Quickstart**: A step-by-step walkthrough from installation to a complete end-to-end example is available in the [Quickstart guide](https://microsoft.github.io/qdk-chemistry/user/quickstart.html)
-- **C++ API**: Headers in `cpp/include/` contain comprehensive Doxygen documentation, also published in the [C++ API reference](https://microsoft.github.io/qdk-chemistry/api/cpp_api.html)
-- **Python API**: All methods include detailed docstrings with Parameters, Returns, Raises, and Examples sections, also published in the [Python API reference](https://microsoft.github.io/qdk-chemistry/api/python_api.html)
-- **Examples**: See the `examples/` directory in this repository, or the [Tutorials](https://microsoft.github.io/qdk-chemistry/tutorials/index.html) for guided, end-to-end usage examples
+- **Website**: The full documentation is hosted [online](https://microsoft.github.io/qdk-chemistry/stable/)
+- **Quickstart**: A step-by-step walkthrough from installation to a complete end-to-end example is available in the [Quickstart guide](https://microsoft.github.io/qdk-chemistry/stable/user/quickstart.html)
+- **C++ API**: Headers in `cpp/include/` contain comprehensive Doxygen documentation, also published in the [C++ API reference](https://microsoft.github.io/qdk-chemistry/stable/api/cpp_api.html)
+- **Python API**: All methods include detailed docstrings with Parameters, Returns, Raises, and Examples sections, also published in the [Python API reference](https://microsoft.github.io/qdk-chemistry/stable/api/python_api.html)
+- **Examples**: See the `examples/` directory in this repository, or the [Tutorials](https://microsoft.github.io/qdk-chemistry/stable/tutorials/index.html) for guided, end-to-end usage examples
 - **Reference data and companion materials**: Curated simulation datasets, molecular benchmarks, and related assets are available at [microsoft/qdk-chemistry-data](https://github.com/microsoft/qdk-chemistry-data)
 
 ## Project Structure
@@ -53,7 +53,7 @@ python3 -m pip install 'qdk-chemistry[all]'
 
 The `[all]` extra pulls in all optional dependencies so that examples and tests work without chasing missing packages. For other installation methods (Dev Container, building from source) and platform-specific notes, see [INSTALL.md](./INSTALL.md).
 
-For a complete, end-to-end walkthrough from installation through a full quantum chemistry pipeline, see the [Quickstart guide](https://microsoft.github.io/qdk-chemistry/user/quickstart.html) and the [examples/](./examples/) directory.
+For a complete, end-to-end walkthrough from installation through a full quantum chemistry pipeline, see the [Quickstart guide](https://microsoft.github.io/qdk-chemistry/stable/user/quickstart.html) and the [examples/](./examples/) directory.
 
 ## Telemetry
 
@@ -69,6 +69,7 @@ Alternatively, telemetry can be disabled within a python script by including the
 
 ```python
 import os
+
 os.environ["QSHARP_PYTHON_TELEMETRY"] = "disabled"
 ```
 
