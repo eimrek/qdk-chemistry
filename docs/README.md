@@ -39,6 +39,12 @@ make clean all
 This will generate the HTML documentation in the `docs/build/html/` directory.
 You can open the [`index.html`](build/html/index.html) file in that directory with your web browser to view the documentation.
 
+## Regenerating tutorial figures
+
+The [ground-state QPE figure maintenance guide](source/_static/diagrams/README.md)
+documents source ownership, regeneration commands, and screenshot-derived asset
+maintenance.
+
 ## Publishing the documentation
 
 The published site is served by GitHub Pages from the `docs/` directory of the `gh-pages` branch, and holds one directory per documentation version:
@@ -69,3 +75,4 @@ Two environment variables let a build target a specific version directory, and a
 
 - `QDK_CHEMISTRY_DOCS_VERSION` overrides the version label taken from the [`VERSION`](../VERSION) file.
 - `QDK_CHEMISTRY_DOCS_BASE_URL` sets the canonical URL of the build.
+You can open the [`index.html`](docs/build/html/index.html) file in that directory with your web browser to view the documentation.
