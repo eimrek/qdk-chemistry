@@ -63,6 +63,13 @@ The [`Docs`](../.github/workflows/docs.yaml) workflow maintains it, and [`.githu
 
 `develop/` is republished automatically after every successful `Build and Test` run on `main`, reusing the documentation that workflow already builds. The artifact is uploaded only for a push to the default branch, and the privileged publishing workflow verifies the originating event and repository before downloading it.
 
+Microsoft's full build jobs use private 1ES runners. On a fork, `Build and Test`
+skips those jobs and uses a GitHub-hosted Ubuntu runner to build the current
+Python package and documentation from source. Build parallelism is limited by
+runner memory capacity with fixed system headroom, and third-party C++
+dependencies are cached. The first build can still take substantially longer
+than later builds.
+
 Final releases are rebuilt from their tag against the exact package version from PyPI. A release such as `2.1.3` replaces `2.1/`; patch-version directories are not retained. The newest version also replaces `stable/`, while an older maintenance release updates only its own minor directory. Prereleases are not published.
 
 Python wheels are published by a separate, approval-gated pipeline. If the exact package version is not on PyPI when the GitHub release is published, the Docs workflow fails with a direct error and should be rerun after the wheel is available.
@@ -88,3 +95,52 @@ Two environment variables let a build target a specific version directory, and a
 - `QDK_CHEMISTRY_DOCS_BASE_URL` sets the canonical URL of the build.
 
 The site assembler records the source ref, commit, documentation version, exact package version, and build time in each published directory's `.build-info.json`.
+
+## Previewing or publishing a versioned site locally
+
+A local documentation build can be installed into a disposable checkout of a
+fork's existing `gh-pages` branch. The assembler updates metadata, redirects,
+and `switcher.json` while preserving all other version directories.
+
+First build `develop` with the fork's canonical URL:
+
+```bash
+QDK_CHEMISTRY_DOCS_VERSION=develop \
+QDK_CHEMISTRY_DOCS_BASE_URL=https://OWNER.github.io/REPOSITORY/develop/ \
+make -C docs clean all
+```
+
+Clone the current Pages branch and install the build into it:
+
+```bash
+SITE_CHECKOUT="$(mktemp -d)"
+git clone --branch gh-pages --single-branch \
+  https://github.com/OWNER/REPOSITORY.git "$SITE_CHECKOUT"
+python3 .github/scripts/docs_site.py \
+  --site "$SITE_CHECKOUT/docs" \
+  --base-url https://OWNER.github.io/REPOSITORY/ \
+  install \
+  --html docs/build/html \
+  --target develop \
+  --version develop \
+  --commit "$(git rev-parse HEAD)" \
+  --ref "$(git branch --show-current)"
+```
+
+Serve the assembled site locally to inspect all versions and the version
+switcher:
+
+```bash
+python3 -m http.server 8766 --directory "$SITE_CHECKOUT/docs"
+```
+
+To publish the inspected tree, stop the server and push the disposable
+checkout. Fetch or clone again first if an automated Docs run published in the
+meantime.
+
+```bash
+git -C "$SITE_CHECKOUT" add --all --force docs
+git -C "$SITE_CHECKOUT" commit -m \
+  "Update develop docs ($(git rev-parse --short HEAD))"
+git -C "$SITE_CHECKOUT" push origin HEAD:gh-pages
+```
