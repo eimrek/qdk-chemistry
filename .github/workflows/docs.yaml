@@ -1,7 +1,7 @@
 name: Docs
 
 on:
-  # Build and Test already builds develop from main, so reuse that trusted artifact.
+  # Build and Test already builds dev from main, so reuse that trusted artifact.
   workflow_run:
     workflows: [Build and Test]
     types: [completed]
@@ -10,19 +10,10 @@ on:
     types: [published]
   workflow_dispatch:
     inputs:
-      ref:
-        description: Git ref containing the documentation sources
-        required: false
+      release_tag:
+        description: Immutable release tag to build (vX.Y.Z)
+        required: true
         type: string
-      package_version:
-        description: Final X.Y.Z qdk-chemistry version to install (defaults to VERSION)
-        required: false
-        type: string
-      stable:
-        description: Update stable if this version is newer
-        required: false
-        default: false
-        type: boolean
       publish:
         description: Push the result to the gh-pages branch
         required: false
@@ -37,11 +28,12 @@ jobs:
   config:
     name: Resolve configuration
     # workflow_run has a write-capable downstream token. Only consume artifacts
-    # produced by a successful push to this repository's default branch.
+    # produced by a successful push or manual run on this repository's default branch.
     if: >-
       (github.event_name != 'release' || github.event.release.prerelease == false) &&
       (github.event_name != 'workflow_run' ||
-       (github.event.workflow_run.event == 'push' &&
+       ((github.event.workflow_run.event == 'push' ||
+         github.event.workflow_run.event == 'workflow_dispatch') &&
         github.event.workflow_run.conclusion == 'success' &&
         github.event.workflow_run.head_branch == github.event.repository.default_branch &&
         github.event.workflow_run.head_repository.full_name == github.repository))
@@ -54,7 +46,6 @@ jobs:
       sha: ${{ steps.resolve.outputs.sha }}
       source: ${{ steps.resolve.outputs.source }}
       source_run_id: ${{ steps.resolve.outputs.source_run_id }}
-      stable: ${{ steps.resolve.outputs.stable }}
       target: ${{ steps.resolve.outputs.target }}
       version: ${{ steps.resolve.outputs.version }}
 
@@ -62,17 +53,15 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
-        ref: ${{ inputs.ref || github.event.release.tag_name || github.ref }}
+        ref: ${{ inputs.release_tag || github.event.release.tag_name || github.ref }}
 
     - name: Resolve inputs
       id: resolve
       env:
         DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         EVENT: ${{ github.event_name }}
-        INPUT_PACKAGE_VERSION: ${{ inputs.package_version }}
         INPUT_PUBLISH: ${{ inputs.publish }}
-        INPUT_REF: ${{ inputs.ref }}
-        INPUT_STABLE: ${{ inputs.stable }}
+        INPUT_RELEASE_TAG: ${{ inputs.release_tag }}
         RELEASE_TAG: ${{ github.event.release.tag_name }}
         RUN_ID: ${{ github.event.workflow_run.id }}
         RUN_SHA: ${{ github.event.workflow_run.head_sha }}
@@ -84,42 +73,39 @@ jobs:
           SHA="$RUN_SHA"
           SOURCE=artifact
           SOURCE_RUN_ID="$RUN_ID"
-          STABLE=false
-          TARGET=develop
-          VERSION=develop
+          TARGET=dev
+          VERSION=dev
         else
           if [[ "$EVENT" == "release" ]]; then
-            PACKAGE_VERSION="${RELEASE_TAG#v}"
             PUBLISH=true
             REF="$RELEASE_TAG"
-            STABLE=true
           else
-            PACKAGE_VERSION="${INPUT_PACKAGE_VERSION:-$(cat VERSION)}"
             PUBLISH="${INPUT_PUBLISH:-false}"
-            REF="${INPUT_REF:-$GITHUB_REF_NAME}"
-            STABLE="${INPUT_STABLE:-false}"
+            REF="$INPUT_RELEASE_TAG"
           fi
 
+          PACKAGE_VERSION="$(cat VERSION)"
           if [[ ! "$PACKAGE_VERSION" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
-            echo "::error::Invalid final release version '$PACKAGE_VERSION'; expected X.Y.Z."
+            echo "::error::Invalid stable release version '$PACKAGE_VERSION'; expected X.Y.Z."
             exit 1
           fi
           TARGET="${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
           VERSION="$TARGET"
           SHA="$(git rev-parse HEAD)"
-          if [[ "$PUBLISH" == "true" ]]; then
-            EXPECTED_REF="v${PACKAGE_VERSION}"
-            if ! git fetch --no-tags origin \
-              "refs/tags/${EXPECTED_REF}:refs/tags/${EXPECTED_REF}"; then
-              echo "::error::Cannot publish ${PACKAGE_VERSION}: tag ${EXPECTED_REF} does not exist."
-              exit 1
-            fi
-            EXPECTED_SHA="$(git rev-parse "${EXPECTED_REF}^{commit}")"
-            if [[ "$SHA" != "$EXPECTED_SHA" ]]; then
-              echo "::error::Publishing ${PACKAGE_VERSION} requires ref ${EXPECTED_REF} (${EXPECTED_SHA}), but the selected ref resolves to ${SHA}."
-              exit 1
-            fi
-            REF="$EXPECTED_REF"
+          EXPECTED_REF="v${PACKAGE_VERSION}"
+          if [[ "$REF" != "$EXPECTED_REF" ]]; then
+            echo "::error::Selected release tag '$REF' does not match VERSION '$PACKAGE_VERSION'; expected ${EXPECTED_REF}."
+            exit 1
+          fi
+          if ! git fetch --no-tags origin \
+            "refs/tags/${EXPECTED_REF}:refs/tags/${EXPECTED_REF}"; then
+            echo "::error::Release tag ${EXPECTED_REF} does not exist."
+            exit 1
+          fi
+          EXPECTED_SHA="$(git rev-parse "${EXPECTED_REF}^{commit}")"
+          if [[ "$SHA" != "$EXPECTED_SHA" ]]; then
+            echo "::error::Selected release tag ${EXPECTED_REF} resolves to ${EXPECTED_SHA}, but the checkout is ${SHA}."
+            exit 1
           fi
           SOURCE=build
           SOURCE_RUN_ID=""
@@ -135,7 +121,6 @@ jobs:
           echo "sha=$SHA"
           echo "source=$SOURCE"
           echo "source_run_id=$SOURCE_RUN_ID"
-          echo "stable=$STABLE"
           echo "target=$TARGET"
           echo "version=$VERSION"
         } >> "$GITHUB_OUTPUT"
@@ -153,15 +138,6 @@ jobs:
       with:
         ref: ${{ needs.config.outputs.sha }}
 
-    # Release tags may predate the current docs toolchain constraints.
-    - name: Checkout documentation build constraints
-      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      with:
-        path: .docs-tooling
-        ref: ${{ github.event.repository.default_branch }}
-        sparse-checkout: .github/docs-constraints.txt
-        sparse-checkout-cone-mode: false
-
     - name: Set up Python
       uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
       with:
@@ -178,9 +154,7 @@ jobs:
         PACKAGE_VERSION: ${{ needs.config.outputs.package_version }}
       run: |
         python -m pip install --upgrade pip
-        if ! python -m pip install \
-          --constraint .docs-tooling/.github/docs-constraints.txt \
-          "qdk-chemistry[all]==${PACKAGE_VERSION}"; then
+        if ! python -m pip install "qdk-chemistry[all]==${PACKAGE_VERSION}"; then
           echo "::error::Could not install qdk-chemistry ${PACKAGE_VERSION} from PyPI. The wheel pipeline is separately approved; rerun Docs after the wheel is published."
           exit 1
         fi
@@ -189,7 +163,7 @@ jobs:
       working-directory: docs
       env:
         QDK_CHEMISTRY_DOCS_BASE_URL: ${{ needs.config.outputs.base_url }}${{ needs.config.outputs.target }}/
-        QDK_CHEMISTRY_DOCS_VERSION: ${{ needs.config.outputs.version }}
+        QDK_CHEMISTRY_DOCS_VERSION: ${{ needs.config.outputs.package_version }}
       run: make clean all
 
     - name: Upload documentation artifact
@@ -206,10 +180,10 @@ jobs:
       !cancelled() &&
       needs.config.outputs.publish == 'true' &&
       (needs.config.outputs.source == 'artifact' || needs.build.result == 'success')
-    # Equivalent runs may coalesce, but develop and distinct releases must not
+    # Equivalent runs may coalesce, but dev and distinct releases must not
     # replace one another while pending. Cross-target push races retry below.
     concurrency:
-      group: docs-publish-${{ needs.config.outputs.source == 'artifact' && 'develop' || needs.config.outputs.package_version }}
+      group: docs-publish-${{ needs.config.outputs.source == 'artifact' && 'dev' || needs.config.outputs.package_version }}
       cancel-in-progress: false
     permissions:
       actions: read
@@ -259,7 +233,7 @@ jobs:
         name: docs-html
         path: docs-html
 
-    - name: Download develop documentation
+    - name: Download dev documentation
       if: needs.config.outputs.source == 'artifact'
       uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
       with:
@@ -275,12 +249,12 @@ jobs:
         REF: ${{ needs.config.outputs.ref }}
         SHA: ${{ needs.config.outputs.sha }}
         SITE: gh-pages/docs
-        STABLE: ${{ needs.config.outputs.stable }}
+        SOURCE: ${{ needs.config.outputs.source }}
         TARGET: ${{ needs.config.outputs.target }}
         VERSION: ${{ needs.config.outputs.version }}
       run: |
         STABLE_ARG=()
-        if [[ "$STABLE" == "true" ]]; then
+        if [[ "$SOURCE" == "build" ]]; then
           STABLE_ARG=(--stable)
         fi
         git -C gh-pages config user.name "github-actions[bot]"
@@ -308,7 +282,7 @@ jobs:
             exit 0
           fi
 
-          LABEL="${PACKAGE_VERSION:-develop}"
+          LABEL="${PACKAGE_VERSION:-dev}"
           git -C gh-pages commit -m "Update ${TARGET} docs to ${LABEL} (${SHA:0:8})"
           if git -C gh-pages push origin HEAD:gh-pages; then
             exit 0

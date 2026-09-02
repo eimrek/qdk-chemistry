@@ -1,14 +1,14 @@
 """Assemble the versioned documentation site published on the ``gh-pages`` branch.
 
 The site is a directory holding one subdirectory per documentation version,
-plus ``develop`` (tip of ``main``) and ``stable`` (newest release) aliases::
+plus ``dev`` (tip of ``main``) and ``stable`` (newest release) aliases::
 
     <site>/
       index.html        redirect to stable/
-      404.html          rewrites legacy flat paths into stable/
+      404.html          rewrites unversioned paths into stable/
       switcher.json     version list consumed by the theme version switcher
       .nojekyll
-    develop/  stable/  2.1/  2.0/  ...
+    dev/  stable/  2.1/  2.0/  ...
 
 GitHub Pages does not follow symlinks, so ``stable`` is a full copy of the
 newest release build rather than a link. Patch releases replace their matching
@@ -31,16 +31,14 @@ from typing import NoReturn
 from urllib.parse import urlsplit
 
 BUILD_INFO_NAME = ".build-info.json"
-DEVELOP_DIR = "develop"
+DEV_DIR = "dev"
 STABLE_DIR = "stable"
 _BUILD_INFO_KEYS = {"version", "package_version", "commit", "ref", "built_at"}
-_LEGACY_BUILD_INFO_KEYS = _BUILD_INFO_KEYS - {"package_version"}
 
 # Published release directories use only the major and minor components.
 _VERSION_RE = re.compile(r"^\d+\.\d+$")
 _RELEASE_RE = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")
 _TARGET_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
-_SITE_FILES = {".nojekyll", "index.html", "404.html", "switcher.json"}
 _SITE_SIZE_WARNING_BYTES = 800 * 1024 * 1024
 _SITE_SIZE_LIMIT_BYTES = 1024 * 1024 * 1024
 
@@ -187,37 +185,6 @@ def _read_build_info(directory: Path) -> dict[str, str]:
     return info
 
 
-def _upgrade_legacy_build_info(directory: Path) -> dict[str, str]:
-    """Upgrade the previous four-field metadata schema in place.
-
-    Args:
-        directory: Published release directory.
-
-    Returns:
-        Complete metadata using a minor documentation version.
-    """
-    info = _load_build_info(directory)
-    if not info:
-        return {}
-    missing_keys = _BUILD_INFO_KEYS - info.keys()
-    if not missing_keys:
-        return info
-    if (
-        missing_keys != {"package_version"}
-        or not _LEGACY_BUILD_INFO_KEYS <= info.keys()
-    ):
-        info_file = directory / BUILD_INFO_NAME
-        _fail(
-            f"build metadata in {info_file} is missing: {', '.join(sorted(missing_keys))}"
-        )
-
-    package_version = info["version"]
-    info["package_version"] = package_version
-    info["version"] = _minor_version(package_version)
-    (directory / BUILD_INFO_NAME).write_text(json.dumps(info, indent=2) + "\n")
-    return info
-
-
 def _discover_versions(site: Path) -> list[str]:
     """List the archived version directories of a site, newest first.
 
@@ -251,12 +218,12 @@ def _switcher_entries(site: Path, base_url: str) -> list[dict[str, object]]:
     entries: list[dict[str, object]] = []
     stable_version = _read_build_info(site / STABLE_DIR).get("version", "")
 
-    if (site / DEVELOP_DIR).is_dir():
+    if (site / DEV_DIR).is_dir():
         entries.append(
             {
-                "name": "develop (main)",
-                "version": DEVELOP_DIR,
-                "url": f"{base_url}{DEVELOP_DIR}/",
+                "name": "dev (main)",
+                "version": DEV_DIR,
+                "url": f"{base_url}{DEV_DIR}/",
             }
         )
     if stable_version:
@@ -271,7 +238,13 @@ def _switcher_entries(site: Path, base_url: str) -> list[dict[str, object]]:
     for version in _discover_versions(site):
         if version == stable_version:
             continue
-        entries.append({"version": version, "url": f"{base_url}{version}/"})
+        entries.append(
+            {
+                "name": version,
+                "version": version,
+                "url": f"{base_url}{version}/",
+            }
+        )
     return entries
 
 
@@ -302,7 +275,7 @@ def _render_index(base_url: str, target: str) -> str:
 
 
 def _render_not_found(base_path: str, known: list[str], fallback: str) -> str:
-    """Render the 404 handler that rewrites legacy flat paths into ``stable``.
+    """Render the 404 handler that rewrites unversioned paths into ``stable``.
 
     Before the site was versioned, pages were served directly from the site
     root. This keeps those links working without publishing a stub per page.
@@ -310,7 +283,7 @@ def _render_not_found(base_path: str, known: list[str], fallback: str) -> str:
     Args:
         base_path: Path component the site is served from, e.g. ``/qdk-chemistry/``.
         known: Top-level directory names that must not be rewritten.
-        fallback: Directory that receives legacy flat paths.
+        fallback: Directory that receives unversioned paths.
 
     Returns:
         HTML source of the 404 page.
@@ -400,7 +373,7 @@ def _render_not_found(base_path: str, known: list[str], fallback: str) -> str:
       <p>The documentation is published per version:</p>
       <ul>
         <li><a href="{base_path}{STABLE_DIR}/">{STABLE_DIR}</a> &mdash; the latest release</li>
-        <li><a href="{base_path}{DEVELOP_DIR}/">{DEVELOP_DIR}</a> &mdash; the development version</li>
+        <li><a href="{base_path}{DEV_DIR}/">{DEV_DIR}</a> &mdash; the development version</li>
       </ul>
       <p>If you followed a link to an older release, the page may have been
       renamed or removed since. Try searching from
@@ -409,28 +382,6 @@ def _render_not_found(base_path: str, known: list[str], fallback: str) -> str:
   </body>
 </html>
 """
-
-
-def _migrate_legacy_root(site: Path) -> None:
-    """Remove the old flat Sphinx tree once stable documentation exists."""
-    keep = _SITE_FILES | {DEVELOP_DIR, STABLE_DIR} | set(_discover_versions(site))
-    for entry in site.iterdir():
-        if entry.name in keep:
-            continue
-        if entry.is_dir():
-            shutil.rmtree(entry)
-        else:
-            entry.unlink()
-
-
-def _migrate_legacy_metadata(site: Path) -> None:
-    """Upgrade stable metadata written by the previous preview workflow."""
-    if not site.is_dir():
-        return
-
-    stable = site / STABLE_DIR
-    if stable.is_dir():
-        _upgrade_legacy_build_info(stable)
 
 
 def _check_site_size(site: Path) -> None:
@@ -460,20 +411,18 @@ def refresh(site: Path, base_url: str) -> None:
     """
     base_path = urlsplit(base_url).path or "/"
     site.mkdir(parents=True, exist_ok=True)
-    _migrate_legacy_metadata(site)
     known = _discover_versions(site)
-    for alias in (DEVELOP_DIR, STABLE_DIR):
+    for alias in (DEV_DIR, STABLE_DIR):
         if (site / alias).is_dir():
             known.append(alias)
 
     (site / ".nojekyll").touch()
     if (site / STABLE_DIR).is_dir():
-        _migrate_legacy_root(site)
         fallback = STABLE_DIR
         (site / "index.html").write_text(_render_index(base_url, fallback))
         (site / "404.html").write_text(_render_not_found(base_path, known, fallback))
-    elif not (site / "index.html").exists() and (site / DEVELOP_DIR).is_dir():
-        fallback = DEVELOP_DIR
+    elif (site / DEV_DIR).is_dir():
+        fallback = DEV_DIR
         (site / "index.html").write_text(_render_index(base_url, fallback))
         (site / "404.html").write_text(_render_not_found(base_path, known, fallback))
     (site / "switcher.json").write_text(
@@ -494,15 +443,14 @@ def install(args: argparse.Namespace) -> None:
         _fail(f"{html} does not look like a built documentation tree")
 
     site = Path(args.site)
-    _migrate_legacy_metadata(site)
     target_name = _check_target_name(args.target)
-    if target_name == DEVELOP_DIR:
-        if args.version != DEVELOP_DIR:
-            _fail("develop documentation must use version 'develop'")
+    if target_name == DEV_DIR:
+        if args.version != DEV_DIR:
+            _fail("dev documentation must use version 'dev'")
         if args.package_version:
-            _fail("develop documentation must not specify a package version")
+            _fail("dev documentation must not specify a package version")
         if args.stable:
-            _fail("develop documentation cannot update stable")
+            _fail("dev documentation cannot update stable")
         source_run_id = args.source_run_id
         previous_run_id = _read_build_info(site / target_name).get("source_run_id", "")
         if (
@@ -511,7 +459,7 @@ def install(args: argparse.Namespace) -> None:
             and int(source_run_id) <= int(previous_run_id)
         ):
             print(
-                f"kept develop/ from workflow run {previous_run_id}; "
+                f"kept dev/ from workflow run {previous_run_id}; "
                 f"ignored older or duplicate run {source_run_id}"
             )
             refresh(site, args.base_url)

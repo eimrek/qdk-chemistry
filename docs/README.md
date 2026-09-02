@@ -52,95 +52,21 @@ The published site is served by GitHub Pages from the `docs/` directory of the `
 ```text
 docs/
   index.html      redirect to stable/
-  404.html        rewrites legacy flat paths into stable/
+  404.html        rewrites unversioned paths into stable/
   switcher.json   version list for the theme version switcher
-  develop/        tip of main
+  dev/            tip of main
   stable/         copy of the newest release
   2.1/  ...       one directory per minor version
 ```
 
 The [`Docs`](../.github/workflows/docs.yaml) workflow maintains it, and [`.github/scripts/docs_site.py`](../.github/scripts/docs_site.py) does the site assembly.
 
-`develop/` is republished automatically after every successful `Build and Test` run on `main`, reusing the documentation that workflow already builds. The artifact is uploaded only for a push to the default branch, and the privileged publishing workflow verifies the originating event and repository before downloading it.
+`dev/` is republished automatically after every successful `Build and Test` run on `main`. If publication fails, rerun the downstream `Docs` workflow while the artifact is available. To rebuild an expired or missing artifact, run `Build and Test` manually on `main`.
 
-Microsoft's full build jobs use private 1ES runners. On a fork, `Build and Test`
-skips those jobs and uses a GitHub-hosted Ubuntu runner to build the current
-Python package and documentation from source. Build parallelism is limited by
-runner memory capacity with fixed system headroom, and third-party C++
-dependencies are cached. The first build can still take substantially longer
-than later builds.
+Stable releases are rebuilt from their tag against the exact package version from PyPI. A release such as `2.1.3` replaces `2.1/`; its sidebar shows `Documentation 2.1.3`, while the version switcher and URL use `2.1`. Patch-version directories are not retained. The newest version also replaces `stable/`, while an older maintenance release updates only its own minor directory. Prereleases are not published.
 
-Final releases are rebuilt from their tag against the exact package version from PyPI. A release such as `2.1.3` replaces `2.1/`; patch-version directories are not retained. The newest version also replaces `stable/`, while an older maintenance release updates only its own minor directory. Prereleases are not published.
+Python wheels are published by a separate, approval-gated pipeline. If the exact package version is not on PyPI when the GitHub release is published, the release-triggered `Docs` workflow fails with a direct error. Rerun that same workflow after the wheel is available; GitHub preserves the original release tag for the rerun.
 
-Python wheels are published by a separate, approval-gated pipeline. If the exact package version is not on PyPI when the GitHub release is published, the Docs workflow fails with a direct error and should be rerun after the wheel is available.
-
-Manual runs (`workflow_dispatch`) choose the source ref and exact package version. They derive the minor-version target automatically and default to a non-publishing build, which is how older final releases can be validated or backfilled.
-Publishing manual runs must use the immutable `vX.Y.Z` tag matching the package version; arbitrary source and package combinations remain available for non-publishing validation only.
-
-On the first release publish, the site assembler removes the previous flat Sphinx tree only after `stable/` exists. This keeps the current site available if `develop/` is published before the first release migration.
-
-For the initial rollout after this workflow reaches the default branch:
-
-1. Let the next successful `Build and Test` run publish `develop/`; the existing flat site remains the root site.
-2. Run `Docs` manually with `ref` set to the latest final tag, its matching `package_version`, and both `stable` and `publish` enabled.
-3. Verify the root redirect, `stable/`, `develop/`, and `switcher.json` before considering the migration complete.
+Manual runs (`workflow_dispatch`) accept one immutable `vX.Y.Z` release tag for validating or backfilling an older stable release. The exact PyPI package version and minor-version target are derived from that tag's root [`VERSION`](../VERSION) file, and the workflow verifies that the checkout resolves to the matching tag.
 
 All minor versions are retained. A build is currently about 50 MB and GitHub Pages limits a published site to 1 GB. The site assembler warns at 800 MB and rejects publication above 1 GB.
-
-Release documentation builds use [`.github/docs-constraints.txt`](../.github/docs-constraints.txt) from the default branch, so rebuilding an older tag does not silently adopt a newer Sphinx toolchain.
-
-Two environment variables let a build target a specific version directory, and are set by the workflow:
-
-- `QDK_CHEMISTRY_DOCS_VERSION` overrides the version label taken from the [`VERSION`](../VERSION) file.
-- `QDK_CHEMISTRY_DOCS_BASE_URL` sets the canonical URL of the build.
-
-The site assembler records the source ref, commit, documentation version, exact package version, and build time in each published directory's `.build-info.json`.
-
-## Previewing or publishing a versioned site locally
-
-A local documentation build can be installed into a disposable checkout of a
-fork's existing `gh-pages` branch. The assembler updates metadata, redirects,
-and `switcher.json` while preserving all other version directories.
-
-First build `develop` with the fork's canonical URL:
-
-```bash
-QDK_CHEMISTRY_DOCS_VERSION=develop \
-QDK_CHEMISTRY_DOCS_BASE_URL=https://OWNER.github.io/REPOSITORY/develop/ \
-make -C docs clean all
-```
-
-Clone the current Pages branch and install the build into it:
-
-```bash
-SITE_CHECKOUT="$(mktemp -d)"
-git clone --branch gh-pages --single-branch \
-  https://github.com/OWNER/REPOSITORY.git "$SITE_CHECKOUT"
-python3 .github/scripts/docs_site.py \
-  --site "$SITE_CHECKOUT/docs" \
-  --base-url https://OWNER.github.io/REPOSITORY/ \
-  install \
-  --html docs/build/html \
-  --target develop \
-  --version develop \
-  --commit "$(git rev-parse HEAD)" \
-  --ref "$(git branch --show-current)"
-```
-
-Serve the assembled site locally to inspect all versions and the version
-switcher:
-
-```bash
-python3 -m http.server 8766 --directory "$SITE_CHECKOUT/docs"
-```
-
-To publish the inspected tree, stop the server and push the disposable
-checkout. Fetch or clone again first if an automated Docs run published in the
-meantime.
-
-```bash
-git -C "$SITE_CHECKOUT" add --all --force docs
-git -C "$SITE_CHECKOUT" commit -m \
-  "Update develop docs ($(git rev-parse --short HEAD))"
-git -C "$SITE_CHECKOUT" push origin HEAD:gh-pages
-```

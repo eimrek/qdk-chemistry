@@ -167,6 +167,12 @@ a.bibtex.internal:hover {
     color: #ffffff;
 }
 
+.admonition.chapter-focus > .admonition-title::after,
+.admonition.lab-notebook-assignment > .admonition-title::after,
+details.admonition.quiz-question > .admonition-title::after {
+    color: inherit;
+}
+
 /* Required cumulative course work. */
 .admonition.lab-notebook-assignment {
     background-color: var(--pst-color-surface);
@@ -188,16 +194,34 @@ details.admonition.quiz-question > .admonition-title {
     background-color: #8c4a00;
     color: #ffffff;
     cursor: pointer;
+    list-style: none;
+    padding-right: 7rem;
 }
 
-details.admonition.quiz-question > .admonition-title::after {
+details.admonition.quiz-question > .admonition-title::-webkit-details-marker {
+    display: none;
+}
+
+details.admonition.quiz-question > .admonition-title::before {
+    color: inherit;
     content: "Show answer";
-    float: right;
+    font: inherit;
     font-size: 0.85em;
     font-weight: normal;
+    height: auto;
+    left: auto;
+    line-height: inherit;
+    margin: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
     white-space: nowrap;
+    width: auto;
+    z-index: auto;
 }
 
-details.admonition.quiz-question[open] > .admonition-title::after {
+details.admonition.quiz-question[open] > .admonition-title::before {
     content: "Hide answer";
 }

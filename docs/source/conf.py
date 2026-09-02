@@ -45,6 +45,13 @@ if not _version_file.exists():
 release = (
     os.environ.get("QDK_CHEMISTRY_DOCS_VERSION") or _version_file.read_text().strip()
 )
+version = release
+_release_match = re.fullmatch(r"(\d+)\.(\d+)\.\d+", release)
+_switcher_version = (
+    f"{_release_match.group(1)}.{_release_match.group(2)}"
+    if _release_match
+    else release
+)
 
 # Canonical URL of this build; overridden per version directory when publishing.
 html_baseurl = os.environ.get(
@@ -190,7 +197,7 @@ html_theme_options = {
     "check_switcher": False,
     "switcher": {
         "json_url": f"{_site_url}switcher.json",
-        "version_match": release,
+        "version_match": _switcher_version,
     },
 }
 # Deliberately not named sidebar-nav-bs: the theme drops that template on pages
