@@ -11,6 +11,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 SCRIPT = Path(__file__).parents[1] / "docs_site.py"
 SPEC = importlib.util.spec_from_file_location("docs_site", SCRIPT)
@@ -48,9 +49,10 @@ class DocsSiteTest(unittest.TestCase):
         package_version: str = "",
         *,
         stable: bool = False,
+        source_run_id: str = "",
     ) -> None:
         """Install a minimal documentation build into the test site."""
-        marker = package_version or version
+        marker = source_run_id or package_version or version
         docs_site.install(
             argparse.Namespace(
                 html=str(self._html(marker)),
@@ -62,6 +64,7 @@ class DocsSiteTest(unittest.TestCase):
                 ref="main" if target == "develop" else f"v{package_version}",
                 stable=stable,
                 base_url="https://example.test/docs/",
+                source_run_id=source_run_id,
             )
         )
 
@@ -161,6 +164,23 @@ class DocsSiteTest(unittest.TestCase):
         """Reject requests to install development docs as stable."""
         with self.assertRaises(SystemExit):
             self._install("develop", "develop", stable=True)
+
+    def test_older_develop_run_cannot_replace_newer_docs(self) -> None:
+        """Ignore delayed workflow runs after newer development docs publish."""
+        self._install("develop", "develop", source_run_id="102")
+        self._install("develop", "develop", source_run_id="101")
+
+        info = docs_site._read_build_info(self.site / "develop")
+        self.assertEqual(info["source_run_id"], "102")
+        self.assertEqual((self.site / "develop" / "index.html").read_text(), "102")
+
+    def test_site_over_pages_limit_is_rejected(self) -> None:
+        """Refuse to publish an assembled tree over the Pages size limit."""
+        with (
+            patch.object(docs_site, "_SITE_SIZE_LIMIT_BYTES", 1),
+            self.assertRaises(SystemExit),
+        ):
+            self._install("develop", "develop")
 
     def test_legacy_preview_is_removed_without_promoting_stale_html(self) -> None:
         """Remove old patch trees while retaining normalized stable docs."""

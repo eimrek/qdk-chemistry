@@ -41,6 +41,8 @@ _VERSION_RE = re.compile(r"^\d+\.\d+$")
 _RELEASE_RE = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")
 _TARGET_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
 _SITE_FILES = {".nojekyll", "index.html", "404.html", "switcher.json"}
+_SITE_SIZE_WARNING_BYTES = 800 * 1024 * 1024
+_SITE_SIZE_LIMIT_BYTES = 1024 * 1024 * 1024
 
 
 def _fail(message: str) -> NoReturn:
@@ -117,6 +119,7 @@ def _write_build_info(
     package_version: str,
     commit: str,
     ref: str,
+    source_run_id: str = "",
 ) -> None:
     """Record what a published directory was built from.
 
@@ -126,6 +129,7 @@ def _write_build_info(
         package_version: Exact package version used to build release docs.
         commit: Commit SHA the documentation sources came from.
         ref: Git ref the documentation sources came from.
+        source_run_id: GitHub Actions run that produced development documentation.
     """
     info = {
         "version": version,
@@ -134,6 +138,8 @@ def _write_build_info(
         "ref": ref,
         "built_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }
+    if source_run_id:
+        info["source_run_id"] = source_run_id
     (directory / BUILD_INFO_NAME).write_text(json.dumps(info, indent=2) + "\n")
 
 
@@ -427,6 +433,24 @@ def _migrate_legacy_metadata(site: Path) -> None:
         _upgrade_legacy_build_info(stable)
 
 
+def _check_site_size(site: Path) -> None:
+    """Report the assembled tree size and enforce the GitHub Pages limit."""
+    size = sum(entry.stat().st_size for entry in site.rglob("*") if entry.is_file())
+    size_mib = size / (1024 * 1024)
+    print(f"assembled site size: {size_mib:.1f} MiB")
+    if size > _SITE_SIZE_LIMIT_BYTES:
+        _fail(
+            f"assembled site is {size_mib:.1f} MiB; GitHub Pages allows at most "
+            f"{_SITE_SIZE_LIMIT_BYTES / (1024 * 1024):.0f} MiB"
+        )
+    if size > _SITE_SIZE_WARNING_BYTES:
+        print(
+            f"warning: assembled site is {size_mib:.1f} MiB and is approaching "
+            "the GitHub Pages limit",
+            file=sys.stderr,
+        )
+
+
 def refresh(site: Path, base_url: str) -> None:
     """Regenerate the site-level index, 404 handler and switcher manifest.
 
@@ -456,6 +480,7 @@ def refresh(site: Path, base_url: str) -> None:
         json.dumps(_switcher_entries(site, base_url), indent=2) + "\n"
     )
     print(f"site now holds: {', '.join(sorted(known)) or '(nothing)'}")
+    _check_site_size(site)
 
 
 def install(args: argparse.Namespace) -> None:
@@ -478,7 +503,21 @@ def install(args: argparse.Namespace) -> None:
             _fail("develop documentation must not specify a package version")
         if args.stable:
             _fail("develop documentation cannot update stable")
+        source_run_id = args.source_run_id
+        previous_run_id = _read_build_info(site / target_name).get("source_run_id", "")
+        if (
+            source_run_id.isdigit()
+            and previous_run_id.isdigit()
+            and int(source_run_id) <= int(previous_run_id)
+        ):
+            print(
+                f"kept develop/ from workflow run {previous_run_id}; "
+                f"ignored older or duplicate run {source_run_id}"
+            )
+            refresh(site, args.base_url)
+            return
     else:
+        source_run_id = ""
         expected_target = _minor_version(args.package_version)
         if target_name != expected_target or args.version != expected_target:
             _fail(
@@ -504,6 +543,7 @@ def install(args: argparse.Namespace) -> None:
         args.package_version,
         args.commit,
         args.ref,
+        source_run_id,
     )
     print(f"installed {args.version} ({args.commit[:8]}) into {target.name}/")
 
@@ -553,6 +593,11 @@ def main() -> None:
     )
     install_parser.add_argument(
         "--ref", default="", help="git ref the sources came from"
+    )
+    install_parser.add_argument(
+        "--source-run-id",
+        default="",
+        help="GitHub Actions run that produced development documentation",
     )
     install_parser.add_argument(
         "--stable", action="store_true", help="update stable if this is newest"

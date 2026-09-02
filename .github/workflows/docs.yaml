@@ -29,11 +29,6 @@ on:
         default: false
         type: boolean
 
-# Serialize gh-pages writes without canceling an active publication.
-concurrency:
-  group: docs-publish
-  cancel-in-progress: false
-
 permissions:
   actions: read
   contents: read
@@ -112,6 +107,20 @@ jobs:
           TARGET="${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
           VERSION="$TARGET"
           SHA="$(git rev-parse HEAD)"
+          if [[ "$PUBLISH" == "true" ]]; then
+            EXPECTED_REF="v${PACKAGE_VERSION}"
+            if ! git fetch --no-tags origin \
+              "refs/tags/${EXPECTED_REF}:refs/tags/${EXPECTED_REF}"; then
+              echo "::error::Cannot publish ${PACKAGE_VERSION}: tag ${EXPECTED_REF} does not exist."
+              exit 1
+            fi
+            EXPECTED_SHA="$(git rev-parse "${EXPECTED_REF}^{commit}")"
+            if [[ "$SHA" != "$EXPECTED_SHA" ]]; then
+              echo "::error::Publishing ${PACKAGE_VERSION} requires ref ${EXPECTED_REF} (${EXPECTED_SHA}), but the selected ref resolves to ${SHA}."
+              exit 1
+            fi
+            REF="$EXPECTED_REF"
+          fi
           SOURCE=build
           SOURCE_RUN_ID=""
         fi
@@ -144,6 +153,15 @@ jobs:
       with:
         ref: ${{ needs.config.outputs.sha }}
 
+    # Release tags may predate the current docs toolchain constraints.
+    - name: Checkout documentation build constraints
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        path: .docs-tooling
+        ref: ${{ github.event.repository.default_branch }}
+        sparse-checkout: .github/docs-constraints.txt
+        sparse-checkout-cone-mode: false
+
     - name: Set up Python
       uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
       with:
@@ -160,7 +178,9 @@ jobs:
         PACKAGE_VERSION: ${{ needs.config.outputs.package_version }}
       run: |
         python -m pip install --upgrade pip
-        if ! python -m pip install "qdk-chemistry[all]==${PACKAGE_VERSION}"; then
+        if ! python -m pip install \
+          --constraint .docs-tooling/.github/docs-constraints.txt \
+          "qdk-chemistry[all]==${PACKAGE_VERSION}"; then
           echo "::error::Could not install qdk-chemistry ${PACKAGE_VERSION} from PyPI. The wheel pipeline is separately approved; rerun Docs after the wheel is published."
           exit 1
         fi
@@ -185,7 +205,12 @@ jobs:
     if: >-
       !cancelled() &&
       needs.config.outputs.publish == 'true' &&
-      needs.build.result != 'failure'
+      (needs.config.outputs.source == 'artifact' || needs.build.result == 'success')
+    # Equivalent runs may coalesce, but develop and distinct releases must not
+    # replace one another while pending. Cross-target push races retry below.
+    concurrency:
+      group: docs-publish-${{ needs.config.outputs.source == 'artifact' && 'develop' || needs.config.outputs.package_version }}
+      cancel-in-progress: false
     permissions:
       actions: read
       contents: write
@@ -211,7 +236,6 @@ jobs:
       if: steps.gh_pages.outputs.exists == 'true'
       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
-        fetch-depth: 0
         path: gh-pages
         ref: gh-pages
 
@@ -244,7 +268,7 @@ jobs:
         path: docs-html
         run-id: ${{ needs.config.outputs.source_run_id }}
 
-    - name: Update site
+    - name: Update, commit, and push
       env:
         BASE_URL: ${{ needs.config.outputs.base_url }}
         PACKAGE_VERSION: ${{ needs.config.outputs.package_version }}
@@ -255,32 +279,42 @@ jobs:
         TARGET: ${{ needs.config.outputs.target }}
         VERSION: ${{ needs.config.outputs.version }}
       run: |
-        mkdir -p "$SITE"
         STABLE_ARG=()
         if [[ "$STABLE" == "true" ]]; then
           STABLE_ARG=(--stable)
         fi
-        python3 .github/scripts/docs_site.py --site "$SITE" --base-url "$BASE_URL" \
-          install --html docs-html --target "$TARGET" --version "$VERSION" \
-          --package-version "$PACKAGE_VERSION" --commit "$SHA" --ref "$REF" \
-          "${STABLE_ARG[@]}"
+        git -C gh-pages config user.name "github-actions[bot]"
+        git -C gh-pages config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-    - name: Commit and push
-      working-directory: gh-pages
-      env:
-        PACKAGE_VERSION: ${{ needs.config.outputs.package_version }}
-        SHA: ${{ needs.config.outputs.sha }}
-        TARGET: ${{ needs.config.outputs.target }}
-      run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git add --all --force docs
+        for ATTEMPT in 1 2 3; do
+          if git -C gh-pages ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
+            git -C gh-pages fetch --depth=1 origin gh-pages
+            # The checkout is disposable; regenerate this publication from the
+            # latest remote tree instead of merging generated HTML.
+            git -C gh-pages reset --hard FETCH_HEAD
+            git -C gh-pages clean -fdx
+          fi
 
-        if git diff --cached --quiet; then
-          echo "Documentation is already up to date."
-          exit 0
-        fi
+          mkdir -p "$SITE"
+          python3 .github/scripts/docs_site.py --site "$SITE" --base-url "$BASE_URL" \
+            install --html docs-html --target "$TARGET" --version "$VERSION" \
+            --package-version "$PACKAGE_VERSION" --commit "$SHA" --ref "$REF" \
+            --source-run-id "${{ needs.config.outputs.source_run_id }}" \
+            "${STABLE_ARG[@]}"
+          git -C gh-pages add --all --force docs
 
-        LABEL="${PACKAGE_VERSION:-develop}"
-        git commit -m "Update ${TARGET} docs to ${LABEL} (${SHA:0:8})"
-        git push origin gh-pages
+          if git -C gh-pages diff --cached --quiet; then
+            echo "Documentation is already up to date."
+            exit 0
+          fi
+
+          LABEL="${PACKAGE_VERSION:-develop}"
+          git -C gh-pages commit -m "Update ${TARGET} docs to ${LABEL} (${SHA:0:8})"
+          if git -C gh-pages push origin HEAD:gh-pages; then
+            exit 0
+          fi
+          echo "::warning::gh-pages changed during publication; retrying from the latest remote tree (${ATTEMPT}/3)."
+        done
+
+        echo "::error::Could not publish documentation after three attempts."
+        exit 1

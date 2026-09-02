@@ -43,7 +43,11 @@ all: check sphinx-docs check-sidebar
 MIN_SIDEBAR_LINKS = 20
 
 check-sidebar: check
-	@links=$$(python3 -c "import re; h=open('$(BUILD_DIR)/html/index.html').read(); \
+	@if [ "$(SPHINX_FORMAT)" != "html" ]; then \
+	    echo "** Skipping HTML sidebar check for $(SPHINX_FORMAT) output."; \
+	    exit 0; \
+	fi; \
+	links=$$(python3 -c "import re; h=open('$(BUILD_DIR)/html/index.html').read(); \
 	    m=re.search(r'bd-docs-nav.*?</nav>', h, re.S); \
 	    print(len(re.findall(r'reference internal', m.group(0))) if m else 0)"); \
 	if [ "$$links" -lt $(MIN_SIDEBAR_LINKS) ]; then \

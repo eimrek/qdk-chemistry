@@ -50,6 +50,14 @@
     }
 }
 
+/* Below this width the brand and version switcher wrap onto two lines. The
+   theme's normal anchor offset only accounts for a single-row sticky header. */
+@media (max-width: 460px) {
+    .bd-article-container section[id] {
+        scroll-margin-top: 1.6rem;
+    }
+}
+
 .bd-header .navbar-header-items__start > .navbar-item {
     display: flex;
     align-items: center;
