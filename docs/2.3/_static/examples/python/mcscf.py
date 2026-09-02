@@ -1,0 +1,99 @@
+"""Multi-configuration SCF usage examples."""
+
+# --------------------------------------------------------------------------------------------
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License. See LICENSE.txt in the project root for license information.
+# --------------------------------------------------------------------------------------------
+
+################################################################################
+# start-cell-create
+from qdk_chemistry.algorithms import create
+from qdk_chemistry.data import AlgorithmRef
+
+# Create the default MultiConfigurationScf instance
+mcscf = create("multi_configuration_scf", "pyscf")
+# end-cell-create
+################################################################################
+
+################################################################################
+# start-cell-configure
+# --- Pattern 1: kwargs at construction ---
+# Keyword arguments are applied as setting overrides on top of the defaults:
+mcscf.settings().set(
+    "multi_configuration_calculator",
+    AlgorithmRef(
+        "multi_configuration_calculator",
+        "macis_cas",
+        ci_residual_tolerance=1e-6,
+        calculate_one_rdm=True,
+        calculate_two_rdm=True,
+    ),
+)
+
+# --- Pattern 2: ref.set() / subscript notation ---
+# Get the existing ref, modify individual settings, and put it back:
+mc_ref = mcscf.settings().get("multi_configuration_calculator")
+mc_ref.set("ci_residual_tolerance", 1e-8)  # ref.set(key, value)
+mc_ref["calculate_one_rdm"] = True  # ref[key] = value
+mcscf.settings().set("multi_configuration_calculator", mc_ref)
+
+# --- Pattern 3: ref.update() for bulk changes ---
+mc_ref = mcscf.settings().get("multi_configuration_calculator")
+mc_ref.update(ci_residual_tolerance=1e-10, calculate_two_rdm=True)
+mcscf.settings().set("multi_configuration_calculator", mc_ref)
+
+# --- Pattern 4: reading back settings ---
+print(mc_ref["ci_residual_tolerance"])  # ref[key]
+print("max_iterations" in mc_ref)  # key in ref
+
+# Configure the MCSCF solver itself
+mcscf.settings().set("max_cycle_macro", 50)
+# end-cell-configure
+################################################################################
+
+################################################################################
+# docs:xyz ../data/n2_stretched.structure.xyz
+# start-cell-run
+from qdk_chemistry.data import Structure
+from qdk_chemistry.utils import compute_valence_space_parameters
+
+# Load nitrogen molecule structure from inline XYZ file
+structure = Structure.from_xyz("""\
+2
+
+N 0 0 0
+N 0 0 2
+""")
+charge = 0
+
+# First, run SCF to get molecular orbitals
+scf_solver = create("scf_solver")
+E_scf, scf_wavefunction = scf_solver.run(
+    structure, charge=charge, spin_multiplicity=1, basis_or_guess="cc-pvdz"
+)
+
+# Select active space based on valence orbitals
+valence_selector = create("active_space_selector", "qdk_valence")
+nele, norb = compute_valence_space_parameters(scf_wavefunction, charge)
+valence_selector.settings().set("num_active_electrons", nele)
+valence_selector.settings().set("num_active_orbitals", norb)
+active_wavefunction = valence_selector.run(scf_wavefunction)
+
+# Run MCSCF calculation
+nalpha, nbeta = active_wavefunction.get_active_num_electrons()
+E_mcscf, mcscf_wfn = mcscf.run(active_wavefunction.get_orbitals(), nalpha, nbeta)
+
+print(f"SCF Energy: {E_scf:.10f} Hartree")
+print(f"MCSCF Energy: {E_mcscf:.10f} Hartree")
+print(f"Correlation energy: {E_mcscf - E_scf:.10f} Hartree")
+# end-cell-run
+################################################################################
+
+################################################################################
+# start-cell-list-implementations
+from qdk_chemistry.algorithms import registry
+
+print(registry.available("multi_configuration_scf"))
+# ['pyscf']
+# end-cell-list-implementations
+################################################################################

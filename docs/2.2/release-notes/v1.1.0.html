@@ -1,0 +1,924 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>What’s New in Version 1.1 &#8212; QDK/Chemistry 2.2</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6c042e97" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../_static/documentation_options.js?v=f35be339"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/tabs.js?v=3ee01567"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'release-notes/v1.1.0';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://eimrek.github.io/qdk-chemistry/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.2';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            true;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="canonical" href="https://eimrek.github.io/qdk-chemistry/2.2/release-notes/v1.1.0.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Changelog" href="../changelog.html" />
+    <link rel="prev" title="What’s New in Version 2.0" href="v2.0.0.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">QDK/Chemistry</p>
+  
+</a></div>
+    
+      <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/microsoft/qdk-chemistry" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/microsoft/qdk-chemistry" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Documentation">
+  <p class="bd-links__title" role="heading" aria-level="1">Documentation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../user/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/features.html">Features, methods and dependencies</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../user/comprehensive/index.html">In-depth user guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user/comprehensive/design/index.html">High-level design</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../user/comprehensive/data/index.html">Data classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/data/serialization.html">Serialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/data/ansatz.html">Ansatz</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/data/basis_set.html">BasisSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/data/hamiltonian.html">Hamiltonian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/data/orbitals.html">Orbitals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/data/lattice_graph.html">LatticeGraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/data/majorana_mapping.html">MajoranaMapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/data/pauli_operator.html">Pauli Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/data/structure.html">Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/data/symmetries.html">Symmetries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/data/wavefunction.html">Wavefunction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/data/qpe_result.html">QpeResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/data/circuit.html">Circuit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../user/comprehensive/algorithms/index.html">Algorithm classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/factory_pattern.html">Factory pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/settings.html">Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/active_space.html">Active space selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/effective_hamiltonian_constructor.html">Effective Hamiltonian construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/expectation_estimator.html">Energy estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/hamiltonian_constructor.html">Hamiltonian construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/localizer.html">Orbital localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/mc_calculator.html">Multi-configuration calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/mcscf.html">Multi-Configuration Self-Consistent Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/pmc.html">Projected Multi-Configuration calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/qubit_mapper.html">Qubit mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/scf_solver.html">Self-consistent field (SCF) solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/stability_checker.html">Stability analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/state_preparation.html">State preparation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/hadamard_test.html">Hadamard test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/phase_estimation.html">Phase estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/qpe_circuit_builder.html">Phase estimation circuit builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/amplitude_amplification.html">Amplitude amplification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/evolution_circuit_builder.html">Evolution circuit builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/hamiltonian_unitary_builder.html">Hamiltonian Unitary Builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/propagator.html">Propagator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/hamiltonian_simulation.html">Hamiltonian simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/circuit_mapper.html">Controlled circuit mapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user/comprehensive/algorithms/circuit_executor.html">Circuit execution</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../user/comprehensive/basis_functionals.html">Available functionals and basis sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user/comprehensive/model_hamiltonians.html">Model Hamiltonians</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user/comprehensive/plugins.html">Plugins</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/migrating-data-files.html">Migrating data files between serialization versions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/ground_state_molecular_energies_with_qpe/index.html">Ground-state molecular energies with quantum phase estimation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/ground_state_molecular_energies_with_qpe/00_before_you_begin.html">Before you begin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/ground_state_molecular_energies_with_qpe/lab_notebook.html">Set up your lab notebook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/ground_state_molecular_energies_with_qpe/01_energy_and_accuracy.html">Energy and accuracy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/ground_state_molecular_energies_with_qpe/02_describing_the_molecule.html">Describing the molecule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/ground_state_molecular_energies_with_qpe/03_choosing_the_active_space.html">Choosing the active space</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/ground_state_molecular_energies_with_qpe/04_putting_the_problem_on_qubits.html">Mapping the problem to qubits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/ground_state_molecular_energies_with_qpe/05_preparing_the_trial_state.html">Preparing the trial state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/ground_state_molecular_energies_with_qpe/06_iterative_phase_estimation.html">Iterative quantum phase estimation</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api/python_api.html">Python API</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.html">qdk_chemistry.data package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.enums.html">qdk_chemistry.data.enums package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.time_dependent_qubit_hamiltonian.html">qdk_chemistry.data.time_dependent_qubit_hamiltonian package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.unitary_representation.html">qdk_chemistry.data.unitary_representation package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data._hashing.html">qdk_chemistry.data._hashing module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data._spin_channels.html">qdk_chemistry.data._spin_channels module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data._type_name.html">qdk_chemistry.data._type_name module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.base.html">qdk_chemistry.data.base module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.circuit.html">qdk_chemistry.data.circuit module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.circuit_executor_data.html">qdk_chemistry.data.circuit_executor_data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.encoding_validation.html">qdk_chemistry.data.encoding_validation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.estimator_data.html">qdk_chemistry.data.estimator_data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.noise_models.html">qdk_chemistry.data.noise_models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.qpe_result.html">qdk_chemistry.data.qpe_result module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.qubit_operator.html">qdk_chemistry.data.qubit_operator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.registry.html">qdk_chemistry.data.registry module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.symmetries.html">qdk_chemistry.data.symmetries module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.symmetry.html">qdk_chemistry.data.symmetry module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.data.term_partition.html">qdk_chemistry.data.term_partition module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.html">qdk_chemistry.algorithms package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.amplitude_amplification.html">qdk_chemistry.algorithms.amplitude_amplification package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.circuit_executor.html">qdk_chemistry.algorithms.circuit_executor package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.circuit_mapper.html">qdk_chemistry.algorithms.circuit_mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.controlled_circuit_mapper.html">qdk_chemistry.algorithms.controlled_circuit_mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.expectation_estimator.html">qdk_chemistry.algorithms.expectation_estimator package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.hadamard_test.html">qdk_chemistry.algorithms.hadamard_test package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.hamiltonian_unitary_builder.html">qdk_chemistry.algorithms.hamiltonian_unitary_builder package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.phase_estimation.html">qdk_chemistry.algorithms.phase_estimation package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.propagator.html">qdk_chemistry.algorithms.propagator package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.qubit_mapper.html">qdk_chemistry.algorithms.qubit_mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.state_preparation.html">qdk_chemistry.algorithms.state_preparation package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.term_grouper.html">qdk_chemistry.algorithms.term_grouper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.time_evolution.html">qdk_chemistry.algorithms.time_evolution package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.active_space_selector.html">qdk_chemistry.algorithms.active_space_selector module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.base.html">qdk_chemistry.algorithms.base module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.dynamical_correlation_calculator.html">qdk_chemistry.algorithms.dynamical_correlation_calculator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.effective_hamiltonian_constructor.html">qdk_chemistry.algorithms.effective_hamiltonian_constructor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.geometry_optimization.html">qdk_chemistry.algorithms.geometry_optimization module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.hamiltonian_constructor.html">qdk_chemistry.algorithms.hamiltonian_constructor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.hashing.html">qdk_chemistry.algorithms.hashing module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.multi_configuration_calculator.html">qdk_chemistry.algorithms.multi_configuration_calculator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.multi_configuration_scf.html">qdk_chemistry.algorithms.multi_configuration_scf module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.nuclear_derivative.html">qdk_chemistry.algorithms.nuclear_derivative module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.orbital_localizer.html">qdk_chemistry.algorithms.orbital_localizer module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.population_analysis.html">qdk_chemistry.algorithms.population_analysis module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.projected_multi_configuration_calculator.html">qdk_chemistry.algorithms.projected_multi_configuration_calculator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.qubit_hamiltonian_solver.html">qdk_chemistry.algorithms.qubit_hamiltonian_solver module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.registry.html">qdk_chemistry.algorithms.registry module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.scf_solver.html">qdk_chemistry.algorithms.scf_solver module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.algorithms.stability_checker.html">qdk_chemistry.algorithms.stability_checker module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.plugins.html">qdk_chemistry.plugins package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.plugins.discovery.html">qdk_chemistry.plugins.discovery package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.plugins.geometric.html">qdk_chemistry.plugins.geometric package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.plugins.networkx.html">qdk_chemistry.plugins.networkx package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.plugins.openfermion.html">qdk_chemistry.plugins.openfermion package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.plugins.pyscf.html">qdk_chemistry.plugins.pyscf package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.plugins.qiskit.html">qdk_chemistry.plugins.qiskit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.plugins.base.html">qdk_chemistry.plugins.base module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.html">qdk_chemistry.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.qsharp.html">qdk_chemistry.utils.qsharp package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.cubegen.html">qdk_chemistry.utils.cubegen module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.enum.html">qdk_chemistry.utils.enum module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.model_hamiltonians.html">qdk_chemistry.utils.model_hamiltonians module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.pauli_commutation.html">qdk_chemistry.utils.pauli_commutation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.pauli_matrix.html">qdk_chemistry.utils.pauli_matrix module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.telemetry.html">qdk_chemistry.utils.telemetry module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.telemetry_events.html">qdk_chemistry.utils.telemetry_events module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.wavefunction.html">qdk_chemistry.utils.wavefunction module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.utils.zassenhaus_generation.html">qdk_chemistry.utils.zassenhaus_generation module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/api_autogen/qdk_chemistry.constants.html">qdk_chemistry.constants module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api/cpp_api.html">C++ API</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1data.html">Namespace qdk::chemistry::data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1algorithms.html">Namespace qdk::chemistry::algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1utils.html">Namespace qdk::chemistry::utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1constants.html">Namespace qdk::chemistry::constants</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Supporting Information</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Release Notes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="v2.1.0.html">What’s New in Version 2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v2.0.0.html">What’s New in Version 2.0</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">What’s New in Version 1.1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Acronym definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Release Notes</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">What’s New in Version 1.1</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="what-s-new-in-version-1-1">
+<span id="release-v1-1-0"></span><h1>What’s New in Version 1.1<a class="headerlink" href="#what-s-new-in-version-1-1" title="Link to this heading">#</a></h1>
+<p>Version 1.1 introduces Q#-native circuits, model Hamiltonians, higher-order Trotter-Suzuki formulas,
+native <a class="reference internal" href="../glossary.html#term-ROHF"><span class="xref std std-term">ROHF</span></a>, Cholesky-based integral transformations, and an OpenFermion plugin.</p>
+<section id="highlights">
+<h2>Highlights<a class="headerlink" href="#highlights" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Q#-native circuit architecture</strong> — circuits are now built and composed as native Q# operations, eliminating intermediate format conversions for faster circuit construction and lower memory overhead, and enabling a streamlined end-to-end <a class="reference internal" href="../glossary.html#term-QPE"><span class="xref std std-term">QPE</span></a> code path with lazy <a class="reference internal" href="../glossary.html#term-QIR"><span class="xref std std-term">QIR</span></a> compilation.</p></li>
+<li><p><strong>Model Hamiltonians</strong> — native construction of fermionic and spin lattice Hamiltonians (Hückel, Fermi-Hubbard, <a class="reference internal" href="../glossary.html#term-PPP"><span class="xref std std-term">PPP</span></a>, Ising, Heisenberg) on arbitrary lattice geometries.</p></li>
+<li><p><strong>Arbitrary-order Trotter-Suzuki</strong> — product formulas of any even order with accuracy-aware step sizing and commutator-based error bounds.</p></li>
+<li><p><strong>Native ROHF</strong> — <a class="reference internal" href="../glossary.html#term-DIIS"><span class="xref std std-term">DIIS</span></a>-accelerated restricted open-shell Hartree-Fock in the <a class="reference internal" href="../glossary.html#term-QDK"><span class="xref std std-term">QDK</span></a> <a class="reference internal" href="../glossary.html#term-SCF"><span class="xref std std-term">SCF</span></a> solver.</p></li>
+<li><p><strong>Cholesky AO→MO transformation</strong> — pivoted Cholesky decomposition for two-electron integrals, reducing memory from <span class="math notranslate nohighlight">\(O(N^4)\)</span> to <span class="math notranslate nohighlight">\(O(N^2 N_\text{chol})\)</span> and enabling treatment of larger molecular systems with significant speedup over full four-center <a class="reference internal" href="../glossary.html#term-ERI"><span class="xref std std-term">ERI</span></a> evaluation.</p></li>
+<li><p><strong>OpenFermion plugin</strong> — Jordan-Wigner, Bravyi-Kitaev, and symmetry-conserving Bravyi-Kitaev mappings via OpenFermion.</p></li>
+</ul>
+</section>
+<section id="model-hamiltonians">
+<h2>Model Hamiltonians<a class="headerlink" href="#model-hamiltonians" title="Link to this heading">#</a></h2>
+<p>Running quantum phase estimation on a full <em>ab initio</em> molecular Hamiltonian is general and accurate, but the number of qubits and gates grows with the orbital basis set, making even modest molecules expensive to simulate.
+An alternative is to <strong>map the essential physics onto a simpler model Hamiltonian</strong> that captures the key interactions with far fewer degrees of freedom.
+New model-Hamiltonian constructors make it possible to build these Hamiltonians directly, without quantum-chemistry input files or external electronic-structure codes.</p>
+<p><strong>Fermionic models</strong> — Hückel, Hubbard, and Pariser-Parr-Pople (<a class="reference internal" href="../glossary.html#term-PPP"><span class="xref std std-term">PPP</span></a>) — return a second-quantized <code class="docutils literal notranslate"><span class="pre">Hamiltonian</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">LatticeGraph</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.utils.model_hamiltonians</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">create_hubbard_hamiltonian</span><span class="p">,</span>
+    <span class="n">create_huckel_hamiltonian</span><span class="p">,</span>
+    <span class="n">create_ppp_hamiltonian</span><span class="p">,</span>
+    <span class="n">ohno_potential</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># 8-site open chain with tight-binding (Hückel) hopping</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">LatticeGraph</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">create_huckel_hamiltonian</span><span class="p">(</span><span class="n">chain</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="c1"># Add on-site Coulomb repulsion (Hubbard)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">create_hubbard_hamiltonian</span><span class="p">(</span><span class="n">chain</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">U</span><span class="o">=</span><span class="mf">4.0</span><span class="p">)</span>
+
+<span class="c1"># 4-site periodic ring with intersite Coulomb via Ohno potential (PPP)</span>
+<span class="n">ring</span> <span class="o">=</span> <span class="n">LatticeGraph</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">periodic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">V</span> <span class="o">=</span> <span class="n">ohno_potential</span><span class="p">(</span><span class="n">ring</span><span class="p">,</span> <span class="n">U</span><span class="o">=</span><span class="mf">11.26</span><span class="p">,</span> <span class="n">R</span><span class="o">=</span><span class="mf">1.4</span><span class="p">,</span> <span class="n">nearest_neighbor_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">create_ppp_hamiltonian</span><span class="p">(</span><span class="n">ring</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mf">2.4</span><span class="p">,</span> <span class="n">U</span><span class="o">=</span><span class="mf">11.26</span><span class="p">,</span> <span class="n">V</span><span class="o">=</span><span class="n">V</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>All parameters (<code class="docutils literal notranslate"><span class="pre">epsilon</span></code>, <code class="docutils literal notranslate"><span class="pre">t</span></code>, <code class="docutils literal notranslate"><span class="pre">U</span></code>, <code class="docutils literal notranslate"><span class="pre">V</span></code>, <code class="docutils literal notranslate"><span class="pre">z</span></code>) accept either a scalar or per-site/per-bond arrays for inhomogeneous lattices.</p>
+<p><strong>Spin models</strong> — Ising and Heisenberg — return a <code class="docutils literal notranslate"><span class="pre">QubitHamiltonian</span></code> directly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.utils.model_hamiltonians</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">create_heisenberg_hamiltonian</span><span class="p">,</span>
+    <span class="n">create_ising_hamiltonian</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Transverse-field Ising model (ZZ coupling + transverse X field)</span>
+<span class="n">ising</span> <span class="o">=</span> <span class="n">create_ising_hamiltonian</span><span class="p">(</span><span class="n">chain</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># Isotropic Heisenberg (XXX) model</span>
+<span class="n">heisenberg</span> <span class="o">=</span> <span class="n">create_heisenberg_hamiltonian</span><span class="p">(</span><span class="n">chain</span><span class="p">,</span> <span class="n">jx</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">jy</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">jz</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Lattice geometries.</strong> All constructors take a <code class="docutils literal notranslate"><span class="pre">LatticeGraph</span></code> that defines the site connectivity. Common topologies are built in:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">LatticeGraph</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">periodic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># ring</span>
+<span class="n">LatticeGraph</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>  <span class="c1"># 2D grid</span>
+<span class="n">LatticeGraph</span><span class="o">.</span><span class="n">triangular</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">LatticeGraph</span><span class="o">.</span><span class="n">honeycomb</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">LatticeGraph</span><span class="o">.</span><span class="n">kagome</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Or from an adjacency matrix / edge dict</span>
+<span class="n">LatticeGraph</span><span class="p">({(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="mf">1.0</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="mf">0.5</span><span class="p">},</span> <span class="n">num_sites</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://github.com/microsoft/qdk-chemistry/blob/v1.1.0/examples/extended_hubbard.ipynb">examples/extended_hubbard.ipynb</a> for a complete walkthrough that models cyclobutadiene with the extended Hubbard (<a class="reference internal" href="../glossary.html#term-PPP"><span class="xref std std-term">PPP</span></a>) model and runs <a class="reference internal" href="../glossary.html#term-QPE"><span class="xref std std-term">QPE</span></a> on it.
+The interoperability examples under <code class="docutils literal notranslate"><span class="pre">examples/interoperability/</span></code> also demonstrate constructing model Hamiltonians directly without relying on the built-in infrastructure.</p>
+</section>
+<section id="q-native-circuit-architecture">
+<h2>Q#-Native Circuit Architecture<a class="headerlink" href="#q-native-circuit-architecture" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Circuit</span></code> class now composes quantum operations as native Q# callables (exposed in <cite>qdk&gt;=1.27.0</cite>). By removing intermediate format conversions (e.g., QASM-to-QIR round-trips), circuit construction is faster and uses less memory, especially for large active spaces. This enables:</p>
+<ul class="simple">
+<li><p>End-to-end <a class="reference internal" href="../glossary.html#term-QPE"><span class="xref std std-term">QPE</span></a> without intermediate format conversions — faster pipeline execution</p></li>
+<li><p>Lazy compilation to <a class="reference internal" href="../glossary.html#term-QIR"><span class="xref std std-term">QIR</span></a> only at execution time — construction cost is deferred until the circuit is actually run</p></li>
+<li><p>Direct access to Q#’s resource estimator on any <code class="docutils literal notranslate"><span class="pre">Circuit</span></code></p></li>
+<li><p>A leaner default install with framework-specific dependencies as optional extras</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">Circuit</span></code> can hold any combination of:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">qsharp_op</span></code> — a callable Q# operation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">qsharp_factory</span></code> — a lazy <code class="docutils literal notranslate"><span class="pre">QsharpFactoryData(program,</span> <span class="pre">parameter)</span></code> that compiles on demand</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">qasm</span></code> / <code class="docutils literal notranslate"><span class="pre">qir</span></code> — for interoperability with external tools</p></li>
+</ul>
+<p>The <a class="reference internal" href="../glossary.html#term-QPE"><span class="xref std std-term">QPE</span></a> pipeline composes Q# callables end-to-end — state preparation, controlled time evolution, and phase estimation are all native Q# operations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.algorithms</span><span class="w"> </span><span class="kn">import</span> <span class="n">create</span>
+
+<span class="n">state_prep</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span><span class="s2">&quot;state_prep&quot;</span><span class="p">,</span> <span class="s2">&quot;sparse_isometry_gf2x&quot;</span><span class="p">)</span>
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">state_prep</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">wavefunction</span><span class="p">)</span>
+
+<span class="c1"># Inspect the Q# circuit</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">get_qsharp_circuit</span><span class="p">(</span><span class="n">prune_classical_qubits</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Compile to QIR for external use</span>
+<span class="n">qir</span> <span class="o">=</span> <span class="n">circuit</span><span class="o">.</span><span class="n">get_qir</span><span class="p">()</span>
+
+<span class="c1"># Use Q#&#39;s resource estimator directly</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">qsharp</span>
+<span class="n">qsharp</span><span class="o">.</span><span class="n">estimate</span><span class="p">(</span>
+    <span class="n">circuit</span><span class="o">.</span><span class="n">_qsharp_factory</span><span class="o">.</span><span class="n">program</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">*</span><span class="n">circuit</span><span class="o">.</span><span class="n">_qsharp_factory</span><span class="o">.</span><span class="n">parameter</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Lightweight core dependencies.</strong> Framework-specific dependencies are now isolated as optional extras, keeping the core install lean:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>qdk-chemistry<span class="w">                        </span><span class="c1"># core (Q#-native)</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="s1">&#39;qdk-chemistry[qiskit-extras]&#39;</span><span class="w">       </span><span class="c1"># + Qiskit interop</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="s1">&#39;qdk-chemistry[openfermion-extras]&#39;</span><span class="w">   </span><span class="c1"># + OpenFermion interop</span>
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://github.com/microsoft/qdk-chemistry/blob/v1.1.0/examples/qpe_stretched_n2.ipynb">examples/qpe_stretched_n2.ipynb</a> and <a class="reference external" href="https://github.com/microsoft/qdk-chemistry/blob/v1.1.0/examples/state_prep_energy.ipynb">examples/state_prep_energy.ipynb</a> for worked end-to-end <a class="reference internal" href="../glossary.html#term-QPE"><span class="xref std std-term">QPE</span></a> notebooks.</p>
+</section>
+<section id="arbitrary-order-trotter-suzuki">
+<h2>Arbitrary-Order Trotter-Suzuki<a class="headerlink" href="#arbitrary-order-trotter-suzuki" title="Link to this heading">#</a></h2>
+<p>Time-evolution builders now support product formulas of any even order via recursive Suzuki composition <span class="bibtex-citation" id="id1">[<a class="reference internal" href="../references.html#id64" title="Masuo Suzuki. General theory of higher-order decomposition of exponential operators and symplectic integrators. Physics Letters A, 165(5–6):387–395, 1992. doi:10.1016/0375-9601(92)90335-J.">Suz92</a>]</span>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.algorithms.time_evolution.builder.trotter</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Trotter</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">builder</span> <span class="o">=</span> <span class="n">Trotter</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">target_accuracy</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">error_bound</span><span class="o">=</span><span class="s2">&quot;commutator&quot;</span><span class="p">)</span>
+<span class="n">unitary</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qubit_hamiltonian</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When both <code class="docutils literal notranslate"><span class="pre">num_divisions</span></code> and <code class="docutils literal notranslate"><span class="pre">target_accuracy</span></code> are specified, the builder uses whichever requires more Trotter steps. The <code class="docutils literal notranslate"><span class="pre">error_bound</span></code> parameter selects between two bounds:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;naive&quot;</span></code> — triangle-inequality bound: <span class="math notranslate nohighlight">\(N = \lceil (\sum_j |\alpha_j|)^2 t^2 / \epsilon \rceil\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;commutator&quot;</span></code> — tighter commutator-scaling bound from <span class="bibtex-citation" id="id2">[<a class="reference internal" href="../references.html#id63" title="Andrew M. Childs, Yuan Su, Minh C. Tran, Nathan Wiebe, and Shuchen Zhu. Theory of Trotter error with commutator scaling. Physical Review X, 11(1):011020, 2021. URL: https://arxiv.org/abs/1912.08854, doi:10.1103/PhysRevX.11.011020.">CST+21</a>]</span>: <span class="math notranslate nohighlight">\(N = \lceil \frac{t^2}{2\epsilon} \sum_{j&lt;k} \lVert [\alpha_j P_j, \alpha_k P_k] \rVert \rceil\)</span></p></li>
+</ul>
+<p><strong>Error-bound utilities</strong> are available for manual step-count analysis:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.algorithms.time_evolution.builder.trotter_error</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">trotter_steps_commutator</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">n_steps</span> <span class="o">=</span> <span class="n">trotter_steps_commutator</span><span class="p">(</span>
+    <span class="n">qubit_hamiltonian</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">target_accuracy</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="native-rohf-in-qdk-scf">
+<h2>Native ROHF in QDK SCF<a class="headerlink" href="#native-rohf-in-qdk-scf" title="Link to this heading">#</a></h2>
+<p>The <a class="reference internal" href="../glossary.html#term-QDK"><span class="xref std std-term">QDK</span></a> <a class="reference internal" href="../glossary.html#term-SCF"><span class="xref std std-term">SCF</span></a> solver now supports restricted open-shell Hartree-Fock (<a class="reference internal" href="../glossary.html#term-ROHF"><span class="xref std std-term">ROHF</span></a>) with <a class="reference internal" href="../glossary.html#term-DIIS"><span class="xref std std-term">DIIS</span></a> acceleration for systems with unpaired electrons. Previously, open-shell calculations required an unrestricted formulation through the <a class="reference internal" href="../glossary.html#term-QDK"><span class="xref std std-term">QDK</span></a> <a class="reference internal" href="../glossary.html#term-SCF"><span class="xref std std-term">SCF</span></a> code path.</p>
+<p><a class="reference internal" href="../glossary.html#term-ROHF"><span class="xref std std-term">ROHF</span></a> is automatically selected when specifying <code class="docutils literal notranslate"><span class="pre">scf_type=&quot;restricted&quot;</span></code> on a system with multiplicity &gt; 1. The <a class="reference internal" href="../glossary.html#term-DIIS"><span class="xref std std-term">DIIS</span></a> extrapolation works with the <a class="reference internal" href="../glossary.html#term-ROHF"><span class="xref std std-term">ROHF</span></a>-effective Fock matrix and total density matrix.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scf_solver</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span><span class="s2">&quot;scf_solver&quot;</span><span class="p">)</span>
+<span class="n">scf_solver</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;method&quot;</span><span class="p">,</span> <span class="s2">&quot;hf&quot;</span><span class="p">)</span>
+<span class="n">scf_solver</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;scf_type&quot;</span><span class="p">,</span> <span class="s2">&quot;restricted&quot;</span><span class="p">)</span>
+<span class="n">scf_solver</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;enable_gdm&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">energy</span><span class="p">,</span> <span class="n">wavefunction</span> <span class="o">=</span> <span class="n">scf_solver</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">structure</span><span class="p">,</span> <span class="n">charge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">spin_multiplicity</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">basis_or_guess</span><span class="o">=</span><span class="s2">&quot;sto-3g&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="cholesky-based-ao-to-mo-transformation">
+<h2>Cholesky-Based AO-to-MO Transformation<a class="headerlink" href="#cholesky-based-ao-to-mo-transformation" title="Link to this heading">#</a></h2>
+<p>A new Hamiltonian constructor uses pivoted Cholesky decomposition of the <a class="reference internal" href="../glossary.html#term-AO"><span class="xref std std-term">AO</span></a> electron-repulsion integrals (<a class="reference internal" href="../glossary.html#term-ERI"><span class="xref std std-term">ERI</span></a>), reducing memory from <span class="math notranslate nohighlight">\(O(N^4)\)</span> to <span class="math notranslate nohighlight">\(O(N^2 N_\text{chol})\)</span> and significantly accelerating the <a class="reference internal" href="../glossary.html#term-AO"><span class="xref std std-term">AO</span></a>-to-<a class="reference internal" href="../glossary.html#term-MO"><span class="xref std std-term">MO</span></a> integral transformation compared to full four-center <a class="reference internal" href="../glossary.html#term-ERI"><span class="xref std std-term">ERI</span></a> evaluation. This enables treatment of active-space methods for larger molecular systems that would be impractical with the conventional approach.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">constructor</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span><span class="s2">&quot;hamiltonian_constructor&quot;</span><span class="p">,</span> <span class="s2">&quot;qdk_cholesky&quot;</span><span class="p">)</span>
+<span class="n">constructor</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;cholesky_tolerance&quot;</span><span class="p">,</span> <span class="mf">1e-8</span><span class="p">)</span>
+<span class="n">constructor</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;eri_threshold&quot;</span><span class="p">,</span> <span class="mf">1e-12</span><span class="p">)</span>
+<span class="n">constructor</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;store_ao_cholesky_vectors&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">cholesky_hamiltonian</span> <span class="o">=</span> <span class="n">constructor</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">orbitals</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The implementation includes Schwarz-based shell-quartet screening, stability guards for near-singular decompositions, and diagnostic logging for convergence monitoring.</p>
+</section>
+<section id="openfermion-plugin">
+<h2>OpenFermion Plugin<a class="headerlink" href="#openfermion-plugin" title="Link to this heading">#</a></h2>
+<p>A new plugin provides qubit mappings backed by <a class="reference external" href="https://quantumai.google/openfermion">OpenFermion</a>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s1">&#39;qdk-chemistry[openfermion-extras]&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">Symmetries</span>
+
+    <span class="n">mapper</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span><span class="s2">&quot;qubit_mapper&quot;</span><span class="p">,</span> <span class="s2">&quot;openfermion&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;jordan-wigner&quot;</span><span class="p">)</span>
+    <span class="n">qh</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">hamiltonian</span><span class="p">)</span>
+
+    <span class="c1"># Symmetry-conserving Bravyi-Kitaev (reduces qubit count by 2)</span>
+    <span class="n">sym</span> <span class="o">=</span> <span class="n">Symmetries</span><span class="p">(</span><span class="n">n_alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_beta</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">mapper</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span>
+        <span class="s2">&quot;qubit_mapper&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;openfermion&quot;</span><span class="p">,</span>
+        <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;symmetry-conserving-bravyi-kitaev&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">qh</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">hamiltonian</span><span class="p">,</span> <span class="n">sym</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Available encodings: <code class="docutils literal notranslate"><span class="pre">jordan-wigner</span></code>, <code class="docutils literal notranslate"><span class="pre">bravyi-kitaev</span></code>, <code class="docutils literal notranslate"><span class="pre">bravyi-kitaev-tree</span></code>, <code class="docutils literal notranslate"><span class="pre">symmetry-conserving-bravyi-kitaev</span></code>.
+Please see the OpenFermion documentation for more information.</p>
+<p>See <a class="reference external" href="https://github.com/microsoft/qdk-chemistry/blob/v1.1.0/examples/interoperability/openFermion/molecular_hamiltonian_jordan_wigner.py">examples/interoperability/openFermion/molecular_hamiltonian_jordan_wigner.py</a> for a worked example.</p>
+</section>
+<section id="macis-improvements">
+<h2>MACIS Improvements<a class="headerlink" href="#macis-improvements" title="Link to this heading">#</a></h2>
+<ul>
+<li><p><strong>Expanded orbital limits.</strong> The selected-<a class="reference internal" href="../glossary.html#term-CI"><span class="xref std std-term">CI</span></a> dispatch now supports active spaces up to <strong>2048 orbitals</strong> (up from 127 in v1.0). The internal <a class="reference internal" href="../glossary.html#term-SCI"><span class="xref std std-term">SCI</span></a> bit-string representation was widened to 255 orbitals.</p></li>
+<li><p><strong>Single-orbital entropies and mutual information.</strong> <a class="reference internal" href="../glossary.html#term-MACIS"><span class="xref std std-term">MACIS</span></a> calculators can now compute S1 entropies and two-orbital mutual information for active-space analysis:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mc</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span><span class="s2">&quot;multi_configuration_calculator&quot;</span><span class="p">,</span> <span class="s2">&quot;macis_asci&quot;</span><span class="p">)</span>
+<span class="n">mc</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;calculate_single_orbital_entropies&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">mc</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;calculate_mutual_information&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">E_asci</span><span class="p">,</span> <span class="n">wfn_asci</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">hamiltonian</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>ASCI refinement stability.</strong> The <a class="reference internal" href="../glossary.html#term-ASCI"><span class="xref std std-term">ASCI</span></a> refinement loop now detects sign-flipping energy oscillations and terminates gracefully instead of looping indefinitely.</p></li>
+<li><p><strong>Unrestricted-orbital guard.</strong> <a class="reference internal" href="../glossary.html#term-MACIS"><span class="xref std std-term">MACIS</span></a> calculators (<a class="reference internal" href="../glossary.html#term-CAS"><span class="xref std std-term">CAS</span></a>, <a class="reference internal" href="../glossary.html#term-ASCI"><span class="xref std std-term">ASCI</span></a>, <a class="reference internal" href="../glossary.html#term-PMC"><span class="xref std std-term">PMC</span></a>) now raise a clear error if passed an unrestricted Hamiltonian, which is not supported by the <a class="reference internal" href="../glossary.html#term-MACIS"><span class="xref std std-term">MACIS</span></a> backend.</p></li>
+</ul>
+</section>
+<section id="orbital-localization">
+<h2>Orbital Localization<a class="headerlink" href="#orbital-localization" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>One-shot VVHV localization.</strong> The valence-virtual hard-virtual (<a class="reference internal" href="../glossary.html#term-VVHV"><span class="xref std std-term">VVHV</span></a>) localizer was rewritten to use a proper one-shot localization for proto hard-virtuals, replacing the previous canonicalization-based approach. This improves numerical stability with better weighted orthogonalization and singular-value diagnostics.</p></li>
+<li><p><strong>Bug fix</strong> in the proto-HV construction that could produce incorrect localized orbitals in certain basis sets.</p></li>
+</ul>
+</section>
+<section id="other-improvements">
+<h2>Other Improvements<a class="headerlink" href="#other-improvements" title="Link to this heading">#</a></h2>
+<ul>
+<li><p><strong>Refactored energy estimator.</strong> <code class="docutils literal notranslate"><span class="pre">QdkEnergyEstimator</span></code> now takes a single <code class="docutils literal notranslate"><span class="pre">QubitHamiltonian</span></code>, groups commuting terms internally via <code class="docutils literal notranslate"><span class="pre">group_commuting(qubit_wise=True)</span></code>, and delegates execution to a <code class="docutils literal notranslate"><span class="pre">CircuitExecutor</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">estimator</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span><span class="s2">&quot;energy_estimator&quot;</span><span class="p">,</span> <span class="s2">&quot;qdk&quot;</span><span class="p">)</span>
+<span class="n">energy_result</span><span class="p">,</span> <span class="n">measurement_data</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">circuit</span><span class="p">,</span>
+    <span class="n">qubit_hamiltonian</span><span class="p">,</span>
+    <span class="n">circuit_executor</span><span class="p">,</span>
+    <span class="n">total_shots</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>CI coefficients for CC and MP2.</strong> Coupled-cluster and <a class="reference internal" href="../glossary.html#term-MP2"><span class="xref std std-term">MP2</span></a> wavefunctions now expose a CI-like expansion with <code class="docutils literal notranslate"><span class="pre">get_coefficients()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_coefficient(...)</span></code>, and <code class="docutils literal notranslate"><span class="pre">get_active_determinants()</span></code> methods, enabling determinant-level analysis of post-<a class="reference internal" href="../glossary.html#term-HF"><span class="xref std std-term">HF</span></a> wavefunctions.</p></li>
+<li><p><strong>Configurable ERI threshold.</strong> The <code class="docutils literal notranslate"><span class="pre">eri_threshold</span></code> setting (default <code class="docutils literal notranslate"><span class="pre">1e-12</span></code>) controls shell-quartet screening in Hamiltonian construction. A separate <code class="docutils literal notranslate"><span class="pre">shell_pair_threshold</span></code> is available for <a class="reference internal" href="../glossary.html#term-SCF"><span class="xref std std-term">SCF</span></a> pre-screening.</p></li>
+<li><p><strong>Wavefunction file I/O with</strong> <code class="docutils literal notranslate"><span class="pre">pathlib.Path</span></code>. Python bindings for <code class="docutils literal notranslate"><span class="pre">to_file</span></code> / <code class="docutils literal notranslate"><span class="pre">from_file</span></code>, <code class="docutils literal notranslate"><span class="pre">to_json_file</span></code> / <code class="docutils literal notranslate"><span class="pre">from_json_file</span></code>, and <code class="docutils literal notranslate"><span class="pre">to_hdf5_file</span></code> / <code class="docutils literal notranslate"><span class="pre">from_hdf5_file</span></code> now accept <code class="docutils literal notranslate"><span class="pre">pathlib.Path</span></code> objects in addition to strings.</p></li>
+<li><p><strong>Dedicated</strong> <code class="docutils literal notranslate"><span class="pre">[jupyter]</span></code> <strong>install extra.</strong> Notebook dependencies are now isolated from the core install: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">'qdk-chemistry[jupyter]'</span></code>.</p></li>
+<li><p><strong>``Symmetries`` data class.</strong> A new immutable container for active-space quantum numbers, used by qubit mappers that exploit particle-number or spin symmetries (e.g., symmetry-conserving Bravyi-Kitaev):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">Symmetries</span>
+
+<span class="n">sym</span> <span class="o">=</span> <span class="n">Symmetries</span><span class="p">(</span><span class="n">n_alpha</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_beta</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">sym</span><span class="o">.</span><span class="n">n_particles</span>  <span class="c1"># 5</span>
+<span class="n">sym</span><span class="o">.</span><span class="n">sz</span>  <span class="c1"># 0.5</span>
+<span class="n">sym</span><span class="o">.</span><span class="n">spin_multiplicity</span>  <span class="c1"># 2</span>
+
+<span class="c1"># Or construct from an existing wavefunction</span>
+<span class="n">sym</span> <span class="o">=</span> <span class="n">Symmetries</span><span class="o">.</span><span class="n">from_wavefunction</span><span class="p">(</span><span class="n">wavefunction</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="bug-fixes">
+<h2>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Fixed inactive Fock matrix dimension validation — matrices are now checked for full NMO × NMO shape before Hamiltonian construction, preventing silent size mismatches.</p></li>
+<li><p>Fixed active-space <a class="reference internal" href="../glossary.html#term-MP2"><span class="xref std std-term">MP2</span></a> orbital energies — denominators now use active-space orbital energies rather than full-system indices for both restricted and unrestricted <a class="reference internal" href="../glossary.html#term-MP2"><span class="xref std std-term">MP2</span></a>.</p></li>
+<li><p>Fixed JSON serialization of <code class="docutils literal notranslate"><span class="pre">TimeEvolutionContainer</span></code> — Pauli-term keys are now correctly serialized as strings and deserialized back to integer qubit indices.</p></li>
+<li><p>Fixed <a class="reference internal" href="../glossary.html#term-SCF"><span class="xref std std-term">SCF</span></a> logging suppression — the solver no longer silences the global logger during execution, which was hiding unrelated log messages.</p></li>
+<li><p>Aligned logger flush policy with the configured log level.</p></li>
+</ul>
+</section>
+<section id="infrastructure-and-packaging">
+<h2>Infrastructure and Packaging<a class="headerlink" href="#infrastructure-and-packaging" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>macOS ARM64 wheels.</strong> Pre-built wheels are now published for macOS Apple Silicon alongside Linux x86_64 and Linux aarch64.</p></li>
+<li><p><strong>Modular install extras.</strong> Framework-specific dependencies are now optional extras (<code class="docutils literal notranslate"><span class="pre">qiskit-extras</span></code>, <code class="docutils literal notranslate"><span class="pre">openfermion-extras</span></code>, <code class="docutils literal notranslate"><span class="pre">jupyter</span></code>), keeping the default install lightweight.</p></li>
+<li><p><strong>Telemetry sanitization.</strong> Tests and CI builds now force telemetry off (<code class="docutils literal notranslate"><span class="pre">QSHARP_PYTHON_TELEMETRY=false</span></code>) to prevent accidental data collection during development.</p></li>
+<li><p><strong>Centralized</strong> <code class="docutils literal notranslate"><span class="pre">VERSION</span></code> <strong>file.</strong> A single <code class="docutils literal notranslate"><span class="pre">VERSION</span></code> file at the repo root is the source of truth for CMake, Python packaging, and CI. Format: <code class="docutils literal notranslate"><span class="pre">X.Y.Z</span></code> or <code class="docutils literal notranslate"><span class="pre">X.Y.Z.T</span></code>.</p></li>
+<li><p>Broadened CI/CD coverage and release pipeline hardening.</p></li>
+<li><p>Documentation restructured with clearer navigation and a layered quick-reference style.</p></li>
+<li><p>Added <a class="reference external" href="https://github.com/microsoft/qdk-chemistry-data">qdk-chemistry-data</a> companion repo references for curated datasets and benchmark materials.</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="v2.0.0.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">What’s New in Version 2.0</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../changelog.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Changelog</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#highlights">Highlights</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-hamiltonians">Model Hamiltonians</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q-native-circuit-architecture">Q#-Native Circuit Architecture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arbitrary-order-trotter-suzuki">Arbitrary-Order Trotter-Suzuki</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#native-rohf-in-qdk-scf">Native ROHF in QDK SCF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cholesky-based-ao-to-mo-transformation">Cholesky-Based AO-to-MO Transformation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openfermion-plugin">OpenFermion Plugin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macis-improvements">MACIS Improvements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orbital-localization">Orbital Localization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-improvements">Other Improvements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bug-fixes">Bug Fixes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#infrastructure-and-packaging">Infrastructure and Packaging</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/release-notes/v1.1.0.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright Microsoft Corporation. All rights reserved. Licensed under the MIT License.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,904 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>References &#8212; QDK/Chemistry dev</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=6c042e97" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="_static/documentation_options.js?v=3ce10a4d"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/tabs.js?v=3ee01567"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'references';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://eimrek.github.io/qdk-chemistry/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            true;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="canonical" href="https://eimrek.github.io/qdk-chemistry/dev/references.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Acronym definitions" href="glossary.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">QDK/Chemistry</p>
+  
+</a></div>
+    
+      <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/microsoft/qdk-chemistry" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/microsoft/qdk-chemistry" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Documentation">
+  <p class="bd-links__title" role="heading" aria-level="1">Documentation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="user/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user/features.html">Features, methods and dependencies</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="user/comprehensive/index.html">In-depth user guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="user/comprehensive/design/index.html">High-level design</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="user/comprehensive/data/index.html">Data classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/data/serialization.html">Serialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/data/ansatz.html">Ansatz</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/data/basis_set.html">BasisSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/data/hamiltonian.html">Hamiltonian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/data/orbitals.html">Orbitals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/data/lattice_graph.html">LatticeGraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/data/majorana_mapping.html">MajoranaMapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/data/pauli_operator.html">Pauli Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/data/structure.html">Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/data/symmetries.html">Symmetries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/data/wavefunction.html">Wavefunction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/data/qpe_result.html">QpeResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/data/circuit.html">Circuit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="user/comprehensive/algorithms/index.html">Algorithm classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/factory_pattern.html">Factory pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/settings.html">Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/active_space.html">Active space selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/effective_hamiltonian_constructor.html">Effective Hamiltonian construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/expectation_estimator.html">Energy estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/hamiltonian_constructor.html">Hamiltonian construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/localizer.html">Orbital localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/mc_calculator.html">Multi-configuration calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/mcscf.html">Multi-Configuration Self-Consistent Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/pmc.html">Projected Multi-Configuration calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/qubit_mapper.html">Qubit mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/scf_solver.html">Self-consistent field (SCF) solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/stability_checker.html">Stability analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/state_preparation.html">State preparation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/hadamard_test.html">Hadamard test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/phase_estimation.html">Phase estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/qpe_circuit_builder.html">Phase estimation circuit builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/amplitude_amplification.html">Amplitude amplification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/evolution_circuit_builder.html">Evolution circuit builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/hamiltonian_unitary_builder.html">Hamiltonian Unitary Builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/propagator.html">Propagator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/hamiltonian_simulation.html">Hamiltonian simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/circuit_mapper.html">Controlled circuit mapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user/comprehensive/algorithms/circuit_executor.html">Circuit execution</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="user/comprehensive/basis_functionals.html">Available functionals and basis sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/comprehensive/model_hamiltonians.html">Model Hamiltonians</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/comprehensive/plugins.html">Plugins</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="user/migrating-data-files.html">Migrating data files between serialization versions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="tutorials/index.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorials/ground_state_molecular_energies_with_qpe/index.html">Ground-state molecular energies with quantum phase estimation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/ground_state_molecular_energies_with_qpe/00_before_you_begin.html">Before you begin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/ground_state_molecular_energies_with_qpe/lab_notebook.html">Set up your lab notebook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/ground_state_molecular_energies_with_qpe/01_energy_and_accuracy.html">Energy and accuracy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/ground_state_molecular_energies_with_qpe/02_describing_the_molecule.html">Describing the molecule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/ground_state_molecular_energies_with_qpe/03_choosing_the_active_space.html">Choosing the active space</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/ground_state_molecular_energies_with_qpe/04_putting_the_problem_on_qubits.html">Mapping the problem to qubits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/ground_state_molecular_energies_with_qpe/05_preparing_the_trial_state.html">Preparing the trial state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/ground_state_molecular_energies_with_qpe/06_iterative_phase_estimation.html">Iterative quantum phase estimation</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="api/python_api.html">Python API</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="api/api_autogen/qdk_chemistry.data.html">qdk_chemistry.data package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.data.enums.html">qdk_chemistry.data.enums package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.data.time_dependent_qubit_hamiltonian.html">qdk_chemistry.data.time_dependent_qubit_hamiltonian package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.data.unitary_representation.html">qdk_chemistry.data.unitary_representation package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.data._hashing.html">qdk_chemistry.data._hashing module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.data._spin_channels.html">qdk_chemistry.data._spin_channels module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.data._type_name.html">qdk_chemistry.data._type_name module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.data.base.html">qdk_chemistry.data.base module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.data.circuit.html">qdk_chemistry.data.circuit module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.data.circuit_executor_data.html">qdk_chemistry.data.circuit_executor_data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.data.encoding_validation.html">qdk_chemistry.data.encoding_validation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.data.estimator_data.html">qdk_chemistry.data.estimator_data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.data.noise_models.html">qdk_chemistry.data.noise_models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.data.qpe_result.html">qdk_chemistry.data.qpe_result module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.data.qubit_operator.html">qdk_chemistry.data.qubit_operator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.data.registry.html">qdk_chemistry.data.registry module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.data.symmetries.html">qdk_chemistry.data.symmetries module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.data.symmetry.html">qdk_chemistry.data.symmetry module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.data.term_partition.html">qdk_chemistry.data.term_partition module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.html">qdk_chemistry.algorithms package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.amplitude_amplification.html">qdk_chemistry.algorithms.amplitude_amplification package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.circuit_executor.html">qdk_chemistry.algorithms.circuit_executor package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.circuit_mapper.html">qdk_chemistry.algorithms.circuit_mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.controlled_circuit_mapper.html">qdk_chemistry.algorithms.controlled_circuit_mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.expectation_estimator.html">qdk_chemistry.algorithms.expectation_estimator package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.hadamard_test.html">qdk_chemistry.algorithms.hadamard_test package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.hamiltonian_unitary_builder.html">qdk_chemistry.algorithms.hamiltonian_unitary_builder package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.phase_estimation.html">qdk_chemistry.algorithms.phase_estimation package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.propagator.html">qdk_chemistry.algorithms.propagator package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.qubit_mapper.html">qdk_chemistry.algorithms.qubit_mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.state_preparation.html">qdk_chemistry.algorithms.state_preparation package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.term_grouper.html">qdk_chemistry.algorithms.term_grouper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.time_evolution.html">qdk_chemistry.algorithms.time_evolution package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.active_space_selector.html">qdk_chemistry.algorithms.active_space_selector module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.base.html">qdk_chemistry.algorithms.base module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.dynamical_correlation_calculator.html">qdk_chemistry.algorithms.dynamical_correlation_calculator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.effective_hamiltonian_constructor.html">qdk_chemistry.algorithms.effective_hamiltonian_constructor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.geometry_optimization.html">qdk_chemistry.algorithms.geometry_optimization module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.hamiltonian_constructor.html">qdk_chemistry.algorithms.hamiltonian_constructor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.hashing.html">qdk_chemistry.algorithms.hashing module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.multi_configuration_calculator.html">qdk_chemistry.algorithms.multi_configuration_calculator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.multi_configuration_scf.html">qdk_chemistry.algorithms.multi_configuration_scf module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.nuclear_derivative.html">qdk_chemistry.algorithms.nuclear_derivative module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.orbital_localizer.html">qdk_chemistry.algorithms.orbital_localizer module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.population_analysis.html">qdk_chemistry.algorithms.population_analysis module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.projected_multi_configuration_calculator.html">qdk_chemistry.algorithms.projected_multi_configuration_calculator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.qubit_hamiltonian_solver.html">qdk_chemistry.algorithms.qubit_hamiltonian_solver module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.registry.html">qdk_chemistry.algorithms.registry module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.scf_solver.html">qdk_chemistry.algorithms.scf_solver module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.algorithms.stability_checker.html">qdk_chemistry.algorithms.stability_checker module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="api/api_autogen/qdk_chemistry.plugins.html">qdk_chemistry.plugins package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.plugins.discovery.html">qdk_chemistry.plugins.discovery package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.plugins.geometric.html">qdk_chemistry.plugins.geometric package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.plugins.networkx.html">qdk_chemistry.plugins.networkx package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.plugins.openfermion.html">qdk_chemistry.plugins.openfermion package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.plugins.pyscf.html">qdk_chemistry.plugins.pyscf package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.plugins.qiskit.html">qdk_chemistry.plugins.qiskit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.plugins.base.html">qdk_chemistry.plugins.base module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="api/api_autogen/qdk_chemistry.utils.html">qdk_chemistry.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.utils.qsharp.html">qdk_chemistry.utils.qsharp package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.utils.cubegen.html">qdk_chemistry.utils.cubegen module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.utils.enum.html">qdk_chemistry.utils.enum module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.utils.model_hamiltonians.html">qdk_chemistry.utils.model_hamiltonians module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.utils.pauli_commutation.html">qdk_chemistry.utils.pauli_commutation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.utils.pauli_matrix.html">qdk_chemistry.utils.pauli_matrix module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.utils.telemetry.html">qdk_chemistry.utils.telemetry module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.utils.telemetry_events.html">qdk_chemistry.utils.telemetry_events module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.utils.wavefunction.html">qdk_chemistry.utils.wavefunction module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_autogen/qdk_chemistry.utils.zassenhaus_generation.html">qdk_chemistry.utils.zassenhaus_generation module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="api/api_autogen/qdk_chemistry.constants.html">qdk_chemistry.constants module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api/cpp_api.html">C++ API</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1data.html">Namespace qdk::chemistry::data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1algorithms.html">Namespace qdk::chemistry::algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1utils.html">Namespace qdk::chemistry::utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1constants.html">Namespace qdk::chemistry::constants</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Supporting Information</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="release-notes/index.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="release-notes/v2.1.0.html">What’s New in Version 2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-notes/v2.0.0.html">What’s New in Version 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-notes/v1.1.0.html">What’s New in Version 1.1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Acronym definitions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">References</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">References</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="references">
+<h1>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h1>
+<div class="docutils container" id="id1">
+<div role="list" class="citation-list">
+<div class="citation" id="id62" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>ABPSdMK06<span class="fn-bracket">]</span></span>
+<p>Francesco Aquilante, Thomas Bondo Pedersen, Alfredo Sánchez de Merás, and Henrik Koch. Fast noniterative orbital localization for large molecules. <em>The Journal of Chemical Physics</em>, 125(17):174101, 11 2006. URL: <a class="reference external" href="https://doi.org/10.1063/1.2360264">https://doi.org/10.1063/1.2360264</a>, <a class="reference external" href="https://doi.org/10.1063/1.2360264">doi:10.1063/1.2360264</a>.</p>
+</div>
+<div class="citation" id="id5" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>AGDLHG05<span class="fn-bracket">]</span></span>
+<p>Alán Aspuru-Guzik, Anthony D. Dutoi, Peter J. Love, and Martin Head-Gordon. Simulated quantum computation of molecular energies. <em>Science</em>, 309(5741):1704–1707, 2005. <a class="reference external" href="https://doi.org/10.1126/science.1113479">doi:10.1126/science.1113479</a>.</p>
+</div>
+<div class="citation" id="id70" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BGB+18<span class="fn-bracket">]</span></span>
+<p>Ryan Babbush, Craig Gidney, Dominic W. Berry, Nathan Wiebe, Jarrod McClean, Alexandru Paler, Austin Fowler, and Hartmut Neven. Encoding electronic spectra in quantum circuits with linear t complexity. <em>Phys. Rev. X</em>, 8:041015, 2018. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevX.8.041015">https://link.aps.org/doi/10.1103/PhysRevX.8.041015</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevX.8.041015">doi:10.1103/PhysRevX.8.041015</a>.</p>
+</div>
+<div class="citation" id="id4" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BBC+26<span class="fn-bracket">]</span></span>
+<p>Nathan A. Baker, Brian Bilodeau, Chi Chen, Yingrong Chen, Marco Eckhoff, Alexandra Efimovskaya, Piero Gasparotto, Puck van Gerwen, Rushi Gong, Kevin Hoang, Zahra Hooshmand, Andrew J. Jenkins, Conrad S. N. Johnston, Run R. Li, Jiashu Liang, Hongbin Liu, Alexis Mills, Maximilian M&quot;orchen, George Nishibuchi, Chong Sun, Bill Ticehurst, Matthias Troyer, Jan P. Unsleber, Stefan Wernli, David B. Williams-Young, and Boqin Zhang. QDK/Chemistry: a modular toolkit for quantum chemistry applications. <em>arXiv</em>, 2026. URL: <a class="reference external" href="https://arxiv.org/abs/2601.15253">https://arxiv.org/abs/2601.15253</a>, <a class="reference external" href="https://doi.org/10.48550/arXiv.2601.15253">doi:10.48550/arXiv.2601.15253</a>.</p>
+</div>
+<div class="citation" id="id10" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BT15<span class="fn-bracket">]</span></span>
+<p>Katharina Boguslawski and Paweł Tecmer. Orbital entanglement in quantum chemistry. <em>International Journal of Quantum Chemistry</em>, 115(19):1289–1295, 2015. <a class="reference external" href="https://doi.org/10.1002/qua.24832">doi:10.1002/qua.24832</a>.</p>
+</div>
+<div class="citation" id="id9" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BP93<span class="fn-bracket">]</span></span>
+<p>James W. Boughton and Peter Pulay. Comparison of the Boys and Pipek-Mezey localizations in the local correlation approach and automatic virtual basis selection. <em>Journal of Computational Chemistry</em>, 14(6):736–740, 1993. <a class="reference external" href="https://doi.org/10.1002/jcc.540140615">doi:10.1002/jcc.540140615</a>.</p>
+</div>
+<div class="citation" id="id20" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BGMT17<span class="fn-bracket">]</span></span>
+<p>Sergey Bravyi, Jay M. Gambetta, Antonio Mezzacapo, and Kristan Temme. Tapering off qubits to simulate fermionic Hamiltonians. <em>arXiv preprint arXiv:1701.08213</em>, 2017. <a class="reference external" href="https://doi.org/10.48550/arXiv.1701.08213">doi:10.48550/arXiv.1701.08213</a>.</p>
+</div>
+<div class="citation" id="id19" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BK02<span class="fn-bracket">]</span></span>
+<p>Sergey B. Bravyi and Alexei Yu. Kitaev. Fermionic quantum computation. <em>Annals of Physics</em>, 298(1):210–226, 2002. <a class="reference external" href="https://doi.org/10.1006/aphy.2002.6254">doi:10.1006/aphy.2002.6254</a>.</p>
+</div>
+<div class="citation" id="id2" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Cam19<span class="fn-bracket">]</span></span>
+<p>Earl Campbell. Random compiler for fast Hamiltonian simulation. <em>Physical Review Letters</em>, 123(7):070503, 2019. <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.123.070503">doi:10.1103/PhysRevLett.123.070503</a>.</p>
+</div>
+<div class="citation" id="id68" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CMN12<span class="fn-bracket">]</span></span>
+<p>Fernando Casas, Ander Murua, and Mladen Nadinic. Efficient computation of the Zassenhaus formula. <em>Computer Physics Communications</em>, 183(11):2386–2391, 2012. URL: <a class="reference external" href="https://arxiv.org/abs/1204.0389">https://arxiv.org/abs/1204.0389</a>, <a class="reference external" href="https://doi.org/10.1016/j.cpc.2012.06.006">doi:10.1016/j.cpc.2012.06.006</a>.</p>
+</div>
+<div class="citation" id="id63" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CST+21<span class="fn-bracket">]</span></span>
+<p>Andrew M. Childs, Yuan Su, Minh C. Tran, Nathan Wiebe, and Shuchen Zhu. Theory of Trotter error with commutator scaling. <em>Physical Review X</em>, 11(1):011020, 2021. URL: <a class="reference external" href="https://arxiv.org/abs/1912.08854">https://arxiv.org/abs/1912.08854</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevX.11.011020">doi:10.1103/PhysRevX.11.011020</a>.</p>
+</div>
+<div class="citation" id="id69" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CW12<span class="fn-bracket">]</span></span>
+<p>Andrew M. Childs and Nathan Wiebe. Hamiltonian simulation using linear combinations of unitary operations. <em>Quantum Info. Comput.</em>, 12(11-12):901–924, nov 2012.</p>
+</div>
+<div class="citation" id="id26" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>DJSW07<span class="fn-bracket">]</span></span>
+<p>M. Dobsicek, G. Johansson, V. Shumeiko, and G. Wendin. Arbitrary accuracy iterative quantum phase estimation algorithm using a single ancillary qubit: a two-qubit benchmark. <em>Physical Review A</em>, 76:030306, 2007. <a class="reference external" href="https://doi.org/10.1103/PhysRevA.76.030306">doi:10.1103/PhysRevA.76.030306</a>.</p>
+</div>
+<div class="citation" id="id6" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Dun89<span class="fn-bracket">]</span></span>
+<p>Thom H. Dunning, Jr. Gaussian basis sets for use in correlated molecular calculations. I. The atoms boron through neon and hydrogen. <em>The Journal of Chemical Physics</em>, 90(2):1007–1023, 1989. <a class="reference external" href="https://doi.org/10.1063/1.456153">doi:10.1063/1.456153</a>.</p>
+</div>
+<div class="citation" id="id48" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>ER63<span class="fn-bracket">]</span></span>
+<p>Clyde Edmiston and Klaus Ruedenberg. Localized atomic and molecular orbitals. <em>Rev. Mod. Phys.</em>, 35:457–464, Jul 1963. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/RevModPhys.35.457">https://link.aps.org/doi/10.1103/RevModPhys.35.457</a>, <a class="reference external" href="https://doi.org/10.1103/RevModPhys.35.457">doi:10.1103/RevModPhys.35.457</a>.</p>
+</div>
+<div class="citation" id="id57" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Fel96<span class="fn-bracket">]</span></span>
+<p>David Feller. The role of databases in support of computational chemistry calculations. <em>Journal of Computational Chemistry</em>, 17(13):1571–1586, 1996. URL: <a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/%28SICI%291096-987X%28199610%2917%3A13%3C1571%3A%3AAID-JCC9%3E3.0.CO%3B2-P">https://onlinelibrary.wiley.com/doi/abs/10.1002/%28SICI%291096-987X%28199610%2917%3A13%3C1571%3A%3AAID-JCC9%3E3.0.CO%3B2-P</a>, <a class="reference external" href="https://doi.org/10.1002/(SICI)1096-987X(199610)17:13&lt;1571::AID-JCC9&gt;3.0.CO;2-P">doi:10.1002/(SICI)1096-987X(199610)17:13&lt;1571::AID-JCC9&gt;3.0.CO;2-P</a>.</p>
+</div>
+<div class="citation" id="id49" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>FB60<span class="fn-bracket">]</span></span>
+<p>J. M. Foster and S. F. Boys. Canonical configurational interaction procedure. <em>Rev. Mod. Phys.</em>, 32:300–302, Apr 1960. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/RevModPhys.32.300">https://link.aps.org/doi/10.1103/RevModPhys.32.300</a>, <a class="reference external" href="https://doi.org/10.1103/RevModPhys.32.300">doi:10.1103/RevModPhys.32.300</a>.</p>
+</div>
+<div class="citation" id="id3" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>GuntherWS+25<span class="fn-bracket">]</span></span>
+<p>Jakob G&quot;unther, Freek Witteveen, Alexander Schmidhuber, Marek Miller, Matthias Christandl, and Aram Harrow. Phase estimation with partially randomized time evolution. <em>arXiv</em>, 2025. URL: <a class="reference external" href="https://arxiv.org/abs/2503.05647">https://arxiv.org/abs/2503.05647</a>, <a class="reference external" href="https://doi.org/10.48550/arXiv.2503.05647">doi:10.48550/arXiv.2503.05647</a>.</p>
+</div>
+<div class="citation" id="id22" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>HavlivcekCT+17<span class="fn-bracket">]</span></span>
+<p>Vojtěch Havlíček, Marcos Corcoles, Kristan Temme, Aram W. Harrow, Abhinav Kandala, Jerry M. Chow, and Jay M. Gambetta. Operator locality in the quantum simulation of fermionic models. <em>Physical Review A</em>, 95(3):032332, 2017. <a class="reference external" href="https://doi.org/10.1103/PhysRevA.95.032332">doi:10.1103/PhysRevA.95.032332</a>.</p>
+</div>
+<div class="citation" id="id12" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Hig05<span class="fn-bracket">]</span></span>
+<p>Nicholas J. Higham. The scaling and squaring method for the matrix exponential revisited. <em>SIAM Journal on Matrix Analysis and Applications</em>, 26(4):1179–1193, 2005. <a class="reference external" href="https://doi.org/10.1137/04061101X">doi:10.1137/04061101X</a>.</p>
+</div>
+<div class="citation" id="id42" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>HWK+21<span class="fn-bracket">]</span></span>
+<p>W. J. Huang, Meng Wang, F. G. Kondev, G. Audi, and S. Naimi. The AME 2020 atomic mass evaluation (I). evaluation of input data, and adjustment procedures. <em>Chinese Physics C</em>, 45:030002, 2021. URL: <a class="reference external" href="https://doi.org/10.1088/1674-1137/abddb0">https://doi.org/10.1088/1674-1137/abddb0</a>, <a class="reference external" href="https://doi.org/10.1088/1674-1137/abddb0">doi:10.1088/1674-1137/abddb0</a>.</p>
+</div>
+<div class="citation" id="id23" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>ICK+16<span class="fn-bracket">]</span></span>
+<p>Raban Iten, Roger Colbeck, Ivan Kukuljan, Jonathan Home, and Matthias Christandl. Quantum circuits for isometries. <em>Physical Review A</em>, 93:032318, 2016. <a class="reference external" href="https://doi.org/10.1103/PhysRevA.93.032318">doi:10.1103/PhysRevA.93.032318</a>.</p>
+</div>
+<div class="citation" id="id30" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>JATK+24<span class="fn-bracket">]</span></span>
+<p>Ali Javadi-Abhari, Matthew Treinish, Kevin Krsulich, Christopher J. Wood, Jake Lishman, Julien Gacon, Simon Martiel, Paul D. Nation, Lev S. Bishop, Andrew W. Cross, Blake R. Johnson, and Jay M. Gambetta. Quantum computing with Qiskit. <em>arXiv</em>, 2024. <a class="reference external" href="https://doi.org/10.48550/arXiv.2405.08810">doi:10.48550/arXiv.2405.08810</a>.</p>
+</div>
+<div class="citation" id="id17" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>JW28<span class="fn-bracket">]</span></span>
+<p>P. Jordan and E. Wigner. Über das Paulische Äquivalenzverbot. <em>Zeitschrift für Physik</em>, 47:631–651, 1928. <a class="reference external" href="https://doi.org/10.1007/BF01331938">doi:10.1007/BF01331938</a>.</p>
+</div>
+<div class="citation" id="id25" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Kit95<span class="fn-bracket">]</span></span>
+<p>A. Y. Kitaev. Quantum measurements and the Abelian stabilizer problem. <em>arXiv</em>, 1995. URL: <a class="reference external" href="https://arxiv.org/abs/quant-ph/9511026">https://arxiv.org/abs/quant-ph/9511026</a>.</p>
+</div>
+<div class="citation" id="id41" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KWH+21<span class="fn-bracket">]</span></span>
+<p>F. G. Kondev, M. Wang, W. J. Huang, S. Naimi, and G. Audi. The NUBASE2020 evaluation of nuclear physics properties. <em>Chinese Physics C</em>, 45:030001, 2021. URL: <a class="reference external" href="https://doi.org/10.1088/1674-1137/abddae">https://doi.org/10.1088/1674-1137/abddae</a>, <a class="reference external" href="https://doi.org/10.1088/1674-1137/abddae">doi:10.1088/1674-1137/abddae</a>.</p>
+</div>
+<div class="citation" id="id31" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KLL+24<span class="fn-bracket">]</span></span>
+<p>Mikael Kovtun, Eleftherios Lambros, Aodong Liu, Diandong Tang, David B. Williams–Young, and Xiaosong Li. Accelerating relativistic exact-two-component density functional theory calculations with graphical processing units. <em>Journal of Chemical Theory and Computation</em>, 20(18):7694–7699, 2024. <a class="reference external" href="https://doi.org/10.1021/acs.jctc.4c00843">doi:10.1021/acs.jctc.4c00843</a>.</p>
+</div>
+<div class="citation" id="id46" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>LowdinS56<span class="fn-bracket">]</span></span>
+<p>Per-Olov Löwdin and Harrison Shull. Natural orbitals in the quantum theory of two-electron systems. <em>Physical Review</em>, 101:1730–1739, Mar 1956. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRev.101.1730">https://link.aps.org/doi/10.1103/PhysRev.101.1730</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRev.101.1730">doi:10.1103/PhysRev.101.1730</a>.</p>
+</div>
+<div class="citation" id="id71" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>LBG+21<span class="fn-bracket">]</span></span>
+<p>Joonho Lee, Dominic W. Berry, Craig Gidney, William J. Huggins, Jarrod R. McClean, Nathan Wiebe, and Ryan Babbush. Even more efficient quantum computations of chemistry through tensor hypercontraction. <em>PRX Quantum</em>, 2:030305, 2021. <a class="reference external" href="https://arxiv.org/abs/2011.03494">arXiv:2011.03494</a>, <a class="reference external" href="https://doi.org/10.1103/PRXQuantum.2.030305">doi:10.1103/PRXQuantum.2.030305</a>.</p>
+</div>
+<div class="citation" id="id50" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>LJ13<span class="fn-bracket">]</span></span>
+<p>Susi Lehtola and Hannes Jónsson. Unitary optimization of localized molecular orbitals. <em>Journal of Chemical Theory and Computation</em>, 9(12):5365–5372, 2013. URL: <a class="reference external" href="https://doi.org/10.1021/ct400793q">https://doi.org/10.1021/ct400793q</a>, <a class="reference external" href="https://doi.org/10.1021/ct400793q">doi:10.1021/ct400793q</a>.</p>
+</div>
+<div class="citation" id="id15" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>LSOM18<span class="fn-bracket">]</span></span>
+<p>Susi Lehtola, Conrad Steigemann, Micael J. T. Oliveira, and Miguel A. L. Marques. Recent developments in Libxc — a comprehensive library of functionals for density functional theory. <em>SoftwareX</em>, 7:1–5, 2018. <a class="reference external" href="https://doi.org/10.1016/j.softx.2017.11.002">doi:10.1016/j.softx.2017.11.002</a>.</p>
+</div>
+<div class="citation" id="id11" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>LDS24<span class="fn-bracket">]</span></span>
+<p>Ke Liao, Lexin Ding, and Christian Schilling. Quantum information orbitals (QIO): unveiling intrinsic many-body complexity by compressing single-body triviality. <em>The Journal of Physical Chemistry Letters</em>, 15(26):6782–6790, 2024. URL: <a class="reference external" href="https://arxiv.org/abs/2402.16841">https://arxiv.org/abs/2402.16841</a>, <a class="reference external" href="https://doi.org/10.1021/acs.jpclett.4c01105">doi:10.1021/acs.jpclett.4c01105</a>.</p>
+</div>
+<div class="citation" id="id28" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>LN89<span class="fn-bracket">]</span></span>
+<p>Dong C. Liu and Jorge Nocedal. On the limited memory BFGS method for large scale optimization. <em>Mathematical Programming</em>, 45:503–528, 1989. <a class="reference external" href="https://doi.org/10.1007/BF01589116">doi:10.1007/BF01589116</a>.</p>
+</div>
+<div class="citation" id="id14" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MIC21<span class="fn-bracket">]</span></span>
+<p>Emanuel Malvetti, Raban Iten, and Roger Colbeck. Quantum circuits for sparse isometries. <em>Quantum</em>, 5:412, 2021. URL: <a class="reference external" href="http://arxiv.org/abs/2006.00016">http://arxiv.org/abs/2006.00016</a>, <a class="reference external" href="https://doi.org/10.22331/q-2021-06-21-412">doi:10.22331/q-2021-06-21-412</a>.</p>
+</div>
+<div class="citation" id="id38" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MNT16<span class="fn-bracket">]</span></span>
+<p>Peter J. Mohr, David B. Newell, and Barry N. Taylor. CODATA recommended values of the fundamental physical constants: 2014. <em>Reviews of Modern Physics</em>, 88:035009, 2016. URL: <a class="reference external" href="https://physics.nist.gov/cuu/pdf/CODATA_RMP2016.pdf">https://physics.nist.gov/cuu/pdf/CODATA_RMP2016.pdf</a>, <a class="reference external" href="https://doi.org/10.1103/RevModPhys.88.035009">doi:10.1103/RevModPhys.88.035009</a>.</p>
+</div>
+<div class="citation" id="id39" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MNT25<span class="fn-bracket">]</span></span>
+<p>Peter J. Mohr, David B. Newell, and Barry N. Taylor. CODATA recommended values of the fundamental physical constants: 2022. <em>Reviews of Modern Physics</em>, 97:025002, 2025. URL: <a class="reference external" href="https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=958143">https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=958143</a>, <a class="reference external" href="https://doi.org/10.1103/RevModPhys.97.025002">doi:10.1103/RevModPhys.97.025002</a>.</p>
+</div>
+<div class="citation" id="id27" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>NC10<span class="fn-bracket">]</span></span>
+<p>Michael A. Nielsen and Isaac L. Chuang. <em>The quantum Fourier transform and its applications</em>, chapter 5.2. Cambridge University Press, Cambridge, UK, 2010. <a class="reference external" href="https://doi.org/10.1017/CBO9780511976667">doi:10.1017/CBO9780511976667</a>.</p>
+</div>
+<div class="citation" id="id16" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>PWYS+18<span class="fn-bracket">]</span></span>
+<p>Alessio Petrone, David B. Williams–Young, Shichao Sun, Torin F. Stetina, and Xiaosong Li. An efficient implementation of two-component relativistic density functional theory with torque-free auxiliary variables. <em>The European Physical Journal B</em>, 91(169):169, 2018. <a class="reference external" href="https://doi.org/10.1140/epjb/e2018-90170-1">doi:10.1140/epjb/e2018-90170-1</a>.</p>
+</div>
+<div class="citation" id="id47" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>PM89<span class="fn-bracket">]</span></span>
+<p>János Pipek and Paul G. Mezey. A fast intrinsic localization procedure applicable for ab initio and semiempirical linear combination of atomic orbital wave functions. <em>The Journal of Chemical Physics</em>, 90(9):4916–4926, 05 1989. URL: <a class="reference external" href="https://doi.org/10.1063/1.456588">https://doi.org/10.1063/1.456588</a>, <a class="reference external" href="https://doi.org/10.1063/1.456588">doi:10.1063/1.456588</a>.</p>
+</div>
+<div class="citation" id="id56" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>PAD+19<span class="fn-bracket">]</span></span>
+<p>Benjamin P. Pritchard, Doaa Altarawy, Brett Didier, Tara D. Gibson, and Theresa L. Windus. New Basis Set Exchange: an open, up-to-date resource for the molecular sciences community. <em>Journal of Chemical Information and Modeling</em>, 59(11):4814–4820, 2019. URL: <a class="reference external" href="https://doi.org/10.1021/acs.jcim.9b00725">https://doi.org/10.1021/acs.jcim.9b00725</a>, <a class="reference external" href="https://doi.org/10.1021/acs.jcim.9b00725">doi:10.1021/acs.jcim.9b00725</a>.</p>
+</div>
+<div class="citation" id="id40" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>PIB+22<span class="fn-bracket">]</span></span>
+<p>Thomas Prohaska, Johanna Irrgeher, Jacqueline Benefield, John K. Böhlke, Lesley A. Chesson, Tyler B. Coplen, Tiping Ding, Philip J. H. Dunn, Manfred Gröning, Norman E. Holden, Harro A. J. Meijer, Heiko Moossen, Antonio Possolo, Yoshio Takahashi, Jochen Vogl, Thomas Walczyk, Jun Wang, Michael E. Wieser, Shigekazu Yoneda, Xiang-Kun Zhu, and Juris Meija. Standard atomic weights of the elements 2021 (IUPAC technical report). <em>Pure and Applied Chemistry</em>, 94:573–600, 2022. URL: <a class="reference external" href="https://doi.org/10.1515/pac-2019-0603">https://doi.org/10.1515/pac-2019-0603</a>, <a class="reference external" href="https://doi.org/10.1515/pac-2019-0603">doi:10.1515/pac-2019-0603</a>.</p>
+</div>
+<div class="citation" id="id61" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Pul82<span class="fn-bracket">]</span></span>
+<p>P. Pulay. Improved SCF convergence acceleration. <em>Journal of Computational Chemistry</em>, 3(4):556–560, 1982. URL: <a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/jcc.540030413">https://onlinelibrary.wiley.com/doi/abs/10.1002/jcc.540030413</a>, <a class="reference external" href="https://doi.org/https://doi.org/10.1002/jcc.540030413">doi:https://doi.org/10.1002/jcc.540030413</a>.</p>
+</div>
+<div class="citation" id="id8" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SSCK17<span class="fn-bracket">]</span></span>
+<p>Elvira R. Sayfutyarova, Qiming Sun, Garnet Kin-Lic Chan, and Gerald Knizia. Automated construction of molecular active spaces from atomic valence orbitals. <em>Journal of Chemical Theory and Computation</em>, 13(9):4063–4078, 2017. URL: <a class="reference external" href="https://arxiv.org/abs/1701.07862">https://arxiv.org/abs/1701.07862</a>, <a class="reference external" href="https://doi.org/10.1021/acs.jctc.7b00128">doi:10.1021/acs.jctc.7b00128</a>.</p>
+</div>
+<div class="citation" id="id45" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SM91<span class="fn-bracket">]</span></span>
+<p>H. B. Schlegel and J. J. W. McDouall. <em>Do you have SCF stability and convergence problems?</em>, pages 167–185. Springer Netherlands, Dordrecht, 1991. URL: <a class="reference external" href="https://doi.org/10.1007/978-94-011-3262-6_2">https://doi.org/10.1007/978-94-011-3262-6_2</a>, <a class="reference external" href="https://doi.org/10.1007/978-94-011-3262-6_2">doi:10.1007/978-94-011-3262-6_2</a>.</p>
+</div>
+<div class="citation" id="id58" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SDE+07<span class="fn-bracket">]</span></span>
+<p>Karen L. Schuchardt, Brett T. Didier, Todd Elsethagen, Lisong Sun, Vidhya Gurumoorthi, Jared Chase, Jun Li, and Theresa L. Windus. Basis Set Exchange: a community database for computational sciences. <em>Journal of Chemical Information and Modeling</em>, 47(3):1045–1052, 2007. URL: <a class="reference external" href="https://doi.org/10.1021/ci600510j">https://doi.org/10.1021/ci600510j</a>, <a class="reference external" href="https://doi.org/10.1021/ci600510j">doi:10.1021/ci600510j</a>.</p>
+</div>
+<div class="citation" id="id18" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SRL12<span class="fn-bracket">]</span></span>
+<p>Jacob T. Seeley, Martin J. Richard, and Peter J. Love. The Bravyi-Kitaev transformation for quantum computation of electronic structure. <em>The Journal of Chemical Physics</em>, 137(22):224109, 2012. <a class="reference external" href="https://doi.org/10.1063/1.4768229">doi:10.1063/1.4768229</a>.</p>
+</div>
+<div class="citation" id="id21" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SW18<span class="fn-bracket">]</span></span>
+<p>Kanav Setia and James D. Whitfield. Bravyi-Kitaev superfast simulation of electronic structure on a quantum computer. <em>The Journal of Chemical Physics</em>, 148(16):164104, 2018. <a class="reference external" href="https://doi.org/10.1063/1.5019371">doi:10.1063/1.5019371</a>.</p>
+</div>
+<div class="citation" id="id59" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SH17<span class="fn-bracket">]</span></span>
+<p>Robert A. Shaw and J. Grant Hill. Prescreening and efficiency in the evaluation of integrals over ab initio effective core potentials. <em>The Journal of Chemical Physics</em>, 147(7):074108, aug 2017. URL: <a class="reference external" href="http://aip.scitation.org/doi/10.1063/1.4986887">http://aip.scitation.org/doi/10.1063/1.4986887</a>, <a class="reference external" href="https://doi.org/10.1063/1.4986887">doi:10.1063/1.4986887</a>.</p>
+</div>
+<div class="citation" id="id60" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SH21<span class="fn-bracket">]</span></span>
+<p>Robert A. Shaw and J. Grant Hill. libecpint: a C++ library for the efficient evaluation of integrals over effective core potentials. <em>Journal of Open Source Software</em>, 6(60):3039, 2021. URL: <a class="reference external" href="https://doi.org/10.21105/joss.03039">https://doi.org/10.21105/joss.03039</a>, <a class="reference external" href="https://doi.org/10.21105/joss.03039">doi:10.21105/joss.03039</a>.</p>
+</div>
+<div class="citation" id="id24" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SBM06<span class="fn-bracket">]</span></span>
+<p>Vivek V. Shende, Stephen S. Bullock, and Igor L. Markov. Synthesis of quantum-logic circuits. <em>IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems</em>, 25(6):1000–1010, 2006. <a class="reference external" href="https://doi.org/10.1109/TCAD.2005.855930">doi:10.1109/TCAD.2005.855930</a>.</p>
+</div>
+<div class="citation" id="id36" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SR16<span class="fn-bracket">]</span></span>
+<p>Christopher J. Stein and Markus Reiher. Automated selection of active orbital spaces. <em>Journal of Chemical Theory and Computation</em>, 12(4):1760–1771, 2016. URL: <a class="reference external" href="https://arxiv.org/abs/1602.03835">https://arxiv.org/abs/1602.03835</a>, <a class="reference external" href="https://doi.org/10.1021/acs.jctc.6b00156">doi:10.1021/acs.jctc.6b00156</a>.</p>
+</div>
+<div class="citation" id="id37" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SR19<span class="fn-bracket">]</span></span>
+<p>Christopher J. Stein and Markus Reiher. autoCAS: a program for fully automated multiconfigurational calculations. <em>Journal of Computational Chemistry</em>, 40(25):2216–2226, 2019. URL: <a class="reference external" href="https://arxiv.org/abs/1904.00097">https://arxiv.org/abs/1904.00097</a>, <a class="reference external" href="https://doi.org/10.1002/jcc.25869">doi:10.1002/jcc.25869</a>.</p>
+</div>
+<div class="citation" id="id51" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SDHG05<span class="fn-bracket">]</span></span>
+<p>Joseph E. Subotnik, Anthony D. Dutoi, and Martin Head-Gordon. Fast localized orthonormal virtual orbitals which depend smoothly on nuclear coordinates. <em>The Journal of Chemical Physics</em>, 123(11):114108, 09 2005. URL: <a class="reference external" href="https://doi.org/10.1063/1.2033687">https://doi.org/10.1063/1.2033687</a>, <a class="reference external" href="https://doi.org/10.1063/1.2033687">doi:10.1063/1.2033687</a>.</p>
+</div>
+<div class="citation" id="id64" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Suz92<span class="fn-bracket">]</span></span>
+<p>Masuo Suzuki. General theory of higher-order decomposition of exponential operators and symplectic integrators. <em>Physics Letters A</em>, 165(5–6):387–395, 1992. <a class="reference external" href="https://doi.org/10.1016/0375-9601(92)90335-J">doi:10.1016/0375-9601(92)90335-J</a>.</p>
+</div>
+<div class="citation" id="id29" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>TMNT21<span class="fn-bracket">]</span></span>
+<p>Eite Tiesinga, Peter J. Mohr, David B. Newell, and Barry N. Taylor. CODATA recommended values of the fundamental physical constants: 2018. <em>Journal of Physical and Chemical Reference Data</em>, 50:033105, 2021. URL: <a class="reference external" href="https://physics.nist.gov/cuu/pdf/JPCRD2018CODATA.pdf">https://physics.nist.gov/cuu/pdf/JPCRD2018CODATA.pdf</a>, <a class="reference external" href="https://doi.org/10.1063/5.0064853">doi:10.1063/5.0064853</a>.</p>
+</div>
+<div class="citation" id="id54" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>TFL+20<span class="fn-bracket">]</span></span>
+<p>Norm M. Tubman, C. Daniel Freeman, Daniel S. Levine, Diptarka Hait, Martin Head-Gordon, and K. Birgitta Whaley. Modern approaches to exact diagonalization and selected configuration interaction with the adaptive sampling CI method. <em>Journal of Chemical Theory and Computation</em>, 16(4):2139–2159, 2020. URL: <a class="reference external" href="https://doi.org/10.1021/acs.jctc.8b00536">https://doi.org/10.1021/acs.jctc.8b00536</a>, <a class="reference external" href="https://doi.org/10.1021/acs.jctc.8b00536">doi:10.1021/acs.jctc.8b00536</a>.</p>
+</div>
+<div class="citation" id="id53" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>TLT+16<span class="fn-bracket">]</span></span>
+<p>Norm M. Tubman, Joonho Lee, Tyler Y. Takeshita, Martin Head-Gordon, and K. Birgitta Whaley. A deterministic alternative to the full configuration interaction quantum Monte Carlo method. <em>The Journal of Chemical Physics</em>, 145(4):044112, 07 2016. URL: <a class="reference external" href="https://doi.org/10.1063/1.4955109">https://doi.org/10.1063/1.4955109</a>, <a class="reference external" href="https://doi.org/10.1063/1.4955109">doi:10.1063/1.4955109</a>.</p>
+</div>
+<div class="citation" id="id55" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Val24<span class="fn-bracket">]</span></span>
+<p>E. F. Valeev. Libint: a library for the evaluation of molecular integrals of many-body operators over Gaussian functions. http://libint.valeyev.net/, 2024. version 2.9.0.</p>
+</div>
+<div class="citation" id="id35" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Val25<span class="fn-bracket">]</span></span>
+<p>E. F. Valeev. Libint: a library for the evaluation of molecular integrals of many-body operators over Gaussian functions. http://libint.valeyev.net/, 2025. version 2.11.2.</p>
+</div>
+<div class="citation" id="id65" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>VC05<span class="fn-bracket">]</span></span>
+<p>F. Verstraete and J. I. Cirac. Mapping local Hamiltonians of fermions onto local Hamiltonians of spins. <em>Journal of Statistical Mechanics: Theory and Experiment</em>, 2005(09):P09012, 2005. <a class="reference external" href="https://doi.org/10.1088/1742-5468/2005/09/P09012">doi:10.1088/1742-5468/2005/09/P09012</a>.</p>
+</div>
+<div class="citation" id="id7" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>vBLHaner+21<span class="fn-bracket">]</span></span>
+<p>Vera von Burg, Guang Hao Low, Thomas Häner, Damian S. Steiger, Markus Reiher, Martin Roetteler, and Matthias Troyer. Quantum computing enhanced computational catalysis. <em>Physical Review Research</em>, 3(3):033055, 2021. <a class="reference external" href="https://doi.org/10.1103/PhysRevResearch.3.033055">doi:10.1103/PhysRevResearch.3.033055</a>.</p>
+</div>
+<div class="citation" id="id43" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>WHK+21<span class="fn-bracket">]</span></span>
+<p>Meng Wang, W. J. Huang, F. G. Kondev, G. Audi, and S. Naimi. The AME 2020 atomic mass evaluation (II). tables, graphs and references. <em>Chinese Physics C</em>, 45:030003, 2021. URL: <a class="reference external" href="https://doi.org/10.1088/1674-1137/abddaf">https://doi.org/10.1088/1674-1137/abddaf</a>, <a class="reference external" href="https://doi.org/10.1088/1674-1137/abddaf">doi:10.1088/1674-1137/abddaf</a>.</p>
+</div>
+<div class="citation" id="id52" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>WIS+25<span class="fn-bracket">]</span></span>
+<p>Zhenling Wang, Kevin Ikeda, Hengyuan Shen, Matthias Loipersberger, Alexander Zech, Abdulrahman Aldossary, Teresa Head-Gordon, and Martin Head-Gordon. Second-generation energy decomposition analysis of intermolecular interaction energies from the second-order Mo̷ller–Plesset theory: an extensible, orthogonal formulation with useful basis set convergence for all terms. <em>Journal of Chemical Theory and Computation</em>, 21(3):1163–1178, 2025. URL: <a class="reference external" href="https://doi.org/10.1021/acs.jctc.4c01301">https://doi.org/10.1021/acs.jctc.4c01301</a>, <a class="reference external" href="https://doi.org/10.1021/acs.jctc.4c01301">doi:10.1021/acs.jctc.4c01301</a>.</p>
+</div>
+<div class="citation" id="id66" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>WHavlivcekT16<span class="fn-bracket">]</span></span>
+<p>James D. Whitfield, Vojtěch Havlíček, and Matthias Troyer. Local spin operators for fermion simulations. <em>Physical Review A</em>, 94(3):030301, 2016. URL: <a class="reference external" href="https://arxiv.org/abs/1605.09789">https://arxiv.org/abs/1605.09789</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevA.94.030301">doi:10.1103/PhysRevA.94.030301</a>.</p>
+</div>
+<div class="citation" id="id67" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Wil67<span class="fn-bracket">]</span></span>
+<p>R. M. Wilcox. Exponential operators and parameter differentiation in quantum physics. <em>Journal of Mathematical Physics</em>, 8(4):962–982, 1967. URL: <a class="reference external" href="https://doi.org/10.1063/1.1705306">https://doi.org/10.1063/1.1705306</a>, <a class="reference external" href="https://doi.org/10.1063/1.1705306">doi:10.1063/1.1705306</a>.</p>
+</div>
+<div class="citation" id="id32" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>WYAP+23<span class="fn-bracket">]</span></span>
+<p>David B. Williams–Young, Andrey Asadchev, Doru Thom Popovici, David Clark, Jonathan Waldrop, Theresa L. Windus, Edward F. Valeev, and Wibe A. de Jong. Distributed memory, GPU accelerated Fock construction for hybrid, Gaussian basis density functional theory. <em>The Journal of Chemical Physics</em>, 158(23):234104, 2023. <a class="reference external" href="https://doi.org/10.1063/5.0151070">doi:10.1063/5.0151070</a>.</p>
+</div>
+<div class="citation" id="id33" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>WYBdeJong+21<span class="fn-bracket">]</span></span>
+<p>David B. Williams–Young, Abhishek Bagusetty, Wibe A. de Jong, Douglas Doerfler, Hubertus J. J. van Dam, Álvaro Vázquez-Mayagoitia, Theresa L. Windus, and Chao Yang. Achieving performance portability in Gaussian basis set density functional theory on accelerator-based architectures in NWChemEx. <em>Parallel Computing</em>, 108:102829, 2021. <a class="reference external" href="https://doi.org/10.1016/j.parco.2021.102829">doi:10.1016/j.parco.2021.102829</a>.</p>
+</div>
+<div class="citation" id="id34" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>WYdeJongvanDamY20<span class="fn-bracket">]</span></span>
+<p>David B. Williams–Young, Wibe A. de Jong, Hubertus J. J. van Dam, and Chao Yang. On the efficient evaluation of the exchange correlation potential on graphics processing unit clusters. <em>Frontiers in Chemistry</em>, 8:581058, 2020. URL: <a class="reference external" href="https://arxiv.org/abs/2007.03143">https://arxiv.org/abs/2007.03143</a>, <a class="reference external" href="https://doi.org/10.3389/fchem.2020.581058">doi:10.3389/fchem.2020.581058</a>.</p>
+</div>
+<div class="citation" id="id13" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>WYTMZdJ23<span class="fn-bracket">]</span></span>
+<p>David B. Williams-Young, Norm M. Tubman, Carlos Mejuto-Zaera, and Wibe A. de Jong. A parallel, distributed memory implementation of the adaptive sampling configuration interaction method. <em>The Journal of Chemical Physics</em>, 158:214109, 2023. URL: <a class="reference external" href="https://arxiv.org/abs/2303.05688">https://arxiv.org/abs/2303.05688</a>, <a class="reference external" href="https://doi.org/10.1063/5.0148650">doi:10.1063/5.0148650</a>.</p>
+</div>
+<div class="citation" id="id44" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>VanVoorhisHG02<span class="fn-bracket">]</span></span>
+<p>Troy Van Voorhis and Martin Head-Gordon. A geometric approach to direct minimization. <em>Molecular Physics</em>, 100(11):1713–1721, 2002. URL: <a class="reference external" href="https://doi.org/10.1080/00268970110103642">https://doi.org/10.1080/00268970110103642</a>, <a class="reference external" href="https://doi.org/10.1080/00268970110103642">doi:10.1080/00268970110103642</a>.</p>
+</div>
+</div>
+</div>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="glossary.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Acronym definitions</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/references.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright Microsoft Corporation. All rights reserved. Licensed under the MIT License.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

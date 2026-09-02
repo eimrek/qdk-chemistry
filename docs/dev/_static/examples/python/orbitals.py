@@ -1,0 +1,92 @@
+"""Orbitals and model orbitals usage examples."""
+
+# --------------------------------------------------------------------------------------------
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License. See LICENSE.txt in the project root for license information.
+# --------------------------------------------------------------------------------------------
+
+from qdk_chemistry.algorithms import create
+from qdk_chemistry.data import Structure, ModelOrbitals
+from qdk_chemistry.data.symmetry import (
+    SymmetryLabel,
+    axes,
+    spin_index_set,
+)
+
+################################################################################
+# docs:xyz ../data/h2.structure.xyz
+# start-cell-create
+# Load H2 molecule from inline XYZ file
+structure = Structure.from_xyz("""\
+2
+H2 molecule
+H    0.000000    0.000000    0.000000
+H    0.000000    0.000000    0.740848
+""")
+
+# Obtain orbitals from a SCF calculation
+scf_solver = create("scf_solver")
+E_scf, wfn = scf_solver.run(
+    structure, charge=0, spin_multiplicity=1, basis_or_guess="sto-3g"
+)
+orbitals = wfn.get_orbitals()
+# end-cell-create
+################################################################################
+
+################################################################################
+# start-cell-model-orbitals-create
+# Set basis set size
+basis_size = 6
+
+# Set active orbitals
+alpha_active = [1, 2]
+beta_active = [2, 3, 4]
+alpha_inactive = [0, 3, 4, 5]
+beta_inactive = [0, 1, 5]
+
+active_indices = spin_index_set(basis_size, alpha_active, beta_active, equivalent=False)
+inactive_indices = spin_index_set(
+    basis_size, alpha_inactive, beta_inactive, equivalent=False
+)
+model_orbitals = ModelOrbitals(active_indices, inactive_indices)
+
+# We can then pass this object to a custom Hamiltonian constructor
+# end-cell-model-orbitals-create
+################################################################################
+
+################################################################################
+# start-cell-access
+# Select a spin channel with a SymmetryLabel, then read the symmetry-blocked block
+alpha = SymmetryLabel([axes.alpha()])
+beta = SymmetryLabel([axes.beta()])
+
+# Access orbital coefficients per spin channel
+coefficients = orbitals.coefficients()
+coeffs_alpha = coefficients.block([alpha, alpha])
+coeffs_beta = coefficients.block([beta, beta])
+
+# Access orbital energies per spin channel
+energies = orbitals.energies()
+energies_alpha = energies.block([alpha])
+energies_beta = energies.block([beta])
+# Get active space indices per spin channel
+active_indices_alpha = orbitals.active_indices().indices(alpha)
+active_indices_beta = orbitals.active_indices().indices(beta)
+
+# Access atomic orbital overlap matrix
+ao_overlap = orbitals.get_overlap_matrix()
+
+# Access basis set information
+basis_set = orbitals.get_basis_set()
+
+# Check calculation type
+is_restricted = orbitals.is_restricted()
+
+# Get size information
+num_molecular_orbitals = orbitals.get_num_molecular_orbitals()
+num_atomic_orbitals = orbitals.get_num_atomic_orbitals()
+
+summary = orbitals.get_summary()
+print(summary)
+# end-cell-access
+################################################################################

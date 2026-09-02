@@ -1,0 +1,1046 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>qdk_chemistry.plugins package &#8212; QDK/Chemistry dev</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=6c042e97" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../../_static/documentation_options.js?v=3ce10a4d"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/tabs.js?v=3ee01567"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/api_autogen/qdk_chemistry.plugins';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://eimrek.github.io/qdk-chemistry/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            true;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="canonical" href="https://eimrek.github.io/qdk-chemistry/dev/api/api_autogen/qdk_chemistry.plugins.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="qdk_chemistry.plugins.discovery package" href="qdk_chemistry.plugins.discovery.html" />
+    <link rel="prev" title="qdk_chemistry.algorithms.stability_checker module" href="qdk_chemistry.algorithms.stability_checker.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">QDK/Chemistry</p>
+  
+</a></div>
+    
+      <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/microsoft/qdk-chemistry" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/microsoft/qdk-chemistry" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Documentation">
+  <p class="bd-links__title" role="heading" aria-level="1">Documentation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../user/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/features.html">Features, methods and dependencies</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../user/comprehensive/index.html">In-depth user guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../user/comprehensive/design/index.html">High-level design</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../user/comprehensive/data/index.html">Data classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/data/serialization.html">Serialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/data/ansatz.html">Ansatz</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/data/basis_set.html">BasisSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/data/hamiltonian.html">Hamiltonian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/data/orbitals.html">Orbitals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/data/lattice_graph.html">LatticeGraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/data/majorana_mapping.html">MajoranaMapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/data/pauli_operator.html">Pauli Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/data/structure.html">Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/data/symmetries.html">Symmetries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/data/wavefunction.html">Wavefunction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/data/qpe_result.html">QpeResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/data/circuit.html">Circuit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../user/comprehensive/algorithms/index.html">Algorithm classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/factory_pattern.html">Factory pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/settings.html">Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/active_space.html">Active space selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/effective_hamiltonian_constructor.html">Effective Hamiltonian construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/expectation_estimator.html">Energy estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/hamiltonian_constructor.html">Hamiltonian construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/localizer.html">Orbital localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/mc_calculator.html">Multi-configuration calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/mcscf.html">Multi-Configuration Self-Consistent Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/pmc.html">Projected Multi-Configuration calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/qubit_mapper.html">Qubit mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/scf_solver.html">Self-consistent field (SCF) solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/stability_checker.html">Stability analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/state_preparation.html">State preparation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/hadamard_test.html">Hadamard test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/phase_estimation.html">Phase estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/qpe_circuit_builder.html">Phase estimation circuit builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/amplitude_amplification.html">Amplitude amplification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/evolution_circuit_builder.html">Evolution circuit builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/hamiltonian_unitary_builder.html">Hamiltonian Unitary Builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/propagator.html">Propagator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/hamiltonian_simulation.html">Hamiltonian simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/circuit_mapper.html">Controlled circuit mapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../user/comprehensive/algorithms/circuit_executor.html">Circuit execution</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user/comprehensive/basis_functionals.html">Available functionals and basis sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user/comprehensive/model_hamiltonians.html">Model Hamiltonians</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user/comprehensive/plugins.html">Plugins</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/migrating-data-files.html">Migrating data files between serialization versions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../tutorials/ground_state_molecular_energies_with_qpe/index.html">Ground-state molecular energies with quantum phase estimation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/ground_state_molecular_energies_with_qpe/00_before_you_begin.html">Before you begin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/ground_state_molecular_energies_with_qpe/lab_notebook.html">Set up your lab notebook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/ground_state_molecular_energies_with_qpe/01_energy_and_accuracy.html">Energy and accuracy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/ground_state_molecular_energies_with_qpe/02_describing_the_molecule.html">Describing the molecule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/ground_state_molecular_energies_with_qpe/03_choosing_the_active_space.html">Choosing the active space</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/ground_state_molecular_energies_with_qpe/04_putting_the_problem_on_qubits.html">Mapping the problem to qubits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/ground_state_molecular_energies_with_qpe/05_preparing_the_trial_state.html">Preparing the trial state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/ground_state_molecular_energies_with_qpe/06_iterative_phase_estimation.html">Iterative quantum phase estimation</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../python_api.html">Python API</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="qdk_chemistry.data.html">qdk_chemistry.data package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.data.enums.html">qdk_chemistry.data.enums package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.data.time_dependent_qubit_hamiltonian.html">qdk_chemistry.data.time_dependent_qubit_hamiltonian package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.data.unitary_representation.html">qdk_chemistry.data.unitary_representation package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.data._hashing.html">qdk_chemistry.data._hashing module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.data._spin_channels.html">qdk_chemistry.data._spin_channels module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.data._type_name.html">qdk_chemistry.data._type_name module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.data.base.html">qdk_chemistry.data.base module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.data.circuit.html">qdk_chemistry.data.circuit module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.data.circuit_executor_data.html">qdk_chemistry.data.circuit_executor_data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.data.encoding_validation.html">qdk_chemistry.data.encoding_validation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.data.estimator_data.html">qdk_chemistry.data.estimator_data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.data.noise_models.html">qdk_chemistry.data.noise_models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.data.qpe_result.html">qdk_chemistry.data.qpe_result module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.data.qubit_operator.html">qdk_chemistry.data.qubit_operator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.data.registry.html">qdk_chemistry.data.registry module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.data.symmetries.html">qdk_chemistry.data.symmetries module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.data.symmetry.html">qdk_chemistry.data.symmetry module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.data.term_partition.html">qdk_chemistry.data.term_partition module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="qdk_chemistry.algorithms.html">qdk_chemistry.algorithms package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.amplitude_amplification.html">qdk_chemistry.algorithms.amplitude_amplification package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.circuit_executor.html">qdk_chemistry.algorithms.circuit_executor package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.circuit_mapper.html">qdk_chemistry.algorithms.circuit_mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.controlled_circuit_mapper.html">qdk_chemistry.algorithms.controlled_circuit_mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.expectation_estimator.html">qdk_chemistry.algorithms.expectation_estimator package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.hadamard_test.html">qdk_chemistry.algorithms.hadamard_test package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.hamiltonian_unitary_builder.html">qdk_chemistry.algorithms.hamiltonian_unitary_builder package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.phase_estimation.html">qdk_chemistry.algorithms.phase_estimation package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.propagator.html">qdk_chemistry.algorithms.propagator package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.qubit_mapper.html">qdk_chemistry.algorithms.qubit_mapper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.state_preparation.html">qdk_chemistry.algorithms.state_preparation package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.term_grouper.html">qdk_chemistry.algorithms.term_grouper package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.time_evolution.html">qdk_chemistry.algorithms.time_evolution package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.active_space_selector.html">qdk_chemistry.algorithms.active_space_selector module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.base.html">qdk_chemistry.algorithms.base module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.dynamical_correlation_calculator.html">qdk_chemistry.algorithms.dynamical_correlation_calculator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.effective_hamiltonian_constructor.html">qdk_chemistry.algorithms.effective_hamiltonian_constructor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.geometry_optimization.html">qdk_chemistry.algorithms.geometry_optimization module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.hamiltonian_constructor.html">qdk_chemistry.algorithms.hamiltonian_constructor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.hashing.html">qdk_chemistry.algorithms.hashing module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.multi_configuration_calculator.html">qdk_chemistry.algorithms.multi_configuration_calculator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.multi_configuration_scf.html">qdk_chemistry.algorithms.multi_configuration_scf module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.nuclear_derivative.html">qdk_chemistry.algorithms.nuclear_derivative module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.orbital_localizer.html">qdk_chemistry.algorithms.orbital_localizer module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.population_analysis.html">qdk_chemistry.algorithms.population_analysis module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.projected_multi_configuration_calculator.html">qdk_chemistry.algorithms.projected_multi_configuration_calculator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.qubit_hamiltonian_solver.html">qdk_chemistry.algorithms.qubit_hamiltonian_solver module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.registry.html">qdk_chemistry.algorithms.registry module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.scf_solver.html">qdk_chemistry.algorithms.scf_solver module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.algorithms.stability_checker.html">qdk_chemistry.algorithms.stability_checker module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">qdk_chemistry.plugins package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.discovery.html">qdk_chemistry.plugins.discovery package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.geometric.html">qdk_chemistry.plugins.geometric package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.networkx.html">qdk_chemistry.plugins.networkx package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.openfermion.html">qdk_chemistry.plugins.openfermion package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.html">qdk_chemistry.plugins.pyscf package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.html">qdk_chemistry.plugins.qiskit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.base.html">qdk_chemistry.plugins.base module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="qdk_chemistry.utils.html">qdk_chemistry.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.utils.qsharp.html">qdk_chemistry.utils.qsharp package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.utils.cubegen.html">qdk_chemistry.utils.cubegen module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.utils.enum.html">qdk_chemistry.utils.enum module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.utils.model_hamiltonians.html">qdk_chemistry.utils.model_hamiltonians module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.utils.pauli_commutation.html">qdk_chemistry.utils.pauli_commutation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.utils.pauli_matrix.html">qdk_chemistry.utils.pauli_matrix module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.utils.telemetry.html">qdk_chemistry.utils.telemetry module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.utils.telemetry_events.html">qdk_chemistry.utils.telemetry_events module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.utils.wavefunction.html">qdk_chemistry.utils.wavefunction module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.utils.zassenhaus_generation.html">qdk_chemistry.utils.zassenhaus_generation module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="qdk_chemistry.constants.html">qdk_chemistry.constants module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../cpp_api.html">C++ API</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1data.html">Namespace qdk::chemistry::data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1algorithms.html">Namespace qdk::chemistry::algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1utils.html">Namespace qdk::chemistry::utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../breathe_api_autogen/namespace/namespaceqdk_1_1chemistry_1_1constants.html">Namespace qdk::chemistry::constants</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Supporting Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../release-notes/index.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../release-notes/v2.1.0.html">What’s New in Version 2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../release-notes/v2.0.0.html">What’s New in Version 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../release-notes/v1.1.0.html">What’s New in Version 1.1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Acronym definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../python_api.html" class="nav-link">Python API</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">qdk_chemistry.plugins package</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-qdk_chemistry.plugins">
+<span id="qdk-chemistry-plugins-package"></span><h1>qdk_chemistry.plugins package<a class="headerlink" href="#module-qdk_chemistry.plugins" title="Link to this heading">#</a></h1>
+<p>Plugin registration and discovery for QDK/Chemistry extensions.</p>
+<p>Plugins connect QDK/Chemistry to optional chemistry packages, quantum software,
+and execution services while preserving the library’s common interfaces. An
+extension can contribute:</p>
+<ul class="simple">
+<li><p>implementations of existing algorithm types or entirely new algorithm types;</p></li>
+<li><p>data classes used by algorithm inputs and outputs;</p></li>
+<li><p>remote execution backends; and</p></li>
+<li><p>cache backends.</p></li>
+</ul>
+<section id="external-plugins">
+<h2>External plugins<a class="headerlink" href="#external-plugins" title="Link to this heading">#</a></h2>
+<p>An installed package exposes a <a class="reference internal" href="#qdk_chemistry.plugins.QdkChemistryPlugin" title="qdk_chemistry.plugins.QdkChemistryPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">QdkChemistryPlugin</span></code></a> subclass through the
+<code class="docutils literal notranslate"><span class="pre">qdk_chemistry.plugins</span></code> entry-point group:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[project.entry-points.</span><span class="s2">&quot;qdk_chemistry.plugins&quot;</span><span class="k">]</span>
+<span class="n">custom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;custom_package.plugin:CustomPlugin&quot;</span>
+</pre></div>
+</div>
+<p>Importing <a class="reference internal" href="qdk_chemistry.html#module-qdk_chemistry" title="qdk_chemistry"><code class="xref py py-mod docutils literal notranslate"><span class="pre">qdk_chemistry</span></code></a> discovers each entry point and calls its
+<a class="reference internal" href="#qdk_chemistry.plugins.QdkChemistryPlugin.register" title="qdk_chemistry.plugins.QdkChemistryPlugin.register"><code class="xref py py-meth docutils literal notranslate"><span class="pre">QdkChemistryPlugin.register()</span></code></a> method with a <a class="reference internal" href="#qdk_chemistry.plugins.PluginRegistrar" title="qdk_chemistry.plugins.PluginRegistrar"><code class="xref py py-class docutils literal notranslate"><span class="pre">PluginRegistrar</span></code></a>. The
+registrar provides access to the standard QDK/Chemistry registries without
+requiring application code to import the plugin package directly.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qdk_chemistry.plugins</span><span class="w"> </span><span class="kn">import</span> <span class="n">PluginRegistrar</span><span class="p">,</span> <span class="n">QdkChemistryPlugin</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CustomPlugin</span><span class="p">(</span><span class="n">QdkChemistryPlugin</span><span class="p">):</span>
+     <span class="k">def</span><span class="w"> </span><span class="nf">register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">registrar</span><span class="p">:</span> <span class="n">PluginRegistrar</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+          <span class="n">registrar</span><span class="o">.</span><span class="n">register_algorithm</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">CustomAlgorithm</span><span class="p">())</span>
+          <span class="n">registrar</span><span class="o">.</span><span class="n">register_remote_backend</span><span class="p">(</span><span class="s2">&quot;custom&quot;</span><span class="p">,</span> <span class="n">CustomRemoteBackend</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="bundled-integrations">
+<h2>Bundled integrations<a class="headerlink" href="#bundled-integrations" title="Link to this heading">#</a></h2>
+<p>QDK/Chemistry also includes integrations for:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="qdk_chemistry.plugins.pyscf.html#module-qdk_chemistry.plugins.pyscf" title="qdk_chemistry.plugins.pyscf"><code class="xref py py-mod docutils literal notranslate"><span class="pre">qdk_chemistry.plugins.pyscf</span></code></a> for electronic-structure algorithms;</p></li>
+<li><p><a class="reference internal" href="qdk_chemistry.plugins.qiskit.html#module-qdk_chemistry.plugins.qiskit" title="qdk_chemistry.plugins.qiskit"><code class="xref py py-mod docutils literal notranslate"><span class="pre">qdk_chemistry.plugins.qiskit</span></code></a> for circuit construction, mapping, and execution;</p></li>
+<li><p><a class="reference internal" href="qdk_chemistry.plugins.openfermion.html#module-qdk_chemistry.plugins.openfermion" title="qdk_chemistry.plugins.openfermion"><code class="xref py py-mod docutils literal notranslate"><span class="pre">qdk_chemistry.plugins.openfermion</span></code></a> for operator conversion and qubit mapping;</p></li>
+<li><p><a class="reference internal" href="qdk_chemistry.plugins.networkx.html#module-qdk_chemistry.plugins.networkx" title="qdk_chemistry.plugins.networkx"><code class="xref py py-mod docutils literal notranslate"><span class="pre">qdk_chemistry.plugins.networkx</span></code></a> for graph-coloring term grouping; and</p></li>
+<li><p><a class="reference internal" href="qdk_chemistry.plugins.geometric.html#module-qdk_chemistry.plugins.geometric" title="qdk_chemistry.plugins.geometric"><code class="xref py py-mod docutils literal notranslate"><span class="pre">qdk_chemistry.plugins.geometric</span></code></a> for molecular geometry optimization.</p></li>
+</ul>
+<p>Bundled integrations are loaded automatically when their optional dependencies
+are available. Their implementations can then be created through the standard
+algorithm registry, for example <code class="docutils literal notranslate"><span class="pre">create(&quot;scf_solver&quot;,</span> <span class="pre">&quot;pyscf&quot;)</span></code>.</p>
+</section>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.ChemistryPlugin">
+<span class="sig-prename descclassname"><span class="pre">qdk_chemistry.plugins.</span></span><span class="sig-name descname"><span class="pre">ChemistryPlugin</span></span><a class="headerlink" href="#qdk_chemistry.plugins.ChemistryPlugin" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="qdk_chemistry.plugins.base.html#qdk_chemistry.plugins.base.QdkChemistryPlugin" title="qdk_chemistry.plugins.base.QdkChemistryPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">QdkChemistryPlugin</span></code></a></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.DuplicateRegistrationError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">qdk_chemistry.plugins.</span></span><span class="sig-name descname"><span class="pre">DuplicateRegistrationError</span></span><a class="headerlink" href="#qdk_chemistry.plugins.DuplicateRegistrationError" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.PluginRegistrar">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">qdk_chemistry.plugins.</span></span><span class="sig-name descname"><span class="pre">PluginRegistrar</span></span><a class="headerlink" href="#qdk_chemistry.plugins.PluginRegistrar" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Register plugin capabilities through the existing public registries.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.PluginRegistrar.register_algorithm_factory">
+<span class="sig-name descname"><span class="pre">register_algorithm_factory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">factory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qdk_chemistry.plugins.PluginRegistrar.register_algorithm_factory" title="Link to this definition">#</a></dt>
+<dd><p>Register a factory that introduces an algorithm type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>factory</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="qdk_chemistry.algorithms.base.html#qdk_chemistry.algorithms.base.AlgorithmFactory" title="qdk_chemistry.algorithms.base.AlgorithmFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmFactory</span></code></a></span>) – Factory that defines and creates the algorithm type.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#qdk_chemistry.plugins.DuplicateRegistrationError" title="qdk_chemistry.plugins.DuplicateRegistrationError"><strong>DuplicateRegistrationError</strong></a> – If the algorithm type is already registered.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.PluginRegistrar.register_algorithm">
+<span class="sig-name descname"><span class="pre">register_algorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">factory</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qdk_chemistry.plugins.PluginRegistrar.register_algorithm" title="Link to this definition">#</a></dt>
+<dd><p>Register an algorithm factory and its DataClass input or output types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>factory</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a>[[], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span>) – Factory that creates the algorithm implementation.</p></li>
+<li><p><strong>data_classes</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]]</span>) – DataClass loaders used by the algorithm’s inputs or outputs.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#qdk_chemistry.plugins.DuplicateRegistrationError" title="qdk_chemistry.plugins.DuplicateRegistrationError"><strong>DuplicateRegistrationError</strong></a> – If the algorithm name or a DataClass wire type is already registered.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.14)"><strong>TypeError</strong></a> – If a DataClass loader is invalid.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.PluginRegistrar.register_dataclass">
+<span class="sig-name descname"><span class="pre">register_dataclass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataclass_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qdk_chemistry.plugins.PluginRegistrar.register_dataclass" title="Link to this definition">#</a></dt>
+<dd><p>Register a DataClass loader used in algorithm inputs or outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dataclass_type</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span>) – Canonical DataClass loader to register.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#qdk_chemistry.plugins.DuplicateRegistrationError" title="qdk_chemistry.plugins.DuplicateRegistrationError"><strong>DuplicateRegistrationError</strong></a> – If the DataClass wire type is already registered.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.PluginRegistrar.register_remote_backend">
+<span class="sig-name descname"><span class="pre">register_remote_backend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backend_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qdk_chemistry.plugins.PluginRegistrar.register_remote_backend" title="Link to this definition">#</a></dt>
+<dd><p>Register a remote execution backend.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Registry name for the backend.</p></li>
+<li><p><strong>backend_type</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span>) – Backend class to register.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#qdk_chemistry.plugins.DuplicateRegistrationError" title="qdk_chemistry.plugins.DuplicateRegistrationError"><strong>DuplicateRegistrationError</strong></a> – If the backend name or class is already registered.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.PluginRegistrar.register_cache_backend">
+<span class="sig-name descname"><span class="pre">register_cache_backend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backend_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qdk_chemistry.plugins.PluginRegistrar.register_cache_backend" title="Link to this definition">#</a></dt>
+<dd><p>Register a cache backend.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Registry name for the cache backend.</p></li>
+<li><p><strong>backend_type</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span>) – Cache backend class to register.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#qdk_chemistry.plugins.DuplicateRegistrationError" title="qdk_chemistry.plugins.DuplicateRegistrationError"><strong>DuplicateRegistrationError</strong></a> – If the cache name or class is already registered.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.QdkChemistryPlugin">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">qdk_chemistry.plugins.</span></span><span class="sig-name descname"><span class="pre">QdkChemistryPlugin</span></span><a class="headerlink" href="#qdk_chemistry.plugins.QdkChemistryPlugin" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<p>Base class for plugins discovered through <code class="docutils literal notranslate"><span class="pre">qdk_chemistry.plugins</span></code>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.QdkChemistryPlugin.api_version">
+<span class="sig-name descname"><span class="pre">api_version</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#qdk_chemistry.plugins.QdkChemistryPlugin.api_version" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qdk_chemistry.plugins.QdkChemistryPlugin.register">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registrar</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qdk_chemistry.plugins.QdkChemistryPlugin.register" title="Link to this definition">#</a></dt>
+<dd><p>Register the capabilities provided by this plugin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>registrar</strong> (<a class="reference internal" href="qdk_chemistry.plugins.base.html#qdk_chemistry.plugins.base.PluginRegistrar" title="qdk_chemistry.plugins.base.PluginRegistrar"><em>PluginRegistrar</em></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="qdk_chemistry.plugins.discovery.html">qdk_chemistry.plugins.discovery package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="qdk_chemistry.plugins.discovery.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.discovery._sdk.html">qdk_chemistry.plugins.discovery._sdk module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.discovery._sdk.html#qdk_chemistry.plugins.discovery._sdk.unquote"><code class="docutils literal notranslate"><span class="pre">unquote()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.discovery._sdk.html#qdk_chemistry.plugins.discovery._sdk.urlsplit"><code class="docutils literal notranslate"><span class="pre">urlsplit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.discovery._sdk.html#qdk_chemistry.plugins.discovery._sdk.NoPolling"><code class="docutils literal notranslate"><span class="pre">NoPolling</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.discovery._sdk.html#qdk_chemistry.plugins.discovery._sdk.create_credential"><code class="docutils literal notranslate"><span class="pre">create_credential()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.discovery._sdk.html#qdk_chemistry.plugins.discovery._sdk.create_workspace_client"><code class="docutils literal notranslate"><span class="pre">create_workspace_client()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.discovery._sdk.html#qdk_chemistry.plugins.discovery._sdk.response_mapping"><code class="docutils literal notranslate"><span class="pre">response_mapping()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.discovery.backend.html">qdk_chemistry.plugins.discovery.backend module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.discovery.backend.html#qdk_chemistry.plugins.discovery.backend.create_credential"><code class="docutils literal notranslate"><span class="pre">create_credential()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.discovery.backend.html#qdk_chemistry.plugins.discovery.backend.create_workspace_client"><code class="docutils literal notranslate"><span class="pre">create_workspace_client()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.discovery.backend.html#qdk_chemistry.plugins.discovery.backend.response_mapping"><code class="docutils literal notranslate"><span class="pre">response_mapping()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.discovery.backend.html#qdk_chemistry.plugins.discovery.backend.JobStatus"><code class="docutils literal notranslate"><span class="pre">JobStatus</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.discovery.backend.html#qdk_chemistry.plugins.discovery.backend.RemoteBackend"><code class="docutils literal notranslate"><span class="pre">RemoteBackend</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.discovery.backend.html#qdk_chemistry.plugins.discovery.backend.deserialize_outputs"><code class="docutils literal notranslate"><span class="pre">deserialize_outputs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.discovery.backend.html#qdk_chemistry.plugins.discovery.backend.get_serialized_file_names"><code class="docutils literal notranslate"><span class="pre">get_serialized_file_names()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.discovery.backend.html#qdk_chemistry.plugins.discovery.backend.serialize_inputs"><code class="docutils literal notranslate"><span class="pre">serialize_inputs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.discovery.backend.html#qdk_chemistry.plugins.discovery.backend.DiscoveryBackend"><code class="docutils literal notranslate"><span class="pre">DiscoveryBackend</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="qdk_chemistry.plugins.geometric.html">qdk_chemistry.plugins.geometric package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="qdk_chemistry.plugins.geometric.html#qdk_chemistry.plugins.geometric.load"><code class="docutils literal notranslate"><span class="pre">load()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="qdk_chemistry.plugins.geometric.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.geometric.geometry_optimizer.html">qdk_chemistry.plugins.geometric.geometry_optimizer module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.geometric.geometry_optimizer.html#qdk_chemistry.plugins.geometric.geometry_optimizer.GeometricOptimizer"><code class="docutils literal notranslate"><span class="pre">GeometricOptimizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.geometric.geometry_optimizer.html#qdk_chemistry.plugins.geometric.geometry_optimizer.GeometricOptimizerSettings"><code class="docutils literal notranslate"><span class="pre">GeometricOptimizerSettings</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="qdk_chemistry.plugins.networkx.html">qdk_chemistry.plugins.networkx package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="qdk_chemistry.plugins.networkx.html#qdk_chemistry.plugins.networkx.load"><code class="docutils literal notranslate"><span class="pre">load()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="qdk_chemistry.plugins.networkx.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.networkx.term_grouper.html">qdk_chemistry.plugins.networkx.term_grouper module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.networkx.term_grouper.html#qdk_chemistry.plugins.networkx.term_grouper.NxFullCommutingTermGrouper"><code class="docutils literal notranslate"><span class="pre">NxFullCommutingTermGrouper</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.networkx.term_grouper.html#qdk_chemistry.plugins.networkx.term_grouper.NxQubitWiseCommutingTermGrouper"><code class="docutils literal notranslate"><span class="pre">NxQubitWiseCommutingTermGrouper</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="qdk_chemistry.plugins.openfermion.html">qdk_chemistry.plugins.openfermion package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="qdk_chemistry.plugins.openfermion.html#qdk_chemistry.plugins.openfermion.load"><code class="docutils literal notranslate"><span class="pre">load()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="qdk_chemistry.plugins.openfermion.html#qdk_chemistry.plugins.openfermion.openfermion_load"><code class="docutils literal notranslate"><span class="pre">openfermion_load()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="qdk_chemistry.plugins.openfermion.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.openfermion.conversion.html">qdk_chemistry.plugins.openfermion.conversion module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.openfermion.conversion.html#qdk_chemistry.plugins.openfermion.conversion.hamiltonian_to_fermion_operator"><code class="docutils literal notranslate"><span class="pre">hamiltonian_to_fermion_operator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.openfermion.conversion.html#qdk_chemistry.plugins.openfermion.conversion.hamiltonian_to_interaction_operator"><code class="docutils literal notranslate"><span class="pre">hamiltonian_to_interaction_operator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.openfermion.conversion.html#qdk_chemistry.plugins.openfermion.conversion.qubit_hamiltonian_to_qubit_operator"><code class="docutils literal notranslate"><span class="pre">qubit_hamiltonian_to_qubit_operator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.openfermion.conversion.html#qdk_chemistry.plugins.openfermion.conversion.qubit_operator_to_qubit_hamiltonian"><code class="docutils literal notranslate"><span class="pre">qubit_operator_to_qubit_hamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.openfermion.qubit_mapper.html">qdk_chemistry.plugins.openfermion.qubit_mapper module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.openfermion.qubit_mapper.html#qdk_chemistry.plugins.openfermion.qubit_mapper.OpenFermionQubitMapper"><code class="docutils literal notranslate"><span class="pre">OpenFermionQubitMapper</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.openfermion.qubit_mapper.html#qdk_chemistry.plugins.openfermion.qubit_mapper.OpenFermionQubitMapperSettings"><code class="docutils literal notranslate"><span class="pre">OpenFermionQubitMapperSettings</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.html">qdk_chemistry.plugins.pyscf package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.html#qdk_chemistry.plugins.pyscf.load"><code class="docutils literal notranslate"><span class="pre">load()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.active_space_avas.html">qdk_chemistry.plugins.pyscf.active_space_avas module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.active_space_avas.html#qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVAS"><code class="docutils literal notranslate"><span class="pre">PyscfAVAS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.active_space_avas.html#qdk_chemistry.plugins.pyscf.active_space_avas.PyscfAVASSettings"><code class="docutils literal notranslate"><span class="pre">PyscfAVASSettings</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.conversion.html">qdk_chemistry.plugins.pyscf.conversion module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.conversion.html#qdk_chemistry.plugins.pyscf.conversion.basis_to_pyscf_mol"><code class="docutils literal notranslate"><span class="pre">basis_to_pyscf_mol()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.conversion.html#qdk_chemistry.plugins.pyscf.conversion.hamiltonian_to_scf"><code class="docutils literal notranslate"><span class="pre">hamiltonian_to_scf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.conversion.html#qdk_chemistry.plugins.pyscf.conversion.pyscf_mol_to_qdk_basis"><code class="docutils literal notranslate"><span class="pre">pyscf_mol_to_qdk_basis()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.conversion.html#qdk_chemistry.plugins.pyscf.conversion.structure_to_pyscf_atom_labels"><code class="docutils literal notranslate"><span class="pre">structure_to_pyscf_atom_labels()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.coupled_cluster.html">qdk_chemistry.plugins.pyscf.coupled_cluster module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.coupled_cluster.html#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterCalculator"><code class="docutils literal notranslate"><span class="pre">PyscfCoupledClusterCalculator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.coupled_cluster.html#qdk_chemistry.plugins.pyscf.coupled_cluster.PyscfCoupledClusterSettings"><code class="docutils literal notranslate"><span class="pre">PyscfCoupledClusterSettings</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.localization.html">qdk_chemistry.plugins.pyscf.localization module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.localization.html#qdk_chemistry.plugins.pyscf.localization.PyscfLocalizer"><code class="docutils literal notranslate"><span class="pre">PyscfLocalizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.localization.html#qdk_chemistry.plugins.pyscf.localization.PyscfLocalizerSettings"><code class="docutils literal notranslate"><span class="pre">PyscfLocalizerSettings</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.mcscf.html">qdk_chemistry.plugins.pyscf.mcscf module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.mcscf.html#qdk_chemistry.plugins.pyscf.mcscf.PyscfMcscfCalculator"><code class="docutils literal notranslate"><span class="pre">PyscfMcscfCalculator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.mcscf.html#qdk_chemistry.plugins.pyscf.mcscf.PyscfMcscfSettings"><code class="docutils literal notranslate"><span class="pre">PyscfMcscfSettings</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.population_analysis.html">qdk_chemistry.plugins.pyscf.population_analysis module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.population_analysis.html#qdk_chemistry.plugins.pyscf.population_analysis.PyscfPopulationAnalysisSettings"><code class="docutils literal notranslate"><span class="pre">PyscfPopulationAnalysisSettings</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.population_analysis.html#qdk_chemistry.plugins.pyscf.population_analysis.PyscfPopulationAnalyzer"><code class="docutils literal notranslate"><span class="pre">PyscfPopulationAnalyzer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.scf_solver.html">qdk_chemistry.plugins.pyscf.scf_solver module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.scf_solver.html#qdk_chemistry.plugins.pyscf.scf_solver.PyscfScfSettings"><code class="docutils literal notranslate"><span class="pre">PyscfScfSettings</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.scf_solver.html#qdk_chemistry.plugins.pyscf.scf_solver.PyscfScfSolver"><code class="docutils literal notranslate"><span class="pre">PyscfScfSolver</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.scf_solver.html#qdk_chemistry.plugins.pyscf.scf_solver.PyscfStabilizedScfSettings"><code class="docutils literal notranslate"><span class="pre">PyscfStabilizedScfSettings</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.scf_solver.html#qdk_chemistry.plugins.pyscf.scf_solver.PyscfStabilizedScfSolver"><code class="docutils literal notranslate"><span class="pre">PyscfStabilizedScfSolver</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.stability.html">qdk_chemistry.plugins.pyscf.stability module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.stability.html#qdk_chemistry.plugins.pyscf.stability.PyscfStabilityChecker"><code class="docutils literal notranslate"><span class="pre">PyscfStabilityChecker</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.pyscf.stability.html#qdk_chemistry.plugins.pyscf.stability.PyscfStabilitySettings"><code class="docutils literal notranslate"><span class="pre">PyscfStabilitySettings</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.html">qdk_chemistry.plugins.qiskit package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.html#qdk_chemistry.plugins.qiskit.load"><code class="docutils literal notranslate"><span class="pre">load()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.html#qdk_chemistry.plugins.qiskit.qiskit_load"><code class="docutils literal notranslate"><span class="pre">qiskit_load()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.html#qdk_chemistry.plugins.qiskit.qiskit_nature_load"><code class="docutils literal notranslate"><span class="pre">qiskit_nature_load()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.html#qdk_chemistry.plugins.qiskit.qiskit_ibm_runtime_load"><code class="docutils literal notranslate"><span class="pre">qiskit_ibm_runtime_load()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.html#qdk_chemistry.plugins.qiskit.qiskit_aer_load"><code class="docutils literal notranslate"><span class="pre">qiskit_aer_load()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.qiskit._interop.html">qdk_chemistry.plugins.qiskit._interop package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.qiskit._interop.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.circuit_executor.html">qdk_chemistry.plugins.qiskit.circuit_executor module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.circuit_executor.html#qdk_chemistry.plugins.qiskit.circuit_executor.QiskitAerSimulator"><code class="docutils literal notranslate"><span class="pre">QiskitAerSimulator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.circuit_executor.html#qdk_chemistry.plugins.qiskit.circuit_executor.QiskitAerSimulatorSettings"><code class="docutils literal notranslate"><span class="pre">QiskitAerSimulatorSettings</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.conversion.html">qdk_chemistry.plugins.qiskit.conversion module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.conversion.html#qdk_chemistry.plugins.qiskit.conversion.apply_matrix_compression_ops"><code class="docutils literal notranslate"><span class="pre">apply_matrix_compression_ops()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.conversion.html#qdk_chemistry.plugins.qiskit.conversion.create_statevector_from_wavefunction"><code class="docutils literal notranslate"><span class="pre">create_statevector_from_wavefunction()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.phase_estimation_circuit_builder.html">qdk_chemistry.plugins.qiskit.phase_estimation_circuit_builder module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.phase_estimation_circuit_builder.html#qdk_chemistry.plugins.qiskit.phase_estimation_circuit_builder.QiskitIterativeQpeCircuitBuilder"><code class="docutils literal notranslate"><span class="pre">QiskitIterativeQpeCircuitBuilder</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.phase_estimation_circuit_builder.html#qdk_chemistry.plugins.qiskit.phase_estimation_circuit_builder.QiskitStandardQpeCircuitBuilder"><code class="docutils literal notranslate"><span class="pre">QiskitStandardQpeCircuitBuilder</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.qubit_mapper.html">qdk_chemistry.plugins.qiskit.qubit_mapper module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.qubit_mapper.html#qdk_chemistry.plugins.qiskit.qubit_mapper.QiskitQubitMapper"><code class="docutils literal notranslate"><span class="pre">QiskitQubitMapper</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.qubit_mapper.html#qdk_chemistry.plugins.qiskit.qubit_mapper.QiskitQubitMapperSettings"><code class="docutils literal notranslate"><span class="pre">QiskitQubitMapperSettings</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.regular_isometry.html">qdk_chemistry.plugins.qiskit.regular_isometry module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.regular_isometry.html#qdk_chemistry.plugins.qiskit.regular_isometry.RegularIsometryStatePreparation"><code class="docutils literal notranslate"><span class="pre">RegularIsometryStatePreparation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qdk_chemistry.plugins.qiskit.regular_isometry.html#qdk_chemistry.plugins.qiskit.regular_isometry.RegularIsometryStatePreparationSettings"><code class="docutils literal notranslate"><span class="pre">RegularIsometryStatePreparationSettings</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="qdk_chemistry.plugins.base.html">qdk_chemistry.plugins.base module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="qdk_chemistry.plugins.base.html#qdk_chemistry.plugins.base.ChemistryPlugin"><code class="docutils literal notranslate"><span class="pre">ChemistryPlugin</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="qdk_chemistry.plugins.base.html#qdk_chemistry.plugins.base.PluginRegistrar"><code class="docutils literal notranslate"><span class="pre">PluginRegistrar</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.base.html#qdk_chemistry.plugins.base.PluginRegistrar.register_algorithm_factory"><code class="docutils literal notranslate"><span class="pre">PluginRegistrar.register_algorithm_factory()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.base.html#qdk_chemistry.plugins.base.PluginRegistrar.register_algorithm"><code class="docutils literal notranslate"><span class="pre">PluginRegistrar.register_algorithm()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.base.html#qdk_chemistry.plugins.base.PluginRegistrar.register_dataclass"><code class="docutils literal notranslate"><span class="pre">PluginRegistrar.register_dataclass()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.base.html#qdk_chemistry.plugins.base.PluginRegistrar.register_remote_backend"><code class="docutils literal notranslate"><span class="pre">PluginRegistrar.register_remote_backend()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.base.html#qdk_chemistry.plugins.base.PluginRegistrar.register_cache_backend"><code class="docutils literal notranslate"><span class="pre">PluginRegistrar.register_cache_backend()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qdk_chemistry.plugins.base.html#qdk_chemistry.plugins.base.QdkChemistryPlugin"><code class="docutils literal notranslate"><span class="pre">QdkChemistryPlugin</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.base.html#qdk_chemistry.plugins.base.QdkChemistryPlugin.api_version"><code class="docutils literal notranslate"><span class="pre">QdkChemistryPlugin.api_version</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="qdk_chemistry.plugins.base.html#qdk_chemistry.plugins.base.QdkChemistryPlugin.register"><code class="docutils literal notranslate"><span class="pre">QdkChemistryPlugin.register()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="qdk_chemistry.algorithms.stability_checker.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">qdk_chemistry.algorithms.stability_checker module</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="qdk_chemistry.plugins.discovery.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">qdk_chemistry.plugins.discovery package</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#external-plugins">External plugins</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bundled-integrations">Bundled integrations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qdk_chemistry.plugins.ChemistryPlugin"><code class="docutils literal notranslate"><span class="pre">ChemistryPlugin</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qdk_chemistry.plugins.DuplicateRegistrationError"><code class="docutils literal notranslate"><span class="pre">DuplicateRegistrationError</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qdk_chemistry.plugins.PluginRegistrar"><code class="docutils literal notranslate"><span class="pre">PluginRegistrar</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qdk_chemistry.plugins.PluginRegistrar.register_algorithm_factory"><code class="docutils literal notranslate"><span class="pre">PluginRegistrar.register_algorithm_factory()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qdk_chemistry.plugins.PluginRegistrar.register_algorithm"><code class="docutils literal notranslate"><span class="pre">PluginRegistrar.register_algorithm()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qdk_chemistry.plugins.PluginRegistrar.register_dataclass"><code class="docutils literal notranslate"><span class="pre">PluginRegistrar.register_dataclass()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qdk_chemistry.plugins.PluginRegistrar.register_remote_backend"><code class="docutils literal notranslate"><span class="pre">PluginRegistrar.register_remote_backend()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qdk_chemistry.plugins.PluginRegistrar.register_cache_backend"><code class="docutils literal notranslate"><span class="pre">PluginRegistrar.register_cache_backend()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qdk_chemistry.plugins.QdkChemistryPlugin"><code class="docutils literal notranslate"><span class="pre">QdkChemistryPlugin</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qdk_chemistry.plugins.QdkChemistryPlugin.api_version"><code class="docutils literal notranslate"><span class="pre">QdkChemistryPlugin.api_version</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qdk_chemistry.plugins.QdkChemistryPlugin.register"><code class="docutils literal notranslate"><span class="pre">QdkChemistryPlugin.register()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subpackages">Subpackages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/api/api_autogen/qdk_chemistry.plugins.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright Microsoft Corporation. All rights reserved. Licensed under the MIT License.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

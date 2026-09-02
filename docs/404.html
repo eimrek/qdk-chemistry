@@ -58,7 +58,7 @@
     <script>
       (function () {
         var basePath = "/qdk-chemistry/";
-        var known = ["2.1.0", "1.1.0", "latest", "stable"];
+        var known = ["2.3", "2.2", "2.1", "1.1", "dev", "stable"];
         var path = window.location.pathname;
         if (path.indexOf(basePath) !== 0) {
           return;
@@ -70,7 +70,8 @@
           return;
         }
         window.location.replace(
-          basePath + "stable" + "/" + rest + window.location.hash
+                    basePath + "stable" + "/" + rest +
+                    window.location.search + window.location.hash
         );
       })();
     </script>
@@ -82,7 +83,7 @@
       <p>The documentation is published per version:</p>
       <ul>
         <li><a href="/qdk-chemistry/stable/">stable</a> &mdash; the latest release</li>
-        <li><a href="/qdk-chemistry/latest/">latest</a> &mdash; the development version</li>
+        <li><a href="/qdk-chemistry/dev/">dev</a> &mdash; the development version</li>
       </ul>
       <p>If you followed a link to an older release, the page may have been
       renamed or removed since. Try searching from
