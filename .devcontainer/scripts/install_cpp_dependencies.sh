@@ -37,7 +37,6 @@ BUILD_DIR="${BUILD_DIR:-/tmp/qdk_deps_build}"
 INSTALL_PREFIX="${INSTALL_PREFIX:-/usr/local}"
 BUILD_TYPE="${BUILD_TYPE:-Release}"
 BUILD_SHARED_LIBS="${BUILD_SHARED_LIBS:-OFF}"  # Default to static
-DEPENDENCY_UARCH="${DEPENDENCY_UARCH:-native}"
 
 KEEP_BUILD_DIR="${KEEP_BUILD_DIR:-0}"
 
@@ -180,7 +179,7 @@ cd build
 cmake .. -DCMAKE_BUILD_TYPE="$BUILD_TYPE" \
          -DCMAKE_INSTALL_PREFIX="$INSTALL_PREFIX" \
          -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
-         -DCMAKE_CXX_FLAGS="-march=$DEPENDENCY_UARCH -fPIC" \
+         -DCMAKE_CXX_FLAGS="-march=native -fPIC" \
          -DBUILD_SHARED_LIBS="$BUILD_SHARED_LIBS"
 make -j"$JOBS"
 make install

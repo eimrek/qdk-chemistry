@@ -69,7 +69,6 @@ Alternatively, telemetry can be disabled within a python script by including the
 
 ```python
 import os
-
 os.environ["QSHARP_PYTHON_TELEMETRY"] = "disabled"
 ```
 

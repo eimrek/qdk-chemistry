@@ -38,7 +38,6 @@ permissions:
 
 jobs:
   coverage:
-    if: github.event.repository.fork == false
     name: ${{ matrix.os-name }} Build, Test, and Coverage Analysis
     runs-on: ${{ matrix.runner }}
     strategy:
@@ -571,7 +570,6 @@ jobs:
         retention-days: 7
 
   coverage-windows:
-    if: github.event.repository.fork == false
     name: ${{ matrix.compiler }} - Build & test (Windows)
     runs-on: [self-hosted, 1ES.Pool=1es-gh-Dads_v5-pool-wus2, 1ES.ImageOverride=windows-2025-1espt, 'JobId=qdk_chemistry-win-${{ strategy.job-index }}-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}']
     timeout-minutes: 480
@@ -762,7 +760,7 @@ jobs:
 
   test-with-qdk-branch:
     name: Full Test with QDK Branch
-    if: ${{ github.event.repository.fork == false && github.event_name == 'workflow_dispatch' && inputs.test_with_qdk_branch }}
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.test_with_qdk_branch }}
     runs-on: [self-hosted, 1ES.Pool=1es-gh-Dads_v5-pool-wus2, 1ES.ImageOverride=Ubuntu24.04Nightly]
     env:
       BUILD_DIR: cpp/build
