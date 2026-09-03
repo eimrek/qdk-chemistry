@@ -53,7 +53,7 @@ _switcher_version = (
     else release
 )
 
-# Canonical URL of this build; overridden per version directory when publishing.
+# Canonical URL of this build.
 html_baseurl = os.environ.get(
     "QDK_CHEMISTRY_DOCS_BASE_URL", "https://microsoft.github.io/qdk-chemistry/stable/"
 )
