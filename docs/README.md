@@ -65,8 +65,8 @@ The [`Makefile`](Makefile) requires GNU make and a POSIX shell (it uses `rm`, `g
 
 #### Running the pipeline from PowerShell
 
-Run each step in order from the `docs/` directory. This mirrors what `make all` does, minus the
-warning-count checks that fail the build in CI and the sidebar navigation check described below.
+Run each step in order from the `docs/` directory. This mirrors the five build stages used by
+`make all`; the Makefile's validation checks are not included.
 
 ```powershell
 # 1. Doxygen XML for the C++ API
@@ -110,14 +110,6 @@ Get-Content sphinx-docs-warnings.txt, sphinx-autosummary-warnings.txt -ErrorActi
 
 Any output means the equivalent `make` build would have failed.
 
-#### Checking the sidebar navigation
-
-`make all` also runs `make check-sidebar`, which fails the build if the left sidebar contains fewer
-links than expected. The sidebar comes from [`source/_templates/sidebar-nav-all.html`](source/_templates/sidebar-nav-all.html),
-which overrides a template internal to the theme, so a theme upgrade could empty it without Sphinx
-emitting a warning. When building manually, confirm the landing page still shows the full table of
-contents in the sidebar after changing the theme version.
-
 ## Regenerating tutorial figures
 
 The [ground-state QPE figure maintenance guide](source/_static/diagrams/README.md)
@@ -133,8 +125,8 @@ docs/
   index.html      redirect to stable/
   404.html        rewrites unversioned paths into stable/
   switcher.json   version list for the theme version switcher
-  dev/            tip of main
-  stable/         copy of the newest release
+  dev/            latest successful main build
+  stable/         copy of the newest published release
   2.1/  ...       one directory per minor version
 ```
 
@@ -142,12 +134,12 @@ The [`Docs`](../.github/workflows/docs.yaml) workflow maintains it, and [`.githu
 
 `dev/` is republished automatically after every successful `Build and Test` run on `main`. If publication fails, rerun the downstream `Docs` workflow while the artifact is available. To rebuild an expired or missing artifact, run `Build and Test` manually on `main`.
 
-Stable releases are rebuilt from their tag against the exact package version from PyPI. A release such as `2.1.3` replaces `2.1/`; its sidebar shows `Documentation 2.1.3`, while the version switcher and URL use `2.1`. Patch-version directories are not retained. The newest version also replaces `stable/`, while an older maintenance release updates only its own minor directory. Prereleases are not published.
+Final releases are rebuilt from their tag against the exact package version from PyPI. Publishing `2.1.3` replaces `2.1/` if it is newer than the version already there; its sidebar shows `Documentation 2.1.3`, while the version switcher and URL use `2.1`. Patch-version directories are not retained. The newest published release also replaces `stable/`, while a release on an older minor line updates only its own minor directory. Older releases cannot overwrite newer documentation, and prereleases are not published.
 
-Releases tagged before the versioned site existed can still be built by a manual run, but they predate the current theme and so have no version switcher: a reader who lands in one of those directories has no in-page way back to `stable/`. If that becomes a problem for a maintained line, cut a patch release so its documentation is rebuilt with the current theme.
+Historical tags can be selected in a manual run. Releases that predate the current theme retain their old theme and have no version switcher, so a reader who lands in one of those directories has no in-page way back to `stable/`. If that becomes a problem for a maintained line, update its documentation configuration and publish a patch release.
 
 Python wheels are published by a separate, approval-gated pipeline. If the exact package version is not on PyPI when the GitHub release is published, the release-triggered `Docs` workflow fails with a direct error. Rerun that same workflow after the wheel is available; GitHub preserves the original release tag for the rerun.
 
-Manual runs (`workflow_dispatch`) accept one immutable `vX.Y.Z` release tag for validating or backfilling an older stable release. The exact PyPI package version and minor-version target are derived from that tag's root [`VERSION`](../VERSION) file, and the workflow verifies that the checkout resolves to the matching tag.
+Manual runs (`workflow_dispatch`) accept one immutable final-release tag for validating or backfilling a release. The exact PyPI package version and minor-version target are derived from that tag's root [`VERSION`](../VERSION) file, and the workflow verifies that the checkout resolves to the matching tag.
 
-All minor versions are retained. A build is currently about 50 MB and GitHub Pages limits a published site to 1 GB. The site assembler warns at 800 MB and rejects publication above 1 GB.
+Published minor versions are retained. A build is currently about 50 MB and GitHub Pages limits a published site to 1 GB. The site assembler warns at 800 MB and rejects publication above 1 GB.
