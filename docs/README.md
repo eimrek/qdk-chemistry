@@ -66,7 +66,7 @@ The [`Makefile`](Makefile) requires GNU make and a POSIX shell (it uses `rm`, `g
 #### Running the pipeline from PowerShell
 
 Run each step in order from the `docs/` directory. This mirrors what `make all` does, minus the
-warning-count checks that fail the build in CI.
+warning-count checks that fail the build in CI and the sidebar navigation check described below.
 
 ```powershell
 # 1. Doxygen XML for the C++ API
@@ -110,6 +110,14 @@ Get-Content sphinx-docs-warnings.txt, sphinx-autosummary-warnings.txt -ErrorActi
 
 Any output means the equivalent `make` build would have failed.
 
+#### Checking the sidebar navigation
+
+`make all` also runs `make check-sidebar`, which fails the build if the left sidebar contains fewer
+links than expected. The sidebar comes from [`source/_templates/sidebar-nav-all.html`](source/_templates/sidebar-nav-all.html),
+which overrides a template internal to the theme, so a theme upgrade could empty it without Sphinx
+emitting a warning. When building manually, confirm the landing page still shows the full table of
+contents in the sidebar after changing the theme version.
+
 ## Regenerating tutorial figures
 
 The [ground-state QPE figure maintenance guide](source/_static/diagrams/README.md)
@@ -135,6 +143,8 @@ The [`Docs`](../.github/workflows/docs.yaml) workflow maintains it, and [`.githu
 `dev/` is republished automatically after every successful `Build and Test` run on `main`. If publication fails, rerun the downstream `Docs` workflow while the artifact is available. To rebuild an expired or missing artifact, run `Build and Test` manually on `main`.
 
 Stable releases are rebuilt from their tag against the exact package version from PyPI. A release such as `2.1.3` replaces `2.1/`; its sidebar shows `Documentation 2.1.3`, while the version switcher and URL use `2.1`. Patch-version directories are not retained. The newest version also replaces `stable/`, while an older maintenance release updates only its own minor directory. Prereleases are not published.
+
+Releases tagged before the versioned site existed can still be built by a manual run, but they predate the current theme and so have no version switcher: a reader who lands in one of those directories has no in-page way back to `stable/`. If that becomes a problem for a maintained line, cut a patch release so its documentation is rebuilt with the current theme.
 
 Python wheels are published by a separate, approval-gated pipeline. If the exact package version is not on PyPI when the GitHub release is published, the release-triggered `Docs` workflow fails with a direct error. Rerun that same workflow after the wheel is available; GitHub preserves the original release tag for the rerun.
 

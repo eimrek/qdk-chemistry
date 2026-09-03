@@ -37,7 +37,8 @@ _BUILD_INFO_KEYS = {"version", "package_version", "commit", "ref", "built_at"}
 
 # Published release directories use only the major and minor components.
 _VERSION_RE = re.compile(r"^\d+\.\d+$")
-_RELEASE_RE = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")
+# The optional fourth component is the tweak level the VERSION file allows.
+_RELEASE_RE = re.compile(r"^(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?$")
 _TARGET_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
 _SITE_SIZE_WARNING_BYTES = 800 * 1024 * 1024
 _SITE_SIZE_LIMIT_BYTES = 1024 * 1024 * 1024
@@ -83,18 +84,18 @@ def _version_sort_key(version: str) -> tuple[int, int]:
     return (int(major), int(minor))
 
 
-def _release_sort_key(version: str) -> tuple[int, int, int]:
+def _release_sort_key(version: str) -> tuple[int, int, int, int]:
     """Return the numeric ordering key for a final release version."""
     match = _RELEASE_RE.fullmatch(version)
     if match is None:
-        _fail(f"invalid final release version: {version!r}; expected X.Y.Z")
-    major, minor, patch = match.groups()
-    return (int(major), int(minor), int(patch))
+        _fail(f"invalid final release version: {version!r}; expected X.Y.Z[.T]")
+    major, minor, patch, tweak = match.groups()
+    return (int(major), int(minor), int(patch), int(tweak or 0))
 
 
 def _minor_version(version: str) -> str:
     """Return the major.minor documentation target for a final release."""
-    major, minor, _ = _release_sort_key(version)
+    major, minor, _, _ = _release_sort_key(version)
     return f"{major}.{minor}"
 
 

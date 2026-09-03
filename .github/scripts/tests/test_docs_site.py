@@ -108,6 +108,14 @@ class DocsSiteTest(unittest.TestCase):
         with self.assertRaises(SystemExit):
             self._install("2.1", "2.1", "2.1.0", stable=True)
 
+    def test_four_component_versions_are_ordered(self) -> None:
+        """Accept the tweak component the VERSION file allows."""
+        self._install("2.1", "2.1", "2.1.0", stable=True)
+        self._install("2.1", "2.1", "2.1.0.1", stable=True)
+
+        self.assertEqual(self._package_version("2.1"), "2.1.0.1")
+        self.assertEqual(self._package_version("stable"), "2.1.0.1")
+
     def test_switcher_lists_dev_and_minor_versions(self) -> None:
         """List dev, stable, and archived minors in expected order."""
         self._install("dev", "dev")

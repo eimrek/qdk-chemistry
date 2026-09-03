@@ -190,6 +190,8 @@ details.admonition.quiz-question {
     border-left: 4px solid #8c4a00;
 }
 
+/* The label is absolutely positioned against the title, which the theme already
+   makes a positioning context for its own admonition icon. */
 details.admonition.quiz-question > .admonition-title {
     background-color: #8c4a00;
     color: #ffffff;

@@ -77,9 +77,7 @@ dev = [
 ]
 docs = [
   "sphinx",
-  # Upper bound because docs/source/_templates/sidebar-nav-all.html overrides a
-  # theme-internal template; check it still renders after relaxing this.
-  "pydata-sphinx-theme>=0.20,<1.0",
+  "pydata-sphinx-theme>=0.20,<0.21",
   "myst-parser",
   "breathe",
   "sphinx-autodoc-typehints",

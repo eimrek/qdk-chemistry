@@ -2,6 +2,8 @@ name: Docs
 
 on:
   # Build and Test already builds dev from main, so reuse that trusted artifact.
+  # Branch filters cannot take expressions, so this one name is hardcoded; the
+  # job conditions below compare against the repository's default branch.
   workflow_run:
     workflows: [Build and Test]
     types: [completed]
@@ -38,6 +40,7 @@ jobs:
         github.event.workflow_run.head_branch == github.event.repository.default_branch &&
         github.event.workflow_run.head_repository.full_name == github.repository))
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     outputs:
       base_url: ${{ steps.resolve.outputs.base_url }}
       package_version: ${{ steps.resolve.outputs.package_version }}
@@ -53,7 +56,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
-        ref: ${{ inputs.release_tag || github.event.release.tag_name || github.ref }}
+        ref: ${{ github.event_name == 'workflow_run' && github.event.repository.default_branch || format('refs/tags/{0}', inputs.release_tag || github.event.release.tag_name) }}
 
     - name: Resolve inputs
       id: resolve
@@ -85,8 +88,8 @@ jobs:
           fi
 
           PACKAGE_VERSION="$(cat VERSION)"
-          if [[ ! "$PACKAGE_VERSION" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
-            echo "::error::Invalid stable release version '$PACKAGE_VERSION'; expected X.Y.Z."
+          if [[ ! "$PACKAGE_VERSION" =~ ^([0-9]+)\.([0-9]+)\.[0-9]+(\.[0-9]+)?$ ]]; then
+            echo "::error::Invalid stable release version '$PACKAGE_VERSION'; expected X.Y.Z or X.Y.Z.T."
             exit 1
           fi
           TARGET="${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
@@ -97,12 +100,7 @@ jobs:
             echo "::error::Selected release tag '$REF' does not match VERSION '$PACKAGE_VERSION'; expected ${EXPECTED_REF}."
             exit 1
           fi
-          if ! git fetch --no-tags origin \
-            "refs/tags/${EXPECTED_REF}:refs/tags/${EXPECTED_REF}"; then
-            echo "::error::Release tag ${EXPECTED_REF} does not exist."
-            exit 1
-          fi
-          EXPECTED_SHA="$(git rev-parse "${EXPECTED_REF}^{commit}")"
+          EXPECTED_SHA="$(git rev-parse --verify "refs/tags/${EXPECTED_REF}^{commit}")"
           if [[ "$SHA" != "$EXPECTED_SHA" ]]; then
             echo "::error::Selected release tag ${EXPECTED_REF} resolves to ${EXPECTED_SHA}, but the checkout is ${SHA}."
             exit 1
@@ -162,9 +160,24 @@ jobs:
     - name: Build documentation
       working-directory: docs
       env:
-        QDK_CHEMISTRY_DOCS_BASE_URL: ${{ needs.config.outputs.base_url }}${{ needs.config.outputs.target }}/
+        # Releases canonicalise to stable/ rather than to their own directory,
+        # so search results follow the current documentation instead of pinning
+        # to whichever version happened to be newest when they were indexed.
+        QDK_CHEMISTRY_DOCS_BASE_URL: ${{ needs.config.outputs.base_url }}stable/
         QDK_CHEMISTRY_DOCS_VERSION: ${{ needs.config.outputs.package_version }}
       run: make clean all
+
+    - name: Show documentation warnings
+      if: failure()
+      working-directory: docs
+      run: |
+        for txtfile in *-output.txt *-warnings.txt; do
+          if [ -s "$txtfile" ]; then
+            echo "==== File: $txtfile ===="
+            cat "$txtfile"
+            echo
+          fi
+        done
 
     - name: Upload documentation artifact
       uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -189,6 +202,7 @@ jobs:
       actions: read
       contents: write
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
     # Always use the current assembler, including when old release sources were built.

@@ -46,7 +46,7 @@ release = (
     os.environ.get("QDK_CHEMISTRY_DOCS_VERSION") or _version_file.read_text().strip()
 )
 version = release
-_release_match = re.fullmatch(r"(\d+)\.(\d+)\.\d+", release)
+_release_match = re.fullmatch(r"(\d+)\.(\d+)\.\d+(?:\.\d+)?", release)
 _switcher_version = (
     f"{_release_match.group(1)}.{_release_match.group(2)}"
     if _release_match
